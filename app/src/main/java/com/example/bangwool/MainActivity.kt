@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             onNavigationItemSelected(it)
         }
         binding.bottomNav.selectedItemId = R.id.navigation_home
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
