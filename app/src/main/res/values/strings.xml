@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BangWool</string>
+    <string name="title_home">Home</string>
+    <string name="title_statistic">Statistic</string>
+    <string name="title_ranking">Ranking</string>
+    <string name="title_mypage">MyPage</string>
+</resources>
