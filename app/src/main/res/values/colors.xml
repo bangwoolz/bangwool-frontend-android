@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="disabledColor">#E0E0E0</color>
+    <color name="hintColor">#BDBDBD</color>
+    <color name="nickButton">#FF4A4A</color>
+    <color name="errorRed">#FF4A4A</color>
+
+
 </resources>
