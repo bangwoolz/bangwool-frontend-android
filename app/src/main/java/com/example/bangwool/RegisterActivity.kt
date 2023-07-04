@@ -47,7 +47,13 @@ class RegisterActivity : AppCompatActivity() {
                 validateEmail(s.toString())
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty()) {
+                    textInputLayoutEmail.hint = "이메일"
+                } else {
+                    textInputLayoutEmail.hint = ""
+                }
+            }
         })
 
         editTextName?.addTextChangedListener(object : TextWatcher {
@@ -57,7 +63,13 @@ class RegisterActivity : AppCompatActivity() {
                 validateName(s.toString())
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty()) {
+                    textInputLayoutName.hint = "이름"
+                } else {
+                    textInputLayoutName.hint = ""
+                }
+            }
         })
 
         editTextNickname?.addTextChangedListener(object : TextWatcher {
@@ -67,7 +79,13 @@ class RegisterActivity : AppCompatActivity() {
                 validateNickname(s.toString())
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty()) {
+                    textInputLayoutNickname.hint = "닉네임"
+                } else {
+                    textInputLayoutNickname.hint = ""
+                }
+            }
         })
 
         editTextPassword?.addTextChangedListener(object : TextWatcher {
@@ -77,7 +95,13 @@ class RegisterActivity : AppCompatActivity() {
                 validatePassword(s.toString())
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty()) {
+                    textInputLayoutPassword.hint = "비밀번호"
+                } else {
+                    textInputLayoutPassword.hint = ""
+                }
+            }
         })
 
         editTextConfirmPassword?.addTextChangedListener(object : TextWatcher {
@@ -87,7 +111,13 @@ class RegisterActivity : AppCompatActivity() {
                 validateConfirmPassword(editTextPassword?.text.toString(), s.toString())
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s.isNullOrEmpty()) {
+                    textInputLayoutConfirmPassword.hint = "비밀번호 확인"
+                } else {
+                    textInputLayoutConfirmPassword.hint = ""
+                }
+            }
         })
     }
 
@@ -116,7 +146,7 @@ class RegisterActivity : AppCompatActivity() {
             buttonContinue.isEnabled = false
             return false
         } else {
-            textInputLayoutEmail.error = null
+            textInputLayoutEmail.error = null  // 오류 메시지 제거
             return true
         }
     }
