@@ -1,105 +1,176 @@
 package com.example.bangwool
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
-
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var editTextEmail: EditText
-    private lateinit var editTextName: EditText
-    private lateinit var editTextNickname: EditText
-    private lateinit var editTextPassword: EditText
-    private lateinit var editTextConfirmPassword: EditText
+    private lateinit var textInputLayoutEmail: TextInputLayout
+    private lateinit var textInputLayoutName: TextInputLayout
+    private lateinit var textInputLayoutNickname: TextInputLayout
+    private lateinit var textInputLayoutPassword: TextInputLayout
+    private lateinit var textInputLayoutConfirmPassword: TextInputLayout
+    private lateinit var buttonContinue: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.register_activity)
+        setContentView(R.layout.activity_register)
 
-        val imageViewBack = findViewById<ImageView>(R.id.imageViewBack)
-        val buttonDuplicateCheck = findViewById<Button>(R.id.buttonDuplicateCheck)
-        val buttonContinue = findViewById<Button>(R.id.buttonContinue)
+        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail)
+        textInputLayoutName = findViewById(R.id.textInputLayoutName)
+        textInputLayoutNickname = findViewById(R.id.textInputLayoutNickname)
+        textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword)
+        textInputLayoutConfirmPassword = findViewById(R.id.textInputLayoutConfirmPassword)
+        buttonContinue = findViewById(R.id.buttonContinue)
 
-        editTextEmail = findViewById(R.id.editTextEmail)
-        editTextName = findViewById(R.id.editTextName)
-        editTextNickname = findViewById(R.id.editTextNickname)
-        editTextPassword = findViewById(R.id.editTextPassword)
-        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword)
+        val editTextEmail = textInputLayoutEmail.editText
+        val editTextName = textInputLayoutName.editText
+        val editTextNickname = textInputLayoutNickname.editText
+        val editTextPassword = textInputLayoutPassword.editText
+        val editTextConfirmPassword = textInputLayoutConfirmPassword.editText
 
-        val textViewDuplicateMessage = findViewById<TextView>(R.id.textViewDuplicateMessage)
+        editTextEmail?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-
-
-
-        imageViewBack.setOnClickListener {
-
-        }
-
-        buttonDuplicateCheck.setOnClickListener {
-            // 중복 확인 로직 추가
-        }
-
-        buttonContinue.setOnClickListener {
-            if (validateEmail() && validateName() && validateNickname() && validatePassword()) {
-                // 계속하기 버튼 클릭 로직 추가
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateEmail(s.toString())
             }
-        }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        editTextName?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateName(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        editTextNickname?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateNickname(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        editTextPassword?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validatePassword(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        editTextConfirmPassword?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validateConfirmPassword(editTextPassword?.text.toString(), s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
-    private fun validateEmail(): Boolean {
-        val email = editTextEmail.text.toString().trim()
+    private fun isFormValid(): Boolean {
+        val email = textInputLayoutEmail.editText?.text.toString()
+        val name = textInputLayoutName.editText?.text.toString()
+        val nickname = textInputLayoutNickname.editText?.text.toString()
+        val password = textInputLayoutPassword.editText?.text.toString()
+        val confirmPassword = textInputLayoutConfirmPassword.editText?.text.toString()
+
+        return validateEmail(email) &&
+                validateName(name) &&
+                validateNickname(nickname) &&
+                validatePassword(password) &&
+                validateConfirmPassword(password, confirmPassword)
+    }
+
+    private fun validateEmail(email: String): Boolean {
+        val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
         if (email.isEmpty()) {
-            Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            textInputLayoutEmail.error = "이메일을 입력하세요."
+            buttonContinue.isEnabled = false
             return false
-        } else if (!Pattern.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+", email)) {
-            Toast.makeText(this, "올바른 이메일 형식이 아닙니다.", Toast.LENGTH_SHORT).show()
+        } else if (!emailPattern.matcher(email).matches()) {
+            textInputLayoutEmail.error = "유효한 이메일을 입력하세요."
+            buttonContinue.isEnabled = false
             return false
+        } else {
+            textInputLayoutEmail.error = null
+            return true
         }
-        return true
     }
 
-    private fun validateName(): Boolean {
-        val name = editTextName.text.toString().trim()
+    private fun validateName(name: String): Boolean {
         if (name.isEmpty()) {
-            Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            textInputLayoutName.error = "이름을 입력하세요."
+            buttonContinue.isEnabled = false
             return false
+        } else {
+            textInputLayoutName.error = null
+            return true
         }
-        return true
     }
 
-    private fun validateNickname(): Boolean {
-        val nickname = editTextNickname.text.toString().trim()
+    private fun validateNickname(nickname: String): Boolean {
         if (nickname.isEmpty()) {
-            Toast.makeText(this, "닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            textInputLayoutNickname.error = "닉네임을 입력하세요."
+            buttonContinue.isEnabled = false
             return false
+        } else {
+            textInputLayoutNickname.error = null
+            return true
         }
-        return true
     }
 
-    private fun validatePassword(): Boolean {
-        val password = editTextPassword.text.toString().trim()
-        val confirmPassword = editTextConfirmPassword.text.toString().trim()
+    private fun validatePassword(password: String): Boolean {
+        val passwordPattern = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
         if (password.isEmpty()) {
-            Toast.makeText(this, "패스워드를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            textInputLayoutPassword.error = "비밀번호를 입력하세요."
+            buttonContinue.isEnabled = false
             return false
-        } else if (password.length < 8 || password.length > 12) {
-            Toast.makeText(this, "패스워드는 8~12자 이내로 입력해주세요.", Toast.LENGTH_SHORT).show()
+        } else if (!passwordPattern.matcher(password).matches()) {
+            textInputLayoutPassword.error = "비밀번호는 최소 8자 이상이며, 숫자, 소문자, 대문자, 특수문자를 포함해야 합니다."
+            buttonContinue.isEnabled = false
             return false
-        } else if (!Pattern.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=]).*$", password)) {
-            Toast.makeText(this, "패스워드는 영어, 숫자, 특수문자를 포함해야 합니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            textInputLayoutPassword.error = null
+            return true
+        }
+    }
+
+    private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
+        if (confirmPassword.isEmpty()) {
+            textInputLayoutConfirmPassword.error = "비밀번호를 다시 입력하세요."
+            buttonContinue.isEnabled = false
             return false
         } else if (password != confirmPassword) {
-            Toast.makeText(this, "패스워드가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+            textInputLayoutConfirmPassword.error = "비밀번호가 일치하지 않습니다."
+            buttonContinue.isEnabled = false
             return false
+        } else {
+            textInputLayoutConfirmPassword.error = null
+            return true
         }
-        return true
     }
-
 }
