@@ -23,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var textInputLayoutConfirmPassword: TextInputLayout
     private lateinit var buttonContinue: Button
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -53,6 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     textInputLayoutEmail.hint = ""
                 }
+                updateButtonState()
             }
         })
 
@@ -69,6 +71,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     textInputLayoutName.hint = ""
                 }
+                updateButtonState()
             }
         })
 
@@ -85,6 +88,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     textInputLayoutNickname.hint = ""
                 }
+                updateButtonState()
             }
         })
 
@@ -101,6 +105,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     textInputLayoutPassword.hint = ""
                 }
+                updateButtonState()
             }
         })
 
@@ -117,36 +122,47 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     textInputLayoutConfirmPassword.hint = ""
                 }
+                updateButtonState()
             }
         })
     }
 
-    private fun isFormValid(): Boolean {
+    private fun updateButtonState() {
+        val isFormValid = areAllFieldsValid()
+
+        buttonContinue.isEnabled = isFormValid
+        if (isFormValid) {
+            val enabledColor = ContextCompat.getColorStateList(this, R.color.enabledColor)
+            buttonContinue.backgroundTintList = enabledColor
+
+        } else {
+            val disabledColor = ContextCompat.getColorStateList(this, R.color.disabledColor)
+            buttonContinue.backgroundTintList = disabledColor
+
+        }
+    }
+
+    private fun areAllFieldsValid(): Boolean {
         val email = textInputLayoutEmail.editText?.text.toString()
         val name = textInputLayoutName.editText?.text.toString()
         val nickname = textInputLayoutNickname.editText?.text.toString()
         val password = textInputLayoutPassword.editText?.text.toString()
         val confirmPassword = textInputLayoutConfirmPassword.editText?.text.toString()
 
-        return validateEmail(email) &&
-                validateName(name) &&
-                validateNickname(nickname) &&
-                validatePassword(password) &&
-                validateConfirmPassword(password, confirmPassword)
+        return validateEmail(email) && validateName(name) && validateNickname(nickname) &&
+                validatePassword(password) && validateConfirmPassword(password, confirmPassword)
     }
 
     private fun validateEmail(email: String): Boolean {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
         if (email.isEmpty()) {
             textInputLayoutEmail.error = "이메일을 입력하세요."
-            buttonContinue.isEnabled = false
             return false
         } else if (!emailPattern.matcher(email).matches()) {
             textInputLayoutEmail.error = "유효한 이메일을 입력하세요."
-            buttonContinue.isEnabled = false
             return false
         } else {
-            textInputLayoutEmail.error = null  // 오류 메시지 제거
+            textInputLayoutEmail.error = null
             return true
         }
     }
@@ -154,7 +170,6 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateName(name: String): Boolean {
         if (name.isEmpty()) {
             textInputLayoutName.error = "이름을 입력하세요."
-            buttonContinue.isEnabled = false
             return false
         } else {
             textInputLayoutName.error = null
@@ -165,7 +180,6 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateNickname(nickname: String): Boolean {
         if (nickname.isEmpty()) {
             textInputLayoutNickname.error = "닉네임을 입력하세요."
-            buttonContinue.isEnabled = false
             return false
         } else {
             textInputLayoutNickname.error = null
@@ -174,14 +188,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validatePassword(password: String): Boolean {
-        val passwordPattern = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
-        if (password.isEmpty()) {
-            textInputLayoutPassword.error = "비밀번호를 입력하세요."
-            buttonContinue.isEnabled = false
-            return false
-        } else if (!passwordPattern.matcher(password).matches()) {
+        val passwordPattern =
+            Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
+        if (!passwordPattern.matcher(password).matches()) {
             textInputLayoutPassword.error = "비밀번호는 최소 8자 이상이며, 숫자, 소문자, 대문자, 특수문자를 포함해야 합니다."
-            buttonContinue.isEnabled = false
             return false
         } else {
             textInputLayoutPassword.error = null
@@ -190,17 +200,16 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
-        if (confirmPassword.isEmpty()) {
-            textInputLayoutConfirmPassword.error = "비밀번호를 다시 입력하세요."
-            buttonContinue.isEnabled = false
-            return false
-        } else if (password != confirmPassword) {
+        if (confirmPassword != password) {
             textInputLayoutConfirmPassword.error = "비밀번호가 일치하지 않습니다."
-            buttonContinue.isEnabled = false
             return false
         } else {
             textInputLayoutConfirmPassword.error = null
             return true
         }
+    }
+
+    fun onContinueClicked(view: View) {
+        Toast.makeText(this, "계속하기 클릭 클릭", Toast.LENGTH_SHORT).show()
     }
 }
