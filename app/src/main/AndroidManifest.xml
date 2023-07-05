@@ -29,6 +29,7 @@
             <!-- MainActivity와 관련된 설정 -->
         </activity>
         <activity android:name=".RegisterActivity2" />
+        <activity android:name=".RegisterActivity3" />
         <!-- 다른 액티비티들 -->
 
     </application>

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.*
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
@@ -133,11 +134,11 @@ class RegisterActivity : AppCompatActivity() {
 
         buttonContinue.isEnabled = isFormValid
         if (isFormValid) {
-            val enabledColor = ContextCompat.getColorStateList(this, R.color.enabledColor)
+            val enabledColor = getColorStateList(this, R.color.enabledColor)
             buttonContinue.backgroundTintList = enabledColor
 
         } else {
-            val disabledColor = ContextCompat.getColorStateList(this, R.color.disabledColor)
+            val disabledColor = getColorStateList(this, R.color.disabledColor)
             buttonContinue.backgroundTintList = disabledColor
 
         }
@@ -158,12 +159,18 @@ class RegisterActivity : AppCompatActivity() {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
         if (email.isEmpty()) {
             textInputLayoutEmail.error = "이메일을 입력하세요."
+            textInputLayoutEmail.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else if (!emailPattern.matcher(email).matches()) {
-            textInputLayoutEmail.error = "유효한 이메일을 입력하세요."
+            textInputLayoutEmail.error = "올바른 이메일 형식이 아니에요"
+            textInputLayoutEmail.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else {
             textInputLayoutEmail.error = null
+            textInputLayoutEmail.isErrorEnabled = false
+            updateEndIcon(true)
             return true
         }
     }
@@ -192,7 +199,7 @@ class RegisterActivity : AppCompatActivity() {
         val passwordPattern =
             Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
         if (!passwordPattern.matcher(password).matches()) {
-            textInputLayoutPassword.error = "비밀번호는 최소 8자 이상이며, 숫자, 소문자, 대문자, 특수문자를 포함해야 합니다."
+            textInputLayoutPassword.error = "패스워드 조건을 확인해주세요(8-12글자 사이)"
             textInputLayoutPassword.isErrorEnabled = true
             return false
         } else {
@@ -203,12 +210,22 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
         if (confirmPassword != password) {
-            textInputLayoutConfirmPassword.error = "비밀번호가 일치하지 않습니다."
+            textInputLayoutConfirmPassword.error = "패스워드가 달라요"
             textInputLayoutConfirmPassword.isErrorEnabled = true
             return false
         } else {
             textInputLayoutConfirmPassword.error = null
             return true
+        }
+    }
+
+    private fun updateEndIcon(isValid: Boolean) {
+        if (isValid) {
+            textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
+            textInputLayoutEmail.endIconDrawable = getDrawable(this, R.drawable.check)
+        } else {
+            textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_NONE
+            textInputLayoutEmail.endIconDrawable = getDrawable(this,R.drawable.error_circle_outline)
         }
     }
 
