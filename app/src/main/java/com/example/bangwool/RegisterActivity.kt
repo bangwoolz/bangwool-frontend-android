@@ -1,5 +1,6 @@
 package com.example.bangwool
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -192,6 +193,7 @@ class RegisterActivity : AppCompatActivity() {
             Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
         if (!passwordPattern.matcher(password).matches()) {
             textInputLayoutPassword.error = "비밀번호는 최소 8자 이상이며, 숫자, 소문자, 대문자, 특수문자를 포함해야 합니다."
+            textInputLayoutPassword.isErrorEnabled = true
             return false
         } else {
             textInputLayoutPassword.error = null
@@ -202,6 +204,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
         if (confirmPassword != password) {
             textInputLayoutConfirmPassword.error = "비밀번호가 일치하지 않습니다."
+            textInputLayoutConfirmPassword.isErrorEnabled = true
             return false
         } else {
             textInputLayoutConfirmPassword.error = null
@@ -211,5 +214,7 @@ class RegisterActivity : AppCompatActivity() {
 
     fun onContinueClicked(view: View) {
         Toast.makeText(this, "계속하기 클릭 클릭", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@RegisterActivity, RegisterActivity2::class.java)
+        startActivity(intent)
     }
 }

@@ -12,6 +12,7 @@
     <color name="nickButton">#FF4A4A</color>
     <color name="enabledColor">#FF4A4A</color>
     <color name="errorRed">#FC2947</color>
+    <color name="darker_gray">#888888</color>
 
 
 </resources>
