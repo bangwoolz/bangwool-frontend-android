@@ -11,7 +11,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/ic_back"
+        android:background="@drawable/back"
         app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:text="약관 전체동의"
+        android:text="약관 동의"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="22sp"
@@ -57,6 +57,8 @@
             android:id="@+id/linearLayoutTermsOfUse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -65,7 +67,7 @@
                 android:id="@+id/textViewTermsOfUse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="25dp"
                 android:text="약관 전체동의"
                 android:textSize="15sp"
                 android:textColor="@color/black"
@@ -75,9 +77,11 @@
                 android:id="@+id/checkBoxAllAgreements"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginStart="236dp"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
+
 
         <View
             android:id="@+id/line2"
@@ -98,30 +102,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/buttonPrivacyPolicy"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_check"
-                android:backgroundTint="@color/disabledColor"
-                android:layout_marginStart="10dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/down"
+                android:backgroundTint="@color/darker_gray"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textViewPrivacyPolicy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:text="이용약관 동의"
-                android:textSize="15sp"
                 android:textColor="@color/black"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewPrivacyPolicyRequired"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:text="(필수)"
                 android:textColor="@android:color/darker_gray"
                 android:textStyle="bold" />
@@ -129,24 +137,28 @@
             <CheckBox
                 android:id="@+id/checkBoxPrivacyPolicy"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="150dp"
+                android:layout_weight="0" />
 
         </LinearLayout>
 
-        <!-- 전체 동의 -->
         <LinearLayout
-            android:id="@+id/linearLayoutAllAgreements"
+            android:id="@+id/linearLayoutAgreements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/buttonAllAgreements"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/ic_check"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="25dp"
+                android:background="@drawable/down"
                 android:backgroundTint="@color/darker_gray"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -155,6 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="개인정보 처리 약관 동의"
+                android:layout_marginStart="10dp"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -164,14 +177,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="(필수)"
+                android:layout_marginStart="10dp"
+
                 android:textColor="@android:color/darker_gray"
                 android:textStyle="bold" />
-
 
             <CheckBox
                 android:id="@+id/checkBoxTermsOfUse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="87dp"
                 />
 
         </LinearLayout>
