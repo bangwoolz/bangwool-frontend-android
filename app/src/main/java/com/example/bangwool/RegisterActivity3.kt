@@ -16,12 +16,12 @@ class RegisterActivity3 : AppCompatActivity() {
         checkboxState = intent.getBooleanExtra("checkboxState", false)
 
         binding.buttonClose.setOnClickListener {
-            finish() // 현재 액티비티를 종료하여 이전 액티비티로 돌아감
+            finish()
         }
     }
 
     override fun onBackPressed() {
-        val intent = intent // 현재 Intent를 가져옴
+        val intent = intent
         setResult(RESULT_OK, intent)
         super.onBackPressed()
     }

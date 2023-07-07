@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="disabledColor">#D5D5D5</color>
-    <color name="hintColor">#BDBDBD</color>
+    <color name="hintColor">#D1D1D1</color>
     <color name="nickButton">#FF4A4A</color>
     <color name="enabledColor">#FF4A4A</color>
     <color name="errorRed">#FC2947</color>

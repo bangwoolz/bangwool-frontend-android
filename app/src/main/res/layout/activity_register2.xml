@@ -78,8 +78,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="236dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null"
                 tools:ignore="TouchTargetSizeCheck" />
-
         </LinearLayout>
 
 
@@ -140,6 +141,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="0dp"
                 android:layout_marginStart="150dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null"
                 android:layout_weight="0" />
 
         </LinearLayout>
@@ -186,7 +189,9 @@
                 android:id="@+id/checkBoxTermsOfUse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="87dp"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null"
+                android:layout_marginStart="88dp"
                 />
 
         </LinearLayout>

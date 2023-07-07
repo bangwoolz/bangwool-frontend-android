@@ -1,18 +1,16 @@
 package com.example.bangwool
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
@@ -24,6 +22,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var textInputLayoutPassword: TextInputLayout
     private lateinit var textInputLayoutConfirmPassword: TextInputLayout
     private lateinit var buttonContinue: Button
+    private lateinit var buttonConfirm: Button
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +36,7 @@ class RegisterActivity : AppCompatActivity() {
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword)
         textInputLayoutConfirmPassword = findViewById(R.id.textInputLayoutConfirmPassword)
         buttonContinue = findViewById(R.id.buttonContinue)
+        buttonConfirm=findViewById(R.id.buttonDuplicateCheck)
 
         val editTextEmail = textInputLayoutEmail.editText
         val editTextName = textInputLayoutName.editText
@@ -64,7 +65,7 @@ class RegisterActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validateName(s.toString())
+                //validateName(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -91,6 +92,7 @@ class RegisterActivity : AppCompatActivity() {
                     textInputLayoutNickname.hint = ""
                 }
                 updateButtonState()
+                updateConfirmButtonState()
             }
         })
 
@@ -144,6 +146,29 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateConfirmButtonState(){
+        val isFormValid=feildsValid()
+
+        buttonConfirm.isEnabled=isFormValid
+        if (isFormValid) {
+            val enabledButton= ContextCompat.getDrawable(this,R.drawable.enabled)
+            buttonConfirm.background=enabledButton
+        //테두리와 글씨색
+
+        } else {
+            val disabledButton= ContextCompat.getDrawable(this,R.drawable.disabled)
+            buttonConfirm.background=disabledButton
+            //테두리와 글씨색
+        }
+
+    }
+
+    private fun feildsValid():Boolean{
+        val nickname = textInputLayoutNickname.editText?.text.toString()
+        return validateNickname(nickname)
+
+    }
+
     private fun areAllFieldsValid(): Boolean {
         val email = textInputLayoutEmail.editText?.text.toString()
         val name = textInputLayoutName.editText?.text.toString()
@@ -151,7 +176,7 @@ class RegisterActivity : AppCompatActivity() {
         val password = textInputLayoutPassword.editText?.text.toString()
         val confirmPassword = textInputLayoutConfirmPassword.editText?.text.toString()
 
-        return validateEmail(email) && validateName(name) && validateNickname(nickname) &&
+        return validateEmail(email)  && validateNickname(nickname) &&
                 validatePassword(password) && validateConfirmPassword(password, confirmPassword)
     }
 
@@ -175,19 +200,20 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateName(name: String): Boolean {
-        if (name.isEmpty()) {
-            textInputLayoutName.error = "이름을 입력하세요."
-            return false
-        } else {
-            textInputLayoutName.error = null
-            return true
-        }
-    }
+//    private fun validateName(name: String): Boolean {
+//        if (name.isEmpty()) {
+//            textInputLayoutName.error = "이름을 입력하세요."
+//            return false
+//        } else {
+//            textInputLayoutName.error = null
+//            return true
+//        }
+//    }
 
     private fun validateNickname(nickname: String): Boolean {
         if (nickname.isEmpty()) {
             textInputLayoutNickname.error = "닉네임을 입력하세요."
+            textInputLayoutNickname.isErrorEnabled=true
             return false
         } else {
             textInputLayoutNickname.error = null
@@ -223,14 +249,18 @@ class RegisterActivity : AppCompatActivity() {
         if (isValid) {
             textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
             textInputLayoutEmail.endIconDrawable = getDrawable(this, R.drawable.check)
+            textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#A1C298")))
+
         } else {
-            textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_NONE
+            textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
             textInputLayoutEmail.endIconDrawable = getDrawable(this,R.drawable.error_circle_outline)
+            textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#FF6666")))
         }
     }
 
+
+
     fun onContinueClicked(view: View) {
-        Toast.makeText(this, "계속하기 클릭 클릭", Toast.LENGTH_SHORT).show()
         val intent = Intent(this@RegisterActivity, RegisterActivity2::class.java)
         startActivity(intent)
     }
