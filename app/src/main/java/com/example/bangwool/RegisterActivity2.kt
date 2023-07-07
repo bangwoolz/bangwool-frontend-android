@@ -38,11 +38,21 @@ class RegisterActivity2 : AppCompatActivity() {
             updateButtonState()
         }
 
-        checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, _ ->
+        checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked && checkBoxTermsOfUse.isChecked) {
+                checkBoxAllAgreements.isChecked = true
+            } else {
+                checkBoxAllAgreements.isChecked = false
+            }
             updateButtonState()
         }
 
-        checkBoxTermsOfUse.setOnCheckedChangeListener { _, _ ->
+        checkBoxTermsOfUse.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked && checkBoxPrivacyPolicy.isChecked) {
+                checkBoxAllAgreements.isChecked = true
+            } else {
+                checkBoxAllAgreements.isChecked = false
+            }
             updateButtonState()
         }
 
