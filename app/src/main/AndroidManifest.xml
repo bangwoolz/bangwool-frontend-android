@@ -30,6 +30,7 @@
         </activity>
         <activity android:name=".RegisterActivity2" />
         <activity android:name=".RegisterActivity3" />
+        <activity android:name=".RegisterActivity4" />
         <!-- 다른 액티비티들 -->
 
     </application>

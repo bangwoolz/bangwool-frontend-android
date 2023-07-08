@@ -14,10 +14,13 @@ class RegisterActivity2 : AppCompatActivity() {
     private lateinit var buttonBack: Button
     private lateinit var buttonContinue: Button
     private lateinit var buttonPrivacyPolicy: Button
+    private lateinit var buttonTermsOfUse: Button
+
+    private var isCheckBoxPrivacyPolicyChecked: Boolean = false
+    private var isCheckBoxTermsOfUseChecked: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register2)
 
@@ -27,9 +30,24 @@ class RegisterActivity2 : AppCompatActivity() {
         buttonBack = findViewById(R.id.buttonBack)
         buttonContinue = findViewById(R.id.buttonContinue)
         buttonPrivacyPolicy = findViewById(R.id.buttonPrivacyPolicy)
+        buttonTermsOfUse = findViewById(R.id.buttonTermsOfUse)
+
+        val intent = intent
+
 
         buttonPrivacyPolicy.setOnClickListener {
-            navigateToRegisterActivity3()
+            val intent = Intent(this, RegisterActivity3::class.java)
+            intent.putExtra("checkBoxPrivacyPolicy", checkBoxPrivacyPolicy.isChecked)
+            intent.putExtra("checkBoxTermsOfUse", checkBoxTermsOfUse.isChecked)
+            intent.putExtra("checkBoxAllAgreements", checkBoxAllAgreements.isChecked)
+            startActivity(intent)
+        }
+
+        buttonTermsOfUse.setOnClickListener {
+            val intent = Intent(this, RegisterActivity4::class.java)
+            intent.putExtra("checkboxState", checkBoxTermsOfUse.isChecked)
+            intent.putExtra("checkBoxPrivacyPolicy", checkBoxPrivacyPolicy.isChecked)
+            startActivity(intent)
         }
 
         checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
@@ -57,15 +75,12 @@ class RegisterActivity2 : AppCompatActivity() {
         }
 
         buttonBack.setOnClickListener {
-            onBackPressed()
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         updateButtonState()
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish() // 현재 액티비티 종료
     }
 
     private fun updateButtonState() {
@@ -85,11 +100,8 @@ class RegisterActivity2 : AppCompatActivity() {
         }
     }
 
-
-
     private fun navigateToRegisterActivity3() {
         val intent = Intent(this, RegisterActivity3::class.java)
         startActivity(intent)
     }
-
 }
