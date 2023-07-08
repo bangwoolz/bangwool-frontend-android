@@ -53,7 +53,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s.isNullOrEmpty()) {
-                    textInputLayoutEmail.hint = "이메일"
+                    textInputLayoutEmail.hint = ""
                 } else {
                     textInputLayoutEmail.hint = ""
                 }
@@ -70,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s.isNullOrEmpty()) {
-                    textInputLayoutName.hint = "이름"
+                    textInputLayoutName.hint = ""
                 } else {
                     textInputLayoutName.hint = ""
                 }
@@ -87,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s.isNullOrEmpty()) {
-                    textInputLayoutNickname.hint = "닉네임"
+                    textInputLayoutNickname.hint = ""
                 } else {
                     textInputLayoutNickname.hint = ""
                 }
@@ -105,7 +105,7 @@ class RegisterActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s.isNullOrEmpty()) {
-                    textInputLayoutPassword.hint = "비밀번호"
+                    textInputLayoutPassword.hint = ""
                 } else {
                     textInputLayoutPassword.hint = ""
                 }
@@ -115,14 +115,13 @@ class RegisterActivity : AppCompatActivity() {
 
         editTextConfirmPassword?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 validateConfirmPassword(editTextPassword?.text.toString(), s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {
                 if (s.isNullOrEmpty()) {
-                    textInputLayoutConfirmPassword.hint = "비밀번호 확인"
+                    textInputLayoutConfirmPassword.hint = ""
                 } else {
                     textInputLayoutConfirmPassword.hint = ""
                 }
@@ -142,7 +141,6 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             val disabledColor = getColorStateList(this, R.color.disabledColor)
             buttonContinue.backgroundTintList = disabledColor
-
         }
     }
 
@@ -153,12 +151,10 @@ class RegisterActivity : AppCompatActivity() {
         if (isFormValid) {
             val enabledButton= ContextCompat.getDrawable(this,R.drawable.enabled)
             buttonConfirm.background=enabledButton
-        //테두리와 글씨색
 
         } else {
             val disabledButton= ContextCompat.getDrawable(this,R.drawable.disabled)
             buttonConfirm.background=disabledButton
-            //테두리와 글씨색
         }
 
     }
@@ -181,7 +177,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateEmail(email: String): Boolean {
-        val emailPattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
+        val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
         if (email.isEmpty()) {
             textInputLayoutEmail.error = "이메일을 입력하세요."
             textInputLayoutEmail.isErrorEnabled = true
@@ -211,7 +207,13 @@ class RegisterActivity : AppCompatActivity() {
 //    }
 
     private fun validateNickname(nickname: String): Boolean {
-        if (nickname.isEmpty()) {
+        val nicknamePattern =
+            Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
+        if (!nicknamePattern.matcher(nickname).matches()) {
+            textInputLayoutNickname.error = "닉네임 조건을 확인하세요."
+            textInputLayoutNickname.isErrorEnabled=true
+            return false
+        }else if(nickname.isEmpty()){
             textInputLayoutNickname.error = "닉네임을 입력하세요."
             textInputLayoutNickname.isErrorEnabled=true
             return false

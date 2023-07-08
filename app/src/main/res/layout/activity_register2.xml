@@ -157,13 +157,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonAllAgreements"
+                android:id="@+id/buttonTermsOfUse"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="25dp"
                 android:background="@drawable/down"
                 android:backgroundTint="@color/darker_gray"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textViewAllAgreements"
