@@ -1,10 +1,12 @@
 package com.example.bangwool
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.bangwool.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -27,10 +29,20 @@ class LoginActivity : AppCompatActivity() {
                 override fun afterTextChanged(s: Editable?) {
                     val id = s.toString().trim()
 
+//                    if (id.isEmpty()){
+//                        idTextInputLayout.error = "잘못된 이메일 형식이에요"
+//                    }
+
                     if (isValidId(id)) {
                         loginStartBtn.setBackgroundColor(getColor(R.color.bangwol_red))
+                        idTextInputLayout.error = null
+                        loginStartBtn.setOnClickListener {
+                            val intent = Intent(this@LoginActivity, PasswordActivity::class.java)
+                            startActivity(intent)
+                        }
                     } else {
                         loginStartBtn.setBackgroundColor(getColor(R.color.gray))
+                        idTextInputLayout.error = "잘못된 이메일 형식이에요"
                     }
                 }
 
