@@ -25,14 +25,23 @@
         android:text="시작하기 전 이메일 주소를 입력해주세요 :)"
         android:textSize="17sp" />
 
-    <EditText
-        android:id="@+id/login_id_et"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/id_textInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="50dp"
-        android:hint="bangwol@google.com"
-        android:textColorHint="#ededed" />
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_id_et"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:hint="bangwol@google.com"
+            android:textColorHint="#ededed" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_start_btn"
