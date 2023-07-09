@@ -16,4 +16,16 @@
         <!-- Customize your theme here. -->
 
     </style>
+
+<!--    TextInputLayout error message setting-->
+    <style name="ErrorTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/androidDefault</item>
+    </style>
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeErrorColor">@color/androidDefault</item>
+        <item name="android:textColor">@color/androidDefault</item>
+    </style>
+<!--    -->
+
+
 </resources>

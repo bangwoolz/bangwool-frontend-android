@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import com.example.bangwool.databinding.ActivityPasswordBinding
 
@@ -20,6 +21,8 @@ class PasswordActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        val userId = intent.getStringExtra("loginId")
+        Log.d("loginId", userId.toString())
         binding.apply {
             backBtn.setOnClickListener {
                 finish()
@@ -34,15 +37,16 @@ class PasswordActivity : AppCompatActivity() {
 
                     if (pw.isEmpty()) {
                         loginBtn.setBackgroundColor(getColor(R.color.gray))
-                        pwTextInputLayout.error = "비밀번호를 입력하세요." // -> 피그마엔 없음
+//                        pwTextInputLayout.error = "비밀번호를 입력하세요." // -> 피그마엔 없음
                     } else {
                         pwTextInputLayout.error = null
                         loginBtn.setBackgroundColor(getColor(R.color.bangwol_red))
                         loginBtn.setOnClickListener {
                             if (pw.equals(uesr_password)) {
-                                pwTextInputLayout.error = "비밀번호 동일함"
+                                pwTextInputLayout.error = null
+//                                pwTextInputLayout.error = "비밀번호 동일함"
                             } else {
-                                pwTextInputLayout.error = "비밀번호가 달라요. 다시 입력해주세요"
+                                pwTextInputLayout.error = "비밀번호가 달라요.다시 입력해주세요"
                             }
                         }
                     }
