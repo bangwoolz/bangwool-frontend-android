@@ -14,8 +14,11 @@ class TimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
-        binding.tvTimerMain.setOnClickListener{
+        binding.btnContinue.setOnClickListener{
             startTimer()    //타이머 작동
+        }
+        binding.btnClear.setOnClickListener{
+            stopTimer()
         }
         binding.icXBtn.setOnClickListener{
             finish()
@@ -42,5 +45,8 @@ class TimerActivity : AppCompatActivity() {
                 binding.tvTimerMain?.text = "${sec} : ${upgradedMilli}"
             }
         }
+    }
+    private fun stopTimer() {
+        timerTask?.cancel()
     }
 }
