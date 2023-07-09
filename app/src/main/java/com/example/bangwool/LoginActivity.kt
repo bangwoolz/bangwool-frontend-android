@@ -1,17 +1,23 @@
 package com.example.bangwool
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.bangwool.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     val isLoadingComplete = false
+    val delayMills = 300
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -41,20 +47,22 @@ class LoginActivity : AppCompatActivity() {
                         idTextInputLayout.error = null
                         idTextInputLayout.hint = null
                         loginStartBtn.setOnClickListener {
-                            idTextInputLayout.error = "잠시후 로그인 창으로 이동합니다"
-                            //에러메세지 색상 변경
-                            idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
-                            idTextInputLayout.boxStrokeErrorColor = getColorStateList(R.color.androidDefault)
-                            //error Icon 변경
-                            if (isLoadingComplete){
-//                                idTextInputLayout.setErrorIconDrawable(R.drawable.round_check_24)
-                                idTextInputLayout.setErrorIconDrawable(null)
-                            } else{
-                                //로딩 중 이미지로 변경해야함
-//                                idTextInputLayout.setErrorIconDrawable(R.drawable.round_arrow_back_ios_24)
-                                idTextInputLayout.setErrorIconDrawable(null)
-                            }
-                            //
+                            //error Icon 삭제
+                            idTextInputLayout.setErrorIconDrawable(null)
+                            // ProgressBar 보이도록 설정
+                            loginProgressBar.visibility = View.VISIBLE
+                            // 일정 시간(300ms) 후에 체크 이미지로 변경
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                loginProgressBar.visibility = View.GONE
+                                loginLoadingDone.visibility = View.VISIBLE
+                                //로딩 완료 메세지
+                                idTextInputLayout.error = "잠시후 로그인 창으로 이동합니다"
+                                //에러메세지 색상 변경
+                                idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
+                                idTextInputLayout.boxStrokeErrorColor = getColorStateList(R.color.androidDefault)
+                            }, 300)
+
+
                             val intent = Intent(this@LoginActivity, PasswordActivity::class.java)
                             intent.putExtra("loginId", id)
                             startActivity(intent)
