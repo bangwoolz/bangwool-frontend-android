@@ -19,30 +19,49 @@ class TimerActivity : AppCompatActivity() {
         }
         binding.btnClear.setOnClickListener{
             stopTimer()
+
         }
         binding.icXBtn.setOnClickListener{
             finish()
         }
+        val min = time / 6000
         val sec = time / 100
-        binding.tvTimerMain?.text = "${sec} : 00"
+        var upgradedMin = min.toString()
+        if(min<10){
+            upgradedMin= "0"+min.toString()
+        }
+        var upgradedSec = sec.toString()
+        if(sec<10){
+            upgradedSec= "0"+sec.toString()
+        }
+        binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
         setContentView(binding.root)
     }
     //타이머 작동
     private fun startTimer() {
         timerTask = timer(period = 10) {
-            time--
-            if(time==0){
+            if(time<=0){
                 cancel()
             }
+            time--
+            val min = time / 6000
             val sec = time / 100
             val milli = time % 100
 
             runOnUiThread {
-                var upgradedMilli = milli.toString()
-                if(milli<10){
-                    upgradedMilli= milli.toString()+"0"
+//                var upgradedMilli = milli.toString()
+//                if(milli<10){
+//                    upgradedMilli= milli.toString()+"0"
+//                }
+                var upgradedMin = min.toString()
+                if(min<10){
+                    upgradedMin= "0"+min.toString()
                 }
-                binding.tvTimerMain?.text = "${sec} : ${upgradedMilli}"
+                var upgradedSec = sec.toString()
+                if(sec<10){
+                    upgradedSec= "0"+sec.toString()
+                }
+                binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
             }
         }
     }
