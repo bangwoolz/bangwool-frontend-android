@@ -71,6 +71,13 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/ll_top"
     />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timer_main"
+        android:src="@drawable/ic_tomatoes" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
