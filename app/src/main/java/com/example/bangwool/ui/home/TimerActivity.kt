@@ -9,7 +9,7 @@ import kotlin.concurrent.timer
 
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
-    private var time = 2000
+    private var time = 100 * 60 * 2 + 100 * 20
     private var timerTask : Timer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,7 @@ class TimerActivity : AppCompatActivity() {
             finish()
         }
         val min = time / 6000
-        val sec = time / 100
+        val sec = time % 6000 / 100
         var upgradedMin = min.toString()
         if(min<10){
             upgradedMin= "0"+min.toString()
@@ -45,7 +45,7 @@ class TimerActivity : AppCompatActivity() {
             }
             time--
             val min = time / 6000
-            val sec = time / 100
+            val sec = time % 6000 / 100
             val milli = time % 100
 
             runOnUiThread {
