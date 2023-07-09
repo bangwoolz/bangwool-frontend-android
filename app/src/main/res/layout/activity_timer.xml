@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.TimerActivity">
 <ImageView
-    android:id="@+id/x_Btn"
+    android:id="@+id/ic_x_btn"
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:src="@drawable/ic_x"
@@ -17,11 +17,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textAlignment="center"
-    android:id="@+id/himan"
+    android:id="@+id/tv_timer_main"
     android:text="dsfa"
     android:textSize="@dimen/text_size_header2"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/x_Btn"
+    app:layout_constraintTop_toBottomOf="@+id/ic_x_btn"
     />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
