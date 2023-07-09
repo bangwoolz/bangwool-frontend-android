@@ -86,18 +86,22 @@
         android:layout_marginBottom="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="초기화"
+            android:textColor="@color/primary_200"
+            android:background="@drawable/transparent_btn"
             />
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="60dp"
             android:text="계속"
+            android:textColor="@color/white"
+            android:background="@drawable/normal_btn"
             />
     </LinearLayout>
 
