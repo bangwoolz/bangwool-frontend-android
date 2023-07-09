@@ -60,36 +60,37 @@
     <ProgressBar
         android:id="@+id/progressbar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="76dp"
-        android:layout_height="76dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_width="262dp"
+        android:layout_height="262dp"
         android:layout_gravity="center"
         android:layout_marginTop="48dp"
         android:indeterminate="false"
         android:max="100"
-        android:progressBackgroundTint="#FBE7C6"
+        android:progressBackgroundTint="@color/gray_100"
         android:progressDrawable="@drawable/circle_progressbar"
-        android:progressTint="#edbf41"
+        android:progressTint="@color/primary_200"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_top"/>
 
 <TextView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="262dp"
     android:textAlignment="center"
+    android:gravity="center"
     android:id="@+id/tv_timer_main"
     android:text="dsfxsa"
     android:textColor="@color/black"
     android:textSize="@dimen/text_size_header2"
-    android:layout_marginTop="20dp"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/ll_top"
+    app:layout_constraintTop_toTopOf="@+id/progressbar"
     />
     <ImageView
         android:layout_width="match_parent"
         android:layout_marginHorizontal="50dp"
         android:layout_height="150dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_timer_main"
+        app:layout_constraintTop_toBottomOf="@+id/progressbar"
         android:src="@drawable/ic_tomatoes" />
     <LinearLayout
         android:layout_width="match_parent"
