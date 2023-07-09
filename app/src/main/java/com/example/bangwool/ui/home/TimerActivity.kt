@@ -9,11 +9,12 @@ import kotlin.concurrent.timer
 
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
-    private var time = 100 * 60 * 2 + 100 * 20
+    private var time = 100 * 60 * 0 + 100 * 15
     private var timerTask : Timer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
+        binding.progressbar.max = time
         binding.btnContinue.setOnClickListener{
             startTimer()    //타이머 작동
         }
@@ -61,7 +62,11 @@ class TimerActivity : AppCompatActivity() {
                 if(sec<10){
                     upgradedSec= "0"+sec.toString()
                 }
-                binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
+                if(milli==0){
+                    binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
+                    binding.progressbar.progress=time
+                }
+
             }
         }
     }

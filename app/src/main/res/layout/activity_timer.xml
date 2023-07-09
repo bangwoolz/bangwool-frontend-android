@@ -57,7 +57,20 @@
             android:src="@drawable/ic_x"
             />
     </LinearLayout>
-
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="48dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progressBackgroundTint="#FBE7C6"
+        android:progressDrawable="@drawable/circle_progressbar"
+        android:progressTint="#edbf41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_top"/>
 
 <TextView
     android:layout_width="match_parent"
