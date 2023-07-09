@@ -18,7 +18,7 @@
     android:layout_height="wrap_content"
     android:textAlignment="center"
     android:id="@+id/tv_timer_main"
-    android:text="dsfa"
+    android:text="dsfxsa"
     android:textSize="@dimen/text_size_header2"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/ic_x_btn"
