@@ -1,7 +1,6 @@
 package com.example.bangwool.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangwool.databinding.ActivityTimerBinding
 import java.util.Timer
@@ -15,12 +14,14 @@ class TimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
-        binding.himan.setOnClickListener{
+        binding.tvTimerMain.setOnClickListener{
             startTimer()    //타이머 작동
         }
-        binding.xBtn.setOnClickListener{
+        binding.icXBtn.setOnClickListener{
             finish()
         }
+        val sec = time / 100
+        binding.tvTimerMain?.text = "${sec} : 00"
         setContentView(binding.root)
     }
     //타이머 작동
@@ -34,7 +35,11 @@ class TimerActivity : AppCompatActivity() {
             val milli = time % 100
 
             runOnUiThread {
-                binding.himan?.text = "${sec} : ${milli}"
+                var upgradedMilli = milli.toString()
+                if(milli<10){
+                    upgradedMilli= milli.toString()+"0"
+                }
+                binding.tvTimerMain?.text = "${sec} : ${upgradedMilli}"
             }
         }
     }
