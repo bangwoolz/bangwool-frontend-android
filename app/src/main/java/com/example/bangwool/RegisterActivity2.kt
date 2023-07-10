@@ -80,6 +80,12 @@ class RegisterActivity2 : AppCompatActivity() {
             finish()
         }
 
+        buttonContinue.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         updateButtonState()
     }
 
