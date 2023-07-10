@@ -14,8 +14,9 @@
         tools:targetApi="31">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Splash">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,12 +28,20 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
+
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
+        <activity android:name=".RegisterActivity2" />
+        <activity android:name=".RegisterActivity3" />
+        <activity android:name=".RegisterActivity4" />
+        <!-- 다른 액티비티들 -->
+
     </application>
 
 </manifest>
