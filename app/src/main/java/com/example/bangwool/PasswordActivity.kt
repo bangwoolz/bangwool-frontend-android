@@ -40,7 +40,7 @@ class PasswordActivity : AppCompatActivity() {
 //                        pwTextInputLayout.error = "비밀번호를 입력하세요." // -> 피그마엔 없음
                     } else {
                         pwTextInputLayout.error = null
-                        loginBtn.setBackgroundColor(getColor(R.color.bangwol_red))
+                        loginBtn.setBackgroundColor(getColor(R.color.primary))
                         loginBtn.setOnClickListener {
                             if (pw.equals(uesr_password)) {
                                 pwTextInputLayout.error = null
