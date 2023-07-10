@@ -74,6 +74,12 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             })
+
+            loginRegisterBtn.setOnClickListener {
+                val i = Intent(this@LoginActivity, RegisterActivity::class.java)
+                startActivity(i)
+                finish()
+            }
         }
     }
 
