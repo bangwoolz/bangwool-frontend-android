@@ -59,7 +59,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
@@ -100,7 +99,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
@@ -114,8 +112,6 @@
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
             android:background="@null"
             android:hint="이름"
             android:textSize="15sp"
@@ -141,7 +137,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="140dp"
-        android:layout_marginTop="0dp"
         app:boxBackgroundColor="@null"
         app:boxBackgroundMode="filled"
         app:hintTextColor="@color/hintColor"
@@ -168,6 +163,7 @@
         android:background="@drawable/disabled"
         android:text=""
         app:layout_constraintStart_toEndOf="@id/textInputLayoutNickname"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmail"
         app:layout_constraintTop_toTopOf="@id/textInputLayoutNickname"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -177,7 +173,6 @@
         android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
         android:layout_marginTop="15dp"
         android:text="패스워드"
         android:textStyle="bold"
@@ -190,22 +185,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
-        app:boxBackgroundMode="filled"
+        android:layout_marginBottom="14dp"
         app:boxBackgroundColor="@null"
+        app:boxBackgroundMode="filled"
+        app:errorEnabled="true"
         app:hintTextColor="@color/hintColor"
+        app:layout_constraintBottom_toTopOf="@+id/textViewConfirmPassword"
         app:layout_constraintEnd_toEndOf="@id/textInputLayoutName"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textViewPassword"
-        app:passwordToggleEnabled="true"
-        app:errorEnabled="true">
+        app:passwordToggleEnabled="true">
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp"
+            android:layout_height="match_parent"
             android:background="@null"
             android:hint="8~12자 사이로 입력해주세요"
             android:inputType="textPassword"
@@ -231,7 +226,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
@@ -255,7 +249,7 @@
 
     <Button
         android:id="@+id/buttonContinue"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
@@ -269,6 +263,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutConfirmPassword"
         app:layout_constraintVertical_bias="0.9" />
 
