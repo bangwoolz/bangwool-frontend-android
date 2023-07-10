@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -11,27 +12,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BangWool"
         tools:targetApi="31">
-
         <activity
-            android:name=".RegisterActivity"
+            android:name=".SplashActivity"
             android:exported="true"
-            android:label="@string/app_name">
-
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".PasswordActivity"
+            android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <!-- MainActivity와 관련된 설정 -->
-        </activity>
+            android:name=".RegisterActivity" />
         <activity android:name=".RegisterActivity2" />
         <activity android:name=".RegisterActivity3" />
         <activity android:name=".RegisterActivity4" />
-        <!-- 다른 액티비티들 -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.home.TimerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TimerActivity"
+            android:exported="false" />
 
     </application>
 

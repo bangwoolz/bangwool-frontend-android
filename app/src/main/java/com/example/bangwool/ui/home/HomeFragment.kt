@@ -1,5 +1,6 @@
 package com.example.bangwool.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.textHome.setOnClickListener{
+            val intent = Intent(activity, TimerActivity::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 }
