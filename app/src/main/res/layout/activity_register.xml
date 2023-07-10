@@ -56,12 +56,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
         app:boxStrokeWidth="1dp"
@@ -74,11 +73,11 @@
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:background="@null"
             android:hint="ex) banwol@google.com"
-            android:textSize="15sp"
             android:inputType="textEmailAddress"
+            android:textSize="18sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -98,11 +97,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutName"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
         app:hintTextColor="@color/hintColor"
@@ -114,7 +113,9 @@
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
             android:background="@null"
             android:hint="이름"
             android:textSize="15sp"
@@ -131,25 +132,26 @@
         android:text="닉네임"
         android:textStyle="bold"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutName"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutNickname"
-        android:layout_width="230dp"
-        android:layout_height="45dp"
-        android:layout_margin="0dp"
-        android:layout_marginTop="16dp"
-        app:hintTextColor="@color/hintColor"
-        app:boxBackgroundMode="filled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginTop="0dp"
         app:boxBackgroundColor="@null"
+        app:boxBackgroundMode="filled"
+        app:hintTextColor="@color/hintColor"
         app:layout_constraintStart_toStartOf="@id/textViewNickname"
         app:layout_constraintTop_toBottomOf="@id/textViewNickname">
 
         <EditText
             android:id="@+id/editTextNickname"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:background="@null"
             android:hint="5글자 이하로 입력해주세요"
             android:textSize="15sp"
@@ -185,9 +187,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPassword"
-        android:layout_width="350dp"
-        android:layout_height="45dp"
-        android:layout_margin="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
         app:hintTextColor="@color/hintColor"
@@ -199,7 +203,7 @@
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:background="@null"
@@ -224,9 +228,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutConfirmPassword"
-        android:layout_width="350dp"
-        android:layout_height="45dp"
-        android:layout_margin="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="20dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
         app:hintTextColor="@color/hintColor"
@@ -238,7 +244,7 @@
         <EditText
             android:id="@+id/editTextConfirmPassword"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:background="@null"
             android:hint="패스워드를 확인해주세요"
@@ -251,7 +257,8 @@
         android:id="@+id/buttonContinue"
         android:layout_width="350dp"
         android:layout_height="52dp"
-        android:layout_margin="0dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/rounded_button_background"
         android:enabled="false"
         android:text="계속하기"

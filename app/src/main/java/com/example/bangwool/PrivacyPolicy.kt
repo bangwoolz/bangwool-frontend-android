@@ -1,25 +1,23 @@
 package com.example.bangwool
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.example.bangwool.databinding.ActivityRegister3Binding
+import com.example.bangwool.databinding.ActivityPrivacypolicyBinding
 
-class RegisterActivity3 : AppCompatActivity() {
-    private lateinit var binding: ActivityRegister3Binding
+class PrivacyPolicy : AppCompatActivity() {
+    private lateinit var binding: ActivityPrivacypolicyBinding
     private var checkboxState = false
     private var isScrolledEnd = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegister3Binding.inflate(layoutInflater)
+        binding = ActivityPrivacypolicyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         checkboxState = intent.getBooleanExtra("checkboxState", false)
 
         binding.buttonClose.setOnClickListener {
-
             finish()
         }
 

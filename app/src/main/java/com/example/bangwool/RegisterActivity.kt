@@ -7,36 +7,29 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.*
+import com.example.bangwool.databinding.ActivityRegisterBinding
 import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var textInputLayoutEmail: TextInputLayout
-    private lateinit var textInputLayoutName: TextInputLayout
-    private lateinit var textInputLayoutNickname: TextInputLayout
-    private lateinit var textInputLayoutPassword: TextInputLayout
-    private lateinit var textInputLayoutConfirmPassword: TextInputLayout
-    private lateinit var buttonContinue: Button
-    private lateinit var buttonConfirm: Button
-
-
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail)
-        textInputLayoutName = findViewById(R.id.textInputLayoutName)
-        textInputLayoutNickname = findViewById(R.id.textInputLayoutNickname)
-        textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword)
-        textInputLayoutConfirmPassword = findViewById(R.id.textInputLayoutConfirmPassword)
-        buttonContinue = findViewById(R.id.buttonContinue)
-        buttonConfirm=findViewById(R.id.buttonDuplicateCheck)
+        val textInputLayoutEmail = binding.textInputLayoutEmail
+        val textInputLayoutName = binding.textInputLayoutName
+        val textInputLayoutNickname = binding.textInputLayoutNickname
+        val textInputLayoutPassword = binding.textInputLayoutPassword
+        val textInputLayoutConfirmPassword = binding.textInputLayoutConfirmPassword
+        val buttonContinue = binding.buttonContinue
+        val buttonConfirm = binding.buttonDuplicateCheck
 
         val editTextEmail = textInputLayoutEmail.editText
         val editTextName = textInputLayoutName.editText
@@ -128,142 +121,142 @@ class RegisterActivity : AppCompatActivity() {
                 updateButtonState()
             }
         })
+
+        buttonContinue.setOnClickListener {
+            val intent = Intent(this@RegisterActivity, TermsAgree::class.java)
+            startActivity(intent)
+        }
+
+        buttonConfirm.setOnClickListener {
+            val nickname = textInputLayoutNickname.editText?.text.toString()
+            if (validateNickname(nickname)) {
+                //여기에 닉네임 로직
+            }
+        }
     }
 
     private fun updateButtonState() {
         val isFormValid = areAllFieldsValid()
 
-        buttonContinue.isEnabled = isFormValid
+        binding.buttonContinue.isEnabled = isFormValid
         if (isFormValid) {
-            val enabledColor = getColorStateList(this, R.color.enabledColor)
-            buttonContinue.backgroundTintList = enabledColor
+            val enabledColor = ContextCompat.getColorStateList(this@RegisterActivity, R.color.enabledColor)
+            binding.buttonContinue.backgroundTintList = enabledColor
 
         } else {
-            val disabledColor = getColorStateList(this, R.color.disabledColor)
-            buttonContinue.backgroundTintList = disabledColor
+            val disabledColor = ContextCompat.getColorStateList(this@RegisterActivity, R.color.disabledColor)
+            binding.buttonContinue.backgroundTintList = disabledColor
         }
     }
 
-    private fun updateConfirmButtonState(){
-        val isFormValid=feildsValid()
+    private fun updateConfirmButtonState() {
+        val isFormValid = fieldsValid()
 
-        buttonConfirm.isEnabled=isFormValid
+        binding.buttonDuplicateCheck.isEnabled = isFormValid
         if (isFormValid) {
-            val enabledButton= ContextCompat.getDrawable(this,R.drawable.enabled)
-            buttonConfirm.background=enabledButton
+            val enabledButton = ContextCompat.getDrawable(this, R.drawable.enabled)
+            binding.buttonDuplicateCheck.background = enabledButton
 
         } else {
-            val disabledButton= ContextCompat.getDrawable(this,R.drawable.disabled)
-            buttonConfirm.background=disabledButton
+            val disabledButton = ContextCompat.getDrawable(this, R.drawable.disabled)
+            binding.buttonDuplicateCheck.background = disabledButton
         }
-
     }
 
-    private fun feildsValid():Boolean{
-        val nickname = textInputLayoutNickname.editText?.text.toString()
+    private fun fieldsValid(): Boolean {
+        val nickname = binding.textInputLayoutNickname.editText?.text.toString()
         return validateNickname(nickname)
-
     }
 
     private fun areAllFieldsValid(): Boolean {
-        val email = textInputLayoutEmail.editText?.text.toString()
-        val name = textInputLayoutName.editText?.text.toString()
-        val nickname = textInputLayoutNickname.editText?.text.toString()
-        val password = textInputLayoutPassword.editText?.text.toString()
-        val confirmPassword = textInputLayoutConfirmPassword.editText?.text.toString()
+        val email = binding.textInputLayoutEmail.editText?.text.toString()
+        val name = binding.textInputLayoutName.editText?.text.toString()
+        val nickname = binding.textInputLayoutNickname.editText?.text.toString()
+        val password = binding.textInputLayoutPassword.editText?.text.toString()
+        val confirmPassword = binding.textInputLayoutConfirmPassword.editText?.text.toString()
 
-        return validateEmail(email)  && validateNickname(nickname) &&
-                validatePassword(password) && validateConfirmPassword(password, confirmPassword)
+        return validateEmail(email) &&
+                validateNickname(nickname) &&
+                validatePassword(password) &&
+                validateConfirmPassword(password, confirmPassword)
     }
 
     private fun validateEmail(email: String): Boolean {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
         if (email.isEmpty()) {
-            textInputLayoutEmail.error = "이메일을 입력하세요."
-            textInputLayoutEmail.isErrorEnabled = true
+            binding.textInputLayoutEmail.error = "이메일을 입력하세요."
+            binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(false)
             return false
         } else if (!emailPattern.matcher(email).matches()) {
-            textInputLayoutEmail.error = "올바른 이메일 형식이 아니에요"
-            textInputLayoutEmail.isErrorEnabled = true
+            binding.textInputLayoutEmail.error = "올바른 이메일 형식이 아니에요"
+            binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(false)
             return false
         } else {
-            textInputLayoutEmail.error = null
-            textInputLayoutEmail.isErrorEnabled = false
+            binding.textInputLayoutEmail.error = null
+            binding.textInputLayoutEmail.isErrorEnabled = false
             updateEndIcon(true)
             return true
         }
     }
 
-//    private fun validateName(name: String): Boolean {
-//        if (name.isEmpty()) {
-//            textInputLayoutName.error = "이름을 입력하세요."
-//            return false
-//        } else {
-//            textInputLayoutName.error = null
-//            return true
-//        }
-//    }
-
     private fun validateNickname(nickname: String): Boolean {
-        val nicknamePattern =
-            Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
+        val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
         if (!nicknamePattern.matcher(nickname).matches()) {
-            textInputLayoutNickname.error = "닉네임 조건을 확인하세요."
-            textInputLayoutNickname.isErrorEnabled=true
+            binding.textInputLayoutNickname.error = "닉네임 조건을 확인하세요."
+            binding.textInputLayoutNickname.isErrorEnabled = true
             return false
-        }else if(nickname.isEmpty()){
-            textInputLayoutNickname.error = "닉네임을 입력하세요."
-            textInputLayoutNickname.isErrorEnabled=true
+        } else if (nickname.isEmpty()) {
+            binding.textInputLayoutNickname.error = "닉네임을 입력하세요."
+            binding.textInputLayoutNickname.isErrorEnabled = true
             return false
         } else {
-            textInputLayoutNickname.error = null
+            binding.textInputLayoutNickname.error = null
             return true
         }
     }
 
     private fun validatePassword(password: String): Boolean {
-        val passwordPattern =
-            Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
+        val passwordPattern = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
         if (!passwordPattern.matcher(password).matches()) {
-            textInputLayoutPassword.error = "패스워드 조건을 확인해주세요(8-12글자 사이)"
-            textInputLayoutPassword.isErrorEnabled = true
+            binding.textInputLayoutPassword.error = "패스워드 조건을 확인해주세요(8-12글자 사이)"
+            binding.textInputLayoutPassword.isErrorEnabled = true
             return false
         } else {
-            textInputLayoutPassword.error = null
+            binding.textInputLayoutPassword.error = null
             return true
         }
     }
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
         if (confirmPassword != password) {
-            textInputLayoutConfirmPassword.error = "패스워드가 달라요"
-            textInputLayoutConfirmPassword.isErrorEnabled = true
+            binding.textInputLayoutConfirmPassword.error = "패스워드가 달라요"
+            binding.textInputLayoutConfirmPassword.isErrorEnabled = true
             return false
         } else {
-            textInputLayoutConfirmPassword.error = null
+            binding.textInputLayoutConfirmPassword.error = null
             return true
         }
     }
 
     private fun updateEndIcon(isValid: Boolean) {
         if (isValid) {
-            textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
-            textInputLayoutEmail.endIconDrawable = getDrawable(this, R.drawable.check)
-            textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#A1C298")))
-
+            binding.textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
+            binding.textInputLayoutEmail.endIconDrawable = ContextCompat.getDrawable(this, R.drawable.check)
+            binding.textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#A1C298")))
         } else {
-            textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
-            textInputLayoutEmail.endIconDrawable = getDrawable(this,R.drawable.error_circle_outline)
-            textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#FF6666")))
+            binding.textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
+            binding.textInputLayoutEmail.endIconDrawable = ContextCompat.getDrawable(this, R.drawable.error_circle_outline)
+            binding.textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#FF6666")))
         }
     }
-
-
-
-    fun onContinueClicked(view: View) {
-        val intent = Intent(this@RegisterActivity, RegisterActivity2::class.java)
-        startActivity(intent)
-    }
 }
+
+
+fun onContinueClicked(view: View) {
+    val intent = Intent(view.context, TermsAgree::class.java)
+    view.context.startActivity(intent)
+}
+
+
