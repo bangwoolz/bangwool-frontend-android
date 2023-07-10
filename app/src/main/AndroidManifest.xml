@@ -30,9 +30,9 @@
 
         <activity
             android:name=".RegisterActivity" />
-        <activity android:name=".RegisterActivity2" />
-        <activity android:name=".RegisterActivity3" />
-        <activity android:name=".RegisterActivity4" />
+        <activity android:name=".PrivacyPolicy" />
+        <activity android:name=".TermsAgree" />
+        <activity android:name=".textViewAllAgreements" />
 
         <activity
             android:name=".MainActivity"

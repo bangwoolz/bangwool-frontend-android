@@ -20,24 +20,17 @@ class TermsAgree : AppCompatActivity() {
         val checkBoxTermsOfUse = binding.checkBoxTermsOfUse
         val buttonBack = binding.buttonBack
         val buttonContinue = binding.buttonContinue
-        val buttonPrivacyPolicy = binding.buttonPrivacyPolicy
-        val buttonTermsOfUse = binding.buttonTermsOfUse
+        val linearLayoutPrivacyPolicy = binding.linearLayoutPrivacyPolicy
+        val linearLayoutAgreements = binding.linearLayoutAgreements
 
         val intent = intent
 
-        buttonPrivacyPolicy.setOnClickListener {
-            val intent = Intent(this, PrivacyPolicy::class.java)
-            intent.putExtra("checkBoxPrivacyPolicy", checkBoxPrivacyPolicy.isChecked)
-            intent.putExtra("checkBoxTermsOfUse", checkBoxTermsOfUse.isChecked)
-            intent.putExtra("checkBoxAllAgreements", checkBoxAllAgreements.isChecked)
-            startActivity(intent)
+        linearLayoutPrivacyPolicy.setOnClickListener {
+            navigateToPrivacyPolicy()
         }
 
-        buttonTermsOfUse.setOnClickListener {
-            val intent = Intent(this, textViewAllAgreements::class.java)
-            intent.putExtra("checkboxState", checkBoxTermsOfUse.isChecked)
-            intent.putExtra("checkBoxPrivacyPolicy", checkBoxPrivacyPolicy.isChecked)
-            startActivity(intent)
+        linearLayoutAgreements.setOnClickListener {
+            navigateToAllAgreements()
         }
 
         checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
@@ -96,8 +89,18 @@ class TermsAgree : AppCompatActivity() {
         }
     }
 
-    private fun navigateToRegisterActivity3() {
+    private fun navigateToPrivacyPolicy() {
         val intent = Intent(this, PrivacyPolicy::class.java)
+        intent.putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
+        intent.putExtra("checkBoxTermsOfUse", binding.checkBoxTermsOfUse.isChecked)
+        intent.putExtra("checkBoxAllAgreements", binding.checkBoxAllAgreements.isChecked)
+        startActivity(intent)
+    }
+
+    private fun navigateToAllAgreements() {
+        val intent = Intent(this, textViewAllAgreements::class.java)
+        intent.putExtra("checkboxState", binding.checkBoxTermsOfUse.isChecked)
+        intent.putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
         startActivity(intent)
     }
 }
