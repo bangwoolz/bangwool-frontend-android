@@ -7,9 +7,9 @@
     tools:context=".ui.mypage.MyPageFragment">
 
     <TextView
-        android:id="@+id/text_home"
+        android:id="@+id/login_btn"
         android:layout_width="match_parent"
-        android:text="mypage"
+        android:text="Login"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
