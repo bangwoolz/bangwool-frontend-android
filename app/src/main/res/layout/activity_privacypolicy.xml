@@ -21,7 +21,7 @@
         app:layout_constraintBottom_toTopOf="@id/scrollable"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonClose"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -124,9 +124,12 @@
 
     <Button
         android:id="@+id/buttonContinue"
-        android:layout_width="350dp"
-        android:layout_height="52dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="30dp"
+        android:textSize="17sp"
         android:background="@drawable/rounded_button_background"
         android:enabled="false"
         android:onClick="onContinueClicked"

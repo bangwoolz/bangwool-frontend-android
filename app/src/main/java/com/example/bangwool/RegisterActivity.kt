@@ -10,7 +10,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityRegisterBinding
-import com.google.android.material.textfield.TextInputLayout
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
@@ -20,117 +19,158 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
-        val textInputLayoutEmail = binding.textInputLayoutEmail
-        val textInputLayoutName = binding.textInputLayoutName
-        val textInputLayoutNickname = binding.textInputLayoutNickname
-        val textInputLayoutPassword = binding.textInputLayoutPassword
-        val textInputLayoutConfirmPassword = binding.textInputLayoutConfirmPassword
-        val buttonContinue = binding.buttonContinue
-        val buttonConfirm = binding.buttonDuplicateCheck
-
-        val editTextEmail = textInputLayoutEmail.editText
-        val editTextName = textInputLayoutName.editText
-        val editTextNickname = textInputLayoutNickname.editText
-        val editTextPassword = textInputLayoutPassword.editText
-        val editTextConfirmPassword = textInputLayoutConfirmPassword.editText
-
-        editTextEmail?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validateEmail(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.isNullOrEmpty()) {
-                    textInputLayoutEmail.hint = ""
-                } else {
-                    textInputLayoutEmail.hint = ""
+        with(binding) {
+            textInputLayoutEmail.editText?.let { editTextEmail ->
+                editTextEmail.hint = ""
+                editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                    if (hasFocus) {
+                        textInputLayoutEmail.hint = ""
+                    }
                 }
-                updateButtonState()
+                editTextEmail.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutEmail.hint = ""
+                        }
+                    }
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        validateEmail(s.toString())
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutEmail.hint = ""
+                        } else {
+                            textInputLayoutEmail.hint = ""
+                        }
+                        updateButtonState()
+                    }
+                })
             }
-        })
 
-        editTextName?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                //validateName(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.isNullOrEmpty()) {
-                    textInputLayoutName.hint = ""
-                } else {
-                    textInputLayoutName.hint = ""
+            textInputLayoutName.editText?.let { editTextName ->
+                editTextName.hint = ""
+                editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                    if (hasFocus) {
+                        textInputLayoutName.hint = ""
+                    }
                 }
-                updateButtonState()
+                editTextName.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutEmail.hint = ""
+                        }
+                    }
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                    override fun afterTextChanged(s: Editable?) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutName.hint = ""
+                        } else {
+                            textInputLayoutName.hint = ""
+                        }
+                        updateButtonState()
+                    }
+                })
             }
-        })
-
-        editTextNickname?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validateNickname(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.isNullOrEmpty()) {
-                    textInputLayoutNickname.hint = ""
-                } else {
-                    textInputLayoutNickname.hint = ""
+            textInputLayoutNickname.editText?.let { editTextNickname ->
+                editTextNickname.hint = ""
+                editTextNickname.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                    if (hasFocus) {
+                        textInputLayoutNickname.hint = ""
+                    }
                 }
-                updateButtonState()
-                updateConfirmButtonState()
+                editTextNickname.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutEmail.hint = ""
+                        }
+                    }
+
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        validateNickname(s.toString())
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutNickname.hint = ""
+                        } else {
+                            textInputLayoutNickname.hint = ""
+                        }
+                        updateButtonState()
+                        updateConfirmButtonState()
+                    }
+                })
             }
-        })
 
-        editTextPassword?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validatePassword(s.toString())
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.isNullOrEmpty()) {
-                    textInputLayoutPassword.hint = ""
-                } else {
-                    textInputLayoutPassword.hint = ""
+            textInputLayoutPassword.editText?.let { editTextPassword ->
+                editTextPassword.hint = ""
+                editTextPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                    if (hasFocus) {
+                        textInputLayoutPassword.hint = ""
+                    }
                 }
-                updateButtonState()
-            }
-        })
+                editTextPassword.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutEmail.hint = ""
+                        }
+                    }
 
-        editTextConfirmPassword?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validateConfirmPassword(editTextPassword?.text.toString(), s.toString())
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        validatePassword(s.toString())
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutPassword.hint = ""
+                        } else {
+                            textInputLayoutPassword.hint = ""
+                        }
+                        updateButtonState()
+                    }
+                })
             }
 
-            override fun afterTextChanged(s: Editable?) {
-                if (s.isNullOrEmpty()) {
-                    textInputLayoutConfirmPassword.hint = ""
-                } else {
-                    textInputLayoutConfirmPassword.hint = ""
+            textInputLayoutConfirmPassword.editText?.let { editTextConfirmPassword ->
+                editTextConfirmPassword.hint = ""
+                editTextConfirmPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                    if (hasFocus) {
+                        textInputLayoutConfirmPassword.hint = ""
+                    }
                 }
-                updateButtonState()
+                editTextConfirmPassword.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        validateConfirmPassword(
+                            textInputLayoutPassword.editText?.text.toString(),
+                            s.toString()
+                        )
+                    }
+
+                    override fun afterTextChanged(s: Editable?) {
+                        if (s.isNullOrEmpty()) {
+                            textInputLayoutConfirmPassword.hint = ""
+                        } else {
+                            textInputLayoutConfirmPassword.hint = ""
+                        }
+                        updateButtonState()
+                    }
+                })
             }
-        })
 
-        buttonContinue.setOnClickListener {
-            val intent = Intent(this@RegisterActivity, TermsAgree::class.java)
-            startActivity(intent)
-        }
+            buttonContinue.setOnClickListener {
+                val intent = Intent(this@RegisterActivity, TermsAgree::class.java)
+                startActivity(intent)
+            }
 
-        buttonConfirm.setOnClickListener {
-            val nickname = textInputLayoutNickname.editText?.text.toString()
-            if (validateNickname(nickname)) {
-                //여기에 닉네임 로직
+            buttonDuplicateCheck.setOnClickListener {
+                val nickname = textInputLayoutNickname.editText?.text.toString()
+                if (validateNickname(nickname)) {
+                    // 여기에 닉네임 로직 추가
+                }
             }
         }
     }
@@ -151,16 +191,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun updateConfirmButtonState() {
         val isFormValid = fieldsValid()
-
         binding.buttonDuplicateCheck.isEnabled = isFormValid
-        if (isFormValid) {
-            val enabledButton = ContextCompat.getDrawable(this, R.drawable.enabled)
-            binding.buttonDuplicateCheck.background = enabledButton
-
+        val buttonBackground = if (isFormValid) {
+            ContextCompat.getDrawable(this, R.drawable.enabled)
         } else {
-            val disabledButton = ContextCompat.getDrawable(this, R.drawable.disabled)
-            binding.buttonDuplicateCheck.background = disabledButton
+            ContextCompat.getDrawable(this, R.drawable.disabled)
         }
+        binding.buttonDuplicateCheck.background = buttonBackground
     }
 
     private fun fieldsValid(): Boolean {
@@ -241,22 +278,23 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun updateEndIcon(isValid: Boolean) {
-        if (isValid) {
-            binding.textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
-            binding.textInputLayoutEmail.endIconDrawable = ContextCompat.getDrawable(this, R.drawable.check)
-            binding.textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#A1C298")))
+        val endIconDrawable = if (isValid) {
+            ContextCompat.getDrawable(this, R.drawable.check)
         } else {
-            binding.textInputLayoutEmail.endIconMode = TextInputLayout.END_ICON_CUSTOM
-            binding.textInputLayoutEmail.endIconDrawable = ContextCompat.getDrawable(this, R.drawable.error_circle_outline)
-            binding.textInputLayoutEmail.setEndIconTintList(ColorStateList.valueOf(Color.parseColor("#FF6666")))
+            ContextCompat.getDrawable(this, R.drawable.error_circle_outline)
         }
+        binding.textInputLayoutEmail.endIconDrawable = endIconDrawable
+
+        val endIconTint = if (isValid) {
+            ColorStateList.valueOf(Color.parseColor("#888888"))
+        } else {
+            ColorStateList.valueOf(Color.parseColor("#888888"))
+        }
+        binding.textInputLayoutEmail.setEndIconTintList(endIconTint)
     }
 }
-
 
 fun onContinueClicked(view: View) {
     val intent = Intent(view.context, TermsAgree::class.java)
     view.context.startActivity(intent)
 }
-
-

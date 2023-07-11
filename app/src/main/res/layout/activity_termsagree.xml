@@ -5,30 +5,29 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonBack"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/back"
-        android:backgroundTint="@color/darker_gray"
+        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="21dp"
         android:text="약관 동의"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="22sp"
+        android:textSize="18dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -37,7 +36,7 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="21dp"
         android:background="@color/disabledColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -48,10 +47,11 @@
         android:id="@+id/linearLayoutTerms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/line"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        android:layout_marginTop="63dp">
+
 
 
         <LinearLayout
@@ -63,27 +63,28 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-
             <TextView
                 android:id="@+id/textViewTermsOfUse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:text="약관 전체동의"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/checkBoxAllAgreements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="230dp"
-                android:background="@drawable/custom_checkbox"
-                android:button="@null"
-                tools:ignore="TouchTargetSizeCheck" />
-        </LinearLayout>
 
+        <CheckBox
+            android:id="@+id/checkBoxAllAgreements"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="226dp"
+            android:background="@drawable/custom_checkbox"
+            android:button="@null"
+            tools:ignore="TouchTargetSizeCheck"
+            />
+
+        </LinearLayout>
 
         <View
             android:id="@+id/line2"
@@ -99,6 +100,7 @@
             />
 
         <!-- 개인정보 처리 약관 동의 (필수) -->
+
         <LinearLayout
             android:id="@+id/linearLayoutPrivacyPolicy"
             android:layout_width="match_parent"
@@ -108,7 +110,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonPrivacyPolicy"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -138,14 +140,13 @@
 
             <CheckBox
                 android:id="@+id/checkBoxPrivacyPolicy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="145dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="150dp"
                 android:background="@drawable/custom_checkbox"
                 android:button="@null"
                 android:layout_weight="0" />
-
-        </LinearLayout>
+   </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayoutAgreements"
@@ -156,7 +157,7 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonTermsOfUse"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -181,39 +182,43 @@
                 android:layout_height="wrap_content"
                 android:text="(필수)"
                 android:layout_marginStart="10dp"
-
                 android:textColor="@android:color/darker_gray"
                 android:textStyle="bold" />
 
             <CheckBox
                 android:id="@+id/checkBoxTermsOfUse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:background="@drawable/custom_checkbox"
                 android:button="@null"
-                android:layout_marginStart="83dp"
+                android:layout_marginStart="88dp"
                 />
+        </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
 
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonContinue"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/rounded_button_background"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/btn_style"
         android:enabled="false"
         android:text="계속하기"
+        android:onClick="onContinueClicked"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="690dp"
         app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
