@@ -239,13 +239,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateNickname(nickname: String): Boolean {
-        val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
-        if (!nicknamePattern.matcher(nickname).matches()) {
-            binding.textInputLayoutNickname.error = "닉네임 조건을 확인하세요."
+        //val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]\$")
+        if (nickname.isEmpty()) {
+            binding.textInputLayoutNickname.error = "닉네임을 입력하세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             return false
-        } else if (nickname.isEmpty()) {
-            binding.textInputLayoutNickname.error = "닉네임을 입력하세요."
+        } else if(nickname.length>5){
+            binding.textInputLayoutNickname.error = "닉네임은 5글자 이하여야해요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             return false
         } else {
@@ -257,7 +257,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun validatePassword(password: String): Boolean {
         val passwordPattern = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}")
         if (!passwordPattern.matcher(password).matches()) {
-            binding.textInputLayoutPassword.error = "패스워드 조건을 확인해주세요(8-12글자 사이)"
+            binding.textInputLayoutPassword.error = "⊗ 패스워드 조건을 확인해주세요(8-12글자 사이)"
             binding.textInputLayoutPassword.isErrorEnabled = true
             return false
         } else {
@@ -268,7 +268,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
         if (confirmPassword != password) {
-            binding.textInputLayoutConfirmPassword.error = "패스워드가 달라요"
+            binding.textInputLayoutConfirmPassword.error = "⊗ 패스워드가 달라요"
             binding.textInputLayoutConfirmPassword.isErrorEnabled = true
             return false
         } else {
@@ -294,7 +294,3 @@ class RegisterActivity : AppCompatActivity() {
     }
 }
 
-fun onContinueClicked(view: View) {
-    val intent = Intent(view.context, TermsAgree::class.java)
-    view.context.startActivity(intent)
-}

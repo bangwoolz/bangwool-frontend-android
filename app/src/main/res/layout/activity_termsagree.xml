@@ -57,9 +57,7 @@
         <LinearLayout
             android:id="@+id/linearLayoutTermsOfUse"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="60dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -76,9 +74,9 @@
 
         <CheckBox
             android:id="@+id/checkBoxAllAgreements"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="226dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="228dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
             tools:ignore="TouchTargetSizeCheck"
@@ -104,10 +102,8 @@
         <LinearLayout
             android:id="@+id/linearLayoutPrivacyPolicy"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -140,8 +136,8 @@
 
             <CheckBox
                 android:id="@+id/checkBoxPrivacyPolicy"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginStart="150dp"
                 android:background="@drawable/custom_checkbox"
                 android:button="@null"
@@ -151,9 +147,8 @@
         <LinearLayout
             android:id="@+id/linearLayoutAgreements"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
@@ -187,8 +182,8 @@
 
             <CheckBox
                 android:id="@+id/checkBoxTermsOfUse"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:background="@drawable/custom_checkbox"
                 android:button="@null"
                 android:layout_marginStart="88dp"
