@@ -1,72 +1,86 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonBack"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="회원가입"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
-        android:id="@+id/line"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title_register"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/disabledColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonBack"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="90dp"
+            android:background="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/textViewTitle"
+            app:layout_constraintTop_toTopOf="@id/textViewTitle"
+            app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="21dp"
+            android:text="회원가입"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/line"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="21dp"
+            android:background="@color/disabledColor"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="83dp"
         android:text="이메일"
+        android:textSize="16dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
-        app:layout_constraintTop_toBottomOf="@id/line" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
         app:boxStrokeWidth="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
         app:hintTextColor="@color/hintColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewEmail">
 
         <EditText
@@ -86,11 +100,11 @@
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:text="이름"
-        android:textStyle="bold"
+        android:textSize="16dp"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
@@ -98,14 +112,13 @@
         android:id="@+id/textInputLayoutName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textViewName">
 
         <EditText
@@ -114,7 +127,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="이름"
-            android:textSize="15sp"
+            android:textSize="18sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -123,8 +136,8 @@
         android:id="@+id/textViewNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
         android:layout_marginTop="15dp"
+        android:textSize="16dp"
         android:text="닉네임"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -135,8 +148,8 @@
         android:id="@+id/textInputLayoutNickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="145dp"
         app:boxBackgroundColor="@null"
         app:boxBackgroundMode="filled"
         app:hintTextColor="@color/hintColor"
@@ -149,31 +162,31 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="5글자 이하로 입력해주세요"
-            android:textSize="15sp"
+            android:textSize="18sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonDuplicateCheck"
-        android:layout_width="111dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/disabled"
+        android:layout_marginStart="10dp"
         android:text=""
-        app:layout_constraintStart_toEndOf="@id/textInputLayoutNickname"
+        app:layout_constraintBottom_toBottomOf="@id/textInputLayoutNickname"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmail"
-        app:layout_constraintTop_toTopOf="@id/textInputLayoutNickname"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/textInputLayoutNickname"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-
 
     <TextView
         android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:textSize="16dp"
         android:text="패스워드"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -183,15 +196,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="14dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:boxBackgroundColor="@null"
         app:boxBackgroundMode="filled"
         app:errorEnabled="true"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintBottom_toTopOf="@+id/textViewConfirmPassword"
         app:layout_constraintEnd_toEndOf="@id/textInputLayoutName"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textViewPassword"
@@ -200,11 +211,11 @@
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@null"
             android:hint="8~12자 사이로 입력해주세요"
             android:inputType="textPassword"
-            android:textSize="15sp"
+            android:textSize="18sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -216,6 +227,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="15dp"
         android:text="패스워드 확인"
+        android:textSize="16dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
@@ -225,13 +237,13 @@
         android:id="@+id/textInputLayoutConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutName"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutName"
         app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword"
         app:passwordToggleEnabled="true">
 
@@ -242,18 +254,19 @@
             android:layout_margin="0dp"
             android:background="@null"
             android:hint="패스워드를 확인해주세요"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:inputType="textPassword"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonContinue"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:background="@drawable/rounded_button_background"
+        android:background="@drawable/btn_style"
         android:enabled="false"
         android:text="계속하기"
         android:onClick="onContinueClicked"
@@ -264,8 +277,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutConfirmPassword"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="690dp"
         app:layout_constraintVertical_bias="0.9" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

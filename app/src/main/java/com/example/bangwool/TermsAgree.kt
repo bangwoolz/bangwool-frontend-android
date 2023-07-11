@@ -12,64 +12,50 @@ class TermsAgree : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTermsagreeBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
-        val checkBoxAllAgreements = binding.checkBoxAllAgreements
-        val checkBoxPrivacyPolicy = binding.checkBoxPrivacyPolicy
-        val checkBoxTermsOfUse = binding.checkBoxTermsOfUse
-        val buttonBack = binding.buttonBack
-        val buttonContinue = binding.buttonContinue
-        val linearLayoutPrivacyPolicy = binding.linearLayoutPrivacyPolicy
-        val linearLayoutAgreements = binding.linearLayoutAgreements
-
-        val intent = intent
-
-        linearLayoutPrivacyPolicy.setOnClickListener {
-            navigateToPrivacyPolicy()
-        }
-
-        linearLayoutAgreements.setOnClickListener {
-            navigateToAllAgreements()
-        }
-
-        checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
-            checkBoxPrivacyPolicy.isChecked = isChecked
-            checkBoxTermsOfUse.isChecked = isChecked
-            updateButtonState()
-        }
-
-        checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked && checkBoxTermsOfUse.isChecked) {
-                checkBoxAllAgreements.isChecked = true
-            } else {
-                checkBoxAllAgreements.isChecked = false
-            }
-            updateButtonState()
-        }
-
-        checkBoxTermsOfUse.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked && checkBoxPrivacyPolicy.isChecked) {
-                checkBoxAllAgreements.isChecked = true
-            } else {
-                checkBoxAllAgreements.isChecked = false
-            }
-            updateButtonState()
-        }
-
-        buttonBack.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        buttonContinue.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
+        setupViews()
         updateButtonState()
+    }
+
+    private fun setupViews() {
+        with(binding) {
+            linearLayoutPrivacyPolicy.setOnClickListener {
+                navigateToPrivacyPolicy()
+            }
+
+            linearLayoutAgreements.setOnClickListener {
+                navigateToAllAgreements()
+            }
+
+            checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                checkBoxPrivacyPolicy.isChecked = isChecked
+                checkBoxTermsOfUse.isChecked = isChecked
+                updateButtonState()
+            }
+
+            checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, isChecked ->
+                checkBoxAllAgreements.isChecked = isChecked && checkBoxTermsOfUse.isChecked
+                updateButtonState()
+            }
+
+            checkBoxTermsOfUse.setOnCheckedChangeListener { _, isChecked ->
+                checkBoxAllAgreements.isChecked = isChecked && checkBoxPrivacyPolicy.isChecked
+                updateButtonState()
+            }
+
+            buttonBack.setOnClickListener {
+                val intent = Intent(this@TermsAgree, RegisterActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            buttonContinue.setOnClickListener {
+                val intent = Intent(this@TermsAgree, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     private fun updateButtonState() {
@@ -79,28 +65,30 @@ class TermsAgree : AppCompatActivity() {
 
         val isFormValid = isAllAgreementsChecked && isPrivacyPolicyChecked && isTermsOfUseChecked
 
-        binding.buttonContinue.isEnabled = isFormValid
-        if (isFormValid) {
-            val enabledColor = ContextCompat.getColorStateList(this, R.color.enabledColor)
-            binding.buttonContinue.backgroundTintList = enabledColor
-        } else {
-            val disabledColor = ContextCompat.getColorStateList(this, R.color.disabledColor)
-            binding.buttonContinue.backgroundTintList = disabledColor
+        with(binding.buttonContinue) {
+            isEnabled = isFormValid
+            backgroundTintList = if (isFormValid) {
+                ContextCompat.getColorStateList(this@TermsAgree, R.color.enabledColor)
+            } else {
+                ContextCompat.getColorStateList(this@TermsAgree, R.color.disabledColor)
+            }
         }
     }
 
     private fun navigateToPrivacyPolicy() {
-        val intent = Intent(this, PrivacyPolicy::class.java)
-        intent.putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
-        intent.putExtra("checkBoxTermsOfUse", binding.checkBoxTermsOfUse.isChecked)
-        intent.putExtra("checkBoxAllAgreements", binding.checkBoxAllAgreements.isChecked)
+        val intent = Intent(this, PrivacyPolicy::class.java).apply {
+            putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
+            putExtra("checkBoxTermsOfUse", binding.checkBoxTermsOfUse.isChecked)
+            putExtra("checkBoxAllAgreements", binding.checkBoxAllAgreements.isChecked)
+        }
         startActivity(intent)
     }
 
     private fun navigateToAllAgreements() {
-        val intent = Intent(this, textViewAllAgreements::class.java)
-        intent.putExtra("checkboxState", binding.checkBoxTermsOfUse.isChecked)
-        intent.putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
+        val intent = Intent(this, textViewAllAgreements::class.java).apply {
+            putExtra("checkboxState", binding.checkBoxTermsOfUse.isChecked)
+            putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
+        }
         startActivity(intent)
     }
 }

@@ -20,13 +20,11 @@ class PrivacyPolicy : AppCompatActivity() {
         binding.buttonClose.setOnClickListener {
             finish()
         }
-
         val scrollView = binding.scrollable
         scrollView.viewTreeObserver.addOnScrollChangedListener {
             val scrollY = scrollView.scrollY
             val scrollViewHeight = scrollView.height
             val contentViewHeight = scrollView.getChildAt(0).height
-
             isScrolledEnd = scrollY + scrollViewHeight >= contentViewHeight
             updateButtonState()
         }
