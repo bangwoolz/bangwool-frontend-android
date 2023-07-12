@@ -3,17 +3,17 @@
     <item android:state_pressed="true">
         <shape>
             <gradient
-                android:centerColor="@color/bangwol_red"
-                android:endColor="@color/bangwol_red"
-                android:startColor="@color/bangwol_red"/>
+                android:centerColor="@color/primary"
+                android:endColor="@color/primary"
+                android:startColor="@color/primary"/>
         </shape>
     </item>
     <item android:state_focused="true">
         <shape>
             <gradient
-                android:centerColor="@color/bangwol_red"
-                android:endColor="@color/bangwol_red"
-                android:startColor="@color/bangwol_red"/>
+                android:centerColor="@color/primary"
+                android:endColor="@color/primary"
+                android:startColor="@color/primary"/>
         </shape>
     </item>
     <item>

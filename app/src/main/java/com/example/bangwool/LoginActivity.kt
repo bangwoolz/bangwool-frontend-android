@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 //                    }
 
                     if (isValidId(id)) {
-                        loginStartBtn.setBackgroundColor(getColor(R.color.bangwol_red))
+                        loginStartBtn.setBackgroundColor(getColor(R.color.primary))
                         idTextInputLayout.error = null
                         idTextInputLayout.hint = null
                         loginStartBtn.setOnClickListener {
@@ -74,6 +74,12 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             })
+
+            loginRegisterBtn.setOnClickListener {
+                val i = Intent(this@LoginActivity, RegisterActivity::class.java)
+                startActivity(i)
+                finish()
+            }
         }
     }
 
