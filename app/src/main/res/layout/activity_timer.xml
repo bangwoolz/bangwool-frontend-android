@@ -117,6 +117,14 @@
             android:textColor="@color/white"
             android:background="@drawable/normal_btn"
             />
+<!--        <android.widget.Button-->
+<!--            android:id="@+id/btn_continue"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="정지"-->
+<!--            android:textColor="@color/primary_200"-->
+<!--            android:background="@drawable/transparent_btn"-->
+<!--            />-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
