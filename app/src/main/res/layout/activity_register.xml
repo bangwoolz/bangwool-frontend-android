@@ -17,9 +17,9 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonBack"
             android:layout_width="30dp"
-            android:layout_height="0dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="90dp"
-            android:background="@drawable/back"
+            android:background="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/textViewTitle"
             app:layout_constraintTop_toTopOf="@id/textViewTitle"
@@ -63,7 +63,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="83dp"
         android:text="이메일"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
@@ -90,7 +90,7 @@
             android:background="@null"
             android:hint="ex) banwol@google.com"
             android:inputType="textEmailAddress"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="이름"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="이름"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -137,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:text="닉네임"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -151,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="143dp"
+        android:layout_marginEnd="140dp"
         app:boxBackgroundColor="@null"
         app:boxBackgroundMode="filled"
         app:hintTextColor="@color/hintColor"
@@ -164,30 +164,29 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="5글자 이하로 입력해주세요"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonDuplicateCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/disabled"
         android:text=""
         app:layout_constraintBottom_toBottomOf="@id/textInputLayoutNickname"
-        app:layout_constraintTop_toTopOf="@id/textInputLayoutNickname"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmail"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/textInputLayoutNickname"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:text="패스워드"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -216,7 +215,7 @@
             android:background="@null"
             android:hint="8~12자 사이로 입력해주세요"
             android:inputType="textPassword"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -227,7 +226,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:text="패스워드 확인"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
@@ -254,7 +253,7 @@
             android:layout_margin="0dp"
             android:background="@null"
             android:hint=" 패스워드를 확인해주세요"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_body3"
             android:inputType="textPassword"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>

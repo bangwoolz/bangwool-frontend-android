@@ -11,7 +11,7 @@
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="21dp"
-        android:background="@drawable/back"
+        android:background="@drawable/ic_back"
         android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
