@@ -57,6 +57,7 @@ class RegisterActivity : AppCompatActivity() {
                 })
             }
 
+            //이름 경고문 주시면 뜨개하갰습니다!!!
             textInputLayoutName.editText?.let { editTextName ->
                 editTextName.hint = ""
                 editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
