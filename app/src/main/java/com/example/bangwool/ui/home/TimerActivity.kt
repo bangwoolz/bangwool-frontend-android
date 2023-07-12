@@ -1,6 +1,7 @@
 package com.example.bangwool.ui.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangwool.databinding.ActivityTimerBinding
 import java.util.Timer
@@ -14,28 +15,25 @@ class TimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
-        binding.progressbar.max = time
         binding.btnContinue.setOnClickListener{
+            binding.btnContinue.visibility = View.GONE
+            binding.btnClear.visibility = View.GONE
+            binding.btnStop.visibility=View.VISIBLE
             startTimer()    //타이머 작동
         }
         binding.btnClear.setOnClickListener{
-            stopTimer()
-
+            clearTime()
         }
         binding.icXBtn.setOnClickListener{
             finish()
         }
-        val min = time / 6000
-        val sec = time % 6000 / 100
-        var upgradedMin = min.toString()
-        if(min<10){
-            upgradedMin= "0"+min.toString()
+        binding.btnStop.setOnClickListener{
+            binding.btnContinue.visibility = View.VISIBLE
+            binding.btnClear.visibility = View.VISIBLE
+            binding.btnStop.visibility=View.GONE
+            stopTimer()
         }
-        var upgradedSec = sec.toString()
-        if(sec<10){
-            upgradedSec= "0"+sec.toString()
-        }
-        binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
+        clearTime()
         setContentView(binding.root)
     }
     //타이머 작동
@@ -50,10 +48,6 @@ class TimerActivity : AppCompatActivity() {
             val milli = time % 100
 
             runOnUiThread {
-//                var upgradedMilli = milli.toString()
-//                if(milli<10){
-//                    upgradedMilli= milli.toString()+"0"
-//                }
                 var upgradedMin = min.toString()
                 if(min<10){
                     upgradedMin= "0"+min.toString()
@@ -72,5 +66,24 @@ class TimerActivity : AppCompatActivity() {
     }
     private fun stopTimer() {
         timerTask?.cancel()
+    }
+    private fun showTimeOnTimer() {
+        val min = time / 6000
+        val sec = time % 6000 / 100
+        var upgradedMin = min.toString()
+        if(min<10){
+            upgradedMin= "0"+min.toString()
+        }
+        var upgradedSec = sec.toString()
+        if(sec<10){
+            upgradedSec= "0"+sec.toString()
+        }
+        binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
+    }
+    private fun clearTime() {
+        time = 100 * 60 * 0 + 100 * 15
+        showTimeOnTimer()
+        binding.progressbar.max = time
+        binding.progressbar.progress=time
     }
 }
