@@ -16,12 +16,15 @@ class TimerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
         binding.btnContinue.setOnClickListener{
-            binding.btnContinue.visibility = View.GONE
-            binding.btnClear.visibility = View.GONE
+            binding.btnContinue.visibility = View.INVISIBLE
+            binding.btnClear.visibility = View.INVISIBLE
             binding.btnStop.visibility=View.VISIBLE
             startTimer()    //타이머 작동
         }
         binding.btnClear.setOnClickListener{
+            binding.btnClear.visibility = View.INVISIBLE
+            binding.btnContinue.visibility = View.INVISIBLE
+            binding.btnStart.visibility = View.VISIBLE
             clearTime()
         }
         binding.icXBtn.setOnClickListener{
@@ -30,8 +33,13 @@ class TimerActivity : AppCompatActivity() {
         binding.btnStop.setOnClickListener{
             binding.btnContinue.visibility = View.VISIBLE
             binding.btnClear.visibility = View.VISIBLE
-            binding.btnStop.visibility=View.GONE
+            binding.btnStop.visibility=View.INVISIBLE
             stopTimer()
+        }
+        binding.btnStart.setOnClickListener{
+            binding.btnStart.visibility = View.INVISIBLE
+            binding.btnStop.visibility=View.VISIBLE
+            startTimer()    //타이머 작동
         }
         clearTime()
         setContentView(binding.root)
