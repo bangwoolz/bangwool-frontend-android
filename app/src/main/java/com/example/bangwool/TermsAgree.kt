@@ -20,11 +20,16 @@ class TermsAgree : AppCompatActivity() {
 
     private fun setupViews() {
         with(binding) {
-            linearLayoutPrivacyPolicy.setOnClickListener {
+            ButtonPrivacyPolicy.setOnClickListener {
                 navigateToPrivacyPolicy()
             }
-
-            linearLayoutAgreements.setOnClickListener {
+            textViewPrivacyPolicy.setOnClickListener {
+                navigateToPrivacyPolicy()
+            }
+            ButtonViewAllAgreements.setOnClickListener {
+                navigateToAllAgreements()
+            }
+            textViewAllAgreements.setOnClickListener {
                 navigateToAllAgreements()
             }
 

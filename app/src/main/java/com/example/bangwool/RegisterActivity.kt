@@ -41,7 +41,6 @@ class RegisterActivity : AppCompatActivity() {
                             textInputLayoutEmail.hint = ""
                         }
                     }
-
                     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                         validateEmail(s.toString())
                     }
@@ -56,7 +55,6 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 })
             }
-
             //이름 경고문 주시면 뜨개하갰습니다!!!
             textInputLayoutName.editText?.let { editTextName ->
                 editTextName.hint = ""
@@ -75,7 +73,6 @@ class RegisterActivity : AppCompatActivity() {
                             textInputLayoutEmail.hint = ""
                         }
                     }
-
                     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
                     override fun afterTextChanged(s: Editable?) {
                         if (s.isNullOrEmpty()) {
@@ -118,7 +115,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             textInputLayoutPassword.editText?.let { editTextPassword ->
-                editTextPassword.hint = ""
+                editTextPassword.hint =""
                 editTextPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                     if (hasFocus) {
                         textInputLayoutPassword.hint = ""
