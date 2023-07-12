@@ -1,5 +1,6 @@
 package com.example.bangwool
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -40,11 +41,14 @@ class PasswordActivity : AppCompatActivity() {
 //                        pwTextInputLayout.error = "비밀번호를 입력하세요." // -> 피그마엔 없음
                     } else {
                         pwTextInputLayout.error = null
-                        loginBtn.setBackgroundColor(getColor(R.color.bangwol_red))
+                        loginBtn.setBackgroundColor(getColor(R.color.primary))
                         loginBtn.setOnClickListener {
                             if (pw.equals(uesr_password)) {
                                 pwTextInputLayout.error = null
 //                                pwTextInputLayout.error = "비밀번호 동일함"
+                                val i = Intent(this@PasswordActivity, MainActivity::class.java)
+                                startActivity(i)
+                                finish()
                             } else {
                                 pwTextInputLayout.error = "비밀번호가 달라요.다시 입력해주세요"
                             }
