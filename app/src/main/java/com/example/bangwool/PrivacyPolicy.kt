@@ -20,8 +20,6 @@ class PrivacyPolicy : AppCompatActivity() {
 
     }
 
-
-
     override fun onBackPressed() {
         setResult(RESULT_OK)
         super.onBackPressed()
