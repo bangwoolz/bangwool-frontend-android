@@ -10,13 +10,12 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="21dp"
         android:background="@drawable/back"
         android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
@@ -52,12 +51,12 @@
         tools:layout_editor_absoluteX="16dp"
         android:layout_marginTop="63dp">
 
-
-
         <LinearLayout
             android:id="@+id/linearLayoutTermsOfUse"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -102,7 +101,9 @@
         <LinearLayout
             android:id="@+id/linearLayoutPrivacyPolicy"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -138,17 +139,18 @@
                 android:id="@+id/checkBoxPrivacyPolicy"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginStart="150dp"
+                android:layout_marginStart="146dp"
+                android:layout_weight="0"
                 android:background="@drawable/custom_checkbox"
-                android:button="@null"
-                android:layout_weight="0" />
-   </LinearLayout>
+                android:button="@null" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayoutAgreements"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
@@ -186,7 +188,7 @@
                 android:layout_height="28dp"
                 android:background="@drawable/custom_checkbox"
                 android:button="@null"
-                android:layout_marginStart="88dp"
+                android:layout_marginStart="84dp"
                 />
         </LinearLayout>
 
