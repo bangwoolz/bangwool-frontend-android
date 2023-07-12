@@ -14,37 +14,13 @@ class PrivacyPolicy : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPrivacypolicyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        checkboxState = intent.getBooleanExtra("checkboxState", false)
-
         binding.buttonClose.setOnClickListener {
             finish()
         }
-        val scrollView = binding.scrollable
-        scrollView.viewTreeObserver.addOnScrollChangedListener {
-            val scrollY = scrollView.scrollY
-            val scrollViewHeight = scrollView.height
-            val contentViewHeight = scrollView.getChildAt(0).height
-            isScrolledEnd = scrollY + scrollViewHeight >= contentViewHeight
-            updateButtonState()
-        }
 
-        binding.buttonContinue.setOnClickListener {
-            finish()
-        }
     }
 
-    private fun updateButtonState() {
-        if (isScrolledEnd) {
-            val enabledColor = ContextCompat.getColorStateList(this, R.color.enabledColor)
-            binding.buttonContinue.backgroundTintList = enabledColor
-            binding.buttonContinue.isEnabled = true
-        } else {
-            val disabledColor = ContextCompat.getColorStateList(this, R.color.disabledColor)
-            binding.buttonContinue.backgroundTintList = disabledColor
-            binding.buttonContinue.isEnabled = false
-        }
-    }
+
 
     override fun onBackPressed() {
         setResult(RESULT_OK)
