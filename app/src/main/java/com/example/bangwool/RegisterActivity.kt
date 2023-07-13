@@ -265,6 +265,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateNickname(nickname: String): Boolean {
+        val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
         if (nickname.isEmpty()) {
             binding.textInputLayoutNickname.error = "닉네임을 입력하세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
@@ -275,7 +276,11 @@ class RegisterActivity : AppCompatActivity() {
             binding.textInputLayoutNickname.isErrorEnabled = true
             updateEndIcon(false)
             return false
-        } else {
+        }else if (!nicknamePattern.matcher(nickname).matches()) {
+            binding.textInputLayoutNickname.error = "닉네임 형식을 확인해주세요."
+            binding.textInputLayoutNickname.isErrorEnabled = true
+            updateEndIcon(false)
+            return false} else {
             binding.textInputLayoutNickname.error = null
             binding.textInputLayoutNickname.isErrorEnabled = false
             return true
