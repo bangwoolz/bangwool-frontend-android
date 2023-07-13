@@ -30,7 +30,7 @@
 
         <activity
             android:name=".RegisterActivity" />
-        <activity android:name=".PrivacyPolicy" />
+        <activity android:name=".PrivacyPolicyActivity" />
         <activity android:name=".TermsAgreeActivity" />
         <activity android:name=".textViewAllAgreementsActivity" />
 

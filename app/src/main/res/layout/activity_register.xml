@@ -125,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="이름"
+            android:hint="실명을 입력해주세요"
             android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

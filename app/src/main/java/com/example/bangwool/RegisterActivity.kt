@@ -30,7 +30,7 @@ class RegisterActivity : AppCompatActivity() {
                         textInputLayoutEmail.hint = ""
                         editTextEmail.setTextColor(textColorFocused)
                     } else {
-                        textInputLayoutEmail.hint = ""
+                        textInputLayoutEmail.hint = "ex) banwol@google.com"
                         editTextEmail.setTextColor(textColorUnFocused)
                     }
                 }
@@ -62,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                         textInputLayoutName.hint = ""
                         editTextName.setTextColor(textColorFocused)
                     } else {
-                        textInputLayoutName.hint = ""
+                        textInputLayoutName.hint = "실명을 입력하세요"
                         editTextName.setTextColor(textColorUnFocused)
                     }
                 }
@@ -90,7 +90,7 @@ class RegisterActivity : AppCompatActivity() {
                         textInputLayoutNickname.hint = ""
                         editTextNickname.setTextColor(textColorFocused)
                     } else {
-                        textInputLayoutNickname.hint = ""
+                        textInputLayoutNickname.hint = "5글자 이하로 입력해주세요"
                         editTextNickname.setTextColor(textColorUnFocused)
                     }
                 }
@@ -118,12 +118,17 @@ class RegisterActivity : AppCompatActivity() {
                 editTextPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                     if (hasFocus) {
                         textInputLayoutPassword.hint = ""
+                    }else{
+                        textInputLayoutPassword.hint = "8~12자 사이로 입력해주세요"
                     }
                 }
                 editTextPassword.addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                         if (s.isNullOrEmpty()) {
-                            textInputLayoutEmail.hint = ""
+                            textInputLayoutPassword.hint = ""
+                        }else{
+                            textInputLayoutPassword.hint = ""
+
                         }
                     }
 
@@ -149,7 +154,7 @@ class RegisterActivity : AppCompatActivity() {
                         textInputLayoutConfirmPassword.hint = ""
                         editTextConfirmPassword.setTextColor(textColorFocused)
                     } else {
-                        textInputLayoutConfirmPassword.hint = ""
+                        textInputLayoutConfirmPassword.hint = "패스워드를 확인해주세요"
                         editTextConfirmPassword.setTextColor(textColorUnFocused)
                     }
                 }
@@ -180,7 +185,8 @@ class RegisterActivity : AppCompatActivity() {
 
             buttonDuplicateCheck.setOnClickListener {
                 val nickname = textInputLayoutNickname.editText?.text.toString()
-                if (validateNickname(nickname)) {}
+                if (validateNickname(nickname)) {
+                }
             }
         }
     }
@@ -243,7 +249,7 @@ class RegisterActivity : AppCompatActivity() {
             return false
         } else {
             binding.textInputLayoutEmail.error = null
-            binding.textInputLayoutEmail.isErrorEnabled = false
+            binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(true)//왜 안뜨지..
             return true
         }
@@ -258,7 +264,7 @@ class RegisterActivity : AppCompatActivity() {
             return false
         } else {
             binding.textInputLayoutName.error = null
-            binding.textInputLayoutName.isErrorEnabled = false
+            binding.textInputLayoutName.isErrorEnabled = true
             return true
         }
     }
@@ -279,9 +285,10 @@ class RegisterActivity : AppCompatActivity() {
             binding.textInputLayoutNickname.error = "닉네임 형식을 확인해주세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             updateEndIcon(false)
-            return false} else {
+            return false
+        } else {
             binding.textInputLayoutNickname.error = null
-            binding.textInputLayoutNickname.isErrorEnabled = false
+            binding.textInputLayoutNickname.isErrorEnabled = true
             return true
         }
     }
@@ -314,11 +321,12 @@ class RegisterActivity : AppCompatActivity() {
 
 
     private fun updateEndIcon(isValid: Boolean) {
-        val endIconDrawable = if (isValid) {
+        val endIconDrawable =
+            if (isValid) {
             ContextCompat.getDrawable(this,R.drawable.round_check_24)
-        } else {
+            } else {
             ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline) // 에러 발생시 아이콘
-        }
+            }
         binding.textInputLayoutConfirmPassword.setErrorIconDrawable(endIconDrawable)
         binding.textInputLayoutEmail.setErrorIconDrawable(endIconDrawable)
         binding.textInputLayoutNickname.setErrorIconDrawable(endIconDrawable)
