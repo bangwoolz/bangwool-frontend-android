@@ -1,23 +1,22 @@
 package com.example.bangwool
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.service.notification.Condition.isValidId
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.MotionEvent
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.bangwool.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
-    val isLoadingComplete = false
-    val delayMills = 300
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -26,8 +25,23 @@ class LoginActivity : AppCompatActivity() {
         init()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun init() {
         binding.apply {
+//            loginIdEt.setOnClickListener {
+//                idTextInputLayout.hint = null
+//                loginIdEt.hint = null
+//            }
+            loginIdEt.setOnTouchListener { v, event ->
+                // 터치 떼자마자 hint 제거
+                if (event.action == MotionEvent.ACTION_UP){
+                    idTextInputLayout.hint = null
+                    idTextInputLayout.requestFocus()
+                    true
+                } else {
+                    false
+                }
+            }
             loginIdEt.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -60,12 +74,13 @@ class LoginActivity : AppCompatActivity() {
                                 //에러메세지 색상 변경
                                 idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
                                 idTextInputLayout.boxStrokeErrorColor = getColorStateList(R.color.androidDefault)
+                                val intent = Intent(this@LoginActivity, PasswordActivity::class.java)
+                                intent.putExtra("loginId", id)
+                                startActivity(intent)
                             }, 300)
 
 
-                            val intent = Intent(this@LoginActivity, PasswordActivity::class.java)
-                            intent.putExtra("loginId", id)
-                            startActivity(intent)
+
                         }
                     } else {
                         loginStartBtn.setBackgroundColor(getColor(R.color.gray))

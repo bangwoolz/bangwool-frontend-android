@@ -19,17 +19,7 @@ class MyPageFragment : Fragment() {
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
-
-        init()
-
         return binding.root
     }
 
-    private fun init() {
-        binding.loginBtn.setOnClickListener {
-            Log.d("LoginBtn", "click!")
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intent)
-        }
-    }
 }

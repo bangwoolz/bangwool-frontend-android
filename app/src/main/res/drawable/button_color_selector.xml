@@ -19,9 +19,9 @@
     <item>
         <shape>
             <gradient
-                android:endColor="@color/gray"
-                android:centerColor="@color/gray"
-                android:startColor="@color/gray"/>
+                android:endColor="@color/gray_400"
+                android:centerColor="@color/gray_400"
+                android:startColor="@color/gray_400"/>
         </shape>
     </item>
 </selector>
