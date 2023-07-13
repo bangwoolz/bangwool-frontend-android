@@ -31,8 +31,8 @@
         <activity
             android:name=".RegisterActivity" />
         <activity android:name=".PrivacyPolicy" />
-        <activity android:name=".TermsAgree" />
-        <activity android:name=".textViewAllAgreements" />
+        <activity android:name=".TermsAgreeActivity" />
+        <activity android:name=".textViewAllAgreementsActivity" />
 
         <activity
             android:name=".MainActivity"
