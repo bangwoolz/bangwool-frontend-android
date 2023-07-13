@@ -245,7 +245,7 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             binding.textInputLayoutEmail.error = null
             binding.textInputLayoutEmail.isErrorEnabled = false
-            updateEndIcon(true)
+            updateEndIcon(true)//왜 안뜨지..
             return true
         }
     }
@@ -255,6 +255,7 @@ class RegisterActivity : AppCompatActivity() {
         if (!namePattern.matcher(name).matches()) {
             binding.editTextName.error = "이름의 형식을 확인해 주세요"
             binding.textInputLayoutName.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else {
             binding.textInputLayoutName.error = null
@@ -267,10 +268,12 @@ class RegisterActivity : AppCompatActivity() {
         if (nickname.isEmpty()) {
             binding.textInputLayoutNickname.error = "닉네임을 입력하세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else if (nickname.length > 5) {
             binding.textInputLayoutNickname.error = "닉네임은 5글자 이하여야해요."
             binding.textInputLayoutNickname.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else {
             binding.textInputLayoutNickname.error = null
@@ -284,6 +287,7 @@ class RegisterActivity : AppCompatActivity() {
         if (!passwordPattern.matcher(password).matches()) {
             binding.textInputLayoutPassword.error = "⊗ 패스워드 조건을 확인해주세요(8-12글자 사이)"
             binding.textInputLayoutPassword.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else {
             binding.textInputLayoutPassword.error = null
@@ -295,26 +299,26 @@ class RegisterActivity : AppCompatActivity() {
         if (confirmPassword != password) {
             binding.textInputLayoutConfirmPassword.error = "⊗ 패스워드가 달라요"
             binding.textInputLayoutConfirmPassword.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else {
             binding.textInputLayoutConfirmPassword.error = null
             return true
+            updateEndIcon(true)
         }
     }
+
 
     private fun updateEndIcon(isValid: Boolean) {
         val endIconDrawable = if (isValid) {
-            ContextCompat.getDrawable(this, R.drawable.check)
+            ContextCompat.getDrawable(this,R.drawable.round_check_24)
         } else {
-            ContextCompat.getDrawable(this, R.drawable.error_circle_outline)
+            ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline) // 에러 발생시 아이콘
         }
-        binding.textInputLayoutEmail.endIconDrawable = endIconDrawable
-
-        val endIconTint = if (isValid) {
-            ColorStateList.valueOf(Color.parseColor("#888888"))
-        } else {
-            ColorStateList.valueOf(Color.parseColor("#888888"))
-        }
-        binding.textInputLayoutEmail.setEndIconTintList(endIconTint)
+        binding.textInputLayoutConfirmPassword.setErrorIconDrawable(endIconDrawable)
+        binding.textInputLayoutEmail.setErrorIconDrawable(endIconDrawable)
+        binding.textInputLayoutNickname.setErrorIconDrawable(endIconDrawable)
+        binding.textInputLayoutPassword.setErrorIconDrawable(endIconDrawable)
     }
+
 }
