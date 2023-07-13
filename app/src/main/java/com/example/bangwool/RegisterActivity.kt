@@ -1,7 +1,6 @@
 package com.example.bangwool
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -175,7 +174,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             buttonContinue.setOnClickListener {
-                val intent = Intent(this@RegisterActivity, TermsAgree::class.java)
+                val intent = Intent(this@RegisterActivity, TermsAgreeActivity::class.java)
                 startActivity(intent)
             }
 

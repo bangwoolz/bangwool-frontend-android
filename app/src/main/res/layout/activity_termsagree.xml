@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="24dp"
             android:text="약관 전체동의"
             android:textSize="16sp"
             android:textColor="@color/black"
@@ -190,4 +190,5 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="690dp"
         app:layout_constraintVertical_bias="0.9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
