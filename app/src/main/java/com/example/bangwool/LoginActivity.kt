@@ -2,6 +2,7 @@ package com.example.bangwool
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -57,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
 //                    }
 
                     if (isValidId(id)) {
-                        loginStartBtn.setBackgroundColor(getColor(R.color.primary))
+                        loginStartBtn.backgroundTintList = ColorStateList.valueOf(getColor(R.color.primary))
                         idTextInputLayout.error = null
                         idTextInputLayout.hint = null
                         loginStartBtn.setOnClickListener {
@@ -83,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
 
                         }
                     } else {
-                        loginStartBtn.setBackgroundColor(getColor(R.color.gray))
+                        loginStartBtn.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray))
                         idTextInputLayout.error = "잘못된 이메일 형식이에요"
                     }
                 }

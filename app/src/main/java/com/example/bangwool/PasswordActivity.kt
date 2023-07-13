@@ -1,6 +1,7 @@
 package com.example.bangwool
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -37,11 +38,11 @@ class PasswordActivity : AppCompatActivity() {
                     val pw = s.toString()
 
                     if (pw.isEmpty()) {
-                        loginBtn.setBackgroundColor(getColor(R.color.gray))
+                        loginBtn.backgroundTintList = ColorStateList.valueOf(getColor(R.color.gray))
 //                        pwTextInputLayout.error = "비밀번호를 입력하세요." // -> 피그마엔 없음
                     } else {
                         pwTextInputLayout.error = null
-                        loginBtn.setBackgroundColor(getColor(R.color.primary))
+                        loginBtn.backgroundTintList = ColorStateList.valueOf(getColor(R.color.primary))
                         loginBtn.setOnClickListener {
                             if (pw.equals(uesr_password)) {
                                 pwTextInputLayout.error = null
