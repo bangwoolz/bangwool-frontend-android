@@ -2,10 +2,9 @@ package com.example.bangwool
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityPrivacypolicyBinding
 
-class PrivacyPolicy : AppCompatActivity() {
+class PrivacyPolicyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPrivacypolicyBinding
     private var checkboxState = false
     private var isScrolledEnd = false

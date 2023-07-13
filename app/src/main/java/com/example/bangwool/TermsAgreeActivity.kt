@@ -78,7 +78,7 @@ class TermsAgreeActivity : AppCompatActivity() {
     }
 
     private fun navigateToPrivacyPolicy() {
-        val intent = Intent(this, PrivacyPolicy::class.java).apply {
+        val intent = Intent(this, PrivacyPolicyActivity::class.java).apply {
             putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
             putExtra("checkBoxTermsOfUse", binding.checkBoxTermsOfUse.isChecked)
             putExtra("checkBoxAllAgreements", binding.checkBoxAllAgreements.isChecked)
