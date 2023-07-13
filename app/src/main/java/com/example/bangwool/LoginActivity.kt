@@ -42,6 +42,10 @@ class LoginActivity : AppCompatActivity() {
                     false
                 }
             }
+
+            loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
+            loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
+
             loginIdEt.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -57,7 +61,9 @@ class LoginActivity : AppCompatActivity() {
 //                    }
 
                     if (isValidId(id)) {
-                        loginStartBtn.setBackgroundColor(getColor(R.color.primary))
+                        loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
+                        loginStartBtn.backgroundTintList = getColorStateList(R.color.primary)
+
                         idTextInputLayout.error = null
                         idTextInputLayout.hint = null
                         loginStartBtn.setOnClickListener {
@@ -83,7 +89,8 @@ class LoginActivity : AppCompatActivity() {
 
                         }
                     } else {
-                        loginStartBtn.setBackgroundColor(getColor(R.color.gray))
+                        loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
+                        loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
                         idTextInputLayout.error = "잘못된 이메일 형식이에요"
                     }
                 }
