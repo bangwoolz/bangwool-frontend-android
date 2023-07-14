@@ -17,10 +17,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.textHome.setOnClickListener({
-            val intent = Intent(activity, TimerActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
+        binding.textHome.setOnClickListener{
+            val intent = Intent(activity, TimerActivity::class.java)
             startActivity(intent)
-        })
+        }
         return binding.root
     }
 }
