@@ -83,6 +83,8 @@ class LoginActivity : AppCompatActivity() {
                                 val intent = Intent(this@LoginActivity, PasswordActivity::class.java)
                                 intent.putExtra("loginId", id)
                                 startActivity(intent)
+                                idTextInputLayout.error = null;
+                                loginLoadingDone.visibility = View.GONE
                             }, 300)
 
 
