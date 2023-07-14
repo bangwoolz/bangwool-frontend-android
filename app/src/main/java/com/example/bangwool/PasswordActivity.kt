@@ -27,6 +27,12 @@ class PasswordActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
+            binding.passwordFindPwBtn.setOnClickListener {
+                val intent = Intent(this@PasswordActivity, FindPasswordActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
 
             loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginBtn.backgroundTintList = getColorStateList(R.color.gray_300)

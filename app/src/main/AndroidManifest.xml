@@ -33,6 +33,7 @@
         <activity android:name=".PrivacyPolicyActivity" />
         <activity android:name=".TermsAgreeActivity" />
         <activity android:name=".textViewAllAgreementsActivity" />
+        <activity android:name=".FindPasswordActivity"/>
 
         <activity
             android:name=".MainActivity"
