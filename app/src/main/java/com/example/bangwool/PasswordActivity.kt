@@ -17,7 +17,6 @@ class PasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         init()
     }
 

@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_checked="false"
-        android:drawable="@drawable/checkbox_off"/>
+        android:drawable="@drawable/circle_progressbar"/>
     <!-- 체크박스 선택 상태 -->
     <item android:state_checked="true"
-        android:drawable="@drawable/checkbox_on"/>
+        android:drawable="@drawable/ic_check_circle_on"/>
 
 </selector>
