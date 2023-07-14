@@ -66,7 +66,7 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int,
                     after: Int
                 ) {
-                    validatePassword(s.toString())
+                    validName(s.toString())
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
