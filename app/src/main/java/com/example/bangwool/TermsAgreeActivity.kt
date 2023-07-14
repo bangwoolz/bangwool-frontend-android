@@ -48,15 +48,13 @@ class TermsAgreeActivity : AppCompatActivity() {
             }
 
             buttonBack.setOnClickListener {
-                val intent = Intent(this@TermsAgreeActivity, RegisterActivity::class.java)
-                startActivity(intent)
                 finish()
             }
 
             buttonContinue.setOnClickListener {
-                val intent = Intent(this@TermsAgreeActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                val i = Intent(this@TermsAgreeActivity, LoginActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(i)
             }
         }
     }
@@ -78,19 +76,12 @@ class TermsAgreeActivity : AppCompatActivity() {
     }
 
     private fun navigateToPrivacyPolicy() {
-        val intent = Intent(this, PrivacyPolicyActivity::class.java).apply {
-            putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
-            putExtra("checkBoxTermsOfUse", binding.checkBoxTermsOfUse.isChecked)
-            putExtra("checkBoxAllAgreements", binding.checkBoxAllAgreements.isChecked)
-        }
+        val intent = Intent(this, PrivacyPolicyActivity::class.java)
         startActivity(intent)
     }
 
     private fun navigateToAllAgreements() {
-        val intent = Intent(this, textViewAllAgreementsActivity::class.java).apply {
-            putExtra("checkboxState", binding.checkBoxTermsOfUse.isChecked)
-            putExtra("checkBoxPrivacyPolicy", binding.checkBoxPrivacyPolicy.isChecked)
-        }
+        val intent = Intent(this, textViewAllAgreementsActivity::class.java)
         startActivity(intent)
     }
 }

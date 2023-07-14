@@ -23,160 +23,160 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         with(binding) {
-            textInputLayoutEmail.editText?.let { editTextEmail ->
-                editTextEmail.hint = ""
-                editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) {
-                        textInputLayoutEmail.hint = ""
-                        editTextEmail.setTextColor(textColorFocused)
-                    } else {
-                        textInputLayoutEmail.hint = "ex) banwol@google.com"
-                        editTextEmail.setTextColor(textColorUnFocused)
-                    }
+            textInputLayoutEmail.hint = ""
+            editTextEmail.hint = "ex) banwol@google.com"
+            editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus && editTextEmail.text.isNullOrEmpty()) {
+                    editTextEmail.hint = "ex) banwol@google.com"
+                } else {
+                    editTextEmail.hint = ""
                 }
-                editTextEmail.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutEmail.hint = ""
-                        }
-                    }
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        validateEmail(s.toString())
-                    }
-
-                    override fun afterTextChanged(s: Editable?) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutEmail.hint = ""
-                        } else {
-                            textInputLayoutEmail.hint = ""
-                        }
-                        updateButtonState()
-                    }
-                })
             }
+            editTextEmail.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    validateEmail(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    updateButtonState()
+                }
+            })
             //이름 경고문 주시면 뜨개하갰습니다!!!
-            textInputLayoutName.editText?.let { editTextName ->
-                editTextName.hint = ""
-                editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) {
-                        textInputLayoutName.hint = ""
-                        editTextName.setTextColor(textColorFocused)
+            textInputLayoutName.hint = ""
+            editTextName.hint = "실명을 입력하세요"
+            editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus && editTextName.text.isNullOrEmpty()) {
+                    editTextName.hint = "실명을 입력하세요"
+                } else {
+                    editTextName.hint = ""
+                }
+            }
+            editTextName.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    validatePassword(s.toString())
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable?) {
+                    updateButtonState()
+                }
+            })
+
+            textInputLayoutNickname.hint = ""
+            editTextNickname.hint = "5글자 이하로 입력해주세요"
+            editTextNickname.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus && editTextNickname.text.isNullOrEmpty()) {
+                    editTextNickname.hint = "5글자 이하로 입력해주세요"
+                } else {
+                    editTextNickname.hint = ""
+                }
+            }
+            editTextNickname.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                    validatePassword(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    updateButtonState()
+                    updateConfirmButtonState()
+                }
+            })
+
+            textInputLayoutPassword.hint = ""
+            editTextPassword.hint = "8~12자 사이로 입력해주세요"
+            editTextPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus && editTextPassword.text.isNullOrEmpty()) {
+                    editTextPassword.hint = "8~12자 사이로 입력해주세요"
+                } else {
+                    editTextPassword.hint = ""
+                }
+            }
+            editTextPassword.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                    validatePassword(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    updateButtonState()
+                }
+            })
+
+
+            textInputLayoutConfirmPassword.hint = ""
+            editTextConfirmPassword.hint = "패스워드를 확인해주세요"
+            editTextConfirmPassword.onFocusChangeListener =
+                View.OnFocusChangeListener { _, hasFocus ->
+                    if (!hasFocus && editTextConfirmPassword.text.isNullOrEmpty()) {
+                        editTextConfirmPassword.hint = "패스워드를 확인해주세요"
                     } else {
-                        textInputLayoutName.hint = "실명을 입력하세요"
-                        editTextName.setTextColor(textColorUnFocused)
+                        editTextConfirmPassword.hint = ""
                     }
                 }
-                editTextName.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutEmail.hint = ""
-                        }
-                    }
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                    override fun afterTextChanged(s: Editable?) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutName.hint = ""
-                        } else {
-                            textInputLayoutName.hint = ""
-                        }
-                        updateButtonState()
-                    }
-                })
-            }
-            textInputLayoutNickname.editText?.let { editTextNickname ->
-                editTextNickname.hint = ""
-                editTextNickname.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) {
-                        textInputLayoutNickname.hint = ""
-                        editTextNickname.setTextColor(textColorFocused)
-                    } else {
-                        textInputLayoutNickname.hint = "5글자 이하로 입력해주세요"
-                        editTextNickname.setTextColor(textColorUnFocused)
-                    }
+            editTextConfirmPassword.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
-                editTextNickname.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutEmail.hint = ""
-                        }
-                    }
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                    override fun afterTextChanged(s: Editable?) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutNickname.hint = ""
-                        } else {
-                            textInputLayoutNickname.hint = ""
-                        }
-                        updateButtonState()
-                        updateConfirmButtonState()
-                    }
-                })
-            }
 
-            textInputLayoutPassword.editText?.let { editTextPassword ->
-                editTextPassword.hint =""
-                editTextPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) {
-                        textInputLayoutPassword.hint = ""
-                    }else{
-                        textInputLayoutPassword.hint = "8~12자 사이로 입력해주세요"
-                    }
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+                    validateConfirmPassword(
+                        editTextPassword.text.toString(),
+                        s.toString()
+                    )
                 }
-                editTextPassword.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutPassword.hint = ""
-                        }else{
-                            textInputLayoutPassword.hint = ""
 
-                        }
-                    }
-
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        validatePassword(s.toString())
-                    }
-
-                    override fun afterTextChanged(s: Editable?) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutPassword.hint = ""
-                        } else {
-                            textInputLayoutPassword.hint = ""
-                        }
-                        updateButtonState()
-                    }
-                })
-            }
-
-            textInputLayoutConfirmPassword.editText?.let { editTextConfirmPassword ->
-                editTextConfirmPassword.hint = ""
-                editTextConfirmPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-                    if (hasFocus) {
-                        textInputLayoutConfirmPassword.hint = ""
-                        editTextConfirmPassword.setTextColor(textColorFocused)
-                    } else {
-                        textInputLayoutConfirmPassword.hint = "패스워드를 확인해주세요"
-                        editTextConfirmPassword.setTextColor(textColorUnFocused)
-                    }
+                override fun afterTextChanged(s: Editable?) {
+                    updateButtonState()
                 }
-                editTextConfirmPassword.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        validateConfirmPassword(
-                            textInputLayoutPassword.editText?.text.toString(),
-                            s.toString()
-                        )
-                    }
+            })
 
-                    override fun afterTextChanged(s: Editable?) {
-                        if (s.isNullOrEmpty()) {
-                            textInputLayoutConfirmPassword.hint = ""
-                        } else {
-                            textInputLayoutConfirmPassword.hint = ""
-                        }
-                        updateButtonState()
-                    }
-                })
-            }
 
             buttonContinue.setOnClickListener {
                 val intent = Intent(this@RegisterActivity, TermsAgreeActivity::class.java)
@@ -188,6 +188,10 @@ class RegisterActivity : AppCompatActivity() {
                 if (validateNickname(nickname)) {
                 }
             }
+
+            buttonBack.setOnClickListener {
+                finish()
+            }
         }
     }
 
@@ -196,11 +200,13 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.buttonContinue.isEnabled = isFormValid
         if (isFormValid) {
-            val enabledColor = ContextCompat.getColorStateList(this@RegisterActivity, R.color.enabledColor)
+            val enabledColor =
+                ContextCompat.getColorStateList(this@RegisterActivity, R.color.enabledColor)
             binding.buttonContinue.backgroundTintList = enabledColor
 
         } else {
-            val disabledColor = ContextCompat.getColorStateList(this@RegisterActivity, R.color.disabledColor)
+            val disabledColor =
+                ContextCompat.getColorStateList(this@RegisterActivity, R.color.disabledColor)
             binding.buttonContinue.backgroundTintList = disabledColor
         }
     }
@@ -281,7 +287,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.textInputLayoutNickname.isErrorEnabled = true
             updateEndIcon(false)
             return false
-        }else if (!nicknamePattern.matcher(nickname).matches()) {
+        } else if (!nicknamePattern.matcher(nickname).matches()) {
             binding.textInputLayoutNickname.error = "닉네임 형식을 확인해주세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             updateEndIcon(false)
@@ -294,7 +300,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validatePassword(password: String): Boolean {
-        val passwordPattern = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}")
+        val passwordPattern =
+            Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}")
         if (!passwordPattern.matcher(password).matches()) {
             binding.textInputLayoutPassword.error = "⊗ 패스워드 조건을 확인해주세요(8-12글자 사이)"
             binding.textInputLayoutPassword.isErrorEnabled = true
@@ -323,9 +330,9 @@ class RegisterActivity : AppCompatActivity() {
     private fun updateEndIcon(isValid: Boolean) {
         val endIconDrawable =
             if (isValid) {
-            ContextCompat.getDrawable(this,R.drawable.round_check_24)
+                ContextCompat.getDrawable(this, R.drawable.round_check_24)
             } else {
-            ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline) // 에러 발생시 아이콘
+                ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline) // 에러 발생시 아이콘
             }
         binding.textInputLayoutConfirmPassword.setErrorIconDrawable(endIconDrawable)
         binding.textInputLayoutEmail.setErrorIconDrawable(endIconDrawable)

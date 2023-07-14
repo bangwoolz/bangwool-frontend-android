@@ -15,12 +15,4 @@ class textViewAllAgreementsActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
-
-
-    override fun onBackPressed() {
-        setResult(RESULT_OK)
-        super.onBackPressed()
-    }
 }
