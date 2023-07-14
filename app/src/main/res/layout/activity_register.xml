@@ -202,7 +202,7 @@
         app:boxBackgroundMode="filled"
         app:errorEnabled="true"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutName"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textViewPassword"
         app:passwordToggleEnabled="true">
@@ -242,7 +242,7 @@
         app:boxBackgroundColor="@null"
         app:hintTextColor="@color/hintColor"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword"
         app:passwordToggleEnabled="true">
 
