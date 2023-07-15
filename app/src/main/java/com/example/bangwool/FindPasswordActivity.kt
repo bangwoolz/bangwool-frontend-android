@@ -1,16 +1,14 @@
 package com.example.bangwool
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityFindpasswordBinding
-import com.example.bangwool.databinding.DialogFindpasswordBinding
 import java.util.regex.Pattern
+import android.content.Intent
 
 
 class FindPasswordActivity : AppCompatActivity() {
@@ -20,9 +18,12 @@ class FindPasswordActivity : AppCompatActivity() {
         binding = ActivityFindpasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.buttonCheck.setOnClickListener {
-            binding.buttonCheck.setOnClickListener {
                 DialogUtils.showFindPasswordDialog(this)
-            }
+        }
+        binding.buttonBack.setOnClickListener {
+            val intent = Intent(this, PasswordActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         with(binding) {
