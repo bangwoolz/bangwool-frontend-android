@@ -13,7 +13,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="작업 시간"
+        android:text="타이머 설정"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:layout_marginStart="123dp"
