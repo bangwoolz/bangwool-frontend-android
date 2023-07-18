@@ -6,57 +6,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.TextView
 import com.example.bangwool.databinding.DialogRestTimecheckBinding
-import java.lang.reflect.Field
 
 class RestTimerDialogUtil(private val context: Context) {
-
-    private fun hideNumberPickerDivider(picker: NumberPicker) {
-        try {
-            val pickerFields: Array<out Field> = NumberPicker::class.java.declaredFields
-            for (field in pickerFields) {
-                if (field.name == "mSelectionDivider") {
-                    field.isAccessible = true
-                    val colorDrawable = ColorDrawable(Color.TRANSPARENT)
-                    field.set(picker, colorDrawable)
-                    break
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun setNumberPickerTextColors(picker: NumberPicker, selectedTextColor: Int, unselectedTextColor: Int) {
-        val count = picker.childCount
-        for (i in 0 until count) {
-            val child = picker.getChildAt(i)
-            if (child is EditText) {
-                child.setTextColor(selectedTextColor)
-                picker.setOnScrollListener { _, _ ->
-                    child.setTextColor(selectedTextColor)
-                }
-                break
-            }
-        }
-
-        picker.setOnValueChangedListener { _, _, _ ->
-            val count = picker.childCount
-            for (i in 0 until count) {
-                val child = picker.getChildAt(i)
-                if (child is EditText) {
-                    child.setTextColor(unselectedTextColor)
-                }
-            }
-            val centerChild = picker.getChildAt(picker.childCount / 2)
-            if (centerChild is EditText) {
-                centerChild.setTextColor(selectedTextColor)
-            }
-        }
-    }
 
     fun showRestTimeDialog(textViewRestTime: TextView) {
         val dialog = Dialog(context)
@@ -83,9 +39,6 @@ class RestTimerDialogUtil(private val context: Context) {
         val selectedTextColor = Color.BLACK
         val unselectedTextColor = Color.BLACK
 
-        setNumberPickerTextColors(binding.numberPickerHour, selectedTextColor, unselectedTextColor)
-        setNumberPickerTextColors(binding.numberPickerMinute, selectedTextColor, unselectedTextColor)
-
         binding.buttonCancel.setOnClickListener {
             dialog.dismiss()
         }
@@ -98,7 +51,7 @@ class RestTimerDialogUtil(private val context: Context) {
             val formattedTime = if (selectedHour == 0) {
                 String.format("%02d분", selectedMinute)
             } else {
-                String.format("%02d시%02d분", selectedHour, selectedMinute)
+                String.format("%02d시간%02d분", selectedHour, selectedMinute)
             }
 
             // 텍스트 뷰에 반영
@@ -106,12 +59,42 @@ class RestTimerDialogUtil(private val context: Context) {
             dialog.dismiss()
         }
 
-        // 구분선 숨기기
-        dialog.setOnShowListener {
-            hideNumberPickerDivider(binding.numberPickerHour)
-            hideNumberPickerDivider(binding.numberPickerMinute)
+        // 선택한 숫자의 색상 변경
+        binding.numberPickerHour.setOnValueChangedListener { picker, oldVal, newVal ->
+            setSelectedTextColor(binding.numberPickerHour)
         }
 
+        binding.numberPickerMinute.setOnValueChangedListener { picker, oldVal, newVal ->
+            setSelectedTextColor(binding.numberPickerMinute)
+        }
+
+        // 다이얼로그 크기 지정
+        dialogResize(dialog, 0.7f, 0.5f)
+
         dialog.show()
+    }
+
+    private fun setSelectedTextColor(np: NumberPicker) {
+        val count = np.childCount
+        val selectedTextColor = Color.BLACK
+
+        for (i in 0 until count) {
+            val child = np.getChildAt(i)
+            if (child is EditText) {
+                child.setTextColor(if (i == np.value) selectedTextColor else child.textColors.defaultColor)
+                np.invalidate()
+                break
+            }
+        }
+    }
+
+    private fun dialogResize(dialog: Dialog, width: Float, height: Float) {
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+        val displayMetrics = context.resources.displayMetrics
+        val dialogWidth = (displayMetrics.widthPixels * width).toInt()
+        val dialogHeight = (displayMetrics.heightPixels * height).toInt()
+
+        dialog.window?.setLayout(dialogWidth, dialogHeight)
     }
 }
