@@ -26,7 +26,7 @@
     <FrameLayout
         android:id="@+id/Frame"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="92dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -53,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="시"
+                    android:textStyle="bold"
                     android:textColor="@color/gray_600" />
 
                 <NumberPicker
@@ -61,18 +62,23 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    />
+                    android:selectionDividerHeight="0dp"
+                    android:theme="@style/NumberPickerTextAppearance"
+                    android:descendantFocusability="beforeDescendants"/>
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:text=":"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="48sp"
+                android:textStyle="bold"
+                />
 
             <LinearLayout
                 android:id="@+id/minutePickerLayout"
@@ -85,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="분"
+                    android:textStyle="bold"
                     android:textColor="@color/gray_600" />
 
                 <NumberPicker
@@ -92,7 +99,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:selectionDividerHeight="0dp"
+                    android:theme="@style/NumberPickerTextAppearance"
+                    android:descendantFocusability="beforeDescendants"/>
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

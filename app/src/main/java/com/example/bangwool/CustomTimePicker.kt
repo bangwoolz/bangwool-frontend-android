@@ -1,25 +1,26 @@
 package com.example.bangwool
 
 import android.content.Context
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.NumberPicker
+import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.CustomTimePickerBinding
 
 class CustomTimePicker(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
     private val binding: CustomTimePickerBinding
+
     init {
         binding = CustomTimePickerBinding.inflate(LayoutInflater.from(context), this, true)
 
-        // Set up number pickers and their ranges
         binding.hourPicker.minValue = 0
         binding.hourPicker.maxValue = 23
 
         binding.minutePicker.minValue = 0
         binding.minutePicker.maxValue = 59
 
-        // Set formatter to display values as 00:00 format
         binding.hourPicker.setFormatter { value ->
             String.format("%02d", value)
         }
@@ -27,9 +28,20 @@ class CustomTimePicker(context: Context, attrs: AttributeSet) : LinearLayout(con
         binding.minutePicker.setFormatter { value ->
             String.format("%02d", value)
         }
-        val dividerId = resources.getIdentifier("selectionDivider", "id", "android")
-        val selectionDivider = findViewById<LinearLayout>(dividerId)
-        selectionDivider?.setBackgroundResource(R.drawable.divider_custom)
-    }
 
+        val textSizePx = resources.getDimensionPixelSize(R.dimen.text_size_header2)
+        binding.hourPicker.setTextSize(textSizePx.toFloat())
+        binding.minutePicker.setTextSize(textSizePx.toFloat())
+
+        val numberPickerFields = NumberPicker::class.java.getDeclaredFields()
+        for (field in numberPickerFields) {
+            if (field.name == "mSelectorWheelPaint") {
+                field.isAccessible = true
+                val paint = field.get(binding.hourPicker) as Paint
+                paint.color = ContextCompat.getColor(context, R.color.gray_200)
+                paint.textSize = textSizePx.toFloat()
+                break
+            }
+        }
+    }
 }

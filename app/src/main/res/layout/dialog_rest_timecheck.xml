@@ -61,6 +61,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:selectionDividerHeight="0dp"
+                    android:theme="@style/NumberPickerTextAppearance"
                     />
             </LinearLayout>
 
@@ -68,11 +70,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
                 android:text=":"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="48sp"
+                android:textStyle="bold"
+                />
 
             <LinearLayout
                 android:id="@+id/minutePickerLayout"
@@ -92,7 +97,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:selectionDividerHeight="0dp"
+                    android:theme="@style/NumberPickerTextAppearance"
+                    />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
@@ -147,3 +155,4 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

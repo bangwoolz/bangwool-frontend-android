@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.Window
+import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.TextView
 import com.example.bangwool.databinding.DialogRestTimecheckBinding
@@ -15,7 +16,7 @@ class RestTimerDialogUtil(private val context: Context) {
 
     private fun hideNumberPickerDivider(picker: NumberPicker) {
         try {
-            val pickerFields: Array<Field> = NumberPicker::class.java.declaredFields
+            val pickerFields: Array<out Field> = NumberPicker::class.java.declaredFields
             for (field in pickerFields) {
                 if (field.name == "mSelectionDivider") {
                     field.isAccessible = true
@@ -26,6 +27,34 @@ class RestTimerDialogUtil(private val context: Context) {
             }
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    private fun setNumberPickerTextColors(picker: NumberPicker, selectedTextColor: Int, unselectedTextColor: Int) {
+        val count = picker.childCount
+        for (i in 0 until count) {
+            val child = picker.getChildAt(i)
+            if (child is EditText) {
+                child.setTextColor(selectedTextColor)
+                picker.setOnScrollListener { _, _ ->
+                    child.setTextColor(selectedTextColor)
+                }
+                break
+            }
+        }
+
+        picker.setOnValueChangedListener { _, _, _ ->
+            val count = picker.childCount
+            for (i in 0 until count) {
+                val child = picker.getChildAt(i)
+                if (child is EditText) {
+                    child.setTextColor(unselectedTextColor)
+                }
+            }
+            val centerChild = picker.getChildAt(picker.childCount / 2)
+            if (centerChild is EditText) {
+                centerChild.setTextColor(selectedTextColor)
+            }
         }
     }
 
@@ -50,6 +79,12 @@ class RestTimerDialogUtil(private val context: Context) {
         // 시간 형식 설정
         binding.numberPickerHour.setFormatter { String.format("%02d", it) }
         binding.numberPickerMinute.setFormatter { String.format("%02d", it) }
+
+        val selectedTextColor = Color.BLACK
+        val unselectedTextColor = Color.BLACK
+
+        setNumberPickerTextColors(binding.numberPickerHour, selectedTextColor, unselectedTextColor)
+        setNumberPickerTextColors(binding.numberPickerMinute, selectedTextColor, unselectedTextColor)
 
         binding.buttonCancel.setOnClickListener {
             dialog.dismiss()

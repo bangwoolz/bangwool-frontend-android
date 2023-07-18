@@ -16,6 +16,14 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="NumberPickerTextAppearance">
+        <item name="android:textSize">48dp</item>
+        <item name="android:textColorPrimary">@color/gray_300</item>
+    </style>
+    <style name="NumberPickerTextAppearance.Unselected">
+        <item name="android:textSize">48dp</item>
+        <item name="android:textColor">@color/gray_200</item>
+    </style>
 
 
     <!--    TextInputLayout error message setting-->
