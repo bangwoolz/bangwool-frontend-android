@@ -5,37 +5,14 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.TextView
 import com.example.bangwool.databinding.DialogTimecheckBinding
-import java.lang.reflect.Field
 
 class TimeDialogUtils(private val context: Context) {
-    private fun setUnselectedNumberColor(picker: NumberPicker, unselectedColor: Int) {
-        val count = picker.childCount
-        for (i in 0 until count) {
-            val child = picker.getChildAt(i)
-            if (child is ViewGroup) {
-                val childCount = child.childCount
-                for (j in 0 until childCount) {
-                    val subChild = child.getChildAt(j)
-                    if (subChild is TextView) {
-                        subChild.setTextColor(unselectedColor)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setSelectedNumberColor(picker: NumberPicker, selectedColor: Int) {
-        val selectedNumber = picker.getChildAt(picker.value)
-        if (selectedNumber is EditText) {
-            selectedNumber.setTextColor(selectedColor)
-        }
-    }
 
     fun showWorkTimeDialog(textViewWorkTime: TextView) {
         val dialog = Dialog(context)
@@ -59,22 +36,13 @@ class TimeDialogUtils(private val context: Context) {
         binding.numberPickerHour.setFormatter { String.format("%02d", it) }
         binding.numberPickerMinute.setFormatter { String.format("%02d", it) }
 
-        // 색상 설정
-        val selectedColor = Color.BLACK
-        val unselectedColor = Color.GRAY
-        setUnselectedNumberColor(binding.numberPickerHour, unselectedColor)
-        setUnselectedNumberColor(binding.numberPickerMinute, unselectedColor)
-        setSelectedNumberColor(binding.numberPickerHour, selectedColor)
-        setSelectedNumberColor(binding.numberPickerMinute, selectedColor)
-
-        binding.numberPickerHour.setOnValueChangedListener { picker, _, _ ->
-            setUnselectedNumberColor(picker, unselectedColor)
-            setSelectedNumberColor(picker, selectedColor)
+        // 선택한 숫자의 색상 변경
+        binding.numberPickerHour.setOnValueChangedListener { picker, oldVal, newVal ->
+            setSelectedTextColor(binding.numberPickerHour)
         }
 
-        binding.numberPickerMinute.setOnValueChangedListener { picker, _, _ ->
-            setUnselectedNumberColor(picker, unselectedColor)
-            setSelectedNumberColor(picker, selectedColor)
+        binding.numberPickerMinute.setOnValueChangedListener { picker, oldVal, newVal ->
+            setSelectedTextColor(binding.numberPickerMinute)
         }
 
         binding.buttonCancel.setOnClickListener {
@@ -89,13 +57,40 @@ class TimeDialogUtils(private val context: Context) {
             val formattedTime = if (selectedHour == 0) {
                 String.format("%02d분", selectedMinute)
             } else {
-                String.format("%02d시%02d분", selectedHour, selectedMinute)
+                String.format("%02d시간%02d분", selectedHour, selectedMinute)
             }
             // 텍스트 뷰에 반영
             textViewWorkTime.text = formattedTime
             dialog.dismiss()
         }
 
+        // 다이얼로그 크기 지정
+        dialogResize(dialog, 0.7f, 0.5f)
+
         dialog.show()
+    }
+
+    private fun setSelectedTextColor(np: NumberPicker) {
+        val count = np.childCount
+        val selectedTextColor = context.resources.getColor(R.color.black)
+
+        for (i in 0 until count) {
+            val child = np.getChildAt(i)
+            if (child is EditText) {
+                child.setTextColor(if (i == np.value) selectedTextColor else child.textColors.defaultColor)
+                np.invalidate()
+                break
+            }
+        }
+    }
+
+    private fun dialogResize(dialog: Dialog, width: Float, height: Float) {
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+        val displayMetrics = context.resources.displayMetrics
+        val dialogWidth = (displayMetrics.widthPixels * width).toInt()
+        val dialogHeight = (displayMetrics.heightPixels * height).toInt()
+
+        dialog.window?.setLayout(dialogWidth, dialogHeight)
     }
 }

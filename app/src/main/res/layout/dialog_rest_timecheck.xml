@@ -62,8 +62,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:selectionDividerHeight="0dp"
-                    android:theme="@style/NumberPickerTextAppearance"
-                    />
+                    android:outlineSpotShadowColor="@color/gray_100"/>
             </LinearLayout>
 
             <TextView
@@ -99,7 +98,6 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:selectionDividerHeight="0dp"
-                    android:theme="@style/NumberPickerTextAppearance"
                     />
             </LinearLayout>
         </LinearLayout>
