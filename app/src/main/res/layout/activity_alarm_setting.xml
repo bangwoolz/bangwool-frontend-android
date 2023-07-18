@@ -41,7 +41,7 @@
         <TextView
             android:id="@+id/textViewWorkTimeTitle"
             android:layout_width="0dp"
-            android:layout_weight="9"
+            android:layout_weight="15"
             android:layout_height="wrap_content"
             android:text="알림 설정"
             android:textColor="@color/black"
@@ -75,7 +75,7 @@
         <TextView
             android:id="@+id/textViewRestTimeTitle"
             android:layout_width="0dp"
-            android:layout_weight="10"
+            android:layout_weight="16"
             android:layout_height="wrap_content"
             android:text="알림 유형"
             android:textColor="@color/black"
@@ -107,7 +107,7 @@
         <TextView
             android:id="@+id/textViewAutoTimerTitle"
             android:layout_width="0dp"
-            android:layout_weight="10"
+            android:layout_weight="19"
             android:layout_height="wrap_content"
             android:text="알림 소리"
             android:textColor="@color/black"
