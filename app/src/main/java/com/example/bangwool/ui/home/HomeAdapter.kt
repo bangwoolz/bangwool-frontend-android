@@ -1,15 +1,21 @@
 package com.example.bangwool.ui.home
 
 import android.content.Context
-import android.graphics.ColorFilter
+import android.graphics.Canvas
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ItemHomeBinding
+import kotlin.math.max
+import kotlin.math.min
 
-class HomeAdapter (private var itemList: ArrayList<HomeItem>) :
+class HomeAdapter(
+    private val context: Context,
+    private var itemList: ArrayList<HomeItem>
+) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     private lateinit var itemClickListener: OnItemClickListener
@@ -51,4 +57,7 @@ class HomeAdapter (private var itemList: ArrayList<HomeItem>) :
         holder.bind(itemList[position])
 
     }
+
+
 }
+
