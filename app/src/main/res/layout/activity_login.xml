@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="ex) banwol@gmail.com"
+                    android:maxLines="1"
                     android:paddingVertical="16dp"
                     android:textColorHint="@color/gray_400"
                     android:textSize="@dimen/text_size_body3" />
@@ -76,9 +77,9 @@
             <ImageView
                 android:id="@+id/login_loading_done"
                 android:layout_width="24dp"
-                android:visibility="gone"
                 android:layout_height="24dp"
                 android:src="@drawable/round_check_24"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -91,9 +92,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="28dp"
-            android:paddingVertical="14dp"
-            android:paddingHorizontal="32dp"
             android:padding="8dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="14dp"
             android:text="시작하기"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_body4"
