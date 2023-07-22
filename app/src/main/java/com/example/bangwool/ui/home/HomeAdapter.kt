@@ -24,7 +24,6 @@ class HomeAdapter(
 ) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-//    private lateinit var itemClickListener: OnItemClickListener
     var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
@@ -33,6 +32,15 @@ class HomeAdapter(
 
     fun setOnClickListener(onItemClickListener: OnItemClickListener) {
         itemClickListener = onItemClickListener
+    }
+
+    // 아이템 삭제 메소드
+    fun removeItem(item: HomeItem) {
+        val position = itemList.indexOf(item)
+        if (position != -1) {
+            itemList.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     inner class ViewHolder(val binding: ItemHomeBinding) :
