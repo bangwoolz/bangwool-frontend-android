@@ -16,6 +16,22 @@ import com.google.gson.Gson
 class TimerDeleteDialog : DialogFragment() {
     lateinit var binding: DialogTimerDeleteBinding
 
+    interface OnDeleteItemClickListener {
+        fun onDeleteItemClicked()
+    }
+
+    private var onDeleteItemClickListener: OnDeleteItemClickListener? = null
+
+    fun setOnDeleteItemClickListener(listener: OnDeleteItemClickListener) {
+        onDeleteItemClickListener = listener
+    }
+
+    // 다이얼로그 내의 삭제 버튼 클릭 시 이벤트를 처리하는 메소드
+    private fun onDeleteButtonClicked() {
+        onDeleteItemClickListener?.onDeleteItemClicked()
+        dismiss() // 다이얼로그 닫기
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogTimerDeleteBinding.inflate(LayoutInflater.from(context))
 //        binding.dialogCl.setBackgroundResource(R.drawable.dialog_layout)
@@ -36,14 +52,7 @@ class TimerDeleteDialog : DialogFragment() {
             dismiss()
         }
         binding.deleteBtn.setOnClickListener {
-            val bundle = Bundle()
-            val deleteState = false
-            bundle.putString("taskData", Gson().toJson(deleteState))
-
-            // OrderDialog 호출
-            val homeFragment = HomeFragment()
-            homeFragment.arguments = bundle
-            dismiss()
+            onDeleteButtonClicked()
         }
 
         return builder.create()

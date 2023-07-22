@@ -81,6 +81,12 @@ class HomeFragment : Fragment() {
 
                     // OrderDialog 호출
                     val dialog = TimerDeleteDialog()
+                    dialog.setOnDeleteItemClickListener(object :TimerDeleteDialog.OnDeleteItemClickListener{
+                        override fun onDeleteItemClicked() {
+                            //아이템 삭제
+                            homeAdapter.removeItem(homeItem)
+                        }
+                    })
                     dialog.arguments = bundle
                     dialog.show(parentFragmentManager, "OrderDialog")
                 }
@@ -101,9 +107,6 @@ class HomeFragment : Fragment() {
 
     fun initDummyData() {
         val dummydata = HomeItem(R.color.primary_100, "잠자기", "03:33", 0)
-        itemList.add(dummydata)
-        itemList.add(dummydata)
-        itemList.add(dummydata)
         itemList.add(dummydata)
         itemList.add(dummydata)
         itemList.add(dummydata)
