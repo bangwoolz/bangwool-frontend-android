@@ -45,4 +45,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="RoundedDialogTheme" parent="Theme.AppCompat.Dialog">
+        <!-- 다이얼로그의 배경을 둥글게 처리 -->
+        <item name="android:windowBackground">@drawable/dialog_layout</item>
+    </style>
 </resources>

@@ -3,21 +3,26 @@ package com.example.bangwool.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentHomeBinding
+import com.google.gson.Gson
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     var itemList: ArrayList<HomeItem> = arrayListOf()
+    lateinit var homeAdapter: HomeAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,16 +52,41 @@ class HomeFragment : Fragment() {
             val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
             itemTouchHelper.attachToRecyclerView(homeRecyclerView)
 
+            homeAdapter = HomeAdapter(requireContext(), itemList)
             homeRecyclerView.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                adapter = HomeAdapter(requireContext(), itemList)
+                adapter = homeAdapter
 
                 setOnTouchListener { _, _ ->
                     swipeHelperCallback.removePreviousClamp(this)
                     false
                 }
+
             }
+
+
+            homeAdapter.setOnClickListener(object : HomeAdapter.OnItemClickListener{
+                override fun onDeleteItemClick(homeItem: HomeItem) {
+//                    Log.d("CLICK!", "deleteBtn")
+
+                    val bundle = Bundle()
+                    val taskName = homeItem.taskName
+                    Log.d("taskName_HomeFragment", taskName)
+
+
+//                    val taskData = HomeItem(0, taskName, "", 0)
+                    val dataJson = Gson().toJson(taskName)
+                    bundle.putString("taskData", dataJson)
+
+                    // OrderDialog 호출
+                    val dialog = TimerDeleteDialog()
+                    dialog.arguments = bundle
+                    dialog.show(parentFragmentManager, "OrderDialog")
+                }
+
+            })
+
 
             homeAddTaskBtn.setOnClickListener {
                 Toast.makeText(requireContext(), "+ 버튼 클릭됨", Toast.LENGTH_SHORT).show()
