@@ -1,5 +1,6 @@
 package com.example.bangwool.ui.home
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentHomeBinding
 import com.google.gson.Gson
@@ -97,11 +96,42 @@ class HomeFragment : Fragment() {
             homeAddTaskBtn.setOnClickListener {
                 Toast.makeText(requireContext(), "+ 버튼 클릭됨", Toast.LENGTH_SHORT).show()
             }
+            homeMenu.setOnClickListener {
+                Log.d("Click", "homeMenu Click")
+                listDialog()
+            }
         }
     }
     // dp 값을 px 값으로 변환하는 함수
     fun dpToPx(dp: Float, context: Context): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+    }
+
+    fun listDialog(){
+        val builder = AlertDialog.Builder(requireContext())
+        val menu = arrayOf("알림 설정", "추가 설정")
+        builder.setItems(menu) { dialog, which ->
+            when (which) {
+                0 -> {
+                    // 알림 설정 화면으로 이동
+                }
+                1 -> {
+                    // 추가 설정 화면으로 이동
+                }
+                else -> {
+                    // 예외 처리 - 이 외의 인덱스에 대한 동작 구현 (필요한 경우)
+                }
+            }
+        }
+        val dialog = builder.create()
+        dialog.show()
+
+        // 다이얼로그의 너비를 직접 지정 (예: 70%의 너비로 지정)
+        val width = (resources.displayMetrics.widthPixels * 0.5).toInt()
+        dialog.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        // 다이얼로그의 배경 테두리 설정
+        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_delete_layout)
     }
 
 
