@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BangWool"
         tools:targetApi="31">
-        <activity android:name=".TimerSettingActivity"
+        <activity android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".TimerSettingActivity"
             android:exported="false"></activity>
         <activity
             android:name=".PasswordActivity"
