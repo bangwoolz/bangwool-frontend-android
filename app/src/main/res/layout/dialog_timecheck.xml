@@ -123,7 +123,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_marginTop="362dp"
+        android:layout_marginTop="355dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,11 +137,6 @@
             android:layout_marginEnd="8dp"
             android:background="@null"
             android:text="취소" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonConfirm"
