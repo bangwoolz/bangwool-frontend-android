@@ -28,10 +28,7 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
         binding.apply {
-//            loginIdEt.setOnClickListener {
-//                idTextInputLayout.hint = null
-//                loginIdEt.hint = null
-//            }
+
             loginIdEt.setOnTouchListener { v, event ->
                 // 터치 떼자마자 hint 제거
                 if (event.action == MotionEvent.ACTION_UP){
