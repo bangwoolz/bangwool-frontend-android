@@ -27,7 +27,6 @@ class RegisterActivity : AppCompatActivity() {
 
         with(binding) {
 
-
             textInputLayoutEmail.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutEmail.hint = ""
             editTextEmail.hint = "ex) banwol@google.com"
@@ -55,7 +54,6 @@ class RegisterActivity : AppCompatActivity() {
                     updateButtonState()
                 }
             })
-            //이름 경고문 주시면 뜨개하갰습니다!!!
             textInputLayoutName.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutName.hint = ""
             editTextName.hint = "실명을 입력하세요"
@@ -206,7 +204,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun updateButtonState() {
         val isFormValid = areAllFieldsValid()
-
         binding.buttonContinue.isEnabled = isFormValid
         if (isFormValid) {
             val enabledColor =
@@ -267,7 +264,7 @@ class RegisterActivity : AppCompatActivity() {
             updateEndIcon(false)
             return false
         } else {
-            binding.textInputLayoutEmail.error = " "
+            binding.textInputLayoutEmail.error = null
             binding.textInputLayoutEmail.isErrorEnabled = true
             binding.textInputLayoutConfirmPassword.boxStrokeErrorColor = ColorStateList.valueOf(grayColor)
             updateEndIcon(true)

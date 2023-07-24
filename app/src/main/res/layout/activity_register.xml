@@ -64,7 +64,7 @@
         android:text="이메일"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:textStyle="bold"
+        android:fontFamily="@font/petendard"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -104,7 +104,7 @@
         android:text="이름"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:textStyle="bold"
+        android:fontFamily="@font/petendard"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
@@ -140,7 +140,7 @@
         android:layout_marginTop="24dp"
         android:textSize="16sp"
         android:text="닉네임"
-        android:textStyle="bold"
+        android:fontFamily="@font/petendard"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutName" />
@@ -192,7 +192,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="패스워드"
-        android:textStyle="bold"
+        android:fontFamily="@font/petendard"
         android:textColor="@color/black"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
@@ -231,7 +231,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="패스워드 확인"
-        android:textStyle="bold"
+        android:fontFamily="@font/petendard"
         android:textColor="@color/black"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
