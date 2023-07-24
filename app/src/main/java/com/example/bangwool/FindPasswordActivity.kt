@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityFindpasswordBinding
 import java.util.regex.Pattern
 import android.content.Intent
+import android.graphics.PorterDuff
 
 
 class FindPasswordActivity : AppCompatActivity() {
@@ -27,6 +28,8 @@ class FindPasswordActivity : AppCompatActivity() {
         }
 
         with(binding) {
+
+            textInputLayoutEmail.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutEmail.hint = ""
             editTextEmail.hint = "ex) banwol@google.com"
             editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
@@ -54,6 +57,7 @@ class FindPasswordActivity : AppCompatActivity() {
                 }
             })
 
+            textInputLayoutName.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutName.hint = ""
             editTextName.hint = "실명을 입력하세요"
             editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
@@ -108,14 +112,17 @@ class FindPasswordActivity : AppCompatActivity() {
         if (email.isEmpty()) {
             binding.textInputLayoutEmail.error = "이메일을 입력하세요."
             binding.textInputLayoutEmail.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else if (!emailPattern.matcher(email).matches()) {
             binding.textInputLayoutEmail.error = "올바른 이메일 형식이 아니에요"
             binding.textInputLayoutEmail.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else {
             binding.textInputLayoutEmail.error = null
             binding.textInputLayoutEmail.isErrorEnabled = true
+            updateEndIcon(true)
             return true
         }
     }
@@ -125,12 +132,33 @@ class FindPasswordActivity : AppCompatActivity() {
         if (!namePattern.matcher(name).matches()) {
             binding.editTextName.error = "이름의 형식을 확인해 주세요"
             binding.textInputLayoutName.isErrorEnabled = true
+            updateEndIcon(false)
             return false
         } else {
             binding.textInputLayoutName.error = null
             binding.textInputLayoutName.isErrorEnabled = true
             return true
         }
+    }
+
+    private fun updateEndIcon(isValid: Boolean) {
+        val endIconDrawable =
+            if (isValid) {
+                ContextCompat.getDrawable(this, R.drawable.round_check_24)
+            } else {
+                ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline)
+            }
+
+        if (isValid) {
+            val tintColor = ContextCompat.getColor(this, R.color.gray_700)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        }else{
+            val tintColor = ContextCompat.getColor(this, R.color.secondary)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        }
+
+        binding.textInputLayoutEmail.setErrorIconDrawable(endIconDrawable)
+        binding.textInputLayoutName.setErrorIconDrawable(endIconDrawable)
     }
 
 

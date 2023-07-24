@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityRegisterBinding
@@ -25,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         with(binding) {
 
             textInputLayoutEmail.boxStrokeErrorColor = getColorStateList(R.color.secondary)
@@ -32,8 +34,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextEmail.hint = "ex) banwol@google.com"
             editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextEmail.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextEmail.hint = "ex) banwol@google.com"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextEmail.hint = ""
                 }
             }
@@ -59,8 +63,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextName.hint = "실명을 입력하세요"
             editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextName.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextName.hint = "실명을 입력하세요"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextName.hint = ""
                 }
             }
@@ -85,8 +91,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextNickname.hint = "5글자 이하로 입력해주세요"
             editTextNickname.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextNickname.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextNickname.hint = "5글자 이하로 입력해주세요"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextNickname.hint = ""
                 }
             }
@@ -119,8 +127,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextPassword.hint = "8~12자 사이로 입력해주세요"
             editTextPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextPassword.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextPassword.hint = "8~12자 사이로 입력해주세요"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextPassword.hint = ""
                 }
             }
@@ -153,8 +163,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextConfirmPassword.onFocusChangeListener =
                 View.OnFocusChangeListener { _, hasFocus ->
                     if (!hasFocus && editTextConfirmPassword.text.isNullOrEmpty()) {
+                        editTextEmail.setTextColor(textColorFocused)
                         editTextConfirmPassword.hint = "패스워드를 확인해주세요"
                     } else {
+                        editTextNickname.setTextColor(textColorUnFocused)
                         editTextConfirmPassword.hint = ""
                     }
                 }
@@ -199,6 +211,12 @@ class RegisterActivity : AppCompatActivity() {
             buttonBack.setOnClickListener {
                 finish()
             }
+
+            buttonDuplicateCheck.setOnClickListener {
+                // 중복 확인 로직을 수행하는 함수를 호출~
+                checkDuplicateNickname()
+            }
+
         }
     }
 
@@ -276,6 +294,8 @@ class RegisterActivity : AppCompatActivity() {
         val namePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,10}\$")
         if (!namePattern.matcher(name).matches()) {
             binding.editTextName.error = "이름의 형식을 확인해 주세요"
+            val errorColor = ContextCompat.getColor(this, R.color.secondary)
+            binding.textInputLayoutName.defaultHintTextColor = ColorStateList.valueOf(errorColor)
             binding.textInputLayoutName.isErrorEnabled = true
             updateEndIconElse(false)
             return false
@@ -318,22 +338,28 @@ class RegisterActivity : AppCompatActivity() {
         if (!passwordPattern.matcher(password).matches()) {
             binding.textInputLayoutPassword.error = "패스워드 조건을 확인해주세요(8-12글자 사이)"
             binding.textInputLayoutPassword.isErrorEnabled = true
+            updateEndIconElse(false)
             return false
         } else {
             binding.textInputLayoutPassword.error = null
             binding.textInputLayoutPassword.isErrorEnabled = false
+            updateEndIconElse(true)
             return true
         }
     }
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
+        val errorColor = ContextCompat.getColor(this, R.color.secondary)
         if (confirmPassword != password) {
             binding.textInputLayoutConfirmPassword.error = "패스워드가 달라요"
             binding.textInputLayoutConfirmPassword.isErrorEnabled = true
+            binding.textInputLayoutEmail.boxStrokeErrorColor = ColorStateList.valueOf(errorColor)
+            updateEndIconElse(false)
             return false
         } else {
             binding.textInputLayoutConfirmPassword.error = null
             binding.textInputLayoutConfirmPassword.isErrorEnabled = false
+            updateEndIconElse(true)
             return true
         }
     }
@@ -367,8 +393,21 @@ class RegisterActivity : AppCompatActivity() {
             }
         binding.textInputLayoutPassword.setErrorIconDrawable(endIconDrawable)
         binding.textInputLayoutConfirmPassword.setErrorIconDrawable(endIconDrawable)
-        binding.textInputLayoutName.setErrorIconDrawable(endIconDrawable)
         binding.textInputLayoutNickname.setErrorIconDrawable(endIconDrawable)
     }
+
+    private fun checkDuplicateNickname() {
+        val nickname = binding.textInputLayoutNickname.editText?.text.toString()
+
+        // 여기에서 중복 확인 로직을 수행할것.
+
+        if (nickname.isNotEmpty()) {
+            // 만약 닉네임이 비어있지 않다면, 중복 확인 중임을 알리는 토스트 메시지를 표시.
+            Toast.makeText(this, "닉네임 중복 확인 중: $nickname", Toast.LENGTH_SHORT).show()
+        } else {
+
+        }
+    }
+
 
 }
