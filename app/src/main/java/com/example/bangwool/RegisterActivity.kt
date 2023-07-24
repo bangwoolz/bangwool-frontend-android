@@ -3,33 +3,31 @@ package com.example.bangwool
 import android.graphics.PorterDuff
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.example.bangwool.databinding.ActivityRegisterBinding
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private val textColorFocused = Color.parseColor("#111111")
-    private val textColorUnFocused = Color.parseColor("#616161")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         with(binding) {
-
-
             textInputLayoutEmail.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutEmail.hint = ""
+            editTextEmail.clearFocus()
             editTextEmail.hint = "ex) banwol@google.com"
             editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextEmail.text.isNullOrEmpty()) {
@@ -73,10 +71,12 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int,
                     after: Int
                 ) {
-                    validName(s.toString())
                 }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    validateName(s.toString())
+                }
+
                 override fun afterTextChanged(s: Editable?) {
                     updateButtonState()
                 }
@@ -107,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
                     before: Int,
                     count: Int
                 ) {
-                    validatePassword(s.toString())
+                    validateNickname(s.toString())
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -142,6 +142,7 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int
                 ) {
                     validatePassword(s.toString())
+                    validateConfirmPassword(s.toString() ,binding.editTextConfirmPassword.text.toString())
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -201,6 +202,7 @@ class RegisterActivity : AppCompatActivity() {
             buttonBack.setOnClickListener {
                 finish()
             }
+
         }
     }
 
@@ -247,7 +249,7 @@ class RegisterActivity : AppCompatActivity() {
                 validateNickname(nickname) &&
                 validatePassword(password) &&
                 validateConfirmPassword(password, confirmPassword) &&
-                validName(name)
+                validateName(name)
     }
 
 
@@ -275,16 +277,27 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun validName(name: String): Boolean {
+    private fun validateName(name: String): Boolean {
         val namePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,10}\$")
-        if (!namePattern.matcher(name).matches()) {
-            binding.editTextName.error = "이름의 형식을 확인해 주세요"
+        if(name.isEmpty()){
+            binding.textInputLayoutName.error = "     이름을 입력하세요."
             binding.textInputLayoutName.isErrorEnabled = true
-            updateEndIconElse(false)
+            binding.icErrorName.visibility = View.VISIBLE
+            return false
+        } else if (name.length > 10) {
+            binding.textInputLayoutName.error = "     이름은 10글자 이하여야해요."
+            binding.textInputLayoutName.isErrorEnabled = true
+            binding.icErrorName.visibility = View.VISIBLE
+            return false
+        } else if (!namePattern.matcher(name).matches()) {
+            binding.textInputLayoutName.error = "     이름의 형식을 확인해 주세요"
+            binding.textInputLayoutName.isErrorEnabled = true
+            binding.icErrorName.visibility = View.VISIBLE
             return false
         } else {
             binding.textInputLayoutName.error = null
             binding.textInputLayoutName.isErrorEnabled = false
+            binding.icErrorName.visibility = View.GONE
             return true
         }
     }
@@ -292,51 +305,60 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateNickname(nickname: String): Boolean {
         val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
         if (nickname.isEmpty()) {
-            binding.textInputLayoutNickname.error = "닉네임을 입력하세요."
+            binding.textInputLayoutNickname.error = "     닉네임을 입력하세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
-            updateEndIconElse(false)
+            binding.icErrorNickName.visibility = View.VISIBLE
             return false
         } else if (nickname.length > 5) {
-            binding.textInputLayoutNickname.error = "닉네임은 5글자 이하여야해요."
+            binding.textInputLayoutNickname.error = "     닉네임은 5글자 이하여야해요."
             binding.textInputLayoutNickname.isErrorEnabled = true
-            updateEndIconElse(false)
+            binding.icErrorNickName.visibility = View.VISIBLE
             return false
         } else if (!nicknamePattern.matcher(nickname).matches()) {
-            binding.textInputLayoutNickname.error = "닉네임 형식을 확인해주세요."
+            binding.textInputLayoutNickname.error = "     닉네임 형식을 확인해주세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
-            updateEndIconElse(false)
+            binding.icErrorNickName.visibility = View.VISIBLE
             return false
         } else {
             binding.textInputLayoutNickname.error = null
             binding.textInputLayoutNickname.isErrorEnabled = false
-            updateEndIconElse(true)
+            binding.icErrorNickName.visibility = View.GONE
             return true
         }
     }
 
-
     private fun validatePassword(password: String): Boolean {
         val passwordPattern =
             Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}")
-        if (!passwordPattern.matcher(password).matches()) {
-            binding.textInputLayoutPassword.error = "패스워드 조건을 확인해주세요(8-12글자 사이)"
+
+        if (password.isEmpty()) {
+            binding.textInputLayoutPassword.error = "     패스워드를 입력하세요."
             binding.textInputLayoutPassword.isErrorEnabled = true
+            binding.icErrorPassword.visibility = View.VISIBLE
+            return false
+        } else if (!passwordPattern.matcher(password).matches()) {
+            binding.textInputLayoutPassword.error = "     패스워드 조건을 확인해주세요(8-12글자 사이)"
+            binding.textInputLayoutPassword.isErrorEnabled = true
+            binding.icErrorPassword.visibility = View.VISIBLE
             return false
         } else {
             binding.textInputLayoutPassword.error = null
             binding.textInputLayoutPassword.isErrorEnabled = false
+            binding.icErrorPassword.visibility = View.GONE
             return true
         }
     }
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
         if (confirmPassword != password) {
-            binding.textInputLayoutConfirmPassword.error = "패스워드가 달라요"
+            binding.textInputLayoutConfirmPassword.error = "    패스워드가 달라요"
             binding.textInputLayoutConfirmPassword.isErrorEnabled = true
+            binding.icErrorConfirmPassword.visibility = View.VISIBLE
             return false
         } else {
             binding.textInputLayoutConfirmPassword.error = null
             binding.textInputLayoutConfirmPassword.isErrorEnabled = false
+            binding.icErrorConfirmPassword.visibility = View.GONE
             return true
         }
     }
@@ -360,18 +382,4 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.textInputLayoutEmail.setErrorIconDrawable(endIconDrawable)
     }
-
-    private fun updateEndIconElse(isValid: Boolean) {
-        val endIconDrawable =
-            if (isValid) {
-                    ColorDrawable(Color.TRANSPARENT)
-            } else {
-                ColorDrawable(Color.TRANSPARENT)
-            }
-        binding.textInputLayoutPassword.setErrorIconDrawable(endIconDrawable)
-        binding.textInputLayoutConfirmPassword.setErrorIconDrawable(endIconDrawable)
-        binding.textInputLayoutName.setErrorIconDrawable(endIconDrawable)
-        binding.textInputLayoutNickname.setErrorIconDrawable(endIconDrawable)
-    }
-
 }
