@@ -27,15 +27,15 @@ class TimeDialogUtils(private val context: Context) {
         dialog.setContentView(binding.root)
 
         // 숫자 범위 설정하는 부분
-        binding.numberPickerHour.minValue = 1
-        binding.numberPickerHour.maxValue = 99
+        binding.numberPickerMinute.minValue = 1
+        binding.numberPickerMinute.maxValue = 99
 
         // 시간 형식 설정 XX 형식으로
-        binding.numberPickerHour.setFormatter { String.format("%02d", it) }
+        binding.numberPickerMinute.setFormatter { String.format("%02d", it) }
 
         // 선택한 숫자의 색상 변경
-        binding.numberPickerHour.setOnValueChangedListener { picker, oldVal, newVal ->
-            setSelectedTextColor(binding.numberPickerHour)
+        binding.numberPickerMinute.setOnValueChangedListener { picker, oldVal, newVal ->
+            setSelectedTextColor(binding.numberPickerMinute)
         }
 
 
@@ -44,13 +44,13 @@ class TimeDialogUtils(private val context: Context) {
         }
 
         binding.buttonConfirm.setOnClickListener {
-            val selectedHour = binding.numberPickerHour.value
+            val selectedMinute = binding.numberPickerMinute.value
 
             // 선택한 시간에 따라 형식 지정
-            val formattedTime = if (selectedHour == 0) {
-                String.format("%02d분", selectedHour)
+            val formattedTime = if (selectedMinute == 0) {
+                String.format("%02d분", selectedMinute)
             } else {
-                String.format("%02d시간%02d분", selectedHour, selectedHour)
+                String.format("%02d시간%02d분", selectedMinute, selectedMinute)
             }
             // 텍스트 뷰에 반영
             textViewWorkTime.text = formattedTime
