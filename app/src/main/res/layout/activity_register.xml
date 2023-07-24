@@ -34,7 +34,7 @@
             android:layout_marginBottom="21dp"
             android:text="회원가입"
             android:textColor="@color/black"
-            android:textStyle="bold"
+            android:fontFamily="@font/petendard"
             android:textSize="18sp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -214,7 +214,7 @@
         app:layout_constraintTop_toBottomOf="@id/textViewPassword"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -251,9 +251,10 @@
         app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
         app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
         app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

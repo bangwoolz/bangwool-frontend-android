@@ -2,6 +2,7 @@ package com.example.bangwool
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -12,6 +13,7 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -106,6 +108,25 @@ class LoginActivity : AppCompatActivity() {
     private fun isValidId(email: String): Boolean {
         val pattern = Patterns.EMAIL_ADDRESS
         return pattern.matcher(email).matches()
+    }
+
+    private fun updateEndIcon(isValid: Boolean) {
+        val endIconDrawable =
+            if (isValid) {
+                ContextCompat.getDrawable(this, R.drawable.round_check_24)
+            } else {
+                ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline)
+            }
+
+        if (isValid) {
+            val tintColor = ContextCompat.getColor(this, R.color.gray_700)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        }else{
+            val tintColor = ContextCompat.getColor(this, R.color.secondary)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        }
+        binding.idTextInputLayout.setErrorIconDrawable(endIconDrawable)
+
     }
 
 }
