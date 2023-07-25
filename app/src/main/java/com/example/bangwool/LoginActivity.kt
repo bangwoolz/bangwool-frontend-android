@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 idTextInputLayout.error = null;
                                 loginLoadingDone.visibility = View.GONE
-                            }, 300)
+                            }, 2000)
 
 
 
