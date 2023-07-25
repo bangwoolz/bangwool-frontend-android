@@ -34,7 +34,7 @@
             android:layout_marginBottom="21dp"
             android:text="회원가입"
             android:textColor="@color/black"
-            android:fontFamily="@font/petendard"
+            android:fontFamily="@font/p_medium"
             android:textSize="18sp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -64,7 +64,7 @@
         android:text="이메일"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/petendard"
+        android:fontFamily="@font/p_medium"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -104,7 +104,7 @@
         android:text="이름"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/petendard"
+        android:fontFamily="@font/p_medium"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
@@ -155,7 +155,7 @@
         android:layout_marginTop="24dp"
         android:textSize="16sp"
         android:text="닉네임"
-        android:fontFamily="@font/petendard"
+        android:fontFamily="@font/p_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutName" />
@@ -221,7 +221,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="패스워드"
-        android:fontFamily="@font/petendard"
+        android:fontFamily="@font/p_medium"
         android:textColor="@color/black"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
@@ -274,7 +274,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="패스워드 확인"
-        android:fontFamily="@font/petendard"
+        android:fontFamily="@font/p_medium"
         android:textColor="@color/black"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
