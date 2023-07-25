@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.bangwool.databinding.FragmentRankingBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class RankingFragment : Fragment() {
     lateinit var binding : FragmentRankingBinding
