@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int,
                     after: Int
                 ) {
-                    validName(s.toString())
+                    validateName(s.toString())
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -257,7 +257,7 @@ class RegisterActivity : AppCompatActivity() {
                 validateNickname(nickname) &&
                 validatePassword(password) &&
                 validateConfirmPassword(password, confirmPassword) &&
-                validName(name)
+                validateName(name)
     }
 
 
