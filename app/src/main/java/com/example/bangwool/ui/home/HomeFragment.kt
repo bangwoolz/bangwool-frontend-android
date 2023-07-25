@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.bangwool.TimerSettingActivity
 import com.example.bangwool.ui.home.TimerActivity
 import com.example.bangwool.databinding.FragmentHomeBinding
 
