@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -37,15 +37,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/login_cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="4dp">
+            android:paddingHorizontal="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/id_textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_300"
+                app:errorIconDrawable="@null"
+                app:boxStrokeErrorColor="@color/secondary"
+                app:errorTextColor="@color/secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +91,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <ImageView
+                android:id="@+id/login_icErrorEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="-20dp"
+                android:src="@drawable/error_circle_outline"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/id_textInputLayout"
+                app:layout_constraintTop_toBottomOf="@id/id_textInputLayout"
+                app:tint="@color/secondary" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -98,12 +119,19 @@
             android:text="시작하기"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_body4"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_cl" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_start_btn">
 
             <TextView
                 android:id="@+id/login_register_btn"
@@ -123,7 +151,7 @@
                 android:text="아이디찾기" />
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <LinearLayout

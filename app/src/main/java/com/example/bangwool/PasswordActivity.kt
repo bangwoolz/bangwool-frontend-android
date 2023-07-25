@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
+import android.view.View
 import com.example.bangwool.databinding.ActivityPasswordBinding
 
 class PasswordActivity : AppCompatActivity() {
@@ -27,10 +28,18 @@ class PasswordActivity : AppCompatActivity() {
             backBtn.setOnClickListener {
                 finish()
             }
+            binding.passwordFindPwBtn.setOnClickListener {
+                val intent = Intent(this@PasswordActivity, FindPasswordActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+
 
             loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginBtn.backgroundTintList = getColorStateList(R.color.gray_300)
 
+            pwTextInputLayout.error = null
             passwordEt.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -45,8 +54,6 @@ class PasswordActivity : AppCompatActivity() {
 
 //                        pwTextInputLayout.error = "비밀번호를 입력하세요." // -> 피그마엔 없음
                     } else {
-                        pwTextInputLayout.error = null
-
                         loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginBtn.backgroundTintList = getColorStateList(R.color.primary)
 
@@ -55,10 +62,14 @@ class PasswordActivity : AppCompatActivity() {
                                 pwTextInputLayout.error = null
 //                                pwTextInputLayout.error = "비밀번호 동일함"
                                 val i = Intent(this@PasswordActivity, MainActivity::class.java)
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 startActivity(i)
                                 finish()
+                                if(LoginActivity.activity != null)
+                                    LoginActivity.activity!!.finish()
                             } else {
-                                pwTextInputLayout.error = "비밀번호가 달라요.다시 입력해주세요"
+                                loginIcErrorPassword.visibility = View.VISIBLE
+                                pwTextInputLayout.error = "    비밀번호가 달라요.다시 입력해주세요"
                             }
                         }
                     }
