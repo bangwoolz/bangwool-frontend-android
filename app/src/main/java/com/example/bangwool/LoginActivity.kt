@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
 //                    }
 
                     if (isValidId(id)) {
+                        loginIcErrorEmail.visibility = View.GONE
                         loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginStartBtn.backgroundTintList = getColorStateList(R.color.primary)
 
@@ -88,9 +89,10 @@ class LoginActivity : AppCompatActivity() {
 
                         }
                     } else {
+                        loginIcErrorEmail.visibility = View.VISIBLE
                         loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
-                        idTextInputLayout.error = "잘못된 이메일 형식이에요"
+                        idTextInputLayout.error = "     잘못된 이메일 형식이에요"
                     }
                 }
 
