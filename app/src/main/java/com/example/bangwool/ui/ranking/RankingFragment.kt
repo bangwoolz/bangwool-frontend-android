@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.bangwool.databinding.FragmentRankingBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
+
 class RankingFragment : Fragment() {
     lateinit var binding : FragmentRankingBinding
     val tabList = listOf<String>("일간", "주간")
