@@ -1,28 +1,29 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/title_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="21dp"
             android:layout_marginEnd="280dp"
+            android:layout_marginStart="21dp"
             android:background="@drawable/ic_back"
-            app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textViewTitle"
+            app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
@@ -31,15 +32,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:layout_marginBottom="21dp"
-            android:gravity="center"
             android:text="회원가입"
             android:textColor="@color/black"
+            android:fontFamily="@font/petendard"
             android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/line"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/line"/>
 
         <View
             android:id="@+id/line"
@@ -47,10 +48,10 @@
             android:layout_height="1dp"
             android:layout_marginTop="21dp"
             android:background="@color/disabledColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -61,11 +62,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="83dp"
         android:text="이메일"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/petendard"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutEmail"
@@ -73,13 +74,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:boxBackgroundColor="@null"
         app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="@null"
         app:boxStrokeWidth="1dp"
-        app:errorTextColor="@color/secondary"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:errorTextColor="@color/secondary"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewEmail">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -101,9 +102,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="이름"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:fontFamily="@font/petendard"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
@@ -120,8 +121,8 @@
         app:errorIconDrawable="@null"
         app:errorTextColor="@color/secondary"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textViewName">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -130,7 +131,6 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="실명을 입력해주세요"
-            android:inputType="textEmailAddress"
             android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -153,10 +153,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="닉네임"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:text="닉네임"
+        android:fontFamily="@font/petendard"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutName" />
 
@@ -186,7 +186,6 @@
             android:inputType="textEmailAddress"
             android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
@@ -211,20 +210,20 @@
         android:background="@drawable/disabled"
         android:text=""
         app:layout_constraintBottom_toBottomOf="@id/textInputLayoutNickname"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textInputLayoutNickname"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="패스워드"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:text="패스워드"
+        android:fontFamily="@font/petendard"
+        android:textColor="@color/black"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutNickname" />
 
@@ -252,10 +251,9 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint=" 패스워드를 확인해주세요"
-            android:inputType="textPassword"
             android:textSize="@dimen/text_size_body3"
+            android:inputType="textPassword"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
@@ -274,11 +272,11 @@
         android:id="@+id/textViewConfirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="패스워드 확인"
-        android:textColor="@color/black"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:text="패스워드 확인"
+        android:fontFamily="@font/petendard"
+        android:textColor="@color/black"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
 
@@ -297,7 +295,8 @@
         app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
         app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextConfirmPassword"
@@ -305,8 +304,8 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint=" 패스워드를 확인해주세요"
-            android:inputType="textPassword"
             android:textSize="@dimen/text_size_body3"
+            android:inputType="textPassword"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
