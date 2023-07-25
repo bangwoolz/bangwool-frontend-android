@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.bangwool.TimerSettingActivity
 import com.example.bangwool.ui.home.TimerActivity
 import com.example.bangwool.databinding.FragmentHomeBinding
 
@@ -17,9 +18,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.textHome.setOnClickListener{
-            val intent = Intent(activity, TimerSettingActivity::class.java)
-            startActivity(intent)
+        binding.homeMenu.setOnClickListener {
+            val i = Intent(requireContext(), TimerEditActivity::class.java)
+            startActivity(i)
         }
         return binding.root
     }
