@@ -29,10 +29,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.dday.setOnClickListener {
+            val i = Intent(requireContext(), TimerActivity::class.java)
+            startActivity(i)
+        }
+        /*
         binding.homeRecyclerView.setOnClickListener {
             val intent = Intent(activity, TimerActivity::class.java)
             startActivity(intent)
         }
+         */
 
         initDummyData()
         init()
@@ -49,9 +55,12 @@ class HomeFragment : Fragment() {
                 setClamp(dpToPx(160f, requireContext()))
             }
             val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
+            /*
             itemTouchHelper.attachToRecyclerView(homeRecyclerView)
+             */
 
             homeAdapter = HomeAdapter(requireContext(), itemList)
+            /*
             homeRecyclerView.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -63,6 +72,7 @@ class HomeFragment : Fragment() {
                 }
 
             }
+             */
 
 
             homeAdapter.setOnClickListener(object : HomeAdapter.OnItemClickListener{
@@ -93,9 +103,11 @@ class HomeFragment : Fragment() {
             })
 
 
+            /*
             homeAddTaskBtn.setOnClickListener {
                 Toast.makeText(requireContext(), "+ 버튼 클릭됨", Toast.LENGTH_SHORT).show()
             }
+             */
             homeMenu.setOnClickListener {
                 Log.d("Click", "homeMenu Click")
                 listDialog()
