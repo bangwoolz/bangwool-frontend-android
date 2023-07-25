@@ -1,12 +1,18 @@
 package com.example.bangwool.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Canvas
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bangwool.MainActivity
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ItemHomeBinding
 import kotlin.math.max
@@ -18,14 +24,23 @@ class HomeAdapter(
 ) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    private lateinit var itemClickListener: OnItemClickListener
+    var itemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onItemClick(homeItem: HomeItem)
+        fun onDeleteItemClick(homeItem: HomeItem)
     }
 
     fun setOnClickListener(onItemClickListener: OnItemClickListener) {
         itemClickListener = onItemClickListener
+    }
+
+    // 아이템 삭제 메소드
+    fun removeItem(item: HomeItem) {
+        val position = itemList.indexOf(item)
+        if (position != -1) {
+            itemList.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     inner class ViewHolder(val binding: ItemHomeBinding) :
@@ -40,6 +55,13 @@ class HomeAdapter(
                 homeItemTaskTv.text = itemList.taskName
                 homeItemTaskTime.text = itemList.taskTime
                 homeItemTaskTimeBtn.setImageResource(R.drawable.ic_play_filled)
+                modifyBtn.setOnClickListener {
+                    Log.d("CLICK!", "modifyBtn")
+
+                }
+                deleteBtn.setOnClickListener {
+                    itemClickListener?.onDeleteItemClick(itemList)
+                }
             }
         }
 
