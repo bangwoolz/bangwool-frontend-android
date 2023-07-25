@@ -35,6 +35,7 @@ class PasswordActivity : AppCompatActivity() {
             }
 
 
+
             loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginBtn.backgroundTintList = getColorStateList(R.color.gray_300)
 
@@ -61,8 +62,11 @@ class PasswordActivity : AppCompatActivity() {
                                 pwTextInputLayout.error = null
 //                                pwTextInputLayout.error = "비밀번호 동일함"
                                 val i = Intent(this@PasswordActivity, MainActivity::class.java)
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 startActivity(i)
                                 finish()
+                                if(LoginActivity.activity != null)
+                                    LoginActivity.activity!!.finish()
                             } else {
                                 loginIcErrorPassword.visibility = View.VISIBLE
                                 pwTextInputLayout.error = "    비밀번호가 달라요.다시 입력해주세요"
