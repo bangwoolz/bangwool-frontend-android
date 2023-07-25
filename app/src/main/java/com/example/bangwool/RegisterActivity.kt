@@ -3,36 +3,40 @@ package com.example.bangwool
 import android.graphics.PorterDuff
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.opengl.Visibility
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.example.bangwool.databinding.ActivityRegisterBinding
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private val textColorFocused = Color.parseColor("#111111")
+    private val textColorUnFocused = Color.parseColor("#616161")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         with(binding) {
+
+
             textInputLayoutEmail.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutEmail.hint = ""
-            editTextEmail.clearFocus()
             editTextEmail.hint = "ex) banwol@google.com"
             editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextEmail.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextEmail.hint = "ex) banwol@google.com"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextEmail.hint = ""
                 }
             }
@@ -59,8 +63,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextName.hint = "실명을 입력하세요"
             editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextName.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextName.hint = "실명을 입력하세요"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextName.hint = ""
                 }
             }
@@ -71,12 +77,10 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int,
                     after: Int
                 ) {
+                    validName(s.toString())
                 }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    validateName(s.toString())
-                }
-
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
                 override fun afterTextChanged(s: Editable?) {
                     updateButtonState()
                 }
@@ -87,8 +91,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextNickname.hint = "5글자 이하로 입력해주세요"
             editTextNickname.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextNickname.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextNickname.hint = "5글자 이하로 입력해주세요"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextNickname.hint = ""
                 }
             }
@@ -107,7 +113,7 @@ class RegisterActivity : AppCompatActivity() {
                     before: Int,
                     count: Int
                 ) {
-                    validateNickname(s.toString())
+                    validatePassword(s.toString())
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -121,8 +127,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextPassword.hint = "8~12자 사이로 입력해주세요"
             editTextPassword.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextPassword.text.isNullOrEmpty()) {
+                    editTextEmail.setTextColor(textColorFocused)
                     editTextPassword.hint = "8~12자 사이로 입력해주세요"
                 } else {
+                    editTextNickname.setTextColor(textColorUnFocused)
                     editTextPassword.hint = ""
                 }
             }
@@ -142,7 +150,6 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int
                 ) {
                     validatePassword(s.toString())
-                    validateConfirmPassword(s.toString() ,binding.editTextConfirmPassword.text.toString())
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -156,8 +163,10 @@ class RegisterActivity : AppCompatActivity() {
             editTextConfirmPassword.onFocusChangeListener =
                 View.OnFocusChangeListener { _, hasFocus ->
                     if (!hasFocus && editTextConfirmPassword.text.isNullOrEmpty()) {
+                        editTextEmail.setTextColor(textColorFocused)
                         editTextConfirmPassword.hint = "패스워드를 확인해주세요"
                     } else {
+                        editTextNickname.setTextColor(textColorUnFocused)
                         editTextConfirmPassword.hint = ""
                     }
                 }
@@ -202,7 +211,6 @@ class RegisterActivity : AppCompatActivity() {
             buttonBack.setOnClickListener {
                 finish()
             }
-
         }
     }
 
@@ -249,7 +257,7 @@ class RegisterActivity : AppCompatActivity() {
                 validateNickname(nickname) &&
                 validatePassword(password) &&
                 validateConfirmPassword(password, confirmPassword) &&
-                validateName(name)
+                validName(name)
     }
 
 
@@ -269,7 +277,7 @@ class RegisterActivity : AppCompatActivity() {
             updateEndIcon(false)
             return false
         } else {
-            binding.textInputLayoutEmail.error = " "
+            binding.textInputLayoutEmail.error = null
             binding.textInputLayoutEmail.isErrorEnabled = true
             binding.textInputLayoutConfirmPassword.boxStrokeErrorColor = ColorStateList.valueOf(grayColor)
             updateEndIcon(true)
