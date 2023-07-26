@@ -32,7 +32,7 @@
             android:fontFamily="@font/p_medium"
             android:text="회원가입"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_size_body3"
             app:layout_constraintBottom_toBottomOf="@id/buttonBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,9 +62,11 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="22dp"
+                android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -82,7 +84,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutEmail"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     app:boxBackgroundColor="@null"
@@ -96,7 +98,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextEmail"
-                        android:layout_width="312dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="ex) banwol@google.com"
@@ -122,7 +124,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     app:boxBackgroundColor="@null"
@@ -136,7 +138,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextName"
-                        android:layout_width="312dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="실명을 입력해주세요"
@@ -173,20 +175,22 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutNickname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
                     app:boxBackgroundColor="@null"
                     app:boxBackgroundMode="filled"
                     app:errorIconDrawable="@null"
                     app:errorTextColor="@color/secondary"
                     app:hintTextColor="@color/gray_400"
-                    app:layout_constraintStart_toStartOf="@id/textViewNickname"
+                    app:layout_constraintEnd_toStartOf="@id/buttonDuplicateCheck"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textViewNickname">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextNickname"
-                        android:layout_width="187dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="5글자 이하로 입력해주세요"
@@ -234,7 +238,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutPassword"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     app:boxBackgroundColor="@null"
@@ -249,7 +253,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextPassword"
-                        android:layout_width="312dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint=" 패스워드를 확인해주세요"
@@ -285,7 +289,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayoutConfirmPassword"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     app:boxBackgroundColor="@null"
@@ -301,7 +305,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextConfirmPassword"
-                        android:layout_width="312dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint=" 패스워드를 확인해주세요"
