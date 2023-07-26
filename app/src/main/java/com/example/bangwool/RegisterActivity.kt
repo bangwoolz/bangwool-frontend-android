@@ -27,7 +27,6 @@ class RegisterActivity : AppCompatActivity() {
 
         with(binding) {
 
-
             textInputLayoutEmail.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutEmail.hint = ""
             editTextEmail.hint = "ex) banwol@google.com"

@@ -68,7 +68,7 @@ class PasswordActivity : AppCompatActivity() {
                                 if(LoginActivity.activity != null)
                                     LoginActivity.activity!!.finish()
                             } else {
-                                loginIcErrorPassword.visibility = View.VISIBLE
+                                //loginIcErrorPassword.visibility = View.VISIBLE
                                 pwTextInputLayout.error = "    비밀번호가 달라요.다시 입력해주세요"
                             }
                         }
