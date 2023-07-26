@@ -35,13 +35,14 @@ class LoginActivity : AppCompatActivity() {
     private fun init() {
         binding.apply {
 
+
             loginIdEt.setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     idTextInputLayout.hint = null
                     idTextInputLayout.requestFocus()
                 } else {
                     if (loginIdEt.text.isNullOrEmpty()) {
-                        idTextInputLayout.hint = "이메일을 입력하세요."
+                        idTextInputLayout.hint = "이메일을 입력하세요. "
                     } else {
                         idTextInputLayout.hint = null
                     }
