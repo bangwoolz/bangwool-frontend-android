@@ -35,14 +35,16 @@ class LoginActivity : AppCompatActivity() {
     private fun init() {
         binding.apply {
 
-            loginIdEt.setOnTouchListener { v, event ->
-                // 터치 떼자마자 hint 제거
-                if (event.action == MotionEvent.ACTION_UP){
+            loginIdEt.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
                     idTextInputLayout.hint = null
                     idTextInputLayout.requestFocus()
-                    true
                 } else {
-                    false
+                    if (loginIdEt.text.isNullOrEmpty()) {
+                        idTextInputLayout.hint = "이메일을 입력하세요."
+                    } else {
+                        idTextInputLayout.hint = null
+                    }
                 }
             }
 
