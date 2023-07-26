@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityFindpasswordBinding
 import java.util.regex.Pattern
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 
 
@@ -59,10 +60,10 @@ class FindPasswordActivity : AppCompatActivity() {
 
             textInputLayoutName.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutName.hint = ""
-            editTextName.hint = "실명을 입력하세요"
+            editTextName.hint = "이름을 입력해주세요"
             editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextName.text.isNullOrEmpty()) {
-                    editTextName.hint = "실명을 입력하세요"
+                    editTextName.hint = "이름을 입력해주세요"
                 } else {
                     editTextName.hint = ""
                 }
@@ -109,13 +110,16 @@ class FindPasswordActivity : AppCompatActivity() {
 
     private fun validateEmail(email: String): Boolean {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+        val errorColor = getColor(R.color.secondary)
         if (email.isEmpty()) {
             binding.textInputLayoutEmail.error = "이메일을 입력하세요."
+            binding.textInputLayoutEmail.defaultHintTextColor = ColorStateList.valueOf(errorColor)
             binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(false)
             return false
         } else if (!emailPattern.matcher(email).matches()) {
             binding.textInputLayoutEmail.error = "올바른 이메일 형식이 아니에요"
+            binding.textInputLayoutEmail.defaultHintTextColor = ColorStateList.valueOf(errorColor)
             binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(false)
             return false
@@ -129,14 +133,17 @@ class FindPasswordActivity : AppCompatActivity() {
 
     private fun validName(name: String): Boolean {
         val namePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,10}\$")
+        val errorColor = getColor(R.color.secondary)
         if (!namePattern.matcher(name).matches()) {
             binding.editTextName.error = "이름의 형식을 확인해 주세요"
+            binding.textInputLayoutName.defaultHintTextColor = ColorStateList.valueOf(errorColor)
             binding.textInputLayoutName.isErrorEnabled = true
             updateEndIcon(false)
             return false
         } else {
+            updateEndIcon(true)
             binding.textInputLayoutName.error = null
-            binding.textInputLayoutName.isErrorEnabled = true
+            binding.textInputLayoutName.isErrorEnabled = false
             return true
         }
     }
