@@ -39,6 +39,19 @@ class PasswordActivity : AppCompatActivity() {
             loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginBtn.backgroundTintList = getColorStateList(R.color.gray_300)
 
+            passwordEt.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    pwTextInputLayout.hint = null
+                    pwTextInputLayout.requestFocus()
+                } else {
+                    if (passwordEt.text.isNullOrEmpty()) {
+                        pwTextInputLayout.hint = "비밀번호를 입력하세요."
+                    } else {
+                        pwTextInputLayout.hint = null
+                    }
+                }
+            }
+
             pwTextInputLayout.error = null
             passwordEt.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
