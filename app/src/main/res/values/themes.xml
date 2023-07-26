@@ -15,10 +15,12 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="NumberPickerTextAppearance">
         <item name="android:textSize">48dp</item>
         <item name="android:textColorPrimary">@color/gray_300</item>
     </style>
+
     <style name="NumberPickerTextAppearance.Unselected">
         <item name="android:textSize">48dp</item>
         <item name="android:textColor">@color/gray_200</item>
@@ -29,10 +31,12 @@
     <style name="ErrorTextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/androidDefault</item>
     </style>
+
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeErrorColor">@color/androidDefault</item>
         <item name="android:textColor">@color/androidDefault</item>
     </style>
+
     <style name="TextInputLayoutErrorCustom" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeErrorColor">@color/androidDefault</item>
         <item name="android:textColor">@color/androidDefault</item>
@@ -44,8 +48,6 @@
 
     <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-
-
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -59,6 +61,16 @@
         <item name="android:windowBackground">@drawable/splash_image</item>
         <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="numberPickerCustomSize">
+        <!-- Number Picker 글자 크기 조절  -->
+        <item name="android:textSize">44sp</item>
+    </style>
+
+    <style name="RoundedDialogTheme" parent="Theme.AppCompat.Dialog">
+        <!-- 다이얼로그의 배경을 둥글게 처리 -->
+        <item name="android:windowBackground">@drawable/dialog_delete_layout</item>
     </style>
 
 </resources>
