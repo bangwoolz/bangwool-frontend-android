@@ -1,5 +1,7 @@
 package com.example.bangwool
 
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.bangwool.databinding.ActivityMainBinding
 import com.example.bangwool.ui.home.HomeFragment
+import com.example.bangwool.ui.home.TimerEditActivity
 import com.example.bangwool.ui.mypage.MyPageFragment
 import com.example.bangwool.ui.ranking.RankingFragment
 import com.example.bangwool.ui.statistic.StatisticFragment
@@ -28,6 +31,10 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             onNavigationItemSelected(it)
         }
         binding.bottomNav.selectedItemId = R.id.navigation_home
+        binding.fab.setOnClickListener{
+            val i = Intent(this, TimerEditActivity::class.java)
+            startActivity(i)
+        }
 
     }
 

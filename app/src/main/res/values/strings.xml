@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">BangWool</string>
-    <string name="title_home">Home</string>
-    <string name="title_statistic">Statistic</string>
-    <string name="title_ranking">Ranking</string>
-    <string name="title_mypage">MyPage</string>
+    <string name="title_home">홈</string>
+    <string name="title_statistic">통계</string>
+    <string name="title_ranking">랭킹</string>
+    <string name="title_mypage">마이 페이지</string>
+    <string name="title_dummy" />
 </resources>
 

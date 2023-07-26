@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="116dp"
         android:text="내가 키우는 뽀모도로"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_body1"
@@ -22,30 +22,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="172dp"
         android:text="시작하기 전 이메일 주소를 입력해주세요 :)"
         android:textSize="@dimen/text_size_body4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="236dp"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/login_cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="4dp">
+            android:paddingHorizontal="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/id_textInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray_300"
+                app:errorIconDrawable="@null"
+                app:boxStrokeErrorColor="@color/secondary"
                 app:errorTextColor="@color/secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:hint="ex) banwol@gmail.com"
-                    app:errorTextColor="@color/secondary"
+                    android:maxLines="1"
                     android:paddingVertical="16dp"
                     android:textColorHint="@color/gray_400"
                     android:textSize="@dimen/text_size_body3" />
@@ -78,12 +84,26 @@
             <ImageView
                 android:id="@+id/login_loading_done"
                 android:layout_width="24dp"
-                android:visibility="gone"
                 android:layout_height="24dp"
                 android:src="@drawable/round_check_24"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/login_icErrorEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="-20dp"
+                android:src="@drawable/error_circle_outline"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/id_textInputLayout"
+                app:layout_constraintTop_toBottomOf="@id/id_textInputLayout"
+                app:tint="@color/secondary" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,18 +113,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="28dp"
-            android:paddingVertical="14dp"
-            android:paddingHorizontal="32dp"
             android:padding="8dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="14dp"
             android:text="시작하기"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_body4"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_cl" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_start_btn">
 
             <TextView
                 android:id="@+id/login_register_btn"
@@ -124,14 +151,14 @@
                 android:text="아이디찾기" />
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="564dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"

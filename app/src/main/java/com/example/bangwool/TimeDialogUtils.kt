@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
@@ -26,38 +27,30 @@ class TimeDialogUtils(private val context: Context) {
         dialog.setContentView(binding.root)
 
         // 숫자 범위 설정하는 부분
-        binding.numberPickerHour.minValue = 0
-        binding.numberPickerHour.maxValue = 23
-
-        binding.numberPickerMinute.minValue = 0
-        binding.numberPickerMinute.maxValue = 59
+        binding.numberPickerMinute.minValue = 1
+        binding.numberPickerMinute.maxValue = 99
 
         // 시간 형식 설정 XX 형식으로
-        binding.numberPickerHour.setFormatter { String.format("%02d", it) }
         binding.numberPickerMinute.setFormatter { String.format("%02d", it) }
 
         // 선택한 숫자의 색상 변경
-        binding.numberPickerHour.setOnValueChangedListener { picker, oldVal, newVal ->
-            setSelectedTextColor(binding.numberPickerHour)
-        }
-
         binding.numberPickerMinute.setOnValueChangedListener { picker, oldVal, newVal ->
             setSelectedTextColor(binding.numberPickerMinute)
         }
+
 
         binding.buttonCancel.setOnClickListener {
             dialog.dismiss()
         }
 
         binding.buttonConfirm.setOnClickListener {
-            val selectedHour = binding.numberPickerHour.value
             val selectedMinute = binding.numberPickerMinute.value
 
             // 선택한 시간에 따라 형식 지정
-            val formattedTime = if (selectedHour == 0) {
+            val formattedTime = if (selectedMinute == 0) {
                 String.format("%02d분", selectedMinute)
             } else {
-                String.format("%02d시간%02d분", selectedHour, selectedMinute)
+                String.format("%02d시간%02d분", selectedMinute, selectedMinute)
             }
             // 텍스트 뷰에 반영
             textViewWorkTime.text = formattedTime
@@ -65,7 +58,8 @@ class TimeDialogUtils(private val context: Context) {
         }
 
         // 다이얼로그 크기 지정
-        dialogResize(dialog, 0.7f, 0.5f)
+        dialogResize(dialog, 1.0f, 0.5f)
+        dialog.window?.setGravity(Gravity.BOTTOM)
 
         dialog.show()
     }
@@ -86,7 +80,6 @@ class TimeDialogUtils(private val context: Context) {
 
     private fun dialogResize(dialog: Dialog, width: Float, height: Float) {
         val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
         val displayMetrics = context.resources.displayMetrics
         val dialogWidth = (displayMetrics.widthPixels * width).toInt()
         val dialogHeight = (displayMetrics.heightPixels * height).toInt()
