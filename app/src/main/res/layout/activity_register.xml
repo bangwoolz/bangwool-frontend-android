@@ -1,345 +1,367 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/title_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginEnd="280dp"
-            android:layout_marginStart="21dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textViewTitle"
-            app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            android:layout_marginBottom="21dp"
+            android:fontFamily="@font/p_medium"
             android:text="회원가입"
             android:textColor="@color/black"
-            android:fontFamily="@font/p_medium"
             android:textSize="18sp"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/buttonBack"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/line"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/buttonBack" />
+
 
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="21dp"
-            android:background="@color/disabledColor"
-            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" />
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="83dp"
-        android:text="이메일"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/p_medium"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEmail"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:boxBackgroundMode="filled"
-        app:boxBackgroundColor="@null"
-        app:boxStrokeWidth="1dp"
-        app:hintTextColor="@color/hintColor"
-        app:errorTextColor="@color/secondary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewEmail">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/register_btn_cl"
+        app:layout_constraintTop_toBottomOf="@id/title_register">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextEmail"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="ex) banwol@google.com"
-            android:inputType="textEmailAddress"
-            android:textSize="@dimen/text_size_body3"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            android:layout_height="match_parent">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/p_medium"
+                    android:text="이메일"
+                    android:textColor="@color/gray_700"
+                    android:textSize="@dimen/text_size_body4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:boxBackgroundColor="@null"
+                    app:boxBackgroundMode="filled"
+                    app:boxStrokeWidth="1dp"
+                    app:errorTextColor="@color/secondary"
+                    app:hintTextColor="@color/gray_400"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewEmail">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmail"
+                        android:layout_width="312dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="ex) banwol@google.com"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/gray_700"
+                        android:textSize="@dimen/text_size_body4"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="이름"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/p_medium"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="28dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/p_medium"
+                    android:text="이름"
+                    android:textColor="@color/gray_700"
+                    android:textSize="@dimen/text_size_body4"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutName"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:boxBackgroundColor="@null"
+                    app:boxBackgroundMode="filled"
+                    app:errorIconDrawable="@null"
+                    app:errorTextColor="@color/secondary"
+                    app:hintTextColor="@color/gray_400"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewName">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextName"
+                        android:layout_width="312dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="실명을 입력해주세요"
+                        android:inputType="text"
+                        android:textColor="@color/gray_700"
+                        android:textSize="@dimen/text_size_body4"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/icErrorName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-20dp"
+                    android:src="@drawable/error_circle_outline"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textViewName"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
+                    app:tint="@color/secondary" />
+
+                <TextView
+                    android:id="@+id/textViewNickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/p_medium"
+                    android:text="닉네임"
+                    android:textColor="@color/gray_700"
+                    android:textSize="@dimen/text_size_body4"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutName" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutNickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:boxBackgroundColor="@null"
+                    app:boxBackgroundMode="filled"
+                    app:errorIconDrawable="@null"
+                    app:errorTextColor="@color/secondary"
+                    app:hintTextColor="@color/gray_400"
+                    app:layout_constraintStart_toStartOf="@id/textViewNickname"
+                    app:layout_constraintTop_toBottomOf="@id/textViewNickname">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextNickname"
+                        android:layout_width="187dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="5글자 이하로 입력해주세요"
+                        android:inputType="text"
+                        android:textColor="@color/gray_700"
+                        android:textSize="@dimen/text_size_body4"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/icErrorNickName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-20dp"
+                    android:src="@drawable/error_circle_outline"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutNickname"
+                    app:tint="@color/secondary" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonDuplicateCheck"
+                    android:layout_width="109dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/disabled"
+                    android:text=""
+                    app:layout_constraintBottom_toBottomOf="@id/textInputLayoutNickname"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/textInputLayoutNickname"
+                    app:layout_constraintVertical_bias="0.3"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                <TextView
+                    android:id="@+id/textViewPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/p_medium"
+                    android:text="패스워드"
+                    android:textColor="@color/gray_700"
+                    android:textSize="@dimen/text_size_body4"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutNickname" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:boxBackgroundColor="@null"
+                    app:boxBackgroundMode="filled"
+                    app:errorIconDrawable="@null"
+                    app:errorTextColor="@color/secondary"
+                    app:hintTextColor="@color/gray_400"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewPassword"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="312dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint=" 패스워드를 확인해주세요"
+                        android:inputType="textPassword"
+                        android:textColor="@color/gray_700"
+                        android:textSize="@dimen/text_size_body4"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/icErrorPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-20dp"
+                    android:src="@drawable/error_circle_outline"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
+                    app:tint="@color/secondary" />
+
+                <TextView
+                    android:id="@+id/textViewConfirmPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/p_medium"
+                    android:text="패스워드 확인"
+                    android:textColor="@color/gray_700"
+                    android:textSize="@dimen/text_size_body4"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutConfirmPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:boxBackgroundColor="@null"
+                    app:boxBackgroundMode="filled"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@null"
+                    app:errorTextColor="@color/secondary"
+                    app:hintTextColor="@color/hintColor"
+                    app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+                    app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextConfirmPassword"
+                        android:layout_width="312dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint=" 패스워드를 확인해주세요"
+                        android:inputType="textPassword"
+                        android:textColor="@color/gray_700"
+                        android:textSize="@dimen/text_size_body4"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/icErrorConfirmPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-20dp"
+                    android:src="@drawable/error_circle_outline"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textInputLayoutConfirmPassword"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutConfirmPassword"
+                    app:tint="@color/secondary" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/register_btn_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        app:boxBackgroundColor="@null"
-        app:boxBackgroundMode="filled"
-        app:counterEnabled="true"
-        app:counterMaxLength="10"
-        app:errorIconDrawable="@null"
-        app:errorTextColor="@color/secondary"
-        app:hintTextColor="@color/hintColor"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
-        app:layout_constraintTop_toBottomOf="@id/textViewName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="실명을 입력해주세요"
-            android:textSize="@dimen/text_size_body3"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/icErrorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="-20dp"
-        android:src="@drawable/error_circle_outline"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/textViewName"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
-        app:tint="@color/secondary" />
-
-    <TextView
-        android:id="@+id/textViewNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textSize="16sp"
-        android:text="닉네임"
-        android:fontFamily="@font/p_medium"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutName" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutNickname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="165dp"
-        app:boxBackgroundColor="@null"
-        app:boxBackgroundMode="filled"
-        app:counterEnabled="true"
-        app:counterMaxLength="5"
-        app:errorIconDrawable="@null"
-        app:errorTextColor="@color/secondary"
-        app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/textViewNickname"
-        app:layout_constraintTop_toBottomOf="@id/textViewNickname">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextNickname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="5글자 이하로 입력해주세요"
-            android:inputType="textEmailAddress"
-            android:textSize="@dimen/text_size_body3"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/icErrorNickName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="-20dp"
-        android:src="@drawable/error_circle_outline"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutNickname"
-        app:tint="@color/secondary" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonDuplicateCheck"
-        android:layout_width="120dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/disabled"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@id/textInputLayoutNickname"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textInputLayoutNickname"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textViewPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="패스워드"
-        android:fontFamily="@font/p_medium"
-        android:textColor="@color/black"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutNickname" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="24dp"
-        app:boxBackgroundColor="@null"
-        app:boxBackgroundMode="filled"
-        app:errorIconDrawable="@null"
-        app:errorTextColor="@color/secondary"
-        app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
-        app:layout_constraintTop_toBottomOf="@id/textViewPassword"
-        app:passwordToggleEnabled="true">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint=" 패스워드를 확인해주세요"
-            android:textSize="@dimen/text_size_body3"
-            android:inputType="textPassword"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/icErrorPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="-20dp"
-        android:src="@drawable/error_circle_outline"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
-        app:tint="@color/secondary" />
-
-    <TextView
-        android:id="@+id/textViewConfirmPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="패스워드 확인"
-        android:fontFamily="@font/p_medium"
-        android:textColor="@color/black"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutConfirmPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="24dp"
-        app:boxBackgroundColor="@null"
-        app:boxBackgroundMode="filled"
-        app:errorIconDrawable="@null"
-        app:errorTextColor="@color/secondary"
-        app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
-        app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword"
-        app:passwordToggleEnabled="true"
-        app:errorEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextConfirmPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint=" 패스워드를 확인해주세요"
-            android:textSize="@dimen/text_size_body3"
-            android:inputType="textPassword"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/icErrorConfirmPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="-20dp"
-        android:src="@drawable/error_circle_outline"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutConfirmPassword"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayoutConfirmPassword"
-        app:tint="@color/secondary" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonContinue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="690dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_style"
-        android:enabled="false"
-        android:onClick="onContinueClicked"
-        android:text="계속하기"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:textStyle="bold"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_300"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/btn_style"
+            android:enabled="false"
+            android:fontFamily="@font/pretendard_semibold"
+            android:onClick="onContinueClicked"
+            android:text="계속하기"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_body4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
