@@ -1,17 +1,23 @@
 package com.example.bangwool
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
+import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityPasswordBinding
 
 class PasswordActivity : AppCompatActivity() {
     lateinit var binding: ActivityPasswordBinding
     val uesr_password = "1234"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +70,12 @@ class PasswordActivity : AppCompatActivity() {
                                 startActivity(i)
                                 finish()
                             } else {
+                                updateEndIconElse(false)
                                 pwTextInputLayout.error = "비밀번호가 달라요.다시 입력해주세요"
+                                val errorColor = ContextCompat.getColor(this@PasswordActivity, R.color.secondary)
+                                pwTextInputLayout.setErrorTextColor(ColorStateList.valueOf(errorColor))
+
+                                pwTextInputLayout.boxStrokeErrorColor = ColorStateList.valueOf(errorColor)
                             }
                         }
                     }
@@ -73,6 +84,17 @@ class PasswordActivity : AppCompatActivity() {
 
         }
     }
+    private fun updateEndIconElse(isValid: Boolean) {
+        val endIconDrawable =
+            if (isValid) {
+                ColorDrawable(Color.TRANSPARENT)
+            } else {
+                ColorDrawable(Color.TRANSPARENT)
+            }
+        binding.pwTextInputLayout.setErrorIconDrawable(endIconDrawable)
+    }
+
+
 
 //    private fun isValidPw(passwrod: String): Boolean {
 //        val passwordPattern = Regex("^(?=.*[a-zA-Z0-9])(?=.*[!@#$%^&*()])(?=\\S+$).{8,12}$")

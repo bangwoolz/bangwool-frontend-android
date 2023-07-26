@@ -2,6 +2,7 @@ package com.example.bangwool
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
         binding.apply {
+
 
             loginIdEt.setOnTouchListener { v, event ->
                 // 터치 떼자마자 hint 제거
@@ -93,6 +95,12 @@ class LoginActivity : AppCompatActivity() {
                         loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
                         idTextInputLayout.error = "잘못된 이메일 형식이에요"
+                        updateEndIcon(false)
+
+                        val errorColor = ContextCompat.getColor(this@LoginActivity, R.color.secondary)
+                        idTextInputLayout.setErrorTextColor(ColorStateList.valueOf(errorColor))
+
+                        idTextInputLayout.boxStrokeErrorColor = ColorStateList.valueOf(errorColor)
                     }
                 }
 
