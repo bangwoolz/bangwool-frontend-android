@@ -358,5 +358,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0" />
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_goal_check_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/second_line">
+        <TextView
+            android:id="@+id/tv_goal_check_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이번달 목표 달성 횟수 보기 !"
+            android:paddingTop="28dp"
+            android:paddingLeft="24dp"
+            android:textColor="@color/gray_800"
+            android:textSize="18sp"
+            android:fontFamily="@font/p_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
