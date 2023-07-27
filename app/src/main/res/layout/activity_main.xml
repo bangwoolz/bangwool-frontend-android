@@ -37,8 +37,8 @@
             app:elevation="0dp"
             app:itemIconSize="24dp"
             android:theme="@style/BottomNavigationTheme"
-            app:itemPaddingBottom="4dp"
-            app:itemPaddingTop="21dp"
+            app:itemPaddingBottom="15dp"
+            app:itemPaddingTop="15dp"
             app:itemRippleColor="@null"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
