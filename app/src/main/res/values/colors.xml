@@ -43,4 +43,6 @@
     <color name="timer_color_skyblue">#B9F3E4</color>
     <color name="timer_color_green">#AACB73</color>
     <color name="confirm_text">#FF6242</color>
+    <color name="statistic_purple">#9B77FF</color>
+    <color name="statistic_light_purple">#8D9AFF</color>
 </resources>
