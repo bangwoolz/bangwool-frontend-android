@@ -91,7 +91,6 @@
                     app:boxBackgroundMode="filled"
                     app:boxStrokeWidth="1dp"
                     app:errorTextColor="@color/secondary"
-                    app:hintTextColor="@color/gray_400"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textViewEmail">
@@ -105,6 +104,7 @@
                         android:inputType="textEmailAddress"
                         android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -146,6 +146,7 @@
                         android:inputType="text"
                         android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -199,6 +200,7 @@
                         android:inputType="text"
                         android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -263,6 +265,7 @@
                         android:inputType="textPassword"
                         android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -316,6 +319,7 @@
                         android:inputType="textPassword"
                         android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
+                        android:textColorHint="@color/gray_400"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -345,11 +349,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray_300"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonContinue"
@@ -361,6 +360,7 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/btn_style"
             android:enabled="false"
+            android:stateListAnimator="@null"
             android:fontFamily="@font/pretendard_semibold"
             android:onClick="onContinueClicked"
             android:text="계속하기"
