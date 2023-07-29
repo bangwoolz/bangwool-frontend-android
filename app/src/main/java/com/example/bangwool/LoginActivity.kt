@@ -35,16 +35,16 @@ class LoginActivity : AppCompatActivity() {
     private fun init() {
         binding.apply {
 
-//            loginIdEt.setOnTouchListener { v, event ->
-//                // 터치 떼자마자 hint 제거
-//                if (event.action == MotionEvent.ACTION_UP){
-//                    idTextInputLayout.hint = null
-//                    idTextInputLayout.requestFocus()
-//                    true
-//                } else {
-//                    false
-//                }
-//            }
+            loginIdEt.setOnTouchListener { v, event ->
+                // 터치 떼자마자 hint 제거
+                if (event.action == MotionEvent.ACTION_UP){
+                    idTextInputLayout.hint = null
+                    idTextInputLayout.requestFocus()
+                    true
+                } else {
+                    false
+                }
+            }
 
             loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
