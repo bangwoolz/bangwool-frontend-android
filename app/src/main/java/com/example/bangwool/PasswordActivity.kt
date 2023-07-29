@@ -1,6 +1,7 @@
 package com.example.bangwool
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityPasswordBinding
 
 class PasswordActivity : AppCompatActivity() {
@@ -81,7 +83,8 @@ class PasswordActivity : AppCompatActivity() {
                                 if(LoginActivity.activity != null)
                                     LoginActivity.activity!!.finish()
                             } else {
-                                //loginIcErrorPassword.visibility = View.VISIBLE
+                                binding.pwTextInputLayout.error = null
+                                binding.pwTextInputLayout.isErrorEnabled = false
                                 pwTextInputLayout.error = "    비밀번호가 달라요.다시 입력해주세요"
                             }
                         }
@@ -90,6 +93,15 @@ class PasswordActivity : AppCompatActivity() {
             })
 
         }
+    }
+
+    private fun updateEndIcon(isValid: Boolean) {
+        val endIconDrawable =
+            if (isValid) {
+                
+            } else {
+            }
+
     }
 
 //    private fun isValidPw(passwrod: String): Boolean {
