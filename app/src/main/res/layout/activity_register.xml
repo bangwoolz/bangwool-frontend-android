@@ -103,6 +103,7 @@
                         android:background="@null"
                         android:hint="ex) banwol@google.com"
                         android:inputType="textEmailAddress"
+                        android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -143,6 +144,7 @@
                         android:background="@null"
                         android:hint="실명을 입력해주세요"
                         android:inputType="text"
+                        android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -195,6 +197,7 @@
                         android:background="@null"
                         android:hint="5글자 이하로 입력해주세요"
                         android:inputType="text"
+                        android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -258,6 +261,7 @@
                         android:background="@null"
                         android:hint=" 패스워드를 확인해주세요"
                         android:inputType="textPassword"
+                        android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -310,6 +314,7 @@
                         android:background="@null"
                         android:hint=" 패스워드를 확인해주세요"
                         android:inputType="textPassword"
+                        android:paddingStart="4dp"
                         android:textColor="@color/gray_700"
                         android:textSize="@dimen/text_size_body4"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
