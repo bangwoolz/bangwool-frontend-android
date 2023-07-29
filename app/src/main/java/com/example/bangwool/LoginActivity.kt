@@ -67,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
 //                    }
 
                     if (isValidId(id)) {
+                        updateEndIcon(true)
                         loginIcErrorEmail.visibility = View.GONE
                         loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginStartBtn.backgroundTintList = getColorStateList(R.color.primary)
@@ -98,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
 
                         }
                     } else {
+                        updateEndIcon(false)
                         loginIcErrorEmail.visibility = View.VISIBLE
                         loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
