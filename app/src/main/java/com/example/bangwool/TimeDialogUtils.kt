@@ -13,7 +13,7 @@ import android.widget.NumberPicker
 import android.widget.TextView
 import com.example.bangwool.databinding.DialogTimecheckBinding
 
-class TimeDialogUtils(private val context: Context) {
+class TimeChooseDialog(private val context: Context, val title: String, val range: Int) {
 
     fun showWorkTimeDialog(textViewWorkTime: TextView) {
         val dialog = Dialog(context)
@@ -26,9 +26,11 @@ class TimeDialogUtils(private val context: Context) {
         val binding: DialogTimecheckBinding = DialogTimecheckBinding.inflate(inflater)
         dialog.setContentView(binding.root)
 
+        binding.textViewTitle.text = title
+
         // 숫자 범위 설정하는 부분
         binding.numberPickerMinute.minValue = 1
-        binding.numberPickerMinute.maxValue = 99
+        binding.numberPickerMinute.maxValue = range
 
         // 시간 형식 설정 XX 형식으로
         binding.numberPickerMinute.setFormatter { String.format("%02d", it) }
@@ -47,11 +49,7 @@ class TimeDialogUtils(private val context: Context) {
             val selectedMinute = binding.numberPickerMinute.value
 
             // 선택한 시간에 따라 형식 지정
-            val formattedTime = if (selectedMinute == 0) {
-                String.format("%02d분", selectedMinute)
-            } else {
-                String.format("%02d시간%02d분", selectedMinute, selectedMinute)
-            }
+            val formattedTime = String.format("%d", selectedMinute) + ":00"
             // 텍스트 뷰에 반영
             textViewWorkTime.text = formattedTime
             dialog.dismiss()
