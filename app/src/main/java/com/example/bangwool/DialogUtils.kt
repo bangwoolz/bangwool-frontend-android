@@ -15,6 +15,7 @@ object DialogUtils {
         val binding = DialogFindpasswordBinding.inflate(LayoutInflater.from(context))
         dialogBuilder.setView(binding.root)
 
+
         val alert = dialogBuilder.create()
         alert.setCancelable(false)
 
