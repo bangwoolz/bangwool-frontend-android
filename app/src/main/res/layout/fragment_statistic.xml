@@ -419,6 +419,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/ll_calender_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="26dp"
@@ -1076,6 +1077,87 @@
                             android:text=""
                             android:textAlignment="center"
                             />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="36dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/ll_calender_main"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginHorizontal="26dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_circle_filled"
+                            app:tint="@color/primary_300" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16dp"
+                            android:text="목표 달성 성공"
+                            android:layout_marginLeft="16dp"
+                            android:textColor="@color/gray_600"
+                            android:fontFamily="@font/body2_regular"
+                            />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/timer"
+                                app:tint="@color/gray_600" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16dp"
+                                android:text="나의 목표시간"
+                                android:layout_marginLeft="16dp"
+                                android:textColor="@color/gray_600"
+                                android:fontFamily="@font/body2_regular"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16dp"
+                                android:text="3시간 30분"
+                                android:textColor="@color/gray_600"
+                                android:fontFamily="@font/body2_regular"
+                                />
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="14dp"
+                                android:src="@drawable/ic_next"
+                                android:layout_marginLeft="3.82dp"
+                                app:tint="@color/gray_600" />
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
