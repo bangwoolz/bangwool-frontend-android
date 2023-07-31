@@ -171,7 +171,7 @@
                             />
                         <View
                             android:layout_width="12dp"
-                            android:layout_height="150dp"
+                            android:layout_height="12.5dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/statistic_rectangle"
                             />
@@ -201,7 +201,7 @@
                         <TextView
                             android:layout_width="36dp"
                             android:layout_height="20dp"
-                            android:text="5.5h"
+                            android:text="2.5h"
                             android:fontFamily="@font/p_medium"
                             android:textSize="14sp"
                             android:textAlignment="center"
@@ -211,7 +211,7 @@
                             />
                         <View
                             android:layout_width="12dp"
-                            android:layout_height="150dp"
+                            android:layout_height="62.5dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/statistic_rectangle"
                             />
@@ -251,7 +251,7 @@
                             />
                         <View
                             android:layout_width="12dp"
-                            android:layout_height="150dp"
+                            android:layout_height="162.5dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/statistic_rectangle"
                             />
@@ -281,7 +281,7 @@
                         <TextView
                             android:layout_width="36dp"
                             android:layout_height="20dp"
-                            android:text="5.5h"
+                            android:text="7h"
                             android:fontFamily="@font/p_medium"
                             android:textSize="14sp"
                             android:textAlignment="center"
@@ -291,7 +291,7 @@
                             />
                         <View
                             android:layout_width="12dp"
-                            android:layout_height="150dp"
+                            android:layout_height="175dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/statistic_rectangle"
                             />
@@ -321,7 +321,7 @@
                         <TextView
                             android:layout_width="36dp"
                             android:layout_height="20dp"
-                            android:text="5.5h"
+                            android:text="3h"
                             android:fontFamily="@font/p_medium"
                             android:textSize="14sp"
                             android:textAlignment="center"
@@ -331,7 +331,7 @@
                             />
                         <View
                             android:layout_width="12dp"
-                            android:layout_height="150dp"
+                            android:layout_height="75dp"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/statistic_rectangle"
                             />
