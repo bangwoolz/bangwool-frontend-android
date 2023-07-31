@@ -9,7 +9,8 @@ import com.example.bangwool.databinding.ActivityTimerEditBinding
 
 class TimerEditActivity : AppCompatActivity() {
     lateinit var binding: ActivityTimerEditBinding
-    var colorList = arrayListOf<String>("red", "pink", "orange", "yellow", "purple", "blue", "skyblue", "green")
+    var colorList =
+        arrayListOf<String>("red", "pink", "orange", "yellow", "purple", "blue", "skyblue", "green")
     var checkViewList = arrayListOf<View>()
     var btnViewList = arrayListOf<View>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,42 +21,48 @@ class TimerEditActivity : AppCompatActivity() {
     }
 
     fun initLayout() {
-        binding.textInputLayoutName.hint = ""
-        binding.editTextName.hint = "ex) 시험공부"
-        binding.textInputLayoutName.onFocusChangeListener =
-            View.OnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus && binding.editTextName.text.isNullOrEmpty()) {
-                    binding.editTextName.setTextColor(getColor(R.color.gray_400))
-                    binding.editTextName.hint = "ex) 시험공부"
-                } else {
-                    binding.editTextName.setTextColor(getColor(R.color.gray_900))
-                    binding.editTextName.hint = ""
+        binding.apply {
+            textInputLayoutName.hint = ""
+            editTextName.hint = "ex) 시험공부"
+            textInputLayoutName.onFocusChangeListener =
+                View.OnFocusChangeListener { _, hasFocus ->
+                    if (!hasFocus && editTextName.text.isNullOrEmpty()) {
+                        editTextName.setTextColor(getColor(R.color.gray_400))
+                        editTextName.hint = "ex) 시험공부"
+                    } else {
+                        editTextName.setTextColor(getColor(R.color.gray_900))
+                        editTextName.hint = ""
+                    }
                 }
+            llWorkTime.setOnClickListener {
+                val workTimeDialog = TimeChooseDialog(this@TimerEditActivity, "작업 시간", 480)
+                workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
             }
-        binding.llWorkTime.setOnClickListener {
-            val workTimeDialog = TimeChooseDialog(this, "작업 시간", 480)
-            workTimeDialog.showWorkTimeDialog(binding.tvWorkTimeClock)
-        }
-        binding.llRestTime.setOnClickListener {
-            val restTimeDialog = TimeChooseDialog(this, "쉬는 시간", 480)
-            restTimeDialog.showWorkTimeDialog(binding.tvRestTimeClock)
-        }
-        setCheckViewList()
-        setCheckViewOnClickListener()
-        updateCheckedColor("red")
-        binding.icTimerEditBack.setOnClickListener {
-            finish()
+            llRestTime.setOnClickListener {
+                val restTimeDialog = TimeChooseDialog(this@TimerEditActivity, "쉬는 시간", 480)
+                restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
+            }
+            setCheckViewList()
+            setCheckViewOnClickListener()
+            updateCheckedColor("red")
+            btnSave.setOnClickListener {
+                finish()
+            }
+            icTimerEditBack.setOnClickListener {
+                finish()
+            }
         }
     }
 
-    fun setCheckViewOnClickListener(){
-        for (i in 0 until btnViewList.size){
-            btnViewList[i].setOnClickListener{
+    fun setCheckViewOnClickListener() {
+        for (i in 0 until btnViewList.size) {
+            btnViewList[i].setOnClickListener {
                 updateCheckedColor(colorList[i])
             }
         }
     }
-    fun updateCheckedColor(color: String){
+
+    fun updateCheckedColor(color: String) {
         checkViewList.forEach {
             it.visibility = View.GONE
         }
@@ -63,7 +70,7 @@ class TimerEditActivity : AppCompatActivity() {
         checkViewList[i].visibility = View.VISIBLE
     }
 
-    fun setCheckViewList(){
+    fun setCheckViewList() {
         checkViewList.add(binding.btnColorRedCheck)
         checkViewList.add(binding.btnColorPinkCheck)
         checkViewList.add(binding.btnColorOrangeCheck)

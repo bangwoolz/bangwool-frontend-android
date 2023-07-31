@@ -33,7 +33,7 @@ class TimeChooseDialog(private val context: Context, val title: String, val rang
         binding.numberPickerMinute.maxValue = range
 
         // 시간 형식 설정 XX 형식으로
-        binding.numberPickerMinute.setFormatter { String.format("%02d", it) }
+        binding.numberPickerMinute.setFormatter { String.format("%d", it) }
 
         // 선택한 숫자의 색상 변경
         binding.numberPickerMinute.setOnValueChangedListener { picker, oldVal, newVal ->
