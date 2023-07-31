@@ -1,60 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:width="1080dp"
-        android:gravity="center_horizontal"
-        android:top="68dp">
+        android:gravity="center_horizontal|left|right"
+        android:top="41dp">
         <shape android:shape="rectangle">
+            <solid android:color="@color/gray_100" />
+            <corners android:topLeftRadius="6dp" android:topRightRadius="6dp"/>
+        </shape>
+    </item>
+    <item
+        android:top="7dp"
+        android:width="72dp"
+        android:height="72dp"
+        android:gravity="center|top">
+        <shape android:shape="oval">
             <solid android:color="@color/gray_100" />
         </shape>
     </item>
     <item
-        android:top="0dp"
-        android:width="148dp"
-        android:height="148dp"
-        android:gravity="center|top">
-        <shape android:shape="oval">
-            <solid android:color="@color/gray_100" />
-        </shape>
-    </item>
-    <item
-        android:width="1080dp"
-        android:gravity="center_horizontal"
-        android:top="71dp">
+        android:width="360dp"
+        android:gravity="center_horizontal|left|right"
+        android:top="43dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/gray_200" />
+            <corners android:topLeftRadius="8dp" android:topRightRadius="8dp"/>
         </shape>
     </item>
     <item
-        android:top="3dp"
-        android:width="144dp"
-        android:height="144dp"
+        android:top="9dp"
+        android:width="70dp"
+        android:height="70dp"
         android:gravity="center|top">
         <shape android:shape="oval">
             <solid android:color="@color/gray_200" />
         </shape>
     </item>
     <item
-        android:width="1080dp"
-        android:gravity="center_horizontal"
-        android:top="73dp">
+        android:width="360dp"
+        android:gravity="center_horizontal|left|right"
+        android:top="44dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/gray_300" />
+            <corners android:topLeftRadius="9dp" android:topRightRadius="9dp"/>
         </shape>
     </item>
     <item
-        android:top="5dp"
-        android:width="140dp"
-        android:height="140dp"
+        android:top="10dp"
+        android:width="69dp"
+        android:height="69dp"
         android:gravity="center|top">
         <shape android:shape="oval">
             <solid android:color="@color/gray_300" />
         </shape>
     </item>
     <item
-        android:top="6dp"
-        android:width="136dp"
-        android:height="136dp"
+        android:top="11dp"
+        android:width="68dp"
+        android:height="68dp"
         android:gravity="center|top">
         <shape android:shape="oval">
             <solid android:color="@color/white" />

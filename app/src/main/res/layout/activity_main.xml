@@ -17,44 +17,48 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/cl_bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="138dp"
         android:background="@drawable/custom_bottom_navigation_shadow"
         app:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
-            android:layout_height="146dp"
+            android:layout_height="93dp"
             android:layout_gravity="bottom"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
+            android:background="@drawable/custom_bottom_navigation_radius"
             android:elevation="0dp"
             app:elevation="0dp"
-            app:itemIconSize="48dp"
-            app:itemPaddingBottom="30dp"
-            app:itemPaddingTop="30dp"
+            app:itemIconSize="24dp"
+            android:theme="@style/BottomNavigationTheme"
+            app:itemPaddingBottom="24dp"
+            app:itemPaddingTop="21dp"
             app:itemRippleColor="@null"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
 
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginBottom="86dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="67dp"
             android:backgroundTint="@color/primary"
             android:elevation="0dp"
             android:outlineProvider="none"
             android:src="@drawable/ic_heart"
             app:backgroundTint="@color/white"
             app:elevation="0dp"
-            app:fabCustomSize="120dp"
+            app:fabCustomSize="52dp"
             app:layout_anchor="@id/bottom_nav"
             app:layout_anchorGravity="center_horizontal|center"
-            app:maxImageSize="50dp"
+            app:maxImageSize="26dp"
             app:tint="@color/white" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
