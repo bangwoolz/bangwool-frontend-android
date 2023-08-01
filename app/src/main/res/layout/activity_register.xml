@@ -34,7 +34,7 @@
             android:layout_marginBottom="21dp"
             android:text="회원가입"
             android:textColor="@color/black"
-            android:textStyle="bold"
+            android:fontFamily="@font/p_medium"
             android:textSize="18sp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
@@ -64,7 +64,7 @@
         android:text="이메일"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:textStyle="bold"
+        android:fontFamily="@font/p_medium"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -78,6 +78,7 @@
         app:boxBackgroundColor="@null"
         app:boxStrokeWidth="1dp"
         app:hintTextColor="@color/hintColor"
+        app:errorTextColor="@color/secondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewEmail">
@@ -99,11 +100,11 @@
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="24dp"
         android:text="이름"
         android:textSize="16sp"
         android:textColor="@color/black"
-        android:textStyle="bold"
+        android:fontFamily="@font/p_medium"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
@@ -113,14 +114,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
+        app:boxBackgroundMode="filled"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:errorIconDrawable="@null"
+        app:errorTextColor="@color/secondary"
         app:hintTextColor="@color/hintColor"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
         app:layout_constraintEnd_toEndOf="@id/textInputLayoutEmail"
         app:layout_constraintTop_toBottomOf="@id/textViewName">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -131,41 +136,69 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageView
+        android:id="@+id/icErrorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/error_circle_outline"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/textViewName"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
+        app:tint="@color/secondary" />
+
     <TextView
         android:id="@+id/textViewNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="24dp"
         android:textSize="16sp"
         android:text="닉네임"
-        android:textStyle="bold"
+        android:fontFamily="@font/p_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutName" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutNickname"
-        app:counterMaxLength="5"
-        app:counterEnabled="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="165dp"
         app:boxBackgroundColor="@null"
         app:boxBackgroundMode="filled"
+        app:counterEnabled="true"
+        app:counterMaxLength="5"
+        app:errorIconDrawable="@null"
+        app:errorTextColor="@color/secondary"
         app:hintTextColor="@color/hintColor"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textViewNickname"
         app:layout_constraintTop_toBottomOf="@id/textViewNickname">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextNickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:hint="5글자 이하로 입력해주세요"
+            android:inputType="textEmailAddress"
             android:textSize="@dimen/text_size_body3"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/icErrorNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/error_circle_outline"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutNickname"
+        app:tint="@color/secondary" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -173,11 +206,12 @@
         android:layout_width="120dp"
         android:layout_height="44dp"
         android:layout_marginTop="26dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/disabled"
         android:text=""
         app:layout_constraintBottom_toBottomOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutName"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmail"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textInputLayoutNickname"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -187,8 +221,9 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="패스워드"
-        android:textStyle="bold"
+        android:fontFamily="@font/p_medium"
         android:textColor="@color/black"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutNickname" />
 
@@ -197,56 +232,73 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="24dp"
         app:boxBackgroundColor="@null"
         app:boxBackgroundMode="filled"
-        app:errorEnabled="true"
+        app:errorIconDrawable="@null"
+        app:errorTextColor="@color/secondary"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintEnd_toEndOf="@id/textInputLayoutName"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
+        app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
         app:layout_constraintTop_toBottomOf="@id/textViewPassword"
         app:passwordToggleEnabled="true">
 
-        <EditText
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="8~12자 사이로 입력해주세요"
-            android:inputType="textPassword"
+            android:hint=" 패스워드를 확인해주세요"
             android:textSize="@dimen/text_size_body3"
+            android:inputType="textPassword"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageView
+        android:id="@+id/icErrorPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/error_circle_outline"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
+        app:tint="@color/secondary" />
 
     <TextView
         android:id="@+id/textViewConfirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:text="패스워드 확인"
         android:textSize="16sp"
-        android:textStyle="bold"
+        android:text="패스워드 확인"
+        android:fontFamily="@font/p_medium"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutNickname"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="24dp"
-        app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@null"
+        app:boxBackgroundMode="filled"
+        app:errorIconDrawable="@null"
+        app:errorTextColor="@color/secondary"
         app:hintTextColor="@color/hintColor"
-        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
         app:layout_constraintEnd_toEndOf="@id/textInputLayoutPassword"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
         app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:errorEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -257,26 +309,37 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <ImageView
+        android:id="@+id/icErrorConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/error_circle_outline"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/textInputLayoutConfirmPassword"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutConfirmPassword"
+        app:tint="@color/secondary" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonContinue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="690dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/btn_style"
         android:enabled="false"
-        android:text="계속하기"
         android:onClick="onContinueClicked"
+        android:text="계속하기"
         android:textColor="@color/white"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="20dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="690dp"
         app:layout_constraintVertical_bias="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

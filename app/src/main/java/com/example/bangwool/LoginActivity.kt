@@ -2,6 +2,7 @@ package com.example.bangwool
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -12,15 +13,20 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
+    companion object co{
+        var activity: LoginActivity? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        co.activity = this
 
         init()
     }
@@ -28,10 +34,7 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
         binding.apply {
-//            loginIdEt.setOnClickListener {
-//                idTextInputLayout.hint = null
-//                loginIdEt.hint = null
-//            }
+
             loginIdEt.setOnTouchListener { v, event ->
                 // 터치 떼자마자 hint 제거
                 if (event.action == MotionEvent.ACTION_UP){
@@ -61,6 +64,7 @@ class LoginActivity : AppCompatActivity() {
 //                    }
 
                     if (isValidId(id)) {
+                        loginIcErrorEmail.visibility = View.GONE
                         loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginStartBtn.backgroundTintList = getColorStateList(R.color.primary)
 
@@ -85,15 +89,16 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 idTextInputLayout.error = null;
                                 loginLoadingDone.visibility = View.GONE
-                            }, 300)
+                            }, 2000)
 
 
 
                         }
                     } else {
+                        loginIcErrorEmail.visibility = View.VISIBLE
                         loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
                         loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
-                        idTextInputLayout.error = "잘못된 이메일 형식이에요"
+                        idTextInputLayout.error = "     잘못된 이메일 형식이에요"
                     }
                 }
 
@@ -109,6 +114,25 @@ class LoginActivity : AppCompatActivity() {
     private fun isValidId(email: String): Boolean {
         val pattern = Patterns.EMAIL_ADDRESS
         return pattern.matcher(email).matches()
+    }
+
+    private fun updateEndIcon(isValid: Boolean) {
+        val endIconDrawable =
+            if (isValid) {
+                ContextCompat.getDrawable(this, R.drawable.round_check_24)
+            } else {
+                ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline)
+            }
+
+        if (isValid) {
+            val tintColor = ContextCompat.getColor(this, R.color.gray_700)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        }else{
+            val tintColor = ContextCompat.getColor(this, R.color.secondary)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        }
+        binding.idTextInputLayout.setErrorIconDrawable(endIconDrawable)
+
     }
 
 }

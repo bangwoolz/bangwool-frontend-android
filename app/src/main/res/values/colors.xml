@@ -34,4 +34,13 @@
     <color name="primary_700">#800000</color>
     <color name="primary_800">#4D0000</color>
     <color name="primary_900">#1A0000</color>
+    <color name="timer_color_red">#FF6969</color>
+    <color name="timer_color_pink">#FF9EAA</color>
+    <color name="timer_color_orange">#FBC252</color>
+    <color name="timer_color_yellow">#FFF066</color>
+    <color name="timer_color_purple">#B2A4FF</color>
+    <color name="timer_color_blue">#95BDFF</color>
+    <color name="timer_color_skyblue">#B9F3E4</color>
+    <color name="timer_color_green">#AACB73</color>
+    <color name="confirm_text">#FF6242</color>
 </resources>
