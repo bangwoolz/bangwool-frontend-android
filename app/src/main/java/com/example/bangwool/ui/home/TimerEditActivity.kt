@@ -1,8 +1,12 @@
 package com.example.bangwool.ui.home
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethod
+import android.view.inputmethod.InputMethodManager
 import com.example.bangwool.R
 import com.example.bangwool.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
@@ -34,6 +38,17 @@ class TimerEditActivity : AppCompatActivity() {
                         editTextName.hint = ""
                     }
                 }
+            editTextName.setOnKeyListener { view, keyCode, keyEvent ->
+                if(keyEvent.action == KeyEvent.ACTION_DOWN){
+                    if(keyCode == KeyEvent.KEYCODE_ENTER){
+                        editTextName.clearFocus()
+                        clTimerName.requestFocus()
+                        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        inputMethodManager.hideSoftInputFromWindow(editTextName.windowToken, 0)
+                    }
+                }
+                return@setOnKeyListener false
+            }
             llWorkTime.setOnClickListener {
                 val workTimeDialog = TimeChooseDialog(this@TimerEditActivity, "작업 시간", 480)
                 workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
