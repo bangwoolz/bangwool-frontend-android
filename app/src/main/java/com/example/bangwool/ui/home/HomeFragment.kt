@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.dday.setOnClickListener {
+        binding.dDay.setOnClickListener {
             val i = Intent(requireContext(), TimerActivity::class.java)
             startActivity(i)
         }
