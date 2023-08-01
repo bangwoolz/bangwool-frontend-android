@@ -18,29 +18,35 @@
             android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".PasswordActivity"
             android:exported="false" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".FindPasswordActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".RegisterActivity" />
         <activity android:name=".PrivacyPolicyActivity" />
         <activity android:name=".TermsAgreeActivity" />
         <activity android:name=".textViewAllAgreementsActivity" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"/>
+
         <activity
             android:name=".ui.home.TimerActivity"
             android:exported="false" />
         <activity
-            android:name=".TimerActivity"
+            android:name=".ui.home.TimerEditActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>
