@@ -61,9 +61,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_timer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_timer_name">
@@ -469,7 +472,7 @@
         android:background="@drawable/long_normal_btn"
         android:fontFamily="@font/pretendard_semibold"
         android:stateListAnimator="@null"
-        android:text="시작"
+        android:text="저장"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_body4"
         app:layout_constraintBottom_toBottomOf="parent"
