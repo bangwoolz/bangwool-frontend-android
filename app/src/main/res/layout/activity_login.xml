@@ -123,6 +123,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_body4"
             android:fontFamily="@font/p_medium"
+            android:stateListAnimator="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_cl" />
