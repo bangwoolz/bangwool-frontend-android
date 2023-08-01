@@ -9,7 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_ranking"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,6 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="랭킹"
+            android:textColor="@color/gray_800"
+            android:textSize="@dimen/text_size_body3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +33,11 @@
         android:layout_height="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_ranking" />
+        app:layout_constraintTop_toBottomOf="@id/cl_ranking"
+        app:tabIndicatorColor="@color/gray_800"
+        app:tabIndicatorGravity="bottom"
+        app:tabSelectedTextColor="@color/gray_800"
+        app:tabTextColor="@color/gray_400" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_ranking"
