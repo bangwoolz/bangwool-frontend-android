@@ -12,4 +12,13 @@
     <dimen name="text_size_body5">14dp</dimen>
     <dimen name="design_bottom_navigation_text_size" tools:override="true">14dp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">14dp</dimen>
+
+    <!--    태현    -->
+
+    <!--    현희    -->
+
+    <!--    지원    -->
+
+    <!--    현준    -->
+
 </resources>
