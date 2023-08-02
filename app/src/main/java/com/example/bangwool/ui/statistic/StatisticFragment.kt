@@ -15,6 +15,10 @@ class StatisticFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStatisticBinding.inflate(inflater, container, false)
+        binding.llCalenderAdd.setOnClickListener{
+            binding.llCalenderMain.visibility = View.VISIBLE
+            binding.llCalenderAdd.visibility = View.GONE
+        }
         return binding.root
     }
 }
