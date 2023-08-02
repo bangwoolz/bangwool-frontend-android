@@ -89,10 +89,11 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int,
                     after: Int
                 ) {
-                    validateName(s.toString())
                 }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    validateName(s.toString())
+                }
                 override fun afterTextChanged(s: Editable?) {
                     updateButtonState()
                 }
