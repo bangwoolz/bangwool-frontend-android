@@ -231,6 +231,10 @@ class RegisterActivity : AppCompatActivity() {
 
             buttonContinue.setOnClickListener {
                 val intent = Intent(this@RegisterActivity, TermsAgreeActivity::class.java)
+                intent.putExtra("email", textInputLayoutEmail.editText?.text.toString())
+                intent.putExtra("name", textInputLayoutName.editText?.text.toString())
+                intent.putExtra("nickname", textInputLayoutNickname.editText?.text.toString())
+                intent.putExtra("password", textInputLayoutPassword.editText?.text.toString())
                 startActivity(intent)
             }
 
