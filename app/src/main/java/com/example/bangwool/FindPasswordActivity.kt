@@ -15,7 +15,7 @@ import java.util.regex.Pattern
 
 class FindPasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindpasswordBinding
-    private val textColorFocused = Color.parseColor("#FF000000")
+    private val textColorFocused = Color.parseColor("#000000")
     private val textColorUnFocused = Color.parseColor("#616161")
     private var isEmailFocused = false
 
