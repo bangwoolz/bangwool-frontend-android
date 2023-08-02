@@ -584,6 +584,7 @@
 
                         >
                         <TextView
+                            android:id="@+id/tv_calender_1r_1c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -599,6 +600,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_1r_2c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -614,6 +616,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_1r_3c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -629,6 +632,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_1r_4c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:textSize="16dp"
@@ -646,6 +650,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_1r_5c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -664,6 +669,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_1r_6c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -679,6 +685,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_1r_7c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -697,6 +704,7 @@
                         android:paddingVertical="4dp"
                         >
                         <TextView
+                            android:id="@+id/tv_calender_2r_1c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -712,6 +720,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_2r_2c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -727,6 +736,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_2r_3c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -742,6 +752,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_2r_4c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -759,6 +770,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_2r_5c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -774,6 +786,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_2r_6c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -790,6 +803,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_2r_7c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -808,6 +822,7 @@
                         android:paddingVertical="4dp"
                         >
                         <TextView
+                            android:id="@+id/tv_calender_3r_1c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -823,6 +838,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_3r_2c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -838,6 +854,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_3r_3c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -853,6 +870,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_3r_4c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -868,6 +886,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_3r_5c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -883,6 +902,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_3r_6c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -898,6 +918,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_3r_7c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -916,6 +937,7 @@
                         android:paddingVertical="4dp"
                         >
                         <TextView
+                            android:id="@+id/tv_calender_4r_1c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -931,6 +953,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_4r_2c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -946,6 +969,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_4r_3c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -961,6 +985,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_4r_4c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -976,6 +1001,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_4r_5c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -991,6 +1017,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_4r_6c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1006,6 +1033,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_4r_7c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1024,6 +1052,7 @@
                         android:paddingVertical="4dp"
                         >
                         <TextView
+                            android:id="@+id/tv_calender_5r_1c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1039,6 +1068,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_5r_2c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1054,6 +1084,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_5r_3c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1069,6 +1100,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_5r_4c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1084,6 +1116,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_5r_5c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1099,6 +1132,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_5r_6c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
@@ -1114,6 +1148,7 @@
                             android:layout_weight="1"
                             />
                         <TextView
+                            android:id="@+id/tv_calender_5r_7c"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:gravity="center"
