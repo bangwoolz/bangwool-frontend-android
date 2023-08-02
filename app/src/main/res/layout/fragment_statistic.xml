@@ -19,7 +19,6 @@
                 android:id="@+id/cl_top"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:layout_marginTop="44dp"
                 >
                 <TextView
                     android:id="@+id/tv_title"
@@ -377,12 +376,44 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
                 <LinearLayout
+                    android:id="@+id/ll_calender_add"
+                    android:paddingVertical="28dp"
+                    android:backgroundTint="@color/gray_100"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_style"
+                    android:layout_marginHorizontal="26dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="52dp"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toBottomOf="@id/tv_goal_check_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    >
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_plus"
+                        app:tint="@color/gray_700" />
+                    <TextView
+                        android:layout_width="262dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/body2_regular"
+                        android:textColor="@color/gray_700"
+                        android:textAlignment="center"
+                        android:textSize="16dp"
+                        android:text="목표시간을 설정하면 이번달 목표 달성률을 확인할 수 있어요!"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/ll_calender_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="26dp"
                     android:orientation="vertical"
                     android:layout_marginTop="52dp"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/tv_goal_check_title"
                     app:layout_constraintStart_toStartOf="parent"
                     >
