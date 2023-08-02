@@ -70,6 +70,7 @@
                     android:textColorHint="@color/gray_400"
                     android:textSize="@dimen/text_size_body3"
                     android:fontFamily="@font/p_medium"
+
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
