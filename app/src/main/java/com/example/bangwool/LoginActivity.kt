@@ -2,6 +2,7 @@ package com.example.bangwool
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityLoginBinding
+import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -116,9 +118,50 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /*
+    private fun validateEmail(email: String): Boolean {
+        val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+
+        val grayColor = ContextCompat.getColor(this, R.color.gray_600)
+        if (email.isEmpty()) {
+            binding.textInputLayoutEmail.error = "이메일을 입력하세요."
+            binding.textInputLayoutEmail.isErrorEnabled = true
+            updateEndIcon(false)
+            return false
+        } else if (!emailPattern.matcher(email).matches()) {
+            binding.textInputLayoutEmail.error = "올바른 이메일 형식이 아니에요"
+            binding.textInputLayoutEmail.isErrorEnabled = true
+            updateEndIcon(false)
+            return false
+        } else {
+            binding.textInputLayoutEmail.error = null
+            binding.textInputLayoutEmail.isErrorEnabled = true
+            binding.textInputLayoutConfirmPassword.boxStrokeErrorColor = ColorStateList.valueOf(grayColor)
+            updateEndIcon(true)
+            return true
+        }
+    }
+     */
     private fun isValidId(email: String): Boolean {
-        val pattern = Patterns.EMAIL_ADDRESS
-        return pattern.matcher(email).matches()
+        val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+        val grayColor = ContextCompat.getColor(this, R.color.gray_300)
+        if (email.isEmpty()) {
+            binding.idTextInputLayout.error = "이메일을 입력하세요."
+            binding.idTextInputLayout.isErrorEnabled = true
+            updateEndIcon(false)
+            return false
+        } else if (!emailPattern.matcher(email).matches()) {
+            binding.idTextInputLayout.error = "올바른 이메일 형식이 아니에요"
+            binding.idTextInputLayout.isErrorEnabled = true
+            updateEndIcon(false)
+            return false
+        } else {
+            binding.idTextInputLayout.error = null
+            binding.idTextInputLayout.isErrorEnabled = true
+            binding.idTextInputLayout.boxStrokeErrorColor = ColorStateList.valueOf(grayColor)
+            updateEndIcon(true)
+            return true
+        }
     }
 
     private fun updateEndIcon(isValid: Boolean) {
