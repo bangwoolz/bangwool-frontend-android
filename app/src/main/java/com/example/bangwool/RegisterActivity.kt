@@ -228,7 +228,6 @@ class RegisterActivity : AppCompatActivity() {
                 }
             })
 
-
             buttonContinue.setOnClickListener {
                 val intent = Intent(this@RegisterActivity, TermsAgreeActivity::class.java)
                 startActivity(intent)

@@ -47,7 +47,7 @@ class PasswordActivity : AppCompatActivity() {
                     pwTextInputLayout.requestFocus()
                 } else {
                     if (passwordEt.text.isNullOrEmpty()) {
-                        pwTextInputLayout.hint = "비밀번호를 입력하세요."
+                        pwTextInputLayout.hint = "     비밀번호를 입력하세요."
                     } else {
                         pwTextInputLayout.hint = null
                     }
