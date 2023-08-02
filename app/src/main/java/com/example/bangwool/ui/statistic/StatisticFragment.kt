@@ -1,6 +1,7 @@
 package com.example.bangwool.ui.statistic
 
 import android.app.Dialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -20,6 +21,8 @@ import kotlin.properties.Delegates
 class StatisticFragment : Fragment() {
     lateinit var binding : FragmentStatisticBinding
     var goalHour = 0
+    var nowDate:LocalDate = LocalDate.now()
+    var calendarMonth:Int =LocalDate.now().month.value
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,18 +80,47 @@ class StatisticFragment : Fragment() {
         }
 
         // 달력 구현하기
-        var nowDate = LocalDate.now()
-        var lastMonthDate = LocalDate.now()
-        if(nowDate.month.value==1){
-            lastMonthDate = LocalDate.of(nowDate.year-1,12,1)
-        } else {
-            lastMonthDate = LocalDate.of(nowDate.year,nowDate.month.value-1,1)
-        }
-        var firstNowDate = nowDate.withDayOfMonth(1)
-        var dateLength = nowDate.lengthOfMonth()
-        var lastNowDate = nowDate.withDayOfMonth(dateLength)
 
-        nowDate.dayOfWeek.value
+        makeCalender(nowDate);
+
+
+        binding.ivCalenderBackBtn.setOnClickListener{
+            if(calendarMonth!=1){
+                if(calendarMonth==nowDate.month.value){
+                    binding.ivCalenderNextBtn.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_700))
+                }
+                if (calendarMonth==2){
+                    binding.ivCalenderBackBtn.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_300))
+                }
+                makeCalender(LocalDate.of(nowDate.year,calendarMonth-1,1))
+                calendarMonth--
+            }
+        }
+        binding.ivCalenderNextBtn.setOnClickListener{
+            if(calendarMonth!=nowDate.month.value&&calendarMonth!=12){
+                if(calendarMonth+1==nowDate.month.value){
+                    binding.ivCalenderNextBtn.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_300))
+                }
+                if(calendarMonth==1){
+                    binding.ivCalenderBackBtn.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_700))
+                }
+                makeCalender(LocalDate.of(nowDate.year,calendarMonth+1,1))
+                calendarMonth++
+            }
+        }
+        return binding.root
+    }
+
+    fun makeCalender(inputDate:LocalDate) {
+        var lastMonthDate = LocalDate.now()
+        if(inputDate.month.value==1){
+            lastMonthDate = LocalDate.of(inputDate.year-1,12,1)
+        } else {
+            lastMonthDate = LocalDate.of(inputDate.year,inputDate.month.value-1,1)
+        }
+        var firstNowDate = inputDate.withDayOfMonth(1)
+        var dateLength = inputDate.lengthOfMonth()
+        var lastNowDate = inputDate.withDayOfMonth(dateLength)
         val calenderDayTextArr:Array<TextView> = arrayOf(binding.tvCalender1r1c,binding.tvCalender1r2c,binding.tvCalender1r3c,
             binding.tvCalender1r4c,binding.tvCalender1r5c,binding.tvCalender1r6c,binding.tvCalender1r7c,binding.tvCalender2r1c,
             binding.tvCalender2r2c,binding.tvCalender2r3c,binding.tvCalender2r4c,binding.tvCalender2r5c,binding.tvCalender2r6c,
@@ -99,7 +131,7 @@ class StatisticFragment : Fragment() {
             binding.tvCalender5r6c,binding.tvCalender5r7c)
         var startIndex:Int = 100
         var calendarDay:Int = 1
-        binding.tvMonthControlText.text = "${nowDate.month.value}월"
+        binding.tvMonthControlText.text = "${inputDate.month.value}월"
         for( i in 0 until calenderDayTextArr.size){
             if(i>startIndex){
                 if(calendarDay>dateLength){
@@ -120,10 +152,7 @@ class StatisticFragment : Fragment() {
                     calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_300))
                 }
             }
-
         }
-        return binding.root
     }
-
 
 }
