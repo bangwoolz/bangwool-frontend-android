@@ -78,6 +78,7 @@
                         android:gravity="center_horizontal"
                         >
                         <TextView
+                            android:id="@+id/tv_monday_hour_text"
                             android:layout_width="36dp"
                             android:layout_height="20dp"
                             android:text="4h"
@@ -89,6 +90,7 @@
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
+                            android:id="@+id/v_monday_hour_bar"
                             android:layout_width="12dp"
                             android:layout_height="100dp"
                             android:layout_marginTop="4dp"
@@ -118,6 +120,7 @@
                         android:gravity="center_horizontal"
                         >
                         <TextView
+                            android:id="@+id/tv_tuesday_hour_text"
                             android:layout_width="36dp"
                             android:layout_height="20dp"
                             android:text="2.5h"
@@ -129,6 +132,7 @@
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
+                            android:id="@+id/v_tuesday_hour_bar"
                             android:layout_width="12dp"
                             android:layout_height="62.5dp"
                             android:layout_marginTop="4dp"
@@ -158,6 +162,7 @@
                         android:gravity="center_horizontal"
                         >
                         <TextView
+                            android:id="@+id/tv_wednesday_hour_text"
                             android:layout_width="36dp"
                             android:layout_height="20dp"
                             android:text="0.5h"
@@ -169,6 +174,7 @@
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
+                            android:id="@+id/v_wednesday_hour_bar"
                             android:layout_width="12dp"
                             android:layout_height="12.5dp"
                             android:layout_marginTop="4dp"
@@ -198,6 +204,7 @@
                         android:gravity="center_horizontal"
                         >
                         <TextView
+                            android:id="@+id/tv_thursday_hour_text"
                             android:layout_width="36dp"
                             android:layout_height="20dp"
                             android:text="2.5h"
@@ -209,6 +216,7 @@
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
+                            android:id="@+id/v_thursday_hour_bar"
                             android:layout_width="12dp"
                             android:layout_height="62.5dp"
                             android:layout_marginTop="4dp"
@@ -238,6 +246,7 @@
                         android:gravity="center_horizontal"
                         >
                         <TextView
+                            android:id="@+id/tv_friday_hour_text"
                             android:layout_width="36dp"
                             android:layout_height="20dp"
                             android:text="5.5h"
@@ -249,6 +258,7 @@
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
+                            android:id="@+id/v_friday_hour_bar"
                             android:layout_width="12dp"
                             android:layout_height="162.5dp"
                             android:layout_marginTop="4dp"
@@ -278,6 +288,7 @@
                         android:gravity="center_horizontal"
                         >
                         <TextView
+                            android:id="@+id/tv_saturday_hour_text"
                             android:layout_width="36dp"
                             android:layout_height="20dp"
                             android:text="7h"
@@ -289,6 +300,7 @@
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
+                            android:id="@+id/v_saturday_hour_bar"
                             android:layout_width="12dp"
                             android:layout_height="175dp"
                             android:layout_marginTop="4dp"
@@ -318,6 +330,7 @@
                         android:gravity="center_horizontal"
                         >
                         <TextView
+                            android:id="@+id/tv_sunday_hour_text"
                             android:layout_width="36dp"
                             android:layout_height="20dp"
                             android:text="3h"
@@ -329,6 +342,7 @@
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
+                            android:id="@+id/v_sunday_hour_bar"
                             android:layout_width="12dp"
                             android:layout_height="75dp"
                             android:layout_marginTop="4dp"
@@ -387,6 +401,7 @@
                     android:gravity="center"
                     android:layout_marginTop="52dp"
                     android:visibility="visible"
+                    android:layout_marginBottom="26dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_goal_check_title"
                     app:layout_constraintStart_toStartOf="parent"
                     >
