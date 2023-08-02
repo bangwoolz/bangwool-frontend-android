@@ -17,19 +17,17 @@ class FindPasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindpasswordBinding
     private val textColorFocused = Color.parseColor("#000000")
     private val textColorUnFocused = Color.parseColor("#616161")
-    private var isEmailFocused = false
+    private var isNameValid = false
+    private var isEmailValid = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFindpasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 최초 포커스를 editTextName에 두기
-        binding.editTextName.requestFocus()
-
         // 확인 버튼 클릭 시 다이얼로그 보여주기
         binding.buttonCheck.setOnClickListener {
-            DialogUtils.showFindPasswordDialog(this)
+            DialogUtils(this).showFindPasswordDialog()
         }
 
         // 뒤로 가기 버튼 클릭 시 PasswordActivity로 이동
@@ -53,10 +51,6 @@ class FindPasswordActivity : AppCompatActivity() {
                     editTextName.hint = ""
                 }
 
-                // 포커스를 받을 때 유효성 검사 실행
-                if (hasFocus) {
-                    validateName(editTextName.text.toString())
-                }
             }
             editTextName.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -64,6 +58,7 @@ class FindPasswordActivity : AppCompatActivity() {
 
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    validateName(editTextName.text.toString())
                     // 이름이 변경된 후에 버튼 상태 업데이트
                     updateButtonState()
                 }
@@ -85,16 +80,13 @@ class FindPasswordActivity : AppCompatActivity() {
                     editTextEmail.hint = ""
                 }
 
-                // 포커스를 받을 때 유효성 검사 실행
-                if (hasFocus) {
-                    validateEmail(editTextEmail.text.toString())
-                }
             }
             editTextEmail.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    validateEmail(editTextEmail.text.toString())
                     // 이메일이 변경된 후에 버튼 상태 업데이트
                     updateButtonState()
                 }
@@ -120,38 +112,39 @@ class FindPasswordActivity : AppCompatActivity() {
 
 
     private fun areAllFieldsValid(): Boolean {
-        val email = binding.textInputLayoutEmail.editText?.text.toString()
-        val name = binding.textInputLayoutName.editText?.text.toString()
-
-        return validateName(name) && validateEmail(email)
+        return isNameValid && isEmailValid
     }
 
     // 이메일 유효성 검사 함수
     private fun validateEmail(email: String): Boolean {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
         val errorColor = getColor(R.color.secondary)
-        if (!isEmailFocused && email.isEmpty()) {
+        if (email.isEmpty()) {
             binding.textInputLayoutEmail.error = "이메일을 입력하세요."
             binding.textInputLayoutEmail.defaultHintTextColor = ColorStateList.valueOf(errorColor)
             binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(false)
+            isEmailValid = false
             return false
-        } else if (!isEmailFocused && !emailPattern.matcher(email).matches()) {
+        } else if (!emailPattern.matcher(email).matches()) {
             binding.textInputLayoutEmail.error = "올바른 이메일 형식이 아니에요"
             binding.textInputLayoutEmail.defaultHintTextColor = ColorStateList.valueOf(errorColor)
             binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(false)
+            isEmailValid = false
             return false
         } else {
             binding.textInputLayoutEmail.error = null
             binding.textInputLayoutEmail.isErrorEnabled = true
             updateEndIcon(true)
+            isEmailValid = true
             return true
         }
     }
 
     private fun validateName(name: String): Boolean {
-        return name.isNotEmpty()
+        isNameValid = name.isNotEmpty()
+        return isNameValid
     }
 
     private fun updateEndIcon(isValid: Boolean) {
