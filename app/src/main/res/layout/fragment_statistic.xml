@@ -442,6 +442,7 @@
                     android:gravity="center_vertical"
                     >
                     <ImageView
+                        android:id="@+id/iv_calender_back_btn"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_back"
@@ -466,10 +467,11 @@
                         android:layout_weight="1"
                         />
                     <ImageView
+                        android:id="@+id/iv_calender_next_btn"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_next"
-                        app:tint="@color/gray_300"
+                        app:tint="@color/gray_300" />
                         />
                 </LinearLayout>
 
