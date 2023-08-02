@@ -39,6 +39,12 @@ class RegisterActivity : AppCompatActivity() {
                     editTextNickname.setTextColor(textColorUnFocused)
                     editTextEmail.hint = ""
                 }
+
+                if (hasFocus) {
+                    editTextEmail.setTextColor(getColor(R.color.black))
+                } else {
+                    editTextEmail.setTextColor(getColor(R.color.gray_700))
+                }
             }
             editTextEmail.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -69,6 +75,12 @@ class RegisterActivity : AppCompatActivity() {
                     editTextNickname.setTextColor(textColorUnFocused)
                     editTextName.hint = ""
                 }
+
+                if (hasFocus) {
+                    editTextName.setTextColor(getColor(R.color.black))
+                } else {
+                    editTextName.setTextColor(getColor(R.color.gray_700))
+                }
             }
             editTextName.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -77,10 +89,11 @@ class RegisterActivity : AppCompatActivity() {
                     count: Int,
                     after: Int
                 ) {
-                    validateName(s.toString())
                 }
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    validateName(s.toString())
+                }
                 override fun afterTextChanged(s: Editable?) {
                     updateButtonState()
                 }
@@ -96,6 +109,12 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     editTextNickname.setTextColor(textColorUnFocused)
                     editTextNickname.hint = ""
+                }
+
+                if (hasFocus) {
+                    editTextNickname.setTextColor(getColor(R.color.black))
+                } else {
+                    editTextNickname.setTextColor(getColor(R.color.gray_700))
                 }
             }
             editTextNickname.addTextChangedListener(object : TextWatcher {
@@ -133,6 +152,12 @@ class RegisterActivity : AppCompatActivity() {
                     editTextNickname.setTextColor(textColorUnFocused)
                     editTextPassword.hint = ""
                 }
+
+                if (hasFocus) {
+                    editTextPassword.setTextColor(getColor(R.color.black))
+                } else {
+                    editTextPassword.setTextColor(getColor(R.color.gray_700))
+                }
             }
             editTextPassword.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -157,7 +182,8 @@ class RegisterActivity : AppCompatActivity() {
                 }
             })
 
-            textInputLayoutConfirmPassword.boxStrokeErrorColor = getColorStateList(R.color.secondary)
+            textInputLayoutConfirmPassword.boxStrokeErrorColor =
+                getColorStateList(R.color.secondary)
             textInputLayoutConfirmPassword.hint = ""
             editTextConfirmPassword.hint = "패스워드를 확인해주세요"
             editTextConfirmPassword.onFocusChangeListener =
@@ -168,6 +194,12 @@ class RegisterActivity : AppCompatActivity() {
                     } else {
                         editTextNickname.setTextColor(textColorUnFocused)
                         editTextConfirmPassword.hint = ""
+                    }
+
+                    if (hasFocus) {
+                        editTextConfirmPassword.setTextColor(getColor(R.color.black))
+                    } else {
+                        editTextConfirmPassword.setTextColor(getColor(R.color.gray_700))
                     }
                 }
             editTextConfirmPassword.addTextChangedListener(object : TextWatcher {
@@ -261,7 +293,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-
     private fun validateEmail(email: String): Boolean {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
 
@@ -279,7 +310,8 @@ class RegisterActivity : AppCompatActivity() {
         } else {
             binding.textInputLayoutEmail.error = null
             binding.textInputLayoutEmail.isErrorEnabled = true
-            binding.textInputLayoutConfirmPassword.boxStrokeErrorColor = ColorStateList.valueOf(grayColor)
+            binding.textInputLayoutConfirmPassword.boxStrokeErrorColor =
+                ColorStateList.valueOf(grayColor)
             updateEndIcon(true)
             return true
         }
@@ -287,18 +319,18 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateName(name: String): Boolean {
         val namePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,10}\$")
-        if(name.isEmpty()){
-            binding.textInputLayoutName.error = "     이름을 입력하세요."
-            binding.textInputLayoutName.isErrorEnabled = true
-            binding.icErrorName.visibility = View.VISIBLE
-            return false
-        } else if (name.length > 10) {
-            binding.textInputLayoutName.error = "     이름은 10글자 이하여야해요."
+        if (name.isEmpty()) {
+            binding.textInputLayoutName.error = "          이름을 입력하세요."
             binding.textInputLayoutName.isErrorEnabled = true
             binding.icErrorName.visibility = View.VISIBLE
             return false
         } else if (!namePattern.matcher(name).matches()) {
-            binding.textInputLayoutName.error = "     이름의 형식을 확인해 주세요"
+            binding.textInputLayoutName.error = "          이름의 형식을 확인해 주세요"
+            binding.textInputLayoutName.isErrorEnabled = true
+            binding.icErrorName.visibility = View.VISIBLE
+            return false
+        } else if (name.length > 10) {
+            binding.textInputLayoutName.error = "          이름은 10글자 이하여야해요."
             binding.textInputLayoutName.isErrorEnabled = true
             binding.icErrorName.visibility = View.VISIBLE
             return false
@@ -313,17 +345,17 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateNickname(nickname: String): Boolean {
         val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
         if (nickname.isEmpty()) {
-            binding.textInputLayoutNickname.error = "     닉네임을 입력하세요."
-            binding.textInputLayoutNickname.isErrorEnabled = true
-            binding.icErrorNickName.visibility = View.VISIBLE
-            return false
-        } else if (nickname.length > 5) {
-            binding.textInputLayoutNickname.error = "     닉네임은 5글자 이하여야해요."
+            binding.textInputLayoutNickname.error = "          닉네임을 입력하세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
             return false
         } else if (!nicknamePattern.matcher(nickname).matches()) {
-            binding.textInputLayoutNickname.error = "     닉네임 형식을 확인해주세요."
+            binding.textInputLayoutNickname.error = "          닉네임 형식을 확인해주세요."
+            binding.textInputLayoutNickname.isErrorEnabled = true
+            binding.icErrorNickName.visibility = View.VISIBLE
+            return false
+        } else if (nickname.length > 5) {
+            binding.textInputLayoutNickname.error = "          닉네임은 5글자 이하여야해요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
             return false
@@ -340,12 +372,12 @@ class RegisterActivity : AppCompatActivity() {
             Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}")
 
         if (password.isEmpty()) {
-            binding.textInputLayoutPassword.error = "     패스워드를 입력하세요."
+            binding.textInputLayoutPassword.error = "          패스워드를 입력하세요."
             binding.textInputLayoutPassword.isErrorEnabled = true
             binding.icErrorPassword.visibility = View.VISIBLE
             return false
         } else if (!passwordPattern.matcher(password).matches()) {
-            binding.textInputLayoutPassword.error = "     패스워드 조건을 확인해주세요(8-12글자 사이)"
+            binding.textInputLayoutPassword.error = "          패스워드 조건을 확인해주세요(8-12글자 사이)"
             binding.textInputLayoutPassword.isErrorEnabled = true
             binding.icErrorPassword.visibility = View.VISIBLE
             return false
@@ -359,7 +391,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
         if (confirmPassword != password) {
-            binding.textInputLayoutConfirmPassword.error = "    패스워드가 달라요"
+            binding.textInputLayoutConfirmPassword.error = "         패스워드가 달라요"
             binding.textInputLayoutConfirmPassword.isErrorEnabled = true
             binding.icErrorConfirmPassword.visibility = View.VISIBLE
             return false
@@ -383,7 +415,7 @@ class RegisterActivity : AppCompatActivity() {
         if (isValid) {
             val tintColor = ContextCompat.getColor(this, R.color.gray_700)
             endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
-        }else{
+        } else {
             val tintColor = ContextCompat.getColor(this, R.color.secondary)
             endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
         }
