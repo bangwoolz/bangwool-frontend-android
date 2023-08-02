@@ -28,7 +28,11 @@ class StatisticFragment : Fragment() {
         val barArr:Array<View> = arrayOf(binding.vMondayHourBar,binding.vTuesdayHourBar,binding.vWednesdayHourBar,
         binding.vThursdayHourBar,binding.vFridayHourBar,binding.vSaturdayHourBar,binding.vSundayHourBar)
         for (i in 1..hourTextArr.size) {
-            hourTextArr[i-1].text = "${hourArr[i-1]}h"
+            if(hourArr[i-1]%1==0.0){
+                hourTextArr[i-1].text = "${(hourArr[i-1]/1).toInt()}h"
+            } else {
+                hourTextArr[i-1].text = "${hourArr[i-1]}h"
+            }
         }
         val maxHour:Double = hourArr.max()
         for( i in 0 until hourArr.size){
