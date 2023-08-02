@@ -2,6 +2,7 @@ package com.example.bangwool.ui.statistic
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.bangwool.databinding.DialogTimecheckBinding
 import com.example.bangwool.databinding.FragmentStatisticBinding
+import java.time.LocalDate
 import kotlin.properties.Delegates
 
 
@@ -74,8 +76,52 @@ class StatisticFragment : Fragment() {
             }
         }
 
+        // 달력 구현하기
+        var nowDate = LocalDate.now()
+        var lastMonthDate = LocalDate.now()
+        if(nowDate.month.value==1){
+            lastMonthDate = LocalDate.of(nowDate.year-1,12,1)
+        } else {
+            lastMonthDate = LocalDate.of(nowDate.year,nowDate.month.value-1,1)
+        }
+        var firstNowDate = nowDate.withDayOfMonth(1)
+        var dateLength = nowDate.lengthOfMonth()
+        var lastNowDate = nowDate.withDayOfMonth(dateLength)
 
+        nowDate.dayOfWeek.value
+        val calenderDayTextArr:Array<TextView> = arrayOf(binding.tvCalender1r1c,binding.tvCalender1r2c,binding.tvCalender1r3c,
+            binding.tvCalender1r4c,binding.tvCalender1r5c,binding.tvCalender1r6c,binding.tvCalender1r7c,binding.tvCalender2r1c,
+            binding.tvCalender2r2c,binding.tvCalender2r3c,binding.tvCalender2r4c,binding.tvCalender2r5c,binding.tvCalender2r6c,
+            binding.tvCalender2r7c,binding.tvCalender3r1c,binding.tvCalender3r2c,binding.tvCalender3r3c,binding.tvCalender3r4c,
+            binding.tvCalender3r5c,binding.tvCalender3r6c,binding.tvCalender3r7c,binding.tvCalender4r1c,binding.tvCalender4r2c,
+            binding.tvCalender4r3c,binding.tvCalender4r4c,binding.tvCalender4r5c,binding.tvCalender4r6c,binding.tvCalender4r7c,
+            binding.tvCalender5r1c,binding.tvCalender5r2c,binding.tvCalender5r3c,binding.tvCalender5r4c,binding.tvCalender5r5c,
+            binding.tvCalender5r6c,binding.tvCalender5r7c)
+        var startIndex:Int = 100
+        var calendarDay:Int = 1
+        binding.tvMonthControlText.text = "${nowDate.month.value}월"
+        for( i in 0 until calenderDayTextArr.size){
+            if(i>startIndex){
+                if(calendarDay>dateLength){
+                    calenderDayTextArr[i].text=""
+                } else {
+                    calenderDayTextArr[i].text=calendarDay.toString()
+                    calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
+                    calendarDay++
+                }
+            } else {
+                if(i+1==firstNowDate.dayOfWeek.value){
+                    startIndex = i
+                    calenderDayTextArr[i].text=calendarDay.toString()
+                    calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
+                    calendarDay++
+                } else {
+                    calenderDayTextArr[i].text=(lastMonthDate.lengthOfMonth()-(firstNowDate.dayOfWeek.value-(i+2))).toString()
+                    calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_300))
+                }
+            }
 
+        }
         return binding.root
     }
 
