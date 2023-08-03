@@ -15,8 +15,6 @@ import java.util.regex.Pattern
 
 class FindPasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindpasswordBinding
-    private val textColorFocused = Color.parseColor("#000000")
-    private val textColorUnFocused = Color.parseColor("#616161")
     private var isNameValid = false
     private var isEmailValid = false
 
@@ -44,11 +42,15 @@ class FindPasswordActivity : AppCompatActivity() {
             editTextName.hint = "실명을 입력하세요"
             editTextName.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextName.text.isNullOrEmpty()) {
-                    editTextName.setTextColor(textColorFocused)
                     editTextName.hint = "실명을 입력하세요"
                 } else {
-                    editTextName.setTextColor(textColorUnFocused)
                     editTextName.hint = ""
+                }
+
+                if (hasFocus) {
+                    editTextName.setTextColor(getColor(R.color.black))
+                } else {
+                    editTextName.setTextColor(getColor(R.color.gray_700))
                 }
 
             }
@@ -73,11 +75,15 @@ class FindPasswordActivity : AppCompatActivity() {
             editTextEmail.hint = "ex) banwol@google.com"
             editTextEmail.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus && editTextEmail.text.isNullOrEmpty()) {
-                    editTextEmail.setTextColor(textColorFocused)
                     editTextEmail.hint = "ex) banwol@google.com"
                 } else {
-                    editTextEmail.setTextColor(textColorUnFocused)
                     editTextEmail.hint = ""
+                }
+
+                if (hasFocus) {
+                    editTextEmail.setTextColor(getColor(R.color.black))
+                } else {
+                    editTextEmail.setTextColor(getColor(R.color.gray_700))
                 }
 
             }
