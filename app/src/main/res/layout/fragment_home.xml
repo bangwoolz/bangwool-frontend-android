@@ -6,18 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+
     <TextView
         android:id="@+id/d_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
         android:fontFamily="@font/pretendard_medium"
         android:gravity="center"
         android:text="D-day"
         android:textColor="#FF9999"
         android:textSize="@dimen/text_size_body2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/home_menu"
+        app:layout_constraintBottom_toBottomOf="@id/home_menu"/>
 
     <ImageView
         android:id="@+id/home_menu"

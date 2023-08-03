@@ -95,7 +95,7 @@ class HomeFragment : Fragment() {
                         }
                     })
                     dialog.arguments = bundle
-                    dialog.show(parentFragmentManager, "OrderDialog")
+                    dialog.show(parentFragmentManager, "TimerDeleteDialog")
                 }
 
             })
@@ -108,7 +108,10 @@ class HomeFragment : Fragment() {
 
             homeMenu.setOnClickListener {
                 Log.d("Click", "homeMenu Click")
-                listDialog()
+//                listDialog()
+                val homeMenuDialog = HomeMenuDialog()
+                homeMenuDialog.show(parentFragmentManager, "HomeMenuDialog")
+
             }
         }
     }
