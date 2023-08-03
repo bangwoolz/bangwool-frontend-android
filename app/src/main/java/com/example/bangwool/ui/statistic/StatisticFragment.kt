@@ -20,7 +20,7 @@ import kotlin.properties.Delegates
 
 class StatisticFragment : Fragment() {
     lateinit var binding : FragmentStatisticBinding
-    var goalHour = 0
+    var goalHour =0
     var nowDate:LocalDate = LocalDate.now()
     var calendarMonth:Int =LocalDate.now().month.value
     lateinit var todayView:TextView
@@ -36,18 +36,20 @@ class StatisticFragment : Fragment() {
             val dlg = GoalTimeDialog(requireContext())
             dlg.setOnOKClickedListener{ hour ->
                 binding.tvGoalTimeText.text = "${hour} 시간"
+                goalHour = hour.toInt()
                 binding.llCalenderMain.visibility = View.VISIBLE
                 binding.llCalenderAdd.visibility = View.GONE
             }
             dlg.show()
         }
-
+        
 
         val hourArr:Array<Double> = arrayOf(4.0,2.5,0.5,2.5,5.5,7.0,3.0) // 월~일까지의 시간 배열 더미 데이터 (받아와야할 데이터)
         val hourTextArr:Array<TextView> = arrayOf(binding.tvMondayHourText,binding.tvTuesdayHourText,binding.
         tvWednesdayHourText,binding.tvThursdayHourText,binding.tvFridayHourText,binding.tvSaturdayHourText,binding.tvSundayHourText)
         val barArr:Array<View> = arrayOf(binding.vMondayHourBar,binding.vTuesdayHourBar,binding.vWednesdayHourBar,
         binding.vThursdayHourBar,binding.vFridayHourBar,binding.vSaturdayHourBar,binding.vSundayHourBar)
+
 
         // 그래프에 시간 text 입력
         for (i in 1..hourTextArr.size) {
