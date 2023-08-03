@@ -94,13 +94,17 @@ class LoginActivity : AppCompatActivity() {
                     idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
                     idTextInputLayout.boxStrokeErrorColor =
                         getColorStateList(R.color.androidDefault)
-                    val intent =
-                        Intent(this@LoginActivity, PasswordActivity::class.java)
-                    val id = loginIdEt.text
-                    intent.putExtra("loginId", id)
-                    startActivity(intent)
-                    idTextInputLayout.error = null;
-                    loginLoadingDone.visibility = View.GONE
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        val intent =
+                            Intent(this@LoginActivity, PasswordActivity::class.java)
+                        val id = loginIdEt.text
+                        intent.putExtra("loginId", id)
+                        startActivity(intent)
+                        loginCl.requestFocus()
+                        idTextInputLayout.error = null
+                        idTextInputLayout.isErrorEnabled = false
+                        loginLoadingDone.visibility = View.GONE
+                    }, 1000)
                 }, 2000)
             }
 
@@ -110,27 +114,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-//    private fun validateId(id: String) {
-//        if (isValidId(id)) {
-//            updateEndIcon(true)
-//            binding.apply {
-//                loginIcErrorEmail.visibility = View.GONE
-//                loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
-//                idTextInputLayout.error = null
-//                idTextInputLayout.hint = null
-//            }
-//
-//        } else {
-//            updateEndIcon(false)
-//            binding.apply {
-//                loginIcErrorEmail.visibility = View.VISIBLE
-//                loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
-//                loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
-//                idTextInputLayout.error = "     잘못된 이메일 형식이에요"
-//            }
-//        }
-//    }
 
     private fun validateId(email: String): Boolean {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
