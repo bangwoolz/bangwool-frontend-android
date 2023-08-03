@@ -23,6 +23,7 @@ class StatisticFragment : Fragment() {
     var goalHour = 0
     var nowDate:LocalDate = LocalDate.now()
     var calendarMonth:Int =LocalDate.now().month.value
+    lateinit var todayView:TextView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -92,6 +93,9 @@ class StatisticFragment : Fragment() {
                 if (calendarMonth==2){
                     binding.ivCalenderBackBtn.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_300))
                 }
+                if(calendarMonth==nowDate.month.value){
+                    todayView.background = null
+                }
                 makeCalender(LocalDate.of(nowDate.year,calendarMonth-1,1))
                 calendarMonth--
             }
@@ -139,6 +143,12 @@ class StatisticFragment : Fragment() {
                 } else {
                     calenderDayTextArr[i].text=calendarDay.toString()
                     calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
+                    if(inputDate.month.value==nowDate.month.value){
+                        if(nowDate.dayOfMonth==calendarDay){
+                            calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_underline_text)
+                            todayView = calenderDayTextArr[i]
+                        }
+                    }
                     calendarDay++
                 }
             } else {
@@ -153,6 +163,7 @@ class StatisticFragment : Fragment() {
                 }
             }
         }
+
     }
 
 }
