@@ -10,7 +10,7 @@
         android:id="@+id/cl_ranking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:text="랭킹"
             android:textColor="@color/gray_800"
+            android:fontFamily="@font/pretendard_medium"
             android:textSize="@dimen/text_size_body3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,23 +28,36 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--    tabIndicatorFullWidth 가로 더 좁게 고쳐야함-->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tl_ranking"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_ranking"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="60dp"
         app:tabIndicatorColor="@color/gray_800"
+        app:tabIndicatorFullWidth="false"
         app:tabIndicatorGravity="bottom"
+        app:tabRippleColor="@color/transparent"
         app:tabSelectedTextColor="@color/gray_800"
+        app:tabTextAppearance="@style/TabLayoutTextAppearance"
         app:tabTextColor="@color/gray_400" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="#F6F6F6"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="114dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_ranking"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tl_ranking" />
+        android:layout_marginTop="120dp"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
