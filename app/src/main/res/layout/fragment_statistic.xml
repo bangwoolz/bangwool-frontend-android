@@ -796,7 +796,6 @@
                             android:textColor="@color/gray_700"
                             android:fontFamily="@font/p_medium"
                             android:text="11"
-                            android:background="@drawable/custom_underline_text"
                             android:textAlignment="center"
                             />
                         <View
