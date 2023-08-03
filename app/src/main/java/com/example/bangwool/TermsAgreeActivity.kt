@@ -2,6 +2,7 @@ package com.example.bangwool
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityTermsagreeBinding
@@ -32,18 +33,29 @@ class TermsAgreeActivity : AppCompatActivity() {
                 navigateToAllAgreements()
             }
             checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
-                checkBoxPrivacyPolicy.isChecked = isChecked
-                checkBoxTermsOfUse.isChecked = isChecked
-                updateButtonState()
+                checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
             }
 
             checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, isChecked ->
+                //remove checkbox's checked change listener
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                }
                 checkBoxAllAgreements.isChecked = isChecked && checkBoxTermsOfUse.isChecked
+                //reallocate checkbox's checked change listener
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                    checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
+                }
                 updateButtonState()
             }
 
             checkBoxTermsOfUse.setOnCheckedChangeListener { _, isChecked ->
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                    //remove checkbox's checked change listener
+                }
                 checkBoxAllAgreements.isChecked = isChecked && checkBoxPrivacyPolicy.isChecked
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                    checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
+                }
                 updateButtonState()
             }
 
@@ -57,6 +69,12 @@ class TermsAgreeActivity : AppCompatActivity() {
                 startActivity(i)
             }
         }
+    }
+
+    fun checkBoxAllAgreementsOnCheckedChangeListener(isChecked: Boolean) {
+        binding.checkBoxPrivacyPolicy.isChecked = isChecked
+        binding.checkBoxTermsOfUse.isChecked = isChecked
+        updateButtonState()
     }
 
     private fun updateButtonState() {

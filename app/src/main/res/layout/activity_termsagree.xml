@@ -1,62 +1,70 @@
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonBack"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="21dp"
-        android:background="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/textViewTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="약관 동의"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="21dp"
-        android:background="@color/disabledColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayoutTerms"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="63dp">
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/p_medium"
+            android:text="약관 동의"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_body3"
+            app:layout_constraintBottom_toBottomOf="@id/buttonBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/buttonBack" />
+
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_all_agreement"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textViewTermsOfUse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
             android:text="약관 전체동의"
-            android:textSize="16sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
+            android:textSize="@dimen/text_size_body4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,9 +72,9 @@
             android:id="@+id/checkBoxAllAgreements"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginEnd="24dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@id/textViewTermsOfUse"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textViewTermsOfUse"
             tools:ignore="TouchTargetSizeCheck" />
@@ -75,43 +83,54 @@
             android:id="@+id/line2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="20dp"
-            android:background="@color/disabledColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxAllAgreements" />
+            android:background="@color/gray_300"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_use_term"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_all_agreement">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ButtonPrivacyPolicy"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginTop="14dp"
             android:background="@drawable/ic_down"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textViewPrivacyPolicy"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
         <TextView
             android:id="@+id/textViewPrivacyPolicy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="25dp"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/p_medium"
             android:text="이용약관 동의"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/ButtonPrivacyPolicy"
-            app:layout_constraintTop_toBottomOf="@id/line2" />
+            android:textSize="@dimen/text_size_body4"
+            app:layout_constraintBottom_toBottomOf="@+id/ButtonPrivacyPolicy"
+            app:layout_constraintStart_toEndOf="@id/ButtonPrivacyPolicy"
+            app:layout_constraintTop_toTopOf="@id/ButtonPrivacyPolicy" />
 
         <TextView
             android:id="@+id/textViewPrivacyPolicyRequired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/pretendard_regular"
             android:text="(필수)"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold"
+            android:textColor="@color/gray_600"
+            app:layout_constraintBottom_toBottomOf="@id/textViewPrivacyPolicy"
             app:layout_constraintStart_toEndOf="@id/textViewPrivacyPolicy"
             app:layout_constraintTop_toTopOf="@id/textViewPrivacyPolicy" />
 
@@ -119,41 +138,56 @@
             android:id="@+id/checkBoxPrivacyPolicy"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@id/textViewPrivacyPolicyRequired"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textViewPrivacyPolicyRequired" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_use_term">
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ButtonViewAllAgreements"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginTop="14dp"
             android:background="@drawable/ic_down"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textViewAllAgreements"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
         <TextView
             android:id="@+id/textViewAllAgreements"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/p_medium"
             android:text="개인정보 처리 약관 동의"
-            android:layout_margin="25dp"
-            android:textSize="15sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/ButtonViewAllAgreements"
-            app:layout_constraintTop_toBottomOf="@id/checkBoxPrivacyPolicy" />
+            android:textSize="@dimen/text_size_body4"
+            app:layout_constraintBottom_toBottomOf="@id/ButtonViewAllAgreements"
+            app:layout_constraintStart_toEndOf="@id/ButtonViewAllAgreements"
+            app:layout_constraintTop_toTopOf="@id/ButtonViewAllAgreements" />
 
         <TextView
             android:id="@+id/textViewPrivacyPolicyRequired2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(필수)"
             android:layout_marginStart="10dp"
+            android:text="(필수)"
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/textViewAllAgreements"
             app:layout_constraintStart_toEndOf="@id/textViewAllAgreements"
             app:layout_constraintTop_toTopOf="@id/textViewAllAgreements" />
 
@@ -161,9 +195,9 @@
             android:id="@+id/checkBoxTermsOfUse"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginEnd="24dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@id/textViewPrivacyPolicyRequired2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textViewPrivacyPolicyRequired2" />
 
@@ -173,22 +207,20 @@
         android:id="@+id/buttonContinue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/btn_style"
         android:enabled="false"
-        android:text="계속하기"
+        android:fontFamily="@font/pretendard_semibold"
         android:onClick="onContinueClicked"
+        android:text="계속하기"
         android:textColor="@color/white"
-        android:textStyle="bold"
+        android:stateListAnimator="@null"
+        android:textSize="@dimen/text_size_body4"
+        app:layout_constraintBaseline_toBottomOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="690dp"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
