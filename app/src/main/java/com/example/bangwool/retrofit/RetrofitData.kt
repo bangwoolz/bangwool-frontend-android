@@ -13,6 +13,14 @@ data class MemberSignUpResponse(
     @SerializedName("id") val id: Int
 )
 
+data class AuthLoginRequest(
+    @SerializedName("email") val email: String,
+    @SerializedName("password") val password: String
+)
+data class TokenResponse(
+    @SerializedName("token") val token: String
+)
+
 //{
 //    "email": "uLTr2ZSzAxdbgfOU2nsh@lHlSNIDK94kj41TUtrvr9nEuHgZeWW.xi7.Ym.2VwK0clpM0.RRzCJwM1p-RwvfPGD2V9Re8BMkFYsAT8PxGnfBCOhO-TeX75x4kJUYjYyIriYL8mK",
 //    "name": "",
