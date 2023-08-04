@@ -25,15 +25,15 @@
     <color name="gray_700">#616161</color>
     <color name="gray_800">#424242</color>
     <color name="gray_900">#111111</color>
-    <color name="primary_100">#FFB2B2</color>
-    <color name="primary_200">#FF8080</color>
-    <color name="primary_300">#FC2947</color>
-    <color name="primary_400">#FF1A1A</color>
-    <color name="primary_500">#E50000</color>
-    <color name="primary_600">#B20000</color>
-    <color name="primary_700">#800000</color>
-    <color name="primary_800">#4D0000</color>
-    <color name="primary_900">#1A0000</color>
+    <color name="primary_100">#FFCCCC</color>
+    <color name="primary_200">#FF9999</color>
+    <color name="primary_300">#FF6666</color>
+    <color name="primary_400">#FF3333</color>
+    <color name="primary_500">#FF0000</color>
+    <color name="primary_600">#CC0000</color>
+    <color name="primary_700">#990000</color>
+    <color name="primary_800">#660000</color>
+    <color name="primary_900">#330000</color>
     <color name="timer_color_red">#FF6969</color>
     <color name="timer_color_pink">#FF9EAA</color>
     <color name="timer_color_orange">#FBC252</color>
@@ -44,7 +44,6 @@
     <color name="timer_color_green">#AACB73</color>
     <color name="confirm_text">#FF6242</color>
 
-
     <!--    태현    -->
     <color name="statistic_purple">#9B77FF</color>
     <color name="statistic_light_purple">#8D9AFF</color>
@@ -53,4 +52,5 @@
     <!--    지원    -->
     <color name="transparent">#00FF0000</color>
     <!--    현준    -->
+
 </resources>
