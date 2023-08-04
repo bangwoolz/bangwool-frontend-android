@@ -1,6 +1,8 @@
 package com.example.bangwool
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.bangwool.databinding.DialogAboutBinding
@@ -15,9 +17,8 @@ object AboutDialogUtils {
         val dialog = dialogBuilder.create()
 
         dialogViewBinding.root.setBackgroundResource(R.drawable.dialog_background)
-
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialogViewBinding.buttonConfirm.setOnClickListener {
-
             dialog.dismiss()
 
         }
