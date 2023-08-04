@@ -30,8 +30,6 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.dDay.setOnClickListener {
-            val i = Intent(requireContext(), TimerActivity::class.java)
-            startActivity(i)
         }
         /*
         binding.homeRecyclerView.setOnClickListener {
@@ -103,7 +101,8 @@ class HomeFragment : Fragment() {
 
 
             homeAddTaskBtn.setOnClickListener {
-                Toast.makeText(requireContext(), "+ 버튼 클릭됨", Toast.LENGTH_SHORT).show()
+                val i = Intent(requireContext(), TimerEditActivity::class.java)
+                startActivity(i)
             }
 
             homeMenu.setOnClickListener {
