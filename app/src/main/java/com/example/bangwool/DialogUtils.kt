@@ -1,6 +1,5 @@
 package com.example.bangwool
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -11,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.Window
 import android.view.WindowManager
 import com.example.bangwool.databinding.DialogFindpasswordBinding
-import com.example.bangwool.databinding.DialogTimecheckBinding
 
 class DialogUtils(val context: Context) {
     fun showFindPasswordDialog() {
