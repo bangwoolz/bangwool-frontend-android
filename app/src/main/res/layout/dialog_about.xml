@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp" />
+        android:layout_marginStart="8dp" />
 
 
     <TextView
@@ -34,13 +34,13 @@
         app:layout_constraintTop_toBottomOf="@id/aboutText"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="31dp"
-        android:layout_marginStart="40dp" />
+        android:layout_marginStart="15dp" />
 
     <TextView
         android:id="@+id/appVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="15dp"
         android:textSize="@dimen/text_size_body4"
         android:text="v 1.0"
         android:textColor="@color/gray_600"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/appVersion"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="25dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="15dp"
         android:textSize="@dimen/text_size_body4" />
 
 
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/termsAndPolicyText"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="25dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="15dp"
         android:textSize="@dimen/text_size_body4" />
 
     <TextView
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@id/developerInfoText"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="25dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="15dp"
         android:textSize="@dimen/text_size_body4" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,8 +97,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="265dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp">
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
 
         <TextView
             android:id="@+id/emailText"
@@ -120,7 +120,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/emailText"
             android:layout_marginTop="0dp"
-            android:layout_marginStart="27dp"
+            android:layout_marginStart="15dp"
             android:textSize="@dimen/text_size_body4" />
 
         <TextView
@@ -144,7 +144,7 @@
             app:layout_constraintTop_toTopOf="@id/telText"
             app:layout_constraintStart_toEndOf="@id/telText"
             android:layout_marginTop="0dp"
-            android:layout_marginStart="27dp"
+            android:layout_marginStart="15dp"
             android:textSize="@dimen/text_size_body4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -161,8 +161,8 @@
         android:stateListAnimator="@null"
         android:backgroundTint="@color/primary"
         android:layout_marginTop="374dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
