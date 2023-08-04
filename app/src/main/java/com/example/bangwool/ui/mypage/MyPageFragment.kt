@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.bangwool.AboutDialogUtils
 import com.example.bangwool.LoginActivity
 import com.example.bangwool.databinding.FragmentMypageBinding
 
@@ -27,6 +28,9 @@ class MyPageFragment : Fragment() {
             activity?.finish()
         }
 
+        binding.textViewAbout.setOnClickListener {
+            AboutDialogUtils.showAboutDialog(requireContext())
+        }
 
         return binding.root
     }
