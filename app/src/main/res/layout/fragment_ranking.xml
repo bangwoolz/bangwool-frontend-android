@@ -40,7 +40,7 @@
         app:tabIndicatorColor="@color/gray_800"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorGravity="bottom"
-        app:tabRippleColor="@color/transparent"
+        app:tabRippleColor="@color/white"
         app:tabSelectedTextColor="@color/gray_800"
         app:tabTextAppearance="@style/TabLayoutTextAppearance"
         app:tabTextColor="@color/gray_400" />
