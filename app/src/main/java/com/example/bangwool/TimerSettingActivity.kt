@@ -55,7 +55,7 @@ class TimerSettingActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        timeDialogUtils = TimeChooseDialog(this, "temp", 5)
+        timeDialogUtils = TimeChooseDialog(this, "temp", 5, 0)
         restTimerDialogUtil=RestTimerDialogUtil(this)
 
         binding.textViewWorkTime.setOnClickListener {
