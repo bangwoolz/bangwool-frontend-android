@@ -56,6 +56,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/swipe_view"
         android:layout_width="match_parent"
+        android:clickable="true"
         android:layout_height="84dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/home_item_layout">
@@ -82,6 +83,7 @@
                 android:src="@drawable/baseline_circle_24" />
 
             <TextView
+                android:fontFamily="@font/pretendard_medium"
                 android:id="@+id/home_item_task_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="28dp"
                 android:text="6 : 20"
+                android:fontFamily="@font/pretendard_regular"
                 android:textColor="@color/gray_600"
                 android:textSize="@dimen/text_size_body2" />
 

@@ -26,6 +26,7 @@ class HomeAdapter(
 
     var itemClickListener: OnItemClickListener? = null
 
+
     interface OnItemClickListener {
         fun onDeleteItemClick(homeItem: HomeItem)
     }
@@ -46,21 +47,30 @@ class HomeAdapter(
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val context: Context = itemView.context
-        fun bind(itemList: HomeItem) {
+        fun bind(item: HomeItem) {
 
             binding.apply {
-                homeItemTaskCircle.setColorFilter(context.getColor(itemList.taskColor))
+                homeItemTaskCircle.setColorFilter(context.getColor(item.taskColor))
 //                homeItemTaskCircle.setBackgroundColor(context.getColor(itemList.taskColor))
 //                homeItemTaskCircle.setBackgroundResource(R.drawable.circle_layout)
-                homeItemTaskTv.text = itemList.taskName
-                homeItemTaskTime.text = itemList.taskTime
+                homeItemTaskTv.text = item.taskName
+                homeItemTaskTime.text = item.taskTime
                 homeItemTaskTimeBtn.setImageResource(R.drawable.ic_play_filled)
+                homeItemTaskTimeBtn.setOnClickListener {
+                    val i = Intent(context, TimerActivity::class.java)
+                    context.startActivity(i)
+                }
                 modifyBtn.setOnClickListener {
-                    Log.d("CLICK!", "modifyBtn")
-
+                    val i = Intent(context, TimerEditActivity::class.java)
+                    i.putExtra("taskColor", item.taskColor)
+                    i.putExtra("taskName", item.taskName)
+                    i.putExtra("taskTime", item.taskTime)
+                    i.putExtra("taskState", item.taskState)
+                    i.putExtra("timerTitle", "타이머 수정")
+                    context.startActivity(i)
                 }
                 deleteBtn.setOnClickListener {
-                    itemClickListener?.onDeleteItemClick(itemList)
+                    itemClickListener?.onDeleteItemClick(item)
                 }
             }
         }

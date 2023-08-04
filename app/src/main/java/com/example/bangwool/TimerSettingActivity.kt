@@ -12,7 +12,7 @@ import com.example.bangwool.databinding.ActivityTimerSettingBinding
 class TimerSettingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTimerSettingBinding
-    private lateinit var timeDialogUtils: TimeDialogUtils
+    private lateinit var timeDialogUtils: TimeChooseDialog
     private lateinit var restTimerDialogUtil: RestTimerDialogUtil
 
     private fun onAutoTimerStateChanged(isChecked: Boolean) {
@@ -55,7 +55,7 @@ class TimerSettingActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        timeDialogUtils = TimeDialogUtils(this)
+        timeDialogUtils = TimeChooseDialog(this, "temp", 5, 0)
         restTimerDialogUtil=RestTimerDialogUtil(this)
 
         binding.textViewWorkTime.setOnClickListener {
