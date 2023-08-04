@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.InputMethod
 import android.view.inputmethod.InputMethodManager
 import com.example.bangwool.R
 import com.example.bangwool.TimeChooseDialog
@@ -26,6 +25,9 @@ class TimerEditActivity : AppCompatActivity() {
 
     fun initLayout() {
         binding.apply {
+            val timerTitle = intent.getStringExtra("timerTitle")
+            binding.tvTimerEditTitle.setText(timerTitle)
+
             textInputLayoutName.hint = ""
             editTextName.hint = "ex) 시험공부"
             textInputLayoutName.onFocusChangeListener =
@@ -50,11 +52,13 @@ class TimerEditActivity : AppCompatActivity() {
                 return@setOnKeyListener false
             }
             llWorkTime.setOnClickListener {
-                val workTimeDialog = TimeChooseDialog(this@TimerEditActivity, "작업 시간", 480)
+                val str = tvWorkTimeClock.text.toString()
+                val workTimeDialog = TimeChooseDialog(this@TimerEditActivity, "작업 시간", 480, str.substring(0, str.length-3).toInt())
                 workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
             }
             llRestTime.setOnClickListener {
-                val restTimeDialog = TimeChooseDialog(this@TimerEditActivity, "쉬는 시간", 480)
+                val str = tvRestTimeClock.text.toString()
+                val restTimeDialog = TimeChooseDialog(this@TimerEditActivity, "쉬는 시간", 480, str.substring(0, str.length-3).toInt())
                 restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
             }
             setCheckViewList()
