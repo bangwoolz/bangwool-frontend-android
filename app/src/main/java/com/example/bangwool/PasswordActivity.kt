@@ -7,11 +7,19 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.example.bangwool.databinding.ActivityPasswordBinding
+import com.example.bangwool.retrofit.AuthLoginRequest
+import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.TokenResponse
+import com.example.bangwool.retrofit.saveAccessToken
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PasswordActivity : AppCompatActivity() {
     lateinit var binding: ActivityPasswordBinding
-    val user_password = "1234"
+    private var userId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +29,7 @@ class PasswordActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        val userId = intent.getStringExtra("loginId")
-        Log.d("loginId", userId.toString())
+        userId = intent.getStringExtra("loginId")
         binding.apply {
             backBtn.setOnClickListener {
                 finish()
@@ -80,11 +87,28 @@ class PasswordActivity : AppCompatActivity() {
             loginBtn.backgroundTintList = getColorStateList(R.color.primary)
 
             loginBtn.setOnClickListener {
-                if (pw.equals(user_password)) {
+                requestAuthLogin()
+            }
+        }
+    }
+
+    private fun ActivityPasswordBinding.requestAuthLogin() {
+        val authLoginRequest = AuthLoginRequest(userId!!, passwordEt.text.toString())
+        RetrofitUtil.getLoginRetrofit().AuthLogin(authLoginRequest).enqueue(object :
+            Callback<TokenResponse> {
+            override fun onResponse(
+                call: Call<TokenResponse>,
+                response: Response<TokenResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val token = response.body()!!.token
+                    saveAccessToken(this@PasswordActivity, token)
+                    RetrofitUtil.setAccessToken(token)
+
                     pwTextInputLayout.error = null
                     pwTextInputLayout.isErrorEnabled = false
                     loginIcErrorEmail.visibility = View.GONE
-//                    pwTextInputLayout.error = "비밀번호 동일함"
+    //                    pwTextInputLayout.error = "비밀번호 동일함"
                     val i = Intent(this@PasswordActivity, MainActivity::class.java)
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(i)
@@ -96,7 +120,13 @@ class PasswordActivity : AppCompatActivity() {
                     pwTextInputLayout.error = "    비밀번호가 달라요. 다시 입력해주세요"
                 }
             }
-        }
+
+            override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
+                loginIcErrorEmail.visibility = View.VISIBLE
+                pwTextInputLayout.error = "    비밀번호가 달라요. 다시 입력해주세요"
+            }
+
+        })
     }
 
 }
