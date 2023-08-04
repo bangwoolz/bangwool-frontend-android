@@ -26,6 +26,9 @@ class TimerEditActivity : AppCompatActivity() {
 
     fun initLayout() {
         binding.apply {
+            val timerTitle = intent.getStringExtra("timerTitle")
+            binding.tvTimerEditTitle.setText(timerTitle)
+
             textInputLayoutName.hint = ""
             editTextName.hint = "ex) 시험공부"
             textInputLayoutName.onFocusChangeListener =
