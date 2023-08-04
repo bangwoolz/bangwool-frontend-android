@@ -19,6 +19,8 @@ class TimerActivity : AppCompatActivity() {
             binding.btnContinue.visibility = View.INVISIBLE
             binding.btnClear.visibility = View.INVISIBLE
             binding.btnStop.visibility=View.VISIBLE
+            binding.ivHappyTomato.visibility=View.GONE
+            binding.ivStudyTomato.visibility=View.VISIBLE
             startTimer()    //타이머 작동
         }
         binding.btnClear.setOnClickListener{
@@ -34,11 +36,15 @@ class TimerActivity : AppCompatActivity() {
             binding.btnContinue.visibility = View.VISIBLE
             binding.btnClear.visibility = View.VISIBLE
             binding.btnStop.visibility=View.INVISIBLE
+            binding.ivHappyTomato.visibility=View.VISIBLE
+            binding.ivStudyTomato.visibility=View.GONE
             stopTimer()
         }
         binding.btnStart.setOnClickListener{
             binding.btnStart.visibility = View.INVISIBLE
             binding.btnStop.visibility=View.VISIBLE
+            binding.ivHappyTomato.visibility=View.GONE
+            binding.ivStudyTomato.visibility=View.VISIBLE
             startTimer()    //타이머 작동
         }
         clearTime()
