@@ -1,11 +1,8 @@
 package com.example.bangwool
 
-import android.app.Dialog
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.bangwool.databinding.DialogAboutBinding
 
 object AboutDialogUtils {
@@ -17,14 +14,13 @@ object AboutDialogUtils {
         dialogBuilder.setView(dialogViewBinding.root)
         val dialog = dialogBuilder.create()
 
-        dialogViewBinding.buttonCancel.setOnClickListener {
-            dialog.dismiss()
-        }
+        dialogViewBinding.root.setBackgroundResource(R.drawable.dialog_background)
+
         dialogViewBinding.buttonConfirm.setOnClickListener {
+
             dialog.dismiss()
+
         }
-
-
 
         dialog.show()
     }

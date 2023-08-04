@@ -2,13 +2,10 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:layout_marginStart="32dp"
-    android:layout_marginEnd="32dp"
     android:padding="16dp"
-    android:background="@drawable/dialog_background"
+    android:background="@drawable/dialog_about_background"
     android:orientation="vertical"
     >
 
@@ -25,7 +22,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginStart="32dp" />
 
-    <!-- 앱버전 텍스트 -->
+
     <TextView
         android:id="@+id/appVersionText"
         android:layout_width="wrap_content"
@@ -33,9 +30,10 @@
         android:text="앱버전"
         android:textSize="@dimen/text_size_body4"
         android:fontFamily="@font/p_medium"
+        android:textColor="@color/gray_900"
         app:layout_constraintTop_toBottomOf="@id/aboutText"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="59dp"
+        android:layout_marginTop="31dp"
         android:layout_marginStart="40dp" />
 
     <TextView
@@ -45,33 +43,49 @@
         android:layout_marginEnd="40dp"
         android:textSize="@dimen/text_size_body4"
         android:text="v 1.0"
+        android:textColor="@color/gray_600"
         android:fontFamily="@font/p_medium"
         app:layout_constraintTop_toTopOf="@id/appVersionText"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 약관 및 정책 텍스트 -->
+
     <TextView
         android:id="@+id/termsAndPolicyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="약관 및 정책"
         android:fontFamily="@font/p_medium"
+        android:textColor="@color/gray_900"
         app:layout_constraintTop_toBottomOf="@id/appVersion"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="25dp"
         android:layout_marginStart="40dp"
         android:textSize="@dimen/text_size_body4" />
 
-    <!-- 개발자 정보 텍스트 -->
+
     <TextView
         android:id="@+id/developerInfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="개발자 정보"
         android:fontFamily="@font/p_medium"
+        android:textColor="@color/gray_900"
         app:layout_constraintTop_toBottomOf="@id/termsAndPolicyText"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="40dp"
+        android:textSize="@dimen/text_size_body4" />
+
+    <TextView
+        android:id="@+id/contactText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="contact"
+        android:fontFamily="@font/p_medium"
+        android:textColor="@color/gray_900"
+        app:layout_constraintTop_toBottomOf="@id/developerInfoText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"
         android:layout_marginStart="40dp"
         android:textSize="@dimen/text_size_body4" />
 
@@ -79,10 +93,10 @@
         android:id="@+id/contactInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/developerInfoText"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="265dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp">
 
@@ -90,13 +104,12 @@
             android:id="@+id/emailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="email"
             android:fontFamily="@font/p_medium"
-            app:layout_constraintTop_toTopOf="parent"
+            android:text="Email"
+            android:textSize="@dimen/text_size_body4"
+            android:layout_marginStart="17dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="0dp"
-            android:layout_marginStart="0dp"
-            android:textSize="@dimen/text_size_body4" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/email"
@@ -107,19 +120,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/emailText"
             android:layout_marginTop="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="27dp"
             android:textSize="@dimen/text_size_body4" />
 
         <TextView
             android:id="@+id/telText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tel"
+            android:text="Tel"
             android:fontFamily="@font/p_medium"
             app:layout_constraintTop_toBottomOf="@id/emailText"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="34dp"
             android:textSize="@dimen/text_size_body4" />
 
         <TextView
@@ -131,27 +144,11 @@
             app:layout_constraintTop_toTopOf="@id/telText"
             app:layout_constraintStart_toEndOf="@id/telText"
             android:layout_marginTop="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="27dp"
             android:textSize="@dimen/text_size_body4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- 기존 버튼 -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonCancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="취소"
-        android:fontFamily="@font/p_medium"
-        android:textColor="@color/gray_600"
-        android:background="@drawable/btn_style"
-        android:backgroundTint="@color/gray_100"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintTop_toBottomOf="@id/contactInfo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintEnd_toStartOf="@id/buttonConfirm" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonConfirm"
@@ -161,13 +158,15 @@
         android:fontFamily="@font/p_medium"
         android:textColor="@color/white"
         android:background="@drawable/btn_style"
+        android:stateListAnimator="@null"
         android:backgroundTint="@color/primary"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="354dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintTop_toBottomOf="@id/contactInfo"
-        app:layout_constraintStart_toEndOf="@id/buttonCancel"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
