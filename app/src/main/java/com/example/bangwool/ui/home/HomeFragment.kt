@@ -102,6 +102,7 @@ class HomeFragment : Fragment() {
 
             homeAddTaskBtn.setOnClickListener {
                 val i = Intent(requireContext(), TimerEditActivity::class.java)
+                i.putExtra("timerTitle", "타이머 추가")
                 startActivity(i)
             }
 

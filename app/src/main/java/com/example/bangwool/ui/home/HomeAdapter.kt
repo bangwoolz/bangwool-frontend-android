@@ -66,6 +66,7 @@ class HomeAdapter(
                     i.putExtra("taskName", item.taskName)
                     i.putExtra("taskTime", item.taskTime)
                     i.putExtra("taskState", item.taskState)
+                    i.putExtra("timerTitle", "타이머 수정")
                     context.startActivity(i)
                 }
                 deleteBtn.setOnClickListener {
