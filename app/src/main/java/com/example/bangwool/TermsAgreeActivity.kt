@@ -1,10 +1,20 @@
 package com.example.bangwool
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityTermsagreeBinding
+import com.example.bangwool.retrofit.MemberSignUpRequest
+import com.example.bangwool.retrofit.MemberSignUpResponse
+import com.example.bangwool.retrofit.RetrofitUtil
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 class TermsAgreeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTermsagreeBinding
@@ -32,18 +42,29 @@ class TermsAgreeActivity : AppCompatActivity() {
                 navigateToAllAgreements()
             }
             checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
-                checkBoxPrivacyPolicy.isChecked = isChecked
-                checkBoxTermsOfUse.isChecked = isChecked
-                updateButtonState()
+                checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
             }
 
             checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, isChecked ->
+                //remove checkbox's checked change listener
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                }
                 checkBoxAllAgreements.isChecked = isChecked && checkBoxTermsOfUse.isChecked
+                //reallocate checkbox's checked change listener
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                    checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
+                }
                 updateButtonState()
             }
 
             checkBoxTermsOfUse.setOnCheckedChangeListener { _, isChecked ->
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                    //remove checkbox's checked change listener
+                }
                 checkBoxAllAgreements.isChecked = isChecked && checkBoxPrivacyPolicy.isChecked
+                checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
+                    checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
+                }
                 updateButtonState()
             }
 
@@ -52,11 +73,54 @@ class TermsAgreeActivity : AppCompatActivity() {
             }
 
             buttonContinue.setOnClickListener {
-                val i = Intent(this@TermsAgreeActivity, LoginActivity::class.java)
-                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(i)
+                requestMemberSignUp()
             }
         }
+    }
+
+    private fun requestMemberSignUp() {
+        val email = intent.getStringExtra("email")
+        val name = intent.getStringExtra("name")
+        val nickname = intent.getStringExtra("nickname")
+        val password = intent.getStringExtra("password")
+        Log.d("qwerty123","email : " + email + " name : " + name + " nickname " + nickname + " password : " + password)
+        val memberSignUpRequest = MemberSignUpRequest(email!!, name!!, nickname!!, password!!)
+
+        val retrofit = RetrofitUtil.getRetrofit()
+        retrofit.MemberSignUp(memberSignUpRequest)
+            .enqueue(object : retrofit2.Callback<MemberSignUpResponse> {
+                override fun onResponse(
+                    call: Call<MemberSignUpResponse>,
+                    response: Response<MemberSignUpResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val id = response.body()!!
+                        Toast.makeText(
+                            this@TermsAgreeActivity,
+                            "id : " + id.toString(),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        val i = Intent(this@TermsAgreeActivity, LoginActivity::class.java)
+                        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(i)
+                    } else {
+                        Toast.makeText(this@TermsAgreeActivity, "회원가입 실패", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MemberSignUpResponse>, t: Throwable) {
+                    Toast.makeText(this@TermsAgreeActivity, "회원가입 실패", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
+    }
+
+    fun checkBoxAllAgreementsOnCheckedChangeListener(isChecked: Boolean) {
+        binding.checkBoxPrivacyPolicy.isChecked = isChecked
+        binding.checkBoxTermsOfUse.isChecked = isChecked
+        updateButtonState()
     }
 
     private fun updateButtonState() {

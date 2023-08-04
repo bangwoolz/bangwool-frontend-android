@@ -82,4 +82,16 @@
         <item name="fontFamily">@font/pretendard_semibold</item>
     </style>
 
+    <!--    태현    -->
+
+    <!--    현희    -->
+
+    <!--    지원    -->
+    <style name="TabLayoutTextAppearance">
+        <item name="android:textSize">@dimen/text_size_body2</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+    </style>
+    <!--    현준    -->
+
+
 </resources>
