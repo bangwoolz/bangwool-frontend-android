@@ -10,8 +10,9 @@
         android:id="@+id/cl_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:paddingVertical="20dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -19,23 +20,23 @@
             android:id="@+id/ic_timer_edit_back"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
             android:src="@drawable/ic_back"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/gray_800" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/p_medium"
             android:text="타이머 수정"
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/gray_800"
+            android:textSize="@dimen/text_size_body3"
+            app:layout_constraintBottom_toBottomOf="@id/ic_timer_edit_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/ic_timer_edit_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,17 +53,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
+            android:fontFamily="@font/p_medium"
             android:text="타이머 이름"
             android:textColor="@color/gray_600"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="@dimen/text_size_body4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_timer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_timer_name">
@@ -83,8 +87,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:fontFamily="@font/p_medium"
                     android:hint="ex) 시험공부"
                     android:inputType="text"
+                    android:paddingStart="4dp"
+                    android:textColor="@color/gray_900"
+                    android:textColorHint="@color/gray_400"
                     android:textSize="@dimen/text_size_body3"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +104,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/hintColor" />
+                app:tint="@color/gray_400" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -106,7 +114,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="44dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_timer_name_input">
@@ -115,7 +123,7 @@
             android:id="@+id/cl_timer_name_inputa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="16dp"
             android:layout_weight="1">
 
             <TextView
@@ -123,10 +131,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
+                android:fontFamily="@font/p_medium"
                 android:text="작업 시간"
                 android:textColor="@color/gray_600"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textSize="@dimen/text_size_body4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,12 +150,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_work_time">
 
                 <TextView
+                    android:id="@+id/tv_work_time_clock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/p_medium"
                     android:text="15:00"
                     android:textColor="@color/gray_800"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/text_size_body3" />
 
                 <View
                     android:layout_width="0dp"
@@ -176,8 +185,7 @@
                 android:layout_marginStart="0dp"
                 android:text="쉬는 시간"
                 android:textColor="@color/gray_600"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textSize="@dimen/text_size_body4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -193,12 +201,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_rest_time">
 
                 <TextView
+                    android:id="@+id/tv_rest_time_clock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/p_medium"
                     android:text="5:00"
                     android:textColor="@color/gray_800"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/text_size_body3" />
 
                 <View
                     android:layout_width="0dp"
@@ -219,7 +228,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_time_table">
 
@@ -228,123 +237,244 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
+            android:fontFamily="@font/p_medium"
             android:text="타이머 색상"
             android:textColor="@color/gray_600"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="@dimen/text_size_body4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_color_first_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal"
-            android:paddingHorizontal="20dp"
+            android:layout_marginTop="36dp"
+            android:paddingHorizontal="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_timer_color">
 
-            <android.widget.Button
+            <FrameLayout
+                android:id="@+id/btn_color_red"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:background="@drawable/timer_color_checked" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/btn_color_red_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_red" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_color_pink"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_check_circle_on"
-                app:tint="@color/timer_color_pink" />
+                app:layout_constraintEnd_toStartOf="@id/btn_color_orange"
+                app:layout_constraintStart_toEndOf="@id/btn_color_red"
+                app:layout_constraintTop_toTopOf="@id/btn_color_red">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/btn_color_pink_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_pink" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_color_orange"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_check_circle_on"
-                app:tint="@color/timer_color_orange" />
+                app:layout_constraintEnd_toStartOf="@id/btn_color_yellow"
+                app:layout_constraintStart_toEndOf="@id/btn_color_pink"
+                app:layout_constraintTop_toTopOf="@id/btn_color_pink">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/btn_color_orange_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_orange" />
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/btn_color_yellow"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_check_circle_on"
-                app:tint="@color/timer_color_yellow" />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btn_color_orange">
 
-        <LinearLayout
-            android:id="@+id/ll_color_secont_table"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingHorizontal="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_color_first_table">
+                <ImageView
+                    android:id="@+id/btn_color_yellow_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_yellow" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_color_purple"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_check_circle_on"
-                app:tint="@color/timer_color_purple" />
+                android:layout_marginTop="38dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_color_red">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/btn_color_purple_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_purple" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_color_blue"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_check_circle_on"
-                app:tint="@color/timer_color_blue" />
+                app:layout_constraintEnd_toStartOf="@id/btn_color_skyblue"
+                app:layout_constraintStart_toEndOf="@id/btn_color_purple"
+                app:layout_constraintTop_toTopOf="@id/btn_color_purple">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/btn_color_blue_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_blue" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_color_skyblue"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_check_circle_on"
-                app:tint="@color/timer_color_skyblue" />
+                app:layout_constraintEnd_toStartOf="@id/btn_color_green"
+                app:layout_constraintStart_toEndOf="@id/btn_color_blue"
+                app:layout_constraintTop_toTopOf="@id/btn_color_blue">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/btn_color_skyblue_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
 
-            <ImageView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_skyblue" />
+
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/btn_color_green"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_check_circle_on"
-                app:tint="@color/timer_color_green" />
-        </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btn_color_skyblue">
 
+                <ImageView
+                    android:id="@+id/btn_color_green_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="1dp"
+                    android:src="@drawable/round_check_24"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_circle_on"
+                    app:tint="@color/timer_color_green" />
+
+            </FrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <android.widget.Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/long_normal_btn"
-        android:text="시작"
+        android:fontFamily="@font/pretendard_semibold"
+        android:stateListAnimator="@null"
+        android:text="저장"
         android:textColor="@color/white"
+        android:textSize="@dimen/text_size_body4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
