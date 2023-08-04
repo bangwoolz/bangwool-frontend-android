@@ -21,7 +21,8 @@
             android:id="@+id/ic_setting"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_setting_adjust_outline" />
+            android:src="@drawable/ic_setting_adjust_outline"
+            app:tint="@color/gray_800" />
 
         <View
             android:layout_width="0dp"
@@ -29,25 +30,28 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="93dp"
+            android:layout_height="24dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:layout_gravity="left|center"
-                android:layout_marginRight="10dp"
                 android:src="@drawable/ic_check_circle_on"
                 app:tint="@color/primary_300" />
-
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right|center"
-                android:fontFamily="@font/p_medium"
+                android:fontFamily="@font/pretendard_regular"
+                android:textAlignment="center"
                 android:text="시험공부"
-                android:textSize="@dimen/text_size_body1" />
+                android:textColor="@color/gray_800"
+                android:textSize="@dimen/text_size_body2" />
         </LinearLayout>
 
         <View
@@ -59,14 +63,15 @@
             android:id="@+id/ic_x_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_x" />
+            android:src="@drawable/ic_x"
+            app:tint="@color/gray_800" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_progressbar_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="62dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,12 +81,12 @@
             android:id="@+id/progressbar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="262dp"
-            android:layout_height="262dp"
+            android:layout_height="265dp"
             android:indeterminate="false"
             android:max="100"
-            android:progressBackgroundTint="@color/gray_100"
+            android:progressBackgroundTint="@color/gray_200"
             android:progressDrawable="@drawable/circle_progressbar"
-            android:progressTint="@color/primary_200" />
+            android:progressTint="@color/primary_300" />
     </LinearLayout>
 
 
@@ -90,25 +95,36 @@
         android:layout_width="match_parent"
         android:layout_height="262dp"
         android:gravity="center"
-        android:text="dsfxsa"
+        android:text="34 : 35"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_header2"
+        android:fontFamily="@font/p_medium"
+        android:textColor="@color/gray_900"
+        android:textSize="@dimen/timer_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ll_progressbar_box" />
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginHorizontal="30dp"
-        android:src="@drawable/ic_tomatoes"
+        android:id="@+id/iv_happy_tomato"
+        android:layout_width="250dp"
+        android:layout_height="250.58dp"
+        android:src="@drawable/happy_tomato"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/ll_progressbar_box" />
-
+    <ImageView
+        android:id="@+id/iv_study_tomato"
+        android:layout_width="250dp"
+        android:layout_height="250.58dp"
+        android:src="@drawable/study_tomato"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/ll_progressbar_box" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -116,21 +132,25 @@
 
         <android.widget.Button
             android:id="@+id/btn_clear"
-            android:layout_width="wrap_content"
+            android:layout_width="148dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="16dp"
             android:background="@drawable/transparent_btn"
             android:text="초기화"
-            android:textColor="@color/primary_200"
+            android:textColor="@color/primary_300"
+            android:textSize="@dimen/text_size_body4"
+            android:fontFamily="@font/pretendard_extrabold"
             android:visibility="gone" />
 
         <android.widget.Button
             android:id="@+id/btn_continue"
-            android:layout_width="wrap_content"
+            android:layout_width="148dp"
             android:layout_height="wrap_content"
             android:background="@drawable/normal_btn"
             android:text="계속"
             android:textColor="@color/white"
+            android:textSize="@dimen/text_size_body4"
+            android:fontFamily="@font/pretendard_extrabold"
             android:visibility="gone" />
 
     </LinearLayout>
@@ -138,7 +158,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -150,14 +170,16 @@
             android:layout_height="wrap_content"
             android:background="@drawable/transparent_btn"
             android:text="정지"
-            android:textColor="@color/primary_200"
+            android:fontFamily="@font/pretendard_extrabold"
+            android:textSize="@dimen/text_size_body4"
+            android:textColor="@color/primary_300"
             android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -169,6 +191,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/normal_btn"
             android:text="시작"
+            android:visibility="visible"
+            android:textSize="@dimen/text_size_body4"
+            android:fontFamily="@font/pretendard_extrabold"
             android:textColor="@color/white" />
     </LinearLayout>
 
