@@ -2,7 +2,6 @@ package com.example.bangwool.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,8 @@ import com.example.bangwool.LoginActivity
 import com.example.bangwool.databinding.FragmentMypageBinding
 
 class MyPageFragment : Fragment() {
-    lateinit var binding : FragmentMypageBinding
+    lateinit var binding: FragmentMypageBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,7 +19,15 @@ class MyPageFragment : Fragment() {
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
+        // 로그아웃 버튼 클릭 이벤트
+        binding.textViewLogout.setOnClickListener {
+            // 로그아웃 버튼을 클릭하면 LoginActivity로 이동하고 현재 액티비티를 종료
+            val intent = Intent(activity, LoginActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
+        }
+
+
         return binding.root
     }
-
 }
