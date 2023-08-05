@@ -7,12 +7,15 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.bangwool.R
 import com.example.bangwool.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
 import com.example.bangwool.retrofit.Ppomodoro
 import com.example.bangwool.retrofit.PpomodoroResponse
 import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.getAccessToken
+import com.example.bangwool.retrofit.getMemberId
 import retrofit2.Call
 import retrofit2.Response
 
@@ -47,11 +50,12 @@ class TimerEditActivity : AppCompatActivity() {
                     }
                 }
             editTextName.setOnKeyListener { view, keyCode, keyEvent ->
-                if(keyEvent.action == KeyEvent.ACTION_DOWN){
-                    if(keyCode == KeyEvent.KEYCODE_ENTER){
+                if (keyEvent.action == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
                         editTextName.clearFocus()
                         clTimerName.requestFocus()
-                        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        val inputMethodManager =
+                            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         inputMethodManager.hideSoftInputFromWindow(editTextName.windowToken, 0)
                     }
                 }
@@ -59,19 +63,31 @@ class TimerEditActivity : AppCompatActivity() {
             }
             llWorkTime.setOnClickListener {
                 val str = tvWorkTimeClock.text.toString()
-                val workTimeDialog = TimeChooseDialog(this@TimerEditActivity, "작업 시간", 480, str.substring(0, str.length-3).toInt())
+                val workTimeDialog = TimeChooseDialog(
+                    this@TimerEditActivity,
+                    "작업 시간",
+                    480,
+                    str.substring(0, str.length - 3).toInt()
+                )
                 workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
             }
             llRestTime.setOnClickListener {
                 val str = tvRestTimeClock.text.toString()
-                val restTimeDialog = TimeChooseDialog(this@TimerEditActivity, "쉬는 시간", 480, str.substring(0, str.length-3).toInt())
+                val restTimeDialog = TimeChooseDialog(
+                    this@TimerEditActivity,
+                    "쉬는 시간",
+                    480,
+                    str.substring(0, str.length - 3).toInt()
+                )
                 restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
             }
             setCheckViewList()
             setCheckViewOnClickListener()
             updateCheckedColor("red")
             btnSave.setOnClickListener {
-                postPpomodoros()
+                val token = getAccessToken(this@TimerEditActivity)
+                val memberId = getMemberId(token)
+                postPpomodoros(memberId)
                 finish()
             }
             icTimerEditBack.setOnClickListener {
@@ -117,17 +133,26 @@ class TimerEditActivity : AppCompatActivity() {
     }
 
 
-    private fun postPpomodoros() {
-        val ppomodoro = Ppomodoro("", "", 1, 1, 1)
-        val retrofit = RetrofitUtil.getRetrofit()
-        retrofit.postPpomodoros(ppomodoro).enqueue(object :retrofit2.Callback<PpomodoroResponse>{
+    private fun postPpomodoros(memberId: Int) {
+        val workTime = binding.tvWorkTimeClock.text.split(":")
+        val workHour = workTime[0].toInt() / 60
+        val workMinute = workTime[0].toInt() % 60
+        val ppomodoro = Ppomodoro(
+            binding.editTextName.toString(),
+            "",
+            workHour,
+            workMinute,
+            binding.tvRestTimeClock.toString().toInt()
+        )
+        val retrofit = RetrofitUtil.getPpomoRetrofit()
+        retrofit.postPpomodoros(memberId, ppomodoro).enqueue(object : retrofit2.Callback<PpomodoroResponse> {
             override fun onResponse(
                 call: Call<PpomodoroResponse>,
                 response: Response<PpomodoroResponse>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val ppomodorosResponse = response.body()
-                    Log.i("GETMEMBERID/SUCCESS", ppomodorosResponse.toString())
+                    Log.i("POSTPPOMODORO/SUCCESS", ppomodorosResponse.toString())
 
                     if (ppomodorosResponse != null) {
                         // 타이머리스트 리사이클러뷰에 연결
@@ -136,7 +161,7 @@ class TimerEditActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<PpomodoroResponse>, t: Throwable) {
-                Log.i("GETMEMBERID/FAILURE", t.message.toString())
+                Log.i("POSTPPOMODORO/FAILURE", t.message.toString())
             }
 
         })

@@ -21,6 +21,7 @@ import com.example.bangwool.retrofit.Ppomodoro
 import com.example.bangwool.retrofit.PpomodoroRequest
 import com.example.bangwool.retrofit.PpomodoroResponse
 import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.getAccessToken
 import com.example.bangwool.retrofit.getMemberId
 import com.google.gson.Gson
 import retrofit2.Call
@@ -48,7 +49,8 @@ class HomeFragment : Fragment() {
         }
          */
 
-        val memberId = getMemberId(requireContext())
+        val token = getAccessToken(requireContext())
+        val memberId = getMemberId(token)
         Log.i("memberId", memberId.toString())
 
 
@@ -171,26 +173,25 @@ class HomeFragment : Fragment() {
     }
 
     private fun getPpomodoros(memberId: Int) {
-        val retrofit = RetrofitUtil.getRetrofit()
-        retrofit.getPpomodoros(memberId).enqueue(object :retrofit2.Callback<PpomodoroRequest>{
+        val retrofit = RetrofitUtil.getPpomoRetrofit()
+        retrofit.getPpomodoros(memberId).enqueue(object :retrofit2.Callback<Ppomodoro>{
             override fun onResponse(
-                call: Call<PpomodoroRequest>,
-                response: Response<PpomodoroRequest>
+                call: Call<Ppomodoro>,
+                response: Response<Ppomodoro>
             ) {
                 if (response.isSuccessful){
-                    val ppomodorosResponse = response.body()
-                    Log.i("GETMEMBERID/SUCCESS", ppomodorosResponse.toString())
+                    val res = response.body()
+                    Log.i("GETPPOMODORO/SUCCESS", res.toString())
 
-                    if (ppomodorosResponse != null) {
-                        val ppomodorosList = ppomodorosResponse.ppomodoros
-                        Log.i("GetPpomodorosList", ppomodorosList.toString())
+                    if (res != null) {
+//                        Log.i("GetPpomodorosList", .toString())
                         // 타이머리스트 리사이클러뷰에 연결
                     }
                 }
             }
 
-            override fun onFailure(call: Call<PpomodoroRequest>, t: Throwable) {
-                Log.i("GETMEMBERID/FAILURE", t.message.toString())
+            override fun onFailure(call: Call<Ppomodoro>, t: Throwable) {
+                Log.i("GETPPOMODORO/FAILURE", t.message.toString())
             }
         })
     }

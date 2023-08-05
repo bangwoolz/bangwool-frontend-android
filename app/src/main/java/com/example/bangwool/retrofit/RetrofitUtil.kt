@@ -18,6 +18,31 @@ object RetrofitUtil {
     private var loginInstance: RetrofitLoginInterface? = null
     private var accessTokenString: String? = null
 
+    private fun getPpomoOkHttpClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+
+        if (BuildConfig.DEBUG) {
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            interceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
+    }
+
+    fun getPpomoRetrofit(): RetrofitPpomoInterface {
+            val retrofit = Retrofit.Builder() //객체를 생성해 줍니다.
+                .baseUrl(BASE_URL) //통신할 서버 주소를 설정합니다.
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(getPpomoOkHttpClient())
+                .build()
+
+        return retrofit.create(RetrofitPpomoInterface::class.java)
+
+}
+
     private fun getLoginOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
 
