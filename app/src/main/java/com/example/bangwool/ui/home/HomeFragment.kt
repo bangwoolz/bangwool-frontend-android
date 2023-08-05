@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
                     bundle.putString("taskData", dataJson)
 
                     // OrderDialog 호출
-                    val dialog = TimerDeleteDialog()
+                    val dialog = TimerDeleteDialog(requireContext())
                     dialog.setOnDeleteItemClickListener(object :TimerDeleteDialog.OnDeleteItemClickListener{
                         override fun onDeleteItemClicked() {
                             //아이템 삭제
