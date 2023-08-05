@@ -21,6 +21,25 @@ data class TokenResponse(
     @SerializedName("token") val token: String
 )
 
+data class Ppomodoro(
+    @SerializedName("name") val name: String,
+    @SerializedName("color") val color: String,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int,
+    @SerializedName("restTime") val restTime: Int
+)
+
+data class PpomodoroRequest(
+    @SerializedName("ppomodoros") val ppomodoros: List<Ppomodoro>
+)
+
+data class PpomodoroResponse(
+    @SerializedName("id") val id: Long
+)
+
+
+
+
 //{
 //    "email": "uLTr2ZSzAxdbgfOU2nsh@lHlSNIDK94kj41TUtrvr9nEuHgZeWW.xi7.Ym.2VwK0clpM0.RRzCJwM1p-RwvfPGD2V9Re8BMkFYsAT8PxGnfBCOhO-TeX75x4kJUYjYyIriYL8mK",
 //    "name": "",

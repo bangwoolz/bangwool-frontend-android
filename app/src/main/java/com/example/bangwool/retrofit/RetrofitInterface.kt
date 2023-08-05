@@ -4,9 +4,19 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface RetrofitInterface {
 
+    @GET("/ppomodoros")
+    fun getPpomodoros(
+        @Query("memberId") memberId: Int
+    ): Call<PpomodoroRequest>
+
+    @POST("/ppomodoros")
+    fun postPpomodoros(
+        @Body request: Ppomodoro
+    ): Call<PpomodoroResponse>
 
 }
 interface RetrofitLoginInterface {

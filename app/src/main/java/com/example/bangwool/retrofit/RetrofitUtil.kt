@@ -18,7 +18,6 @@ object RetrofitUtil {
     private var loginInstance: RetrofitLoginInterface? = null
     private var accessTokenString: String? = null
 
-
     private fun getLoginOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
 

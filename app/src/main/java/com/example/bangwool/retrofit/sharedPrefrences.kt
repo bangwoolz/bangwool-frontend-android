@@ -14,3 +14,8 @@ fun getAccessToken(context: Context): String {
     val spf = context.getSharedPreferences("accessToken_spf", AppCompatActivity.MODE_PRIVATE)
     return spf.getString("accessToken", 1.toString())!!
 }
+
+fun getMemberId(context: Context): Int{
+    val spf = context.getSharedPreferences("member_spf", AppCompatActivity.MODE_PRIVATE)
+    return spf.getInt("memberId", 1)
+}

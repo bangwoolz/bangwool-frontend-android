@@ -10,12 +10,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentHomeBinding
+import com.example.bangwool.retrofit.AuthLoginRequest
+import com.example.bangwool.retrofit.Ppomodoro
+import com.example.bangwool.retrofit.PpomodoroRequest
+import com.example.bangwool.retrofit.PpomodoroResponse
+import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.getMemberId
 import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
@@ -38,8 +48,13 @@ class HomeFragment : Fragment() {
         }
          */
 
+        val memberId = getMemberId(requireContext())
+        Log.i("memberId", memberId.toString())
+
+
         initDummyData()
         init()
+        getPpomodoros(memberId)
         return binding.root
     }
 
@@ -154,4 +169,30 @@ class HomeFragment : Fragment() {
         itemList.add(dummydata)
         itemList.add(dummydata)
     }
+
+    private fun getPpomodoros(memberId: Int) {
+        val retrofit = RetrofitUtil.getRetrofit()
+        retrofit.getPpomodoros(memberId).enqueue(object :retrofit2.Callback<PpomodoroRequest>{
+            override fun onResponse(
+                call: Call<PpomodoroRequest>,
+                response: Response<PpomodoroRequest>
+            ) {
+                if (response.isSuccessful){
+                    val ppomodorosResponse = response.body()
+                    Log.i("GETMEMBERID/SUCCESS", ppomodorosResponse.toString())
+
+                    if (ppomodorosResponse != null) {
+                        val ppomodorosList = ppomodorosResponse.ppomodoros
+                        Log.i("GetPpomodorosList", ppomodorosList.toString())
+                        // 타이머리스트 리사이클러뷰에 연결
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<PpomodoroRequest>, t: Throwable) {
+                Log.i("GETMEMBERID/FAILURE", t.message.toString())
+            }
+        })
+    }
+
 }

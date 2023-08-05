@@ -3,12 +3,18 @@ package com.example.bangwool.ui.home
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.bangwool.R
 import com.example.bangwool.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
+import com.example.bangwool.retrofit.Ppomodoro
+import com.example.bangwool.retrofit.PpomodoroResponse
+import com.example.bangwool.retrofit.RetrofitUtil
+import retrofit2.Call
+import retrofit2.Response
 
 class TimerEditActivity : AppCompatActivity() {
     lateinit var binding: ActivityTimerEditBinding
@@ -65,6 +71,7 @@ class TimerEditActivity : AppCompatActivity() {
             setCheckViewOnClickListener()
             updateCheckedColor("red")
             btnSave.setOnClickListener {
+                postPpomodoros()
                 finish()
             }
             icTimerEditBack.setOnClickListener {
@@ -107,5 +114,31 @@ class TimerEditActivity : AppCompatActivity() {
         btnViewList.add(binding.btnColorBlue)
         btnViewList.add(binding.btnColorSkyblue)
         btnViewList.add(binding.btnColorGreen)
+    }
+
+
+    private fun postPpomodoros() {
+        val ppomodoro = Ppomodoro("", "", 1, 1, 1)
+        val retrofit = RetrofitUtil.getRetrofit()
+        retrofit.postPpomodoros(ppomodoro).enqueue(object :retrofit2.Callback<PpomodoroResponse>{
+            override fun onResponse(
+                call: Call<PpomodoroResponse>,
+                response: Response<PpomodoroResponse>
+            ) {
+                if (response.isSuccessful){
+                    val ppomodorosResponse = response.body()
+                    Log.i("GETMEMBERID/SUCCESS", ppomodorosResponse.toString())
+
+                    if (ppomodorosResponse != null) {
+                        // 타이머리스트 리사이클러뷰에 연결
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<PpomodoroResponse>, t: Throwable) {
+                Log.i("GETMEMBERID/FAILURE", t.message.toString())
+            }
+
+        })
     }
 }
