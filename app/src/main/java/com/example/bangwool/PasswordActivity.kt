@@ -94,6 +94,8 @@ class PasswordActivity : AppCompatActivity() {
 
     private fun ActivityPasswordBinding.requestAuthLogin() {
         val authLoginRequest = AuthLoginRequest(userId!!, passwordEt.text.toString())
+        loginIcErrorEmail.visibility = View.GONE
+        pwTextInputLayout.isErrorEnabled = false
         RetrofitUtil.getLoginRetrofit().AuthLogin(authLoginRequest).enqueue(object :
             Callback<TokenResponse> {
             override fun onResponse(
@@ -112,17 +114,20 @@ class PasswordActivity : AppCompatActivity() {
                     val i = Intent(this@PasswordActivity, MainActivity::class.java)
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(i)
+                    Toast.makeText(this@PasswordActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                     finish()
                     if (LoginActivity.activity != null)
                         LoginActivity.activity!!.finish()
                 } else {
                     loginIcErrorEmail.visibility = View.VISIBLE
+                    pwTextInputLayout.isErrorEnabled = true
                     pwTextInputLayout.error = "    비밀번호가 달라요. 다시 입력해주세요"
                 }
             }
 
             override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
                 loginIcErrorEmail.visibility = View.VISIBLE
+                pwTextInputLayout.isErrorEnabled = true
                 pwTextInputLayout.error = "    비밀번호가 달라요. 다시 입력해주세요"
             }
 
