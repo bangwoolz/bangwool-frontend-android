@@ -13,6 +13,7 @@ import com.example.bangwool.retrofit.AuthLoginRequest
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.TokenResponse
 import com.example.bangwool.retrofit.saveAccessToken
+import com.example.bangwool.retrofit.saveMemberId
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -104,6 +105,9 @@ class PasswordActivity : AppCompatActivity() {
                     val token = response.body()!!.token
                     saveAccessToken(this@PasswordActivity, token)
                     RetrofitUtil.setAccessToken(token)
+
+                    //val memberId = response.body()!!.memberId
+                    //saveMemberId(this@PasswordActivity, memberId)
 
                     pwTextInputLayout.error = null
                     pwTextInputLayout.isErrorEnabled = false

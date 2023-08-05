@@ -8,6 +8,17 @@ import retrofit2.http.Query
 
 interface RetrofitInterface {
 
+    @GET("/ppomodoros")
+    fun getPpomodoros(
+        @Query("memberId") memberId: Int
+    ): Call<Ppomodoro>
+
+    @POST("/ppomodoros")
+    fun postPpomodoros(
+        @Query("memberId") memberId: Int,
+        @Body request: Ppomodoro
+    ): Call<PpomodoroResponse>
+
 }
 interface RetrofitLoginInterface {
 
@@ -21,22 +32,13 @@ interface RetrofitLoginInterface {
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
 
-}
-
-interface RetrofitPpomoInterface {
-
-    @GET("/ppomodoros")
-    fun getPpomodoros(
-        @Query("memberId") memberId: Int
-    ): Call<Ppomodoro>
-
-    @POST("/ppomodoros")
-    fun postPpomodoros(
-        @Query("memberId") memberId: Int,
-        @Body request: Ppomodoro
-    ): Call<PpomodoroResponse>
 
 }
+
+//interface RetrofitPpomoInterface {
+//
+//
+//}
 
 
 

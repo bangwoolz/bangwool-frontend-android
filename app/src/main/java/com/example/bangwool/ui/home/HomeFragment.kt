@@ -1,5 +1,6 @@
 package com.example.bangwool.ui.home
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -42,17 +43,11 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.dDay.setOnClickListener {
         }
-        /*
-        binding.homeRecyclerView.setOnClickListener {
-            val intent = Intent(activity, TimerActivity::class.java)
-            startActivity(intent)
-        }
-         */
 
         val token = getAccessToken(requireContext())
-        val memberId = getMemberId(token)
+        //val memberId = getMemberId(token)
+        val memberId = getMemberId(requireContext())
         Log.i("memberId", memberId.toString())
-
 
         initDummyData()
         init()
@@ -60,6 +55,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     fun init() {
         binding.apply {
 //            homeRecyclerView.layoutManager =
@@ -173,8 +169,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun getPpomodoros(memberId: Int) {
-        val retrofit = RetrofitUtil.getPpomoRetrofit()
-        retrofit.getPpomodoros(memberId).enqueue(object :retrofit2.Callback<Ppomodoro>{
+        val retrofit = RetrofitUtil.getRetrofit()
+        retrofit.getPpomodoros(memberId).enqueue(object : Callback<Ppomodoro>{
             override fun onResponse(
                 call: Call<Ppomodoro>,
                 response: Response<Ppomodoro>

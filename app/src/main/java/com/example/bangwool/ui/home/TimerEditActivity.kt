@@ -86,7 +86,8 @@ class TimerEditActivity : AppCompatActivity() {
             updateCheckedColor("red")
             btnSave.setOnClickListener {
                 val token = getAccessToken(this@TimerEditActivity)
-                val memberId = getMemberId(token)
+//                val memberId = getMemberId(token)
+                val memberId = getMemberId(this@TimerEditActivity)
                 postPpomodoros(memberId)
                 finish()
             }
@@ -144,7 +145,7 @@ class TimerEditActivity : AppCompatActivity() {
             workMinute,
             binding.tvRestTimeClock.toString().toInt()
         )
-        val retrofit = RetrofitUtil.getPpomoRetrofit()
+        val retrofit = RetrofitUtil.getRetrofit()
         retrofit.postPpomodoros(memberId, ppomodoro).enqueue(object : retrofit2.Callback<PpomodoroResponse> {
             override fun onResponse(
                 call: Call<PpomodoroResponse>,
