@@ -344,19 +344,19 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateName(name: String): Boolean {
         val namePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,10}\$")
         if (name.isEmpty()) {
-            binding.textInputLayoutName.error = "          이름을 입력하세요."
+            binding.textInputLayoutName.error = "        이름을 입력하세요."
             binding.textInputLayoutName.isErrorEnabled = true
             binding.icErrorName.visibility = View.VISIBLE
             isNameValid = false
             return false
         } else if (!namePattern.matcher(name).matches()) {
-            binding.textInputLayoutName.error = "          이름의 형식을 확인해 주세요"
+            binding.textInputLayoutName.error = "        이름의 형식을 확인해 주세요"
             binding.textInputLayoutName.isErrorEnabled = true
             binding.icErrorName.visibility = View.VISIBLE
             isNameValid = false
             return false
         } else if (name.length > 10) {
-            binding.textInputLayoutName.error = "          이름은 10글자 이하여야해요."
+            binding.textInputLayoutName.error = "        이름은 10글자 이하여야해요."
             binding.textInputLayoutName.isErrorEnabled = true
             binding.icErrorName.visibility = View.VISIBLE
             isNameValid = false
@@ -373,19 +373,19 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateNickname(nickname: String): Boolean {
         val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
         if (nickname.isEmpty()) {
-            binding.textInputLayoutNickname.error = "          닉네임을 입력하세요."
+            binding.textInputLayoutNickname.error = "        닉네임을 입력하세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
             isNickNameValid = false
             return false
         } else if (!nicknamePattern.matcher(nickname).matches()) {
-            binding.textInputLayoutNickname.error = "          닉네임 형식을 확인해주세요."
+            binding.textInputLayoutNickname.error = "        닉네임 형식을 확인해주세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
             isNickNameValid = false
             return false
         } else if (nickname.length > 5) {
-            binding.textInputLayoutNickname.error = "          닉네임은 5글자 이하여야해요."
+            binding.textInputLayoutNickname.error = "        닉네임은 5글자 이하여야해요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
             isNickNameValid = false
@@ -404,13 +404,13 @@ class RegisterActivity : AppCompatActivity() {
             Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,12}")
 
         if (password.isEmpty()) {
-            binding.textInputLayoutPassword.error = "          패스워드를 입력하세요."
+            binding.textInputLayoutPassword.error = "        패스워드를 입력하세요."
             binding.textInputLayoutPassword.isErrorEnabled = true
             binding.icErrorPassword.visibility = View.VISIBLE
             isPasswordValid = false
             return false
         } else if (!passwordPattern.matcher(password).matches()) {
-            binding.textInputLayoutPassword.error = "          패스워드 조건을 확인해주세요(8-12글자 사이)"
+            binding.textInputLayoutPassword.error = "        패스워드 조건을 확인해주세요(8-12글자 사이)"
             binding.textInputLayoutPassword.isErrorEnabled = true
             binding.icErrorPassword.visibility = View.VISIBLE
             isPasswordValid = false
@@ -426,7 +426,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateConfirmPassword(password: String, confirmPassword: String): Boolean {
         if (confirmPassword != password) {
-            binding.textInputLayoutConfirmPassword.error = "          패스워드가 달라요"
+            binding.textInputLayoutConfirmPassword.error = "        패스워드가 달라요"
             binding.textInputLayoutConfirmPassword.isErrorEnabled = true
             binding.icErrorConfirmPassword.visibility = View.VISIBLE
             isConfirmPasswordValid = false
