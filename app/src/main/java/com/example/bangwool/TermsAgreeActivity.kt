@@ -86,7 +86,7 @@ class TermsAgreeActivity : AppCompatActivity() {
         Log.d("qwerty123","email : " + email + " name : " + name + " nickname " + nickname + " password : " + password)
         val memberSignUpRequest = MemberSignUpRequest(email!!, name!!, nickname!!, password!!)
 
-        val retrofit = RetrofitUtil.getRetrofit()
+        val retrofit = RetrofitUtil.getLoginRetrofit()
         retrofit.MemberSignUp(memberSignUpRequest)
             .enqueue(object : retrofit2.Callback<MemberSignUpResponse> {
                 override fun onResponse(
