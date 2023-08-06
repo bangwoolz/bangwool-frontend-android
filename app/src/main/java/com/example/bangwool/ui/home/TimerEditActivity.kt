@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import com.example.bangwool.R
 import com.example.bangwool.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
-import com.example.bangwool.retrofit.Ppomodoros
+import com.example.bangwool.retrofit.Ppomodoro
 import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import retrofit2.Call
@@ -24,9 +24,15 @@ class TimerEditActivity : AppCompatActivity() {
     var checkViewList = arrayListOf<View>()
     var btnViewList = arrayListOf<View>()
     var selectedColor = "red"
+
+    var ppomoListForId: ArrayList<HomeItem> = arrayListOf()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerEditBinding.inflate(layoutInflater)
+
+
         initLayout()
         setContentView(binding.root)
     }
@@ -85,8 +91,11 @@ class TimerEditActivity : AppCompatActivity() {
             setCheckViewOnClickListener()
             updateCheckedColor("red")
             btnSave.setOnClickListener {
-                postPpomo()
-                finish()
+                if (tvTimerEditTitle.text.toString().equals("타이머 추가")){
+                    postPpomo()
+                } else if (tvTimerEditTitle.text.toString().equals("타이머 수정")){
+                    putPpomo()
+                }
             }
             icTimerEditBack.setOnClickListener {
                 finish()
@@ -139,7 +148,7 @@ class TimerEditActivity : AppCompatActivity() {
         val workMin = workTime[0].toInt() % 60
         val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].toInt()
 
-        val Ppomo = Ppomodoros(name, color, workHour, workMin, restTime)
+        val Ppomo = Ppomodoro(name, color, workHour, workMin, restTime)
 
         RetrofitUtil.getRetrofit().PostPpomodoro(Ppomo).enqueue(object :
             Callback<PpomodorosResponse> {
@@ -148,8 +157,11 @@ class TimerEditActivity : AppCompatActivity() {
                 response: Response<PpomodorosResponse>
             ) {
                 if (response.isSuccessful) {
-                    Log.i("POSTPpomo/Success", "success")
-                    //뽀모도로 가져와서 리싸이클러뷰에 연동하기
+                    Log.i("POSTPpomo/Success", response.body()!!.toString())
+                    val ppomoId = response.body()!!.toString().toInt()
+                    var PpomoForId = HomeItem(name, color, workHour, workMin, restTime, ppomoId)
+                    ppomoListForId.addAll(listOf(PpomoForId))
+                    finish()
                 }
             }
 
@@ -160,4 +172,36 @@ class TimerEditActivity : AppCompatActivity() {
         })
 
     }
+
+    private fun putPpomo() {
+        // 수정된 값 반영 안되면 다시해
+        val name = binding.editTextName.text.toString()
+        val color = selectedColor
+        val workTime = binding.tvWorkTimeClock.text.toString().split(":")
+        val workHour = workTime[0].toInt() / 60
+        val workMin = workTime[0].toInt() % 60
+        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].toInt()
+
+        val Ppomo = Ppomodoro(name, color, workHour, workMin, restTime)
+
+        RetrofitUtil.getRetrofit().PutPpomodoro(0, Ppomo).enqueue(object :
+            Callback<PpomodorosResponse> {
+            override fun onResponse(
+                call: Call<PpomodorosResponse>,
+                response: Response<PpomodorosResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.i("PUTPpomo/Success", response.body()!!.toString())
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<PpomodorosResponse>, t: Throwable) {
+                Log.i("PUTPpomo/Failure", "fail")
+
+            }
+        })
+
+    }
+
 }

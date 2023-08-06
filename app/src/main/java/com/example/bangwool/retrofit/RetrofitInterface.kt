@@ -1,30 +1,36 @@
 package com.example.bangwool.retrofit
 
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Query
+import retrofit2.http.Path
 
 interface RetrofitInterface {
 
     @GET("/ppomodoros")
     fun GetPpomodoro(): Call<Ppomodoros>
+
     @POST("/ppomodoros")
     fun PostPpomodoro(
-        @Body requestBody: Ppomodoros
+        @Body requestBody: Ppomodoro
     ): Call<PpomodorosResponse>
+
     @PUT("/ppomodoros/{ppomodoroId}")
     fun PutPpomodoro(
-        @Body requestBody: Ppomodoros
+        @Path("ppomodoroId") ppomodoroId: Int,
+        @Body requestBody: Ppomodoro
     ): Call<PpomodorosResponse>
+
     @DELETE("/ppomodoros/{ppomodoroId}")
-    fun DeletePpomodoro(): Call<Void>
+    fun DeletePpomodoro(
+        @Path("ppomodoroId") ppomodoroId: Int
+    ): Call<Void>
 
 }
+
 interface RetrofitLoginInterface {
 
     @POST("/members")
