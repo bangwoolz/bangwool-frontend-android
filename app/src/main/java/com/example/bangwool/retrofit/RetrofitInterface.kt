@@ -2,14 +2,24 @@ package com.example.bangwool.retrofit
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RetrofitInterface {
+
+
+}
+interface RetrofitLoginInterface {
 
     @POST("/members")
     fun MemberSignUp(
         @Body requestbody: MemberSignUpRequest
     ): Call<MemberSignUpResponse>
+
+    @POST("/login")
+    fun AuthLogin(
+        @Body requestbody: AuthLoginRequest
+    ): Call<TokenResponse>
 
 }
 

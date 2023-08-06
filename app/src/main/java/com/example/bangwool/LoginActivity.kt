@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
                     Handler(Looper.getMainLooper()).postDelayed({
                         val intent =
                             Intent(this@LoginActivity, PasswordActivity::class.java)
-                        val id = loginIdEt.text
+                        val id = loginIdEt.text.toString()
                         intent.putExtra("loginId", id)
                         startActivity(intent)
                         loginCl.requestFocus()
