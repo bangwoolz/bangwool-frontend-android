@@ -1,5 +1,6 @@
 package com.example.bangwool.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -33,7 +34,6 @@ class HomeFragment : Fragment() {
 
     val updatePpomodoro =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-
             getPpomo()
         }
 
@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     fun init() {
         binding.apply {
 //            homeRecyclerView.layoutManager =
@@ -71,7 +72,7 @@ class HomeFragment : Fragment() {
             val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
             itemTouchHelper.attachToRecyclerView(homeRecyclerView)
 
-            homeAdapter = HomeAdapter(this@HomeFragment, requireContext(), ppomoList)
+            homeAdapter = HomeAdapter(itemTouchHelper, this@HomeFragment, requireContext(), ppomoList)
 
             homeRecyclerView.apply {
                 layoutManager =
@@ -118,6 +119,7 @@ class HomeFragment : Fragment() {
                 override fun onEditItemClick(homeItem: PpomodoroId) {
 //                    val ppomoId = homeAdapter.findId(homeItem)
 //                    putPpomo(ppomoId)
+
                 }
 
             })
@@ -201,8 +203,6 @@ class HomeFragment : Fragment() {
                     ppomoList.addAll(data)
                     homeAdapter.notifyDataSetChanged()
                     //뽀모도로 가져와서 리싸이클러뷰에 연동하기
-
-
                 }
             }
 
