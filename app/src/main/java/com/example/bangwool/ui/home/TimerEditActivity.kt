@@ -25,8 +25,6 @@ class TimerEditActivity : AppCompatActivity() {
     var btnViewList = arrayListOf<View>()
     var selectedColor = "red"
 
-    var ppomoListForId: ArrayList<HomeItem> = arrayListOf()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,58 +41,79 @@ class TimerEditActivity : AppCompatActivity() {
             val timerTitle = intent.getStringExtra("timerTitle")
             binding.tvTimerEditTitle.setText(timerTitle)
 
-            textInputLayoutName.hint = ""
-            editTextName.hint = "ex) 시험공부"
-            textInputLayoutName.onFocusChangeListener =
-                View.OnFocusChangeListener { _, hasFocus ->
-                    if (!hasFocus && editTextName.text.isNullOrEmpty()) {
-                        editTextName.setTextColor(getColor(R.color.gray_400))
-                        editTextName.hint = "ex) 시험공부"
-                    } else {
-                        editTextName.setTextColor(getColor(R.color.gray_900))
-                        editTextName.hint = ""
-                    }
+            if (timerTitle.equals("타이머 수정")) {
+                val color = intent.getStringExtra("taskColor")
+                val name = intent.getStringExtra("taskName")
+                val time = intent.getStringExtra("taskTime")
+
+                Log.i("color", color!!)
+
+                editTextName.setText(name)
+                tvWorkTimeClock.setText(time)
+                if (color != null) {
+//                    updateCheckedColor(color)
                 }
-            editTextName.setOnKeyListener { view, keyCode, keyEvent ->
-                if (keyEvent.action == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                        editTextName.clearFocus()
-                        clTimerName.requestFocus()
-                        val inputMethodManager =
-                            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        inputMethodManager.hideSoftInputFromWindow(editTextName.windowToken, 0)
+
+            } else if (timerTitle.equals("타이머 추가")) {
+                // 새로 추가 시 코드
+                updateCheckedColor("red")
+
+                setCheckViewList()
+                setCheckViewOnClickListener()
+            }
+
+                textInputLayoutName.hint = ""
+                editTextName.hint = "ex) 시험공부"
+                textInputLayoutName.onFocusChangeListener =
+                    View.OnFocusChangeListener { _, hasFocus ->
+                        if (!hasFocus && editTextName.text.isNullOrEmpty()) {
+                            editTextName.setTextColor(getColor(R.color.gray_400))
+                            editTextName.hint = "ex) 시험공부"
+                        } else {
+                            editTextName.setTextColor(getColor(R.color.gray_900))
+                            editTextName.hint = ""
+                        }
                     }
+                editTextName.setOnKeyListener { view, keyCode, keyEvent ->
+                    if (keyEvent.action == KeyEvent.ACTION_DOWN) {
+                        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                            editTextName.clearFocus()
+                            clTimerName.requestFocus()
+                            val inputMethodManager =
+                                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            inputMethodManager.hideSoftInputFromWindow(editTextName.windowToken, 0)
+                        }
+                    }
+                    return@setOnKeyListener false
                 }
-                return@setOnKeyListener false
-            }
-            llWorkTime.setOnClickListener {
-                val str = tvWorkTimeClock.text.toString()
-                val workTimeDialog = TimeChooseDialog(
-                    this@TimerEditActivity,
-                    "작업 시간",
-                    480,
-                    str.substring(0, str.length - 3).toInt()
-                )
-                workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
-            }
-            llRestTime.setOnClickListener {
-                val str = tvRestTimeClock.text.toString()
-                val restTimeDialog = TimeChooseDialog(
-                    this@TimerEditActivity,
-                    "쉬는 시간",
-                    480,
-                    str.substring(0, str.length - 3).toInt()
-                )
-                restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
-            }
-            setCheckViewList()
-            setCheckViewOnClickListener()
-            updateCheckedColor("red")
+                llWorkTime.setOnClickListener {
+                    val str = tvWorkTimeClock.text.toString()
+                    val workTimeDialog = TimeChooseDialog(
+                        this@TimerEditActivity,
+                        "작업 시간",
+                        480,
+                        str.substring(0, str.length - 3).toInt()
+                    )
+                    workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
+                }
+                llRestTime.setOnClickListener {
+                    val str = tvRestTimeClock.text.toString()
+                    val restTimeDialog = TimeChooseDialog(
+                        this@TimerEditActivity,
+                        "쉬는 시간",
+                        480,
+                        str.substring(0, str.length - 3).toInt()
+                    )
+                    restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
+                }
+
             btnSave.setOnClickListener {
-                if (tvTimerEditTitle.text.toString().equals("타이머 추가")){
+                if (tvTimerEditTitle.text.toString().equals("타이머 추가")) {
                     postPpomo()
-                } else if (tvTimerEditTitle.text.toString().equals("타이머 수정")){
+                } else if (tvTimerEditTitle.text.toString().equals("타이머 수정")) {
                     putPpomo()
+                } else {
+                    Log.d("error", "btnSave")
                 }
             }
             icTimerEditBack.setOnClickListener {
@@ -158,9 +177,7 @@ class TimerEditActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     Log.i("POSTPpomo/Success", response.body()!!.toString())
-                    val ppomoId = response.body()!!.toString().toInt()
-                    var PpomoForId = HomeItem(name, color, workHour, workMin, restTime, ppomoId)
-                    ppomoListForId.addAll(listOf(PpomoForId))
+//                    val ppomoId = response.body()!!.toString().toInt()
                     finish()
                 }
             }
@@ -174,7 +191,7 @@ class TimerEditActivity : AppCompatActivity() {
     }
 
     private fun putPpomo() {
-        // 수정된 값 반영 안되면 다시해
+        // 수정된 값 반영 안되면 다시
         val name = binding.editTextName.text.toString()
         val color = selectedColor
         val workTime = binding.tvWorkTimeClock.text.toString().split(":")
