@@ -22,6 +22,14 @@ data class TokenResponse(
     @SerializedName("token") val token: String
 )
 
+data class PpomodoroId(
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("color") val color: String,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int,
+    @SerializedName("restTime") val restTime: Int
+)
 data class Ppomodoro(
     @SerializedName("name") val name: String,
     @SerializedName("color") val color: String,
@@ -31,7 +39,7 @@ data class Ppomodoro(
 )
 
 data class Ppomodoros(
-    @SerializedName("ppomodoros") val ppomodoros: List<Ppomodoro>
+    @SerializedName("ppomodoros") val ppomodoros: List<PpomodoroId>
 )
 
 

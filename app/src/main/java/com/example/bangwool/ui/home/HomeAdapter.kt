@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ItemHomeBinding
 import com.example.bangwool.retrofit.Ppomodoro
+import com.example.bangwool.retrofit.PpomodoroId
 
 class HomeAdapter(
     private val context: Context,
-    private var itemList: ArrayList<Ppomodoro>
+    private var itemList: ArrayList<PpomodoroId>
 ) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -30,27 +31,23 @@ class HomeAdapter(
 
 
     interface OnItemClickListener {
-        fun onDeleteItemClick(homeItem: Ppomodoro)
+        fun onDeleteItemClick(homeItem: PpomodoroId)
     }
 
     fun setOnClickListener(onItemClickListener: OnItemClickListener) {
         itemClickListener = onItemClickListener
     }
 
-    // 아이템 삭제 메소드
-    fun findPositionOfItem(item: Ppomodoro): Int {
-        val position = itemList.indexOf(item)
-        return position
-//        if (position != -1) {
-//            itemList.removeAt(position)
-//            notifyItemRemoved(position)
-//        }
+    fun findId(item: PpomodoroId): Int {
+        // 뽀모도로 아이디 찾기
+        val Id = item.id
+        return Id
     }
 
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val context: Context = itemView.context
-        fun bind(item: Ppomodoro) {
+        fun bind(item: PpomodoroId) {
             val workTime = item.workHour * 60 + item.workMin
             val workTimeText = workTime.toString() + " : 00"
 
@@ -70,7 +67,7 @@ class HomeAdapter(
                     val i = Intent(context, TimerEditActivity::class.java)
                     i.putExtra("taskColor", item.color)
                     i.putExtra("taskName", item.name)
-                    i.putExtra("taskTime", workTime)
+                    i.putExtra("taskTime", workTimeText)
 //                    i.putExtra("taskState", item.taskState)
                     i.putExtra("timerTitle", "타이머 수정")
                     context.startActivity(i)

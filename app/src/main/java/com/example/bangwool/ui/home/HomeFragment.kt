@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.databinding.FragmentHomeBinding
 import com.example.bangwool.retrofit.Ppomodoro
+import com.example.bangwool.retrofit.PpomodoroId
 import com.example.bangwool.retrofit.Ppomodoros
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.google.gson.Gson
@@ -24,8 +25,7 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     //    var itemList: ArrayList<HomeItem> = arrayListOf()
-    var ppomoList: ArrayList<Ppomodoro> = arrayListOf()
-    var ppomoListForId: ArrayList<HomeItem> = arrayListOf()
+    var ppomoList: ArrayList<PpomodoroId> = arrayListOf()
     lateinit var homeAdapter: HomeAdapter
 
     val updatePpomodoro =
@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
 
 
             homeAdapter.setOnClickListener(object : HomeAdapter.OnItemClickListener {
-                override fun onDeleteItemClick(homeItem: Ppomodoro) {
+                override fun onDeleteItemClick(homeItem: PpomodoroId) {
 //                    Log.d("CLICK!", "deleteBtn")
 
                     val bundle = Bundle()
@@ -109,8 +109,8 @@ class HomeFragment : Fragment() {
                     dialog.arguments = bundle
                     dialog.show(parentFragmentManager, "TimerDeleteDialog")
 
-
-                    deletePpomo(1) // 수정해
+                    val ppomoId = homeAdapter.findId(homeItem)
+                    deletePpomo(ppomoId) // 수정해
                 }
 
             })
