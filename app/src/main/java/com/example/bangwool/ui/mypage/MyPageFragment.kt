@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.bangwool.AboutDialogUtils
 import com.example.bangwool.LoginActivity
+import com.example.bangwool.WithdrawDialogUtils
 import com.example.bangwool.databinding.FragmentMypageBinding
 
 class MyPageFragment : Fragment() {
@@ -30,6 +31,10 @@ class MyPageFragment : Fragment() {
 
         binding.textViewAbout.setOnClickListener {
             AboutDialogUtils.showAboutDialog(requireContext())
+        }
+
+        binding.withdrawMenu.setOnClickListener {
+            WithdrawDialogUtils.showAboutDialog(requireContext())
         }
 
         return binding.root
