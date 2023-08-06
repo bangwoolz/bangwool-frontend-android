@@ -3,6 +3,8 @@ package com.example.bangwool.ui.home
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangwool.LoginActivity
@@ -23,13 +25,15 @@ import kotlin.concurrent.timer
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
     var workHour = 0
-    var workMin = 5
+    var workMin = 0
+    var testSec = 10
     var restTime = 3
     var color = "purple"
-    private var time = 100 * 60 * workMin + 100 * 60 * 60 * workHour
+    private var time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
     private var recentTime = time
     private var timerTask : Timer? = null
     lateinit var ppomodoroId:String
+    var isWorking = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
@@ -59,10 +63,12 @@ class TimerActivity : AppCompatActivity() {
             startTimer()    //타이머 작동
         }
         binding.btnClear.setOnClickListener{
-            binding.btnClear.visibility = View.INVISIBLE
-            binding.btnContinue.visibility = View.INVISIBLE
-            binding.btnStart.visibility = View.VISIBLE
-            clearTime()
+            clearBtns()
+            if(isWorking){
+                clearToWorkTime()
+            } else {
+                clearToRestTime()
+            }
         }
         binding.icXBtn.setOnClickListener{
             finish()
@@ -103,10 +109,32 @@ class TimerActivity : AppCompatActivity() {
 //            })
         setContentView(binding.root)
     }
+
+    val timerHandler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            if (msg.what == 0) {
+                clearBtns()
+                binding.ivHappyTomato.visibility=View.VISIBLE
+                binding.ivStudyTomato.visibility=View.GONE
+            }
+        }
+    }
+
     //타이머 작동
     private fun startTimer() {
         timerTask = timer(period = 10) {
             if(time<=0){
+                if(isWorking){
+                    clearToRestTime()
+                    timerHandler.sendEmptyMessage(0)
+//                    clearBtns() 위줄 코드가 대신 실행
+                    isWorking = false
+                } else {
+                    clearToWorkTime()
+//                    clearBtns() 위줄 코드가 대신 실행
+                    timerHandler.sendEmptyMessage(0)
+                    isWorking = true
+                }
                 cancel()
             }
             time--
@@ -131,6 +159,11 @@ class TimerActivity : AppCompatActivity() {
             }
         }
     }
+    private fun clearBtns() {
+        binding.btnClear.visibility = View.INVISIBLE
+        binding.btnContinue.visibility = View.INVISIBLE
+        binding.btnStart.visibility = View.VISIBLE
+    }
     private fun stopTimer() {
         timerTask?.cancel()
     }
@@ -148,7 +181,21 @@ class TimerActivity : AppCompatActivity() {
         binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
     }
     private fun clearTime() {
-        time = 100 * 60 * workMin + 100 * 60 * 60 * workHour
+        time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
+        showTimeOnTimer()
+        binding.progressbar.max = time
+        binding.progressbar.progress=time
+    }
+
+    private fun clearToWorkTime() {
+        time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
+        showTimeOnTimer()
+        binding.progressbar.max = time
+        binding.progressbar.progress=time
+    }
+
+    private fun clearToRestTime() {
+        time = 100 * 60 * 0 + 100 * 5
         showTimeOnTimer()
         binding.progressbar.max = time
         binding.progressbar.progress=time
