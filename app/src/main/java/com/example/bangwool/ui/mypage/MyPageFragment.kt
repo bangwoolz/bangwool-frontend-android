@@ -14,6 +14,7 @@ import com.example.bangwool.databinding.FragmentMypageBinding
 class MyPageFragment : Fragment() {
     lateinit var binding: FragmentMypageBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
