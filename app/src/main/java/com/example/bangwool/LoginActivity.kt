@@ -14,8 +14,15 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityLoginBinding
+import com.example.bangwool.retrofit.ExistResponse
+import com.example.bangwool.retrofit.RetrofitInterface
+import com.example.bangwool.retrofit.RetrofitUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
@@ -79,39 +86,68 @@ class LoginActivity : AppCompatActivity() {
             loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
             loginStartBtn.setOnClickListener {
-                //error Icon 삭제
-                idTextInputLayout.setErrorIconDrawable(null)
-                // ProgressBar 보이도록 설정
-                loginProgressBar.visibility = View.VISIBLE
-
-                // 일정 시간(300ms) 후에 체크 이미지로 변경
-                Handler(Looper.getMainLooper()).postDelayed({
-                    loginProgressBar.visibility = View.GONE
-                    loginLoadingDone.visibility = View.VISIBLE
-                    //로딩 완료 메세지
-                    idTextInputLayout.error = "잠시후 로그인 창으로 이동합니다"
-                    //에러메세지 색상 변경
-                    idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
-                    idTextInputLayout.boxStrokeErrorColor =
-                        getColorStateList(R.color.androidDefault)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        val intent =
-                            Intent(this@LoginActivity, PasswordActivity::class.java)
-                        val id = loginIdEt.text.toString()
-                        intent.putExtra("loginId", id)
-                        startActivity(intent)
-                        loginCl.requestFocus()
-                        idTextInputLayout.error = null
-                        idTextInputLayout.isErrorEnabled = false
-                        loginLoadingDone.visibility = View.GONE
-                    }, 1000)
-                }, 2000)
+                checkEmail()
             }
 
             loginRegisterBtn.setOnClickListener {
                 val i = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(i)
             }
+        }
+    }
+
+    private fun checkEmail() {
+        binding.apply {
+            //error Icon 삭제
+            idTextInputLayout.setErrorIconDrawable(null)
+            // ProgressBar 보이도록 설정
+            loginProgressBar.visibility = View.VISIBLE
+
+            RetrofitUtil.getLoginRetrofit().ExistEmail(loginIdEt.text.toString()).enqueue(object : Callback<ExistResponse> {
+                override fun onResponse(
+                    call: Call<ExistResponse>,
+                    response: Response<ExistResponse>
+                ) {
+                    if(response.isSuccessful){
+                        if(response.body()!!.exist){
+                            // 일정 시간(300ms) 후에 체크 이미지로 변경
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                loginProgressBar.visibility = View.GONE
+                                loginLoadingDone.visibility = View.VISIBLE
+                                //로딩 완료 메세지
+                                idTextInputLayout.error = "잠시후 로그인 창으로 이동합니다"
+                                //에러메세지 색상 변경
+                                idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
+                                idTextInputLayout.boxStrokeErrorColor =
+                                    getColorStateList(R.color.androidDefault)
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    val intent =
+                                        Intent(this@LoginActivity, PasswordActivity::class.java)
+                                    val id = loginIdEt.text.toString()
+                                    intent.putExtra("loginId", id)
+                                    startActivity(intent)
+                                    loginCl.requestFocus()
+                                    idTextInputLayout.error = null
+                                    idTextInputLayout.isErrorEnabled = false
+                                    loginLoadingDone.visibility = View.GONE
+                                }, 1000)
+                            }, 2000)
+                        } else {
+                            loginProgressBar.visibility = View.GONE
+                            Toast.makeText(this@LoginActivity, "가입되지 않은 이메일", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+
+
+
+
         }
     }
 

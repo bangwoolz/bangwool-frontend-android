@@ -21,6 +21,11 @@ data class TokenResponse(
     @SerializedName("token") val token: String
 )
 
+data class ExistResponse(
+    @SerializedName("exist") val exist: Boolean
+)
+
+
 //{
 //    "email": "uLTr2ZSzAxdbgfOU2nsh@lHlSNIDK94kj41TUtrvr9nEuHgZeWW.xi7.Ym.2VwK0clpM0.RRzCJwM1p-RwvfPGD2V9Re8BMkFYsAT8PxGnfBCOhO-TeX75x4kJUYjYyIriYL8mK",
 //    "name": "",
