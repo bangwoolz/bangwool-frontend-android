@@ -27,7 +27,7 @@ class TimerActivity : AppCompatActivity() {
     private var ppomodoroId = 0
     private var workMin = 2
     private var testSec = 0
-    private var testSec2 = 5
+    private var testSec2 = 0
     private var restTime = 0
     private var color = "purple"
     private val workTime = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
