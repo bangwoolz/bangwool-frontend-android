@@ -13,9 +13,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bangwool.LoginActivity
+import com.example.bangwool.MainActivity
 import com.example.bangwool.R
+import com.example.bangwool.databinding.ActivityPasswordBinding
 import com.example.bangwool.databinding.FragmentHomeBinding
+import com.example.bangwool.retrofit.AuthLoginRequest
+import com.example.bangwool.retrofit.Ppomodoros
+import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.TokenResponse
+import com.example.bangwool.retrofit.saveAccessToken
 import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
@@ -40,6 +51,7 @@ class HomeFragment : Fragment() {
 
         initDummyData()
         init()
+        getPpomo()
         return binding.root
     }
 
@@ -71,7 +83,7 @@ class HomeFragment : Fragment() {
             }
 
 
-            homeAdapter.setOnClickListener(object : HomeAdapter.OnItemClickListener{
+            homeAdapter.setOnClickListener(object : HomeAdapter.OnItemClickListener {
                 override fun onDeleteItemClick(homeItem: HomeItem) {
 //                    Log.d("CLICK!", "deleteBtn")
 
@@ -86,7 +98,8 @@ class HomeFragment : Fragment() {
 
                     // OrderDialog 호출
                     val dialog = TimerDeleteDialog(requireContext())
-                    dialog.setOnDeleteItemClickListener(object :TimerDeleteDialog.OnDeleteItemClickListener{
+                    dialog.setOnDeleteItemClickListener(object :
+                        TimerDeleteDialog.OnDeleteItemClickListener {
                         override fun onDeleteItemClicked() {
                             //아이템 삭제
                             homeAdapter.removeItem(homeItem)
@@ -115,12 +128,17 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     // dp 값을 px 값으로 변환하는 함수
     fun dpToPx(dp: Float, context: Context): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            context.resources.displayMetrics
+        )
     }
 
-    fun listDialog(){
+    fun listDialog() {
         val builder = AlertDialog.Builder(requireContext())
         val menu = arrayOf("알림 설정", "추가 설정")
         builder.setItems(menu) { dialog, which ->
@@ -128,9 +146,11 @@ class HomeFragment : Fragment() {
                 0 -> {
                     // 알림 설정 화면으로 이동
                 }
+
                 1 -> {
                     // 추가 설정 화면으로 이동
                 }
+
                 else -> {
                     // 예외 처리 - 이 외의 인덱스에 대한 동작 구현 (필요한 경우)
                 }
@@ -153,5 +173,25 @@ class HomeFragment : Fragment() {
         itemList.add(dummydata)
         itemList.add(dummydata)
         itemList.add(dummydata)
+    }
+
+    private fun getPpomo() {
+        RetrofitUtil.getRetrofit().GetPpomodoro().enqueue(object :
+            Callback<Ppomodoros> {
+            override fun onResponse(
+                call: Call<Ppomodoros>,
+                response: Response<Ppomodoros>
+            ) {
+                if (response.isSuccessful) {
+                    Log.i("GETPpomo/Success", response.message())
+                    //뽀모도로 가져와서 리싸이클러뷰에 연동하기
+                }
+            }
+            override fun onFailure(call: Call<Ppomodoros>, t: Throwable) {
+                Log.i("GETPpomo/Failure", "fail")
+
+            }
+        })
+
     }
 }
