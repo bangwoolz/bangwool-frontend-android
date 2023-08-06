@@ -12,6 +12,7 @@ import com.example.bangwool.retrofit.Ppomodoro
 import com.example.bangwool.retrofit.PpomodoroId
 
 class HomeAdapter(
+    private val homeFragment: HomeFragment,
     private val context: Context,
     private var itemList: ArrayList<PpomodoroId>
 ) :
@@ -32,6 +33,7 @@ class HomeAdapter(
 
     interface OnItemClickListener {
         fun onDeleteItemClick(homeItem: PpomodoroId)
+        fun onEditItemClick(homeItem: PpomodoroId)
     }
 
     fun setOnClickListener(onItemClickListener: OnItemClickListener) {
@@ -70,7 +72,11 @@ class HomeAdapter(
                     i.putExtra("taskTime", workTimeText)
 //                    i.putExtra("taskState", item.taskState)
                     i.putExtra("timerTitle", "타이머 수정")
-                    context.startActivity(i)
+                    i.putExtra("PpomoId", item.id.toString())
+//                    context.startActivity(i)
+                    homeFragment.updatePpomodoro.launch(i)
+
+                    itemClickListener?.onEditItemClick(item)
                 }
                 deleteBtn.setOnClickListener {
                     itemClickListener?.onDeleteItemClick(item)

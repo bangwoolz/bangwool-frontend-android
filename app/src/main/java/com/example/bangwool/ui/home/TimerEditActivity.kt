@@ -11,6 +11,7 @@ import com.example.bangwool.R
 import com.example.bangwool.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
 import com.example.bangwool.retrofit.Ppomodoro
+import com.example.bangwool.retrofit.PpomodoroId
 import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import retrofit2.Call
@@ -37,6 +38,10 @@ class TimerEditActivity : AppCompatActivity() {
 
     fun initLayout() {
         Log.d("qwerty123", RetrofitUtil.accessTokenString!!.toString())
+
+        setCheckViewList()
+        setCheckViewOnClickListener()
+
         binding.apply {
             val timerTitle = intent.getStringExtra("timerTitle")
             binding.tvTimerEditTitle.setText(timerTitle)
@@ -51,67 +56,73 @@ class TimerEditActivity : AppCompatActivity() {
                 editTextName.setText(name)
                 tvWorkTimeClock.setText(time)
                 if (color != null) {
-//                    updateCheckedColor(color)
+                    updateCheckedColor(color)
                 }
 
             } else if (timerTitle.equals("타이머 추가")) {
                 // 새로 추가 시 코드
                 updateCheckedColor("red")
 
-                setCheckViewList()
-                setCheckViewOnClickListener()
             }
 
-                textInputLayoutName.hint = ""
-                editTextName.hint = "ex) 시험공부"
-                textInputLayoutName.onFocusChangeListener =
-                    View.OnFocusChangeListener { _, hasFocus ->
-                        if (!hasFocus && editTextName.text.isNullOrEmpty()) {
-                            editTextName.setTextColor(getColor(R.color.gray_400))
-                            editTextName.hint = "ex) 시험공부"
-                        } else {
-                            editTextName.setTextColor(getColor(R.color.gray_900))
-                            editTextName.hint = ""
-                        }
+            textInputLayoutName.hint = ""
+            editTextName.hint = "ex) 시험공부"
+            textInputLayoutName.onFocusChangeListener =
+                View.OnFocusChangeListener { _, hasFocus ->
+                    if (!hasFocus && editTextName.text.isNullOrEmpty()) {
+                        editTextName.setTextColor(getColor(R.color.gray_400))
+                        editTextName.hint = "ex) 시험공부"
+                    } else {
+                        editTextName.setTextColor(getColor(R.color.gray_900))
+                        editTextName.hint = ""
                     }
-                editTextName.setOnKeyListener { view, keyCode, keyEvent ->
-                    if (keyEvent.action == KeyEvent.ACTION_DOWN) {
-                        if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                            editTextName.clearFocus()
-                            clTimerName.requestFocus()
-                            val inputMethodManager =
-                                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                            inputMethodManager.hideSoftInputFromWindow(editTextName.windowToken, 0)
-                        }
+                }
+            editTextName.setOnKeyListener { view, keyCode, keyEvent ->
+                if (keyEvent.action == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        editTextName.clearFocus()
+                        clTimerName.requestFocus()
+                        val inputMethodManager =
+                            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        inputMethodManager.hideSoftInputFromWindow(editTextName.windowToken, 0)
                     }
-                    return@setOnKeyListener false
                 }
-                llWorkTime.setOnClickListener {
-                    val str = tvWorkTimeClock.text.toString()
-                    val workTimeDialog = TimeChooseDialog(
-                        this@TimerEditActivity,
-                        "작업 시간",
-                        480,
-                        str.substring(0, str.length - 3).toInt()
-                    )
-                    workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
-                }
-                llRestTime.setOnClickListener {
-                    val str = tvRestTimeClock.text.toString()
-                    val restTimeDialog = TimeChooseDialog(
-                        this@TimerEditActivity,
-                        "쉬는 시간",
-                        480,
-                        str.substring(0, str.length - 3).toInt()
-                    )
-                    restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
-                }
+                return@setOnKeyListener false
+            }
+            llWorkTime.setOnClickListener {
+                val str = tvWorkTimeClock.text.toString()
+                val workTimeDialog = TimeChooseDialog(
+                    this@TimerEditActivity,
+                    "작업 시간",
+                    480,
+                    str.substring(0, str.length - 3).trim().toInt()
+                )
+                workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
+            }
+            llRestTime.setOnClickListener {
+                val str = tvRestTimeClock.text.toString()
+                val restTimeDialog = TimeChooseDialog(
+                    this@TimerEditActivity,
+                    "쉬는 시간",
+                    480,
+                    str.substring(0, str.length - 3).toInt()
+                )
+                restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
+            }
 
             btnSave.setOnClickListener {
+                val name = binding.editTextName.text.toString()
+                val color = selectedColor
+                val workTime = binding.tvWorkTimeClock.text.toString().split(":")
+                val workHour = workTime[0].trim().toInt() / 60
+                val workMin = workTime[0].trim().toInt() % 60
+                val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].trim().toInt()
+
                 if (tvTimerEditTitle.text.toString().equals("타이머 추가")) {
                     postPpomo()
                 } else if (tvTimerEditTitle.text.toString().equals("타이머 수정")) {
-                    putPpomo()
+                    val Id = intent.getStringExtra("PpomoId")!!.toInt()
+                    putPpomo(Id)
                 } else {
                     Log.d("error", "btnSave")
                 }
@@ -190,18 +201,18 @@ class TimerEditActivity : AppCompatActivity() {
 
     }
 
-    private fun putPpomo() {
-        // 수정된 값 반영 안되면 다시
+    private fun putPpomo(ppomoId: Int) {
         val name = binding.editTextName.text.toString()
         val color = selectedColor
         val workTime = binding.tvWorkTimeClock.text.toString().split(":")
-        val workHour = workTime[0].toInt() / 60
-        val workMin = workTime[0].toInt() % 60
-        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].toInt()
+        val workHour = workTime[0].trim().toInt() / 60
+        val workMin = workTime[0].trim().toInt() % 60
+        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].trim().toInt()
 
-        val Ppomo = Ppomodoro(name, color, workHour, workMin, restTime)
 
-        RetrofitUtil.getRetrofit().PutPpomodoro(0, Ppomo).enqueue(object :
+        var Ppomo = Ppomodoro(name!!, color!!, workHour, workMin, restTime)
+
+        RetrofitUtil.getRetrofit().PutPpomodoro(ppomoId, Ppomo).enqueue(object :
             Callback<PpomodorosResponse> {
             override fun onResponse(
                 call: Call<PpomodorosResponse>,
@@ -218,7 +229,7 @@ class TimerEditActivity : AppCompatActivity() {
 
             }
         })
-
     }
-
 }
+
+
