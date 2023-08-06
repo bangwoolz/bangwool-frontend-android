@@ -5,15 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.example.bangwool.databinding.ActivityPasswordBinding
 import com.example.bangwool.retrofit.AuthLoginRequest
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.TokenResponse
 import com.example.bangwool.retrofit.saveAccessToken
-import com.example.bangwool.retrofit.saveMemberId
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -106,13 +103,10 @@ class PasswordActivity : AppCompatActivity() {
                     saveAccessToken(this@PasswordActivity, token)
                     RetrofitUtil.setAccessToken(token)
 
-                    //val memberId = response.body()!!.memberId
-                    //saveMemberId(this@PasswordActivity, memberId)
-
                     pwTextInputLayout.error = null
                     pwTextInputLayout.isErrorEnabled = false
                     loginIcErrorEmail.visibility = View.GONE
-    //                    pwTextInputLayout.error = "비밀번호 동일함"
+//                    pwTextInputLayout.error = "비밀번호 동일함"
                     val i = Intent(this@PasswordActivity, MainActivity::class.java)
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(i)

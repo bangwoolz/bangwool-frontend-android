@@ -29,12 +29,12 @@ data class Ppomodoro(
     @SerializedName("restTime") val restTime: Int
 )
 
-data class PpomodoroRequest(
+data class PpomodorosResponse(
     @SerializedName("ppomodoros") val ppomodoros: List<Ppomodoro>
 )
 
 data class PpomodoroResponse(
-    @SerializedName("id") val id: Long
+    @SerializedName("id") val id: Int
 )
 
 

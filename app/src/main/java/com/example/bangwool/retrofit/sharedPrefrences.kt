@@ -18,18 +18,6 @@ fun getAccessToken(context: Context): String {
     return spf.getString("accessToken", 1.toString())!!
 }
 
-fun saveMemberId(context: Context, memberId: Int) {
-    val pref =
-        context.getSharedPreferences("memberId_spf", Context.MODE_PRIVATE) //shared key 설정
-    val edit = pref.edit() // 수정모드
-    edit.putInt("memberId_spf", memberId) // 값 넣기
-    edit.apply() // 적용하기
-}
-
-fun getMemberId(context: Context): Int {
-    val spf = context.getSharedPreferences("memberId_spf_spf", AppCompatActivity.MODE_PRIVATE)
-    return spf.getInt("memberId_spf", -1)!!
-}
 
 //fun getMemberId(JWTEncoded:String): Int {
 //    val splitStr:List<String> = JWTEncoded.split(".")

@@ -10,13 +10,11 @@ interface RetrofitInterface {
 
     @GET("/ppomodoros")
     fun getPpomodoros(
-        @Query("memberId") memberId: Int
-    ): Call<Ppomodoro>
+    ): Call<PpomodorosResponse>
 
     @POST("/ppomodoros")
     fun postPpomodoros(
-        @Query("memberId") memberId: Int,
-        @Body request: Ppomodoro
+        @Body requestbody: Ppomodoro
     ): Call<PpomodoroResponse>
 
 }

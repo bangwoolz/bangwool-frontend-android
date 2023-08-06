@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,11 +18,10 @@ import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentHomeBinding
 import com.example.bangwool.retrofit.AuthLoginRequest
 import com.example.bangwool.retrofit.Ppomodoro
-import com.example.bangwool.retrofit.PpomodoroRequest
 import com.example.bangwool.retrofit.PpomodoroResponse
+import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.getAccessToken
-import com.example.bangwool.retrofit.getMemberId
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,13 +43,10 @@ class HomeFragment : Fragment() {
         }
 
         val token = getAccessToken(requireContext())
-        //val memberId = getMemberId(token)
-        val memberId = getMemberId(requireContext())
-        Log.i("memberId", memberId.toString())
 
         initDummyData()
         init()
-        getPpomodoros(memberId)
+        getPpomodoros()
         return binding.root
     }
 
@@ -84,7 +79,7 @@ class HomeFragment : Fragment() {
             }
 
 
-            homeAdapter.setOnClickListener(object : HomeAdapter.OnItemClickListener{
+            homeAdapter.setOnClickListener(object : HomeAdapter.OnItemClickListener {
                 override fun onDeleteItemClick(homeItem: HomeItem) {
 //                    Log.d("CLICK!", "deleteBtn")
 
@@ -99,7 +94,8 @@ class HomeFragment : Fragment() {
 
                     // OrderDialog 호출
                     val dialog = TimerDeleteDialog()
-                    dialog.setOnDeleteItemClickListener(object :TimerDeleteDialog.OnDeleteItemClickListener{
+                    dialog.setOnDeleteItemClickListener(object :
+                        TimerDeleteDialog.OnDeleteItemClickListener {
                         override fun onDeleteItemClicked() {
                             //아이템 삭제
                             homeAdapter.removeItem(homeItem)
@@ -128,12 +124,17 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     // dp 값을 px 값으로 변환하는 함수
     fun dpToPx(dp: Float, context: Context): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp,
+            context.resources.displayMetrics
+        )
     }
 
-    fun listDialog(){
+    fun listDialog() {
         val builder = AlertDialog.Builder(requireContext())
         val menu = arrayOf("알림 설정", "추가 설정")
         builder.setItems(menu) { dialog, which ->
@@ -141,9 +142,11 @@ class HomeFragment : Fragment() {
                 0 -> {
                     // 알림 설정 화면으로 이동
                 }
+
                 1 -> {
                     // 추가 설정 화면으로 이동
                 }
+
                 else -> {
                     // 예외 처리 - 이 외의 인덱스에 대한 동작 구현 (필요한 경우)
                 }
@@ -168,14 +171,14 @@ class HomeFragment : Fragment() {
         itemList.add(dummydata)
     }
 
-    private fun getPpomodoros(memberId: Int) {
+    private fun getPpomodoros() {
         val retrofit = RetrofitUtil.getRetrofit()
-        retrofit.getPpomodoros(memberId).enqueue(object : Callback<Ppomodoro>{
+        retrofit.getPpomodoros().enqueue(object : Callback<PpomodorosResponse> {
             override fun onResponse(
-                call: Call<Ppomodoro>,
-                response: Response<Ppomodoro>
+                call: Call<PpomodorosResponse>,
+                response: Response<PpomodorosResponse>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     val res = response.body()
                     Log.i("GETPPOMODORO/SUCCESS", res.toString())
 
@@ -186,7 +189,7 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<Ppomodoro>, t: Throwable) {
+            override fun onFailure(call: Call<PpomodorosResponse>, t: Throwable) {
                 Log.i("GETPPOMODORO/FAILURE", t.message.toString())
             }
         })

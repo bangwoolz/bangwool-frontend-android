@@ -12,7 +12,6 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.bangwool.databinding.DialogTimecheckBinding
 import com.example.bangwool.databinding.FragmentStatisticBinding
 import java.time.LocalDate
 import kotlin.properties.Delegates

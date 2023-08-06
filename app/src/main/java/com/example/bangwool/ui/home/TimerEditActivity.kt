@@ -15,7 +15,6 @@ import com.example.bangwool.retrofit.Ppomodoro
 import com.example.bangwool.retrofit.PpomodoroResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.getAccessToken
-import com.example.bangwool.retrofit.getMemberId
 import retrofit2.Call
 import retrofit2.Response
 
@@ -87,8 +86,7 @@ class TimerEditActivity : AppCompatActivity() {
             btnSave.setOnClickListener {
                 val token = getAccessToken(this@TimerEditActivity)
 //                val memberId = getMemberId(token)
-                val memberId = getMemberId(this@TimerEditActivity)
-                postPpomodoros(memberId)
+                postPpomodoro()
                 finish()
             }
             icTimerEditBack.setOnClickListener {
@@ -134,7 +132,7 @@ class TimerEditActivity : AppCompatActivity() {
     }
 
 
-    private fun postPpomodoros(memberId: Int) {
+    private fun postPpomodoro() {
         val workTime = binding.tvWorkTimeClock.text.split(":")
         val workHour = workTime[0].toInt() / 60
         val workMinute = workTime[0].toInt() % 60
@@ -146,7 +144,7 @@ class TimerEditActivity : AppCompatActivity() {
             binding.tvRestTimeClock.toString().toInt()
         )
         val retrofit = RetrofitUtil.getRetrofit()
-        retrofit.postPpomodoros(memberId, ppomodoro).enqueue(object : retrofit2.Callback<PpomodoroResponse> {
+        retrofit.postPpomodoros(ppomodoro).enqueue(object : retrofit2.Callback<PpomodoroResponse> {
             override fun onResponse(
                 call: Call<PpomodoroResponse>,
                 response: Response<PpomodoroResponse>
