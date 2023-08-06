@@ -155,14 +155,14 @@ class LoginActivity : AppCompatActivity() {
         val emailPattern = Pattern.compile("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
         val grayColor = ContextCompat.getColor(this, R.color.gray_300)
         if (email.isEmpty()) {
-            binding.idTextInputLayout.error = "          이메일을 입력하세요."
+            binding.idTextInputLayout.error = "        이메일을 입력하세요."
             binding.idTextInputLayout.isErrorEnabled = true
             binding.loginIcErrorEmail.visibility = View.VISIBLE
             updateEndIcon(false)
             isIdValid = false
             return false
         } else if (!emailPattern.matcher(email).matches()) {
-            binding.idTextInputLayout.error = "          올바른 이메일 형식이 아니에요"
+            binding.idTextInputLayout.error = "        올바른 이메일 형식이 아니에요"
             binding.idTextInputLayout.isErrorEnabled = true
             binding.loginIcErrorEmail.visibility = View.VISIBLE
             updateEndIcon(false)
