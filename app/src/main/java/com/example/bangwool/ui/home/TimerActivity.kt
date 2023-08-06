@@ -1,20 +1,39 @@
 package com.example.bangwool.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bangwool.LoginActivity
+import com.example.bangwool.MainActivity
 import com.example.bangwool.databinding.ActivityTimerBinding
+import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.TokenResponse
+import com.example.bangwool.retrofit.WorkRequest
+import com.example.bangwool.retrofit.WorkResponse
+import com.example.bangwool.retrofit.saveAccessToken
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.Timer
 import kotlin.concurrent.timer
 
 
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
-    private var time = 100 * 60 * 0 + 100 * 15
+    var workHour = 0
+    var workMin = 5
+    var restTime = 3
+    var color = "red"
+    private var time = 100 * 60 * workMin + 100 * 60 * 60 * workHour
+    private var recentTime = time
     private var timerTask : Timer? = null
+    lateinit var ppomodoroId:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
+        val intent = intent //전달할 데이터를 받을 Intent
+        ppomodoroId = intent.getStringExtra("ppomodoroId").toString()
         binding.btnContinue.setOnClickListener{
             binding.btnContinue.visibility = View.INVISIBLE
             binding.btnClear.visibility = View.INVISIBLE
@@ -48,6 +67,24 @@ class TimerActivity : AppCompatActivity() {
             startTimer()    //타이머 작동
         }
         clearTime()
+//        val recordWorkRequest = WorkRequest(0,2)
+//        RetrofitUtil.getRetrofit().RecordWork(ppomodoroId.toInt(),recordWorkRequest).enqueue(object :
+//            Callback<WorkResponse> {
+//            override fun onResponse(
+//                call: Call<WorkResponse>,
+//                response: Response<WorkResponse>
+//            ) {
+//                if (response.isSuccessful) {
+//                    val workid = response.body()!!.id
+//                } else {
+//
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<WorkResponse>, t: Throwable) {
+//
+//            }
+//            })
         setContentView(binding.root)
     }
     //타이머 작동
@@ -95,7 +132,7 @@ class TimerActivity : AppCompatActivity() {
         binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
     }
     private fun clearTime() {
-        time = 100 * 60 * 0 + 100 * 15
+        time = 100 * 60 * workMin + 100 * 60 * 60 * workHour
         showTimeOnTimer()
         binding.progressbar.max = time
         binding.progressbar.progress=time
