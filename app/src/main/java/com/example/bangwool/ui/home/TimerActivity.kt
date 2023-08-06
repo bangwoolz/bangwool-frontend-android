@@ -25,15 +25,17 @@ import kotlin.concurrent.timer
 
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
-    var workHour = 0
-    var workMin = 5
-    var testSec = 3
-    var testSec2 = 5
-    var restTime = 0
-    var color = "purple"
-    private var time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
-    private var recentTime = time
+    private var workHour = 0
+    private var workMin = 2
+    private var testSec = 0
+    private var testSec2 = 5
+    private var restTime = 0
+    private var color = "purple"
+    private val workTime = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
+    private var time = workTime
+    private var recentTime = workTime
     private var timerTask : Timer? = null
+    private var totalSendedMin = 0
     lateinit var ppomodoroId:String
     var isWorking = true
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,14 +87,12 @@ class TimerActivity : AppCompatActivity() {
 
             // 시간 서버로 전송처리
             val diffMin = (recentTime-time)/(100*60)
-            Log.d("",diffMin.toString())
+            Log.d("","시간 차이는 ${diffMin}분!!")
             if(diffMin>0){
-                recentTime = time -(100*60)*diffMin+(recentTime-time)%(100*60)
-                if(diffMin>=60){
+                recentTime = time -(100*60)*diffMin
+                totalSendedMin += diffMin
+                Log.d("","서버로 ${diffMin/60}시간 ${diffMin%60}분 전송!!")
 //                    sendToServerWorkTime(diffMin/60,diffMin%60)
-                } else {
-//                    sendToServerWorkTime(0,diffMin)
-                }
             }
         }
         binding.btnStart.setOnClickListener{
@@ -110,7 +110,18 @@ class TimerActivity : AppCompatActivity() {
     val timerHandler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             if (msg.what == 0) {
-//                sendToServerWorkTime(workHour,workMin)
+                if(recentTime == workTime){
+                    //sendToServerWorkTime(workHour,workMin)
+                    Log.d("","서버로 ${workHour}시간 ${workMin}분 전송!!")
+                } else {
+                    val workTotalMin = workHour * 60 + workMin - totalSendedMin
+                    //sendToServerWorkTime(workTotalMin/60,workTotalMin%60)
+                    Log.d("","서버로 ${workTotalMin/60}시간 ${workTotalMin%60}분 전송!!")
+                }
+                clearBtns()
+                binding.ivHappyTomato.visibility=View.VISIBLE
+                binding.ivStudyTomato.visibility=View.GONE
+            } else if (msg.what == 1) {
                 clearBtns()
                 binding.ivHappyTomato.visibility=View.VISIBLE
                 binding.ivStudyTomato.visibility=View.GONE
@@ -125,12 +136,10 @@ class TimerActivity : AppCompatActivity() {
                 if(isWorking){
                     clearToRestTime()
                     timerHandler.sendEmptyMessage(0)
-//                    clearBtns() 위줄 코드가 대신 실행
                     isWorking = false
                 } else {
                     clearToWorkTime()
-//                    clearBtns() 위줄 코드가 대신 실행
-                    timerHandler.sendEmptyMessage(0)
+                    timerHandler.sendEmptyMessage(1)
                     isWorking = true
                 }
                 cancel()
@@ -178,16 +187,12 @@ class TimerActivity : AppCompatActivity() {
         }
         binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
     }
-    private fun clearTime() {
-        time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
-        showTimeOnTimer()
-        binding.progressbar.max = time
-        binding.progressbar.progress=time
-    }
+
 
     private fun clearToWorkTime() {
         time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
         recentTime = time
+        totalSendedMin = 0
         showTimeOnTimer()
         binding.progressbar.max = time
         binding.progressbar.progress=time
