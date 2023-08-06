@@ -5,13 +5,14 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.example.bangwool.R
 import com.example.bangwool.databinding.DialogTimerDeleteBinding
 
-class TimerDeleteDialog : DialogFragment() {
+class TimerDeleteDialog(private val context: Context) : DialogFragment() {
     lateinit var binding: DialogTimerDeleteBinding
 
     interface OnDeleteItemClickListener {
@@ -54,7 +55,18 @@ class TimerDeleteDialog : DialogFragment() {
         }
 
         val dialog = builder.create()
+        dialogResize(dialog, 0.911111f, 0.24f)
+        dialog.window?.setGravity(Gravity.CENTER)
 
         return dialog
+    }
+
+    private fun dialogResize(dialog: Dialog, width: Float, height: Float) {
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val displayMetrics = context.resources.displayMetrics
+        val dialogWidth = (displayMetrics.widthPixels * width).toInt()
+        val dialogHeight = (displayMetrics.heightPixels * height).toInt()
+
+        dialog.window?.setLayout(dialogWidth, dialogHeight)
     }
 }

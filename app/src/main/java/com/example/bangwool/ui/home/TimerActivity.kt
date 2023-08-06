@@ -12,10 +12,8 @@ import com.example.bangwool.LoginActivity
 import com.example.bangwool.MainActivity
 import com.example.bangwool.databinding.ActivityTimerBinding
 import com.example.bangwool.retrofit.RetrofitUtil
-import com.example.bangwool.retrofit.TokenResponse
 import com.example.bangwool.retrofit.WorkRequest
 import com.example.bangwool.retrofit.WorkResponse
-import com.example.bangwool.retrofit.saveAccessToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,9 +41,18 @@ class TimerActivity : AppCompatActivity() {
         binding = ActivityTimerBinding.inflate(layoutInflater)
 
         val intent = intent //전달할 데이터를 받을 Intent
-        ppomodoroId = intent.getStringExtra("ppomodoroId").toString()
 
         //타이머 색깔 설정
+
+
+        val Id = intent.getStringExtra("id")!!.toInt()
+        val name = intent.getStringExtra("name")
+        color = intent.getStringExtra("color")!!
+        workHour = intent.getStringExtra("workHour")!!.toInt()
+        workMin = intent.getStringExtra("workMin")!!.toInt()
+        restTime = intent.getStringExtra("restTime")!!.toInt()
+        
+        // 타이머 색깔
         when(color) {
             "red" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
             "pink" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_pink))
@@ -57,6 +64,8 @@ class TimerActivity : AppCompatActivity() {
             "green" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_green))
             else -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
         }
+        Log.d("getStringExtra", Id.toString()+name+color+workHour.toString()+workMin.toString()+restTime.toString())
+
 
         binding.btnContinue.setOnClickListener{
             binding.btnContinue.visibility = View.INVISIBLE
@@ -102,8 +111,14 @@ class TimerActivity : AppCompatActivity() {
             binding.ivStudyTomato.visibility=View.VISIBLE
             startTimer()    //타이머 작동
         }
-        clearToWorkTime()
 
+        binding.icSetting.setOnClickListener {
+            val i = Intent(this, TimerEditActivity::class.java)
+            i.putExtra("timerTitle", "타이머 수정")
+            startActivity(i)
+        }
+
+        clearToWorkTime()
         setContentView(binding.root)
     }
 
