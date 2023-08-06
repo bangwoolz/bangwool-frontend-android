@@ -8,7 +8,15 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RetrofitInterface {
+    @POST("/work/{ppomodoroId}")
+    fun RecordWork(
+        @Path("ppomodoroId") ppomodoroId: Int,
+        @Body requestbody: WorkRequest
+    ): Call<WorkResponse>
 
+    @GET("/work/today")
+    fun WorkToday(
+    ): Call<Works>
 
 }
 interface RetrofitLoginInterface {
@@ -23,17 +31,7 @@ interface RetrofitLoginInterface {
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
 
-    @POST("/work/{ppomodoroId}")
-    fun RecordWork(
-        @Query("memberId") memberId: Int,
-        @Path("ppomodoroId") ppomodoroId: Int,
-        @Body requestbody: WorkRequest
-    ): Call<WorkResponse>
 
-    @GET("/work/today")
-    fun WorkToday(
-        @Query("memberId") memberId: Int,
-    ): Call<Works>
 
 }
 
