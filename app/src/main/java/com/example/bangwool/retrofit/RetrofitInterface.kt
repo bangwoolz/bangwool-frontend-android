@@ -4,8 +4,11 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface RetrofitInterface {
+
+
 
 
 }
@@ -21,6 +24,15 @@ interface RetrofitLoginInterface {
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
 
+    @GET("/members/exist/email")
+    fun ExistEmail(
+        @Query("email") email: String
+    ): Call<ExistResponse>
+
+    @GET("/members/exist/nickname")
+    fun ExistNickname(
+        @Query("nickname") nickname: String
+    ): Call<ExistResponse>
 }
 
 

@@ -12,6 +12,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityRegisterBinding
+import com.example.bangwool.retrofit.ExistResponse
+import com.example.bangwool.retrofit.RetrofitUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
@@ -20,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
     private var isEmailValid = false
     private var isNameValid = false
     private var isNickNameValid = false
+    private var isNicknameExist = true
     private var isPasswordValid = false
     private var isConfirmPasswordValid = false
 
@@ -138,6 +144,27 @@ class RegisterActivity : AppCompatActivity() {
                 }
             })
 
+            buttonDuplicateCheck.setOnClickListener {
+                RetrofitUtil.getLoginRetrofit().ExistNickname(editTextNickname.text.toString()).enqueue(object: Callback<ExistResponse> {
+                    override fun onResponse(
+                        call: Call<ExistResponse>,
+                        response: Response<ExistResponse>
+                    ) {
+                        if(response.isSuccessful){
+                            if(!response.body()!!.exist){
+
+                            }
+                        } else {
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+            }
+
             textInputLayoutPassword.boxStrokeErrorColor = getColorStateList(R.color.secondary)
             textInputLayoutPassword.hint = ""
             editTextPassword.hint = "8~12자 사이로 입력해주세요"
@@ -244,12 +271,6 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            buttonDuplicateCheck.setOnClickListener {
-                val nickname = textInputLayoutNickname.editText?.text.toString()
-                if (validateNickname(nickname)) {
-                }
-            }
-
             buttonBack.setOnClickListener {
                 finish()
             }
@@ -285,7 +306,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
     private fun areAllFieldsValid(): Boolean {
-        return isEmailValid && isNameValid && isNickNameValid && isPasswordValid && isConfirmPasswordValid
+        return isEmailValid && isNameValid && isNickNameValid && isPasswordValid && isConfirmPasswordValid && !isNicknameExist
     }
 
 
