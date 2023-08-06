@@ -30,8 +30,6 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.dDay.setOnClickListener {
-            val i = Intent(requireContext(), TimerActivity::class.java)
-            startActivity(i)
         }
         /*
         binding.homeRecyclerView.setOnClickListener {
@@ -87,7 +85,7 @@ class HomeFragment : Fragment() {
                     bundle.putString("taskData", dataJson)
 
                     // OrderDialog 호출
-                    val dialog = TimerDeleteDialog()
+                    val dialog = TimerDeleteDialog(requireContext())
                     dialog.setOnDeleteItemClickListener(object :TimerDeleteDialog.OnDeleteItemClickListener{
                         override fun onDeleteItemClicked() {
                             //아이템 삭제
@@ -103,7 +101,9 @@ class HomeFragment : Fragment() {
 
 
             homeAddTaskBtn.setOnClickListener {
-                Toast.makeText(requireContext(), "+ 버튼 클릭됨", Toast.LENGTH_SHORT).show()
+                val i = Intent(requireContext(), TimerEditActivity::class.java)
+                i.putExtra("timerTitle", "타이머 추가")
+                startActivity(i)
             }
 
             homeMenu.setOnClickListener {

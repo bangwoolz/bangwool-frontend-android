@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         }
         binding.bottomNav.selectedItemId = R.id.navigation_home
         binding.fab.setOnClickListener{
-            val i = Intent(this, TimerEditActivity::class.java)
-            startActivity(i)
         }
 
     }

@@ -1,5 +1,6 @@
 package com.example.bangwool.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,11 @@ class TimerActivity : AppCompatActivity() {
             binding.btnStart.visibility = View.INVISIBLE
             binding.btnStop.visibility=View.VISIBLE
             startTimer()    //타이머 작동
+        }
+        binding.icSetting.setOnClickListener {
+            val i = Intent(this, TimerEditActivity::class.java)
+            i.putExtra("timerTitle", "타이머 수정")
+            startActivity(i)
         }
         clearTime()
         setContentView(binding.root)
