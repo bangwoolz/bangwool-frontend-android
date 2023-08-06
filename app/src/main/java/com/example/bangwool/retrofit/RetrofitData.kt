@@ -17,9 +17,36 @@ data class AuthLoginRequest(
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String
 )
+
 data class TokenResponse(
     @SerializedName("token") val token: String
 )
+
+data class PpomodoroId(
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("color") val color: String,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int,
+    @SerializedName("restTime") val restTime: Int
+)
+data class Ppomodoro(
+    @SerializedName("name") val name: String,
+    @SerializedName("color") val color: String,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int,
+    @SerializedName("restTime") val restTime: Int
+)
+
+data class Ppomodoros(
+    @SerializedName("ppomodoros") val ppomodoros: List<PpomodoroId>
+)
+
+
+data class PpomodorosResponse(
+    @SerializedName("id") val id: Int
+)
+
 
 //{
 //    "email": "uLTr2ZSzAxdbgfOU2nsh@lHlSNIDK94kj41TUtrvr9nEuHgZeWW.xi7.Ym.2VwK0clpM0.RRzCJwM1p-RwvfPGD2V9Re8BMkFYsAT8PxGnfBCOhO-TeX75x4kJUYjYyIriYL8mK",
