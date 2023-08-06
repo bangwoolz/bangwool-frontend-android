@@ -2,33 +2,35 @@ package com.example.bangwool.ui.home
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Canvas
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.startActivity
-import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bangwool.MainActivity
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ItemHomeBinding
-import kotlin.math.max
-import kotlin.math.min
+import com.example.bangwool.retrofit.Ppomodoro
 
 class HomeAdapter(
     private val context: Context,
-    private var itemList: ArrayList<HomeItem>
+    private var itemList: ArrayList<Ppomodoro>
 ) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var itemClickListener: OnItemClickListener? = null
+    val colorMap = mapOf(
+        "red" to R.color.timer_color_red,
+        "pink" to R.color.timer_color_pink,
+        "orange" to R.color.timer_color_orange,
+        "yellow" to R.color.timer_color_yellow,
+        "purple" to R.color.timer_color_purple,
+        "blue" to R.color.timer_color_blue,
+        "skyblue" to R.color.timer_color_skyblue,
+        "green" to R.color.timer_color_green
+    )
 
 
     interface OnItemClickListener {
-        fun onDeleteItemClick(homeItem: HomeItem)
+        fun onDeleteItemClick(homeItem: Ppomodoro)
     }
 
     fun setOnClickListener(onItemClickListener: OnItemClickListener) {
@@ -36,41 +38,47 @@ class HomeAdapter(
     }
 
     // 아이템 삭제 메소드
-    fun removeItem(item: HomeItem) {
+    fun findPositionOfItem(item: Ppomodoro): Int {
         val position = itemList.indexOf(item)
-        if (position != -1) {
-            itemList.removeAt(position)
-            notifyItemRemoved(position)
-        }
+        return position
+//        if (position != -1) {
+//            itemList.removeAt(position)
+//            notifyItemRemoved(position)
+//        }
     }
 
     inner class ViewHolder(val binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val context: Context = itemView.context
-        fun bind(item: HomeItem) {
+        fun bind(item: Ppomodoro) {
+            val workTime = item.workHour * 60 + item.workMin
+            val workTimeText = workTime.toString() + " : 00"
 
             binding.apply {
-                homeItemTaskCircle.setColorFilter(context.getColor(item.taskColor))
+
+                homeItemTaskCircle.setColorFilter(getColor(context, colorMap[item.color]!!))
 //                homeItemTaskCircle.setBackgroundColor(context.getColor(itemList.taskColor))
 //                homeItemTaskCircle.setBackgroundResource(R.drawable.circle_layout)
-                homeItemTaskTv.text = item.taskName
-                homeItemTaskTime.text = item.taskTime
-                homeItemTaskTimeBtn.setImageResource(R.drawable.ic_play_filled)
+                homeItemTaskTv.text = item.name
+                homeItemTaskTime.text = workTimeText
+//                homeItemTaskTimeBtn.setImageResource(R.drawable.ic_play_filled)
                 homeItemTaskTimeBtn.setOnClickListener {
                     val i = Intent(context, TimerActivity::class.java)
                     context.startActivity(i)
                 }
                 modifyBtn.setOnClickListener {
                     val i = Intent(context, TimerEditActivity::class.java)
-                    i.putExtra("taskColor", item.taskColor)
-                    i.putExtra("taskName", item.taskName)
-                    i.putExtra("taskTime", item.taskTime)
-                    i.putExtra("taskState", item.taskState)
+                    i.putExtra("taskColor", item.color)
+                    i.putExtra("taskName", item.name)
+                    i.putExtra("taskTime", workTime)
+//                    i.putExtra("taskState", item.taskState)
                     i.putExtra("timerTitle", "타이머 수정")
                     context.startActivity(i)
                 }
                 deleteBtn.setOnClickListener {
                     itemClickListener?.onDeleteItemClick(item)
+//                    deletePpomo()
+
                 }
             }
         }
@@ -89,7 +97,6 @@ class HomeAdapter(
         holder.bind(itemList[position])
 
     }
-
 
 }
 
