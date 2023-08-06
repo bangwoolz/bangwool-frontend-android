@@ -1,6 +1,7 @@
 package com.example.bangwool.ui.home
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,7 @@ class TimerActivity : AppCompatActivity() {
     var workHour = 0
     var workMin = 5
     var restTime = 3
-    var color = "red"
+    var color = "purple"
     private var time = 100 * 60 * workMin + 100 * 60 * 60 * workHour
     private var recentTime = time
     private var timerTask : Timer? = null
@@ -32,8 +33,23 @@ class TimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
+
         val intent = intent //전달할 데이터를 받을 Intent
         ppomodoroId = intent.getStringExtra("ppomodoroId").toString()
+
+        //타이머 색깔 설정
+        when(color) {
+            "red" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
+            "pink" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_pink))
+            "orange" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_orange))
+            "yellow" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_yellow))
+            "purple" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_purple))
+            "blue" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_blue))
+            "skyblue" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_skyblue))
+            "green" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_green))
+            else -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
+        }
+
         binding.btnContinue.setOnClickListener{
             binding.btnContinue.visibility = View.INVISIBLE
             binding.btnClear.visibility = View.INVISIBLE
