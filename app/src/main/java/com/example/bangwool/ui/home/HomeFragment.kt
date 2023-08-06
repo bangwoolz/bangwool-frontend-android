@@ -16,6 +16,7 @@ import com.example.bangwool.databinding.FragmentHomeBinding
 import com.example.bangwool.retrofit.Ppomodoro
 import com.example.bangwool.retrofit.PpomodoroId
 import com.example.bangwool.retrofit.Ppomodoros
+import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.google.gson.Gson
 import retrofit2.Call
@@ -24,9 +25,11 @@ import retrofit2.Response
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
+
     //    var itemList: ArrayList<HomeItem> = arrayListOf()
     var ppomoList: ArrayList<PpomodoroId> = arrayListOf()
     lateinit var homeAdapter: HomeAdapter
+    val ppomoId: Int = 0
 
     val updatePpomodoro =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -68,7 +71,7 @@ class HomeFragment : Fragment() {
             val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
             itemTouchHelper.attachToRecyclerView(homeRecyclerView)
 
-            homeAdapter = HomeAdapter(requireContext(), ppomoList)
+            homeAdapter = HomeAdapter(this@HomeFragment, requireContext(), ppomoList)
 
             homeRecyclerView.apply {
                 layoutManager =
@@ -103,14 +106,18 @@ class HomeFragment : Fragment() {
                         override fun onDeleteItemClicked() {
                             //아이템 삭제
 //                            homeAdapter.removeItem(homeItem)
-
+                            val ppomoId = homeAdapter.findId(homeItem)
+                            deletePpomo(ppomoId)
                         }
                     })
                     dialog.arguments = bundle
                     dialog.show(parentFragmentManager, "TimerDeleteDialog")
 
-                    val ppomoId = homeAdapter.findId(homeItem)
-                    deletePpomo(ppomoId) // 수정해
+                }
+
+                override fun onEditItemClick(homeItem: PpomodoroId) {
+//                    val ppomoId = homeAdapter.findId(homeItem)
+//                    putPpomo(ppomoId)
                 }
 
             })
@@ -198,6 +205,7 @@ class HomeFragment : Fragment() {
 
                 }
             }
+
             override fun onFailure(call: Call<Ppomodoros>, t: Throwable) {
                 Log.i("GETPpomo/Failure", "fail")
 
@@ -213,14 +221,17 @@ class HomeFragment : Fragment() {
                 response: Response<Void>
             ) {
                 if (response.isSuccessful) {
-                    Log.i("GETPpomo/Success", "success")
+                    Log.i("DELETEPpomo/Success", "success")
                     getPpomo()
                 }
             }
+
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.i("GETPpomo/Failure", "fail")
+                Log.i("DELETEPpomo/Failure", "fail")
 
             }
         })
     }
+
+
 }
