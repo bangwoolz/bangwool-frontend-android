@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColor
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ItemHomeBinding
@@ -12,6 +13,7 @@ import com.example.bangwool.retrofit.Ppomodoro
 import com.example.bangwool.retrofit.PpomodoroId
 
 class HomeAdapter(
+    private val swipeHelperCallback: ItemTouchHelper,
     private val homeFragment: HomeFragment,
     private val context: Context,
     private var itemList: ArrayList<PpomodoroId>
@@ -34,6 +36,7 @@ class HomeAdapter(
     interface OnItemClickListener {
         fun onDeleteItemClick(homeItem: PpomodoroId)
         fun onEditItemClick(homeItem: PpomodoroId)
+
 
     }
 
@@ -80,13 +83,16 @@ class HomeAdapter(
 //                    i.putExtra("taskState", item.taskState)
                     i.putExtra("timerTitle", "타이머 수정")
                     i.putExtra("PpomoId", item.id.toString())
-//                    context.startActivity(i)
+//                    context.startActivity(i)b
+
+                    swipeHelperCallback.startSwipe(this@ViewHolder)
                     homeFragment.updatePpomodoro.launch(i)
 
                     itemClickListener?.onEditItemClick(item)
                 }
                 deleteBtn.setOnClickListener {
                     itemClickListener?.onDeleteItemClick(item)
+                    swipeHelperCallback.startSwipe(this@ViewHolder)
 //                    deletePpomo()
 
                 }
