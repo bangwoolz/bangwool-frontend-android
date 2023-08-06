@@ -135,6 +135,7 @@ class RegisterActivity : AppCompatActivity() {
                     before: Int,
                     count: Int
                 ) {
+                    isNicknameExist = true
                     validateNickname(s.toString())
                     updateConfirmButtonState()
                     updateButtonState()
@@ -152,9 +153,12 @@ class RegisterActivity : AppCompatActivity() {
                     ) {
                         if(response.isSuccessful){
                             if(!response.body()!!.exist){
-
+                                isNicknameExist = false
+                                updateButtonState()
                             }
                         } else {
+                            isNicknameExist = true
+                            updateButtonState()
                         }
                     }
 
