@@ -24,6 +24,7 @@ import kotlin.concurrent.timer
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
     private var workHour = 0
+    private var ppomodoroId = 0
     private var workMin = 2
     private var testSec = 0
     private var testSec2 = 5
@@ -34,7 +35,6 @@ class TimerActivity : AppCompatActivity() {
     private var recentTime = workTime
     private var timerTask : Timer? = null
     private var totalSendedMin = 0
-    lateinit var ppomodoroId:String
     var isWorking = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,14 +45,17 @@ class TimerActivity : AppCompatActivity() {
         //타이머 색깔 설정
 
 
-        val Id = intent.getStringExtra("id")!!.toInt()
+        ppomodoroId = intent.getStringExtra("id")!!.toInt()
         val name = intent.getStringExtra("name")
         color = intent.getStringExtra("color")!!
         workHour = intent.getStringExtra("workHour")!!.toInt()
         workMin = intent.getStringExtra("workMin")!!.toInt()
         restTime = intent.getStringExtra("restTime")!!.toInt()
-        
-        // 타이머 색깔
+
+        // 타이머 이름 연동
+        binding.tvTimerName.text = name
+
+        // 타이머 색깔 연동
         when(color) {
             "red" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
             "pink" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_pink))
@@ -64,7 +67,7 @@ class TimerActivity : AppCompatActivity() {
             "green" -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_green))
             else -> binding.ivTimerColor.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
         }
-        Log.d("getStringExtra", Id.toString()+name+color+workHour.toString()+workMin.toString()+restTime.toString())
+        Log.d("getStringExtra", ppomodoroId.toString()+name+color+workHour.toString()+workMin.toString()+restTime.toString())
 
 
         binding.btnContinue.setOnClickListener{
@@ -101,7 +104,7 @@ class TimerActivity : AppCompatActivity() {
                 recentTime = time -(100*60)*diffMin
                 totalSendedMin += diffMin
                 Log.d("","서버로 ${diffMin/60}시간 ${diffMin%60}분 전송!!")
-//                    sendToServerWorkTime(diffMin/60,diffMin%60)
+                sendToServerWorkTime(diffMin/60,diffMin%60)
             }
         }
         binding.btnStart.setOnClickListener{
@@ -223,15 +226,15 @@ class TimerActivity : AppCompatActivity() {
 
     private fun sendToServerWorkTime(newWorkHour:Int, newWorkMin:Int) {
         val recordWorkRequest = WorkRequest(newWorkHour,newWorkMin)
-        RetrofitUtil.getRetrofit().RecordWork(ppomodoroId.toInt(),recordWorkRequest).enqueue(object :
+        RetrofitUtil.getRetrofit().RecordWork(ppomodoroId,recordWorkRequest).enqueue(object :
             Callback<WorkResponse> {
             override fun onResponse(
                 call: Call<WorkResponse>,
                 response: Response<WorkResponse>
             ) {
                 if (response.isSuccessful) {
-                    val workid = response.body()!!.id
-                    Log.d("","성공함")
+                    val workId = response.body()!!.id
+                    Log.d("","성공함 id:${workId}")
                 } else {
                     Log.d("","실패함")
 
