@@ -95,7 +95,7 @@ class TimerEditActivity : AppCompatActivity() {
                     this@TimerEditActivity,
                     "작업 시간",
                     480,
-                    str.substring(0, str.length - 3).trim().toInt()
+                    str.substring(0, str.length - 5).trim().toInt()
                 )
                 workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
             }
@@ -105,7 +105,7 @@ class TimerEditActivity : AppCompatActivity() {
                     this@TimerEditActivity,
                     "쉬는 시간",
                     480,
-                    str.substring(0, str.length - 3).toInt()
+                    str.substring(0, str.length - 5).toInt()
                 )
                 restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
             }
