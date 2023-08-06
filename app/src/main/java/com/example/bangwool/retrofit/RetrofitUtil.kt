@@ -1,5 +1,6 @@
 package com.example.bangwool.retrofit
 
+import android.util.Log
 import com.example.bangwool.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -16,7 +17,7 @@ val BASE_URL = BuildConfig.BASE_URL
 object RetrofitUtil {
 
     private var loginInstance: RetrofitLoginInterface? = null
-    private var accessTokenString: String? = null
+    var accessTokenString = ""
 
 
     private fun getLoginOkHttpClient(): OkHttpClient {
@@ -67,6 +68,7 @@ object RetrofitUtil {
         } else {
             interceptor.level = HttpLoggingInterceptor.Level.NONE
         }
+        Log.d("qwerty123", accessTokenString)
 
         return OkHttpClient.Builder().addInterceptor(interceptor).addInterceptor(
             AddedTokenRequest(
