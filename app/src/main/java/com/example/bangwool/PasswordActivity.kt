@@ -80,7 +80,7 @@ class PasswordActivity : AppCompatActivity() {
         if (pw.isEmpty()) {
             loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginBtn.backgroundTintList = getColorStateList(R.color.gray_300)
-            loginIcErrorEmail.visibility = View.VISIBLE
+//            loginIcErrorEmail.visibility = View.VISIBLE
 //            pwTextInputLayout.error = "비밀번호를 입력하세요." // -> 피그마엔 없음
         } else {
             loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
