@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangwool.LoginActivity
@@ -25,9 +26,10 @@ import kotlin.concurrent.timer
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
     var workHour = 0
-    var workMin = 0
-    var testSec = 10
-    var restTime = 3
+    var workMin = 5
+    var testSec = 3
+    var testSec2 = 5
+    var restTime = 0
     var color = "purple"
     private var time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
     private var recentTime = time
@@ -80,6 +82,18 @@ class TimerActivity : AppCompatActivity() {
             binding.ivHappyTomato.visibility=View.VISIBLE
             binding.ivStudyTomato.visibility=View.GONE
             stopTimer()
+
+            // 시간 서버로 전송처리
+            val diffMin = (recentTime-time)/(100*60)
+            Log.d("",diffMin.toString())
+            if(diffMin>0){
+                recentTime = time -(100*60)*diffMin+(recentTime-time)%(100*60)
+                if(diffMin>=60){
+//                    sendToServerWorkTime(diffMin/60,diffMin%60)
+                } else {
+//                    sendToServerWorkTime(0,diffMin)
+                }
+            }
         }
         binding.btnStart.setOnClickListener{
             binding.btnStart.visibility = View.INVISIBLE
@@ -88,31 +102,15 @@ class TimerActivity : AppCompatActivity() {
             binding.ivStudyTomato.visibility=View.VISIBLE
             startTimer()    //타이머 작동
         }
-        clearTime()
-//        val recordWorkRequest = WorkRequest(0,2)
-//        RetrofitUtil.getRetrofit().RecordWork(ppomodoroId.toInt(),recordWorkRequest).enqueue(object :
-//            Callback<WorkResponse> {
-//            override fun onResponse(
-//                call: Call<WorkResponse>,
-//                response: Response<WorkResponse>
-//            ) {
-//                if (response.isSuccessful) {
-//                    val workid = response.body()!!.id
-//                } else {
-//
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<WorkResponse>, t: Throwable) {
-//
-//            }
-//            })
+        clearToWorkTime()
+
         setContentView(binding.root)
     }
 
     val timerHandler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             if (msg.what == 0) {
+//                sendToServerWorkTime(workHour,workMin)
                 clearBtns()
                 binding.ivHappyTomato.visibility=View.VISIBLE
                 binding.ivStudyTomato.visibility=View.GONE
@@ -189,15 +187,42 @@ class TimerActivity : AppCompatActivity() {
 
     private fun clearToWorkTime() {
         time = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
+        recentTime = time
         showTimeOnTimer()
         binding.progressbar.max = time
         binding.progressbar.progress=time
     }
 
     private fun clearToRestTime() {
-        time = 100 * 60 * 0 + 100 * 5
+        time = 100 * 60 * restTime + 100 * testSec2
+        recentTime = time
         showTimeOnTimer()
         binding.progressbar.max = time
         binding.progressbar.progress=time
     }
+
+    private fun sendToServerWorkTime(newWorkHour:Int, newWorkMin:Int) {
+        val recordWorkRequest = WorkRequest(newWorkHour,newWorkMin)
+        RetrofitUtil.getRetrofit().RecordWork(ppomodoroId.toInt(),recordWorkRequest).enqueue(object :
+            Callback<WorkResponse> {
+            override fun onResponse(
+                call: Call<WorkResponse>,
+                response: Response<WorkResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val workid = response.body()!!.id
+                    Log.d("","성공함")
+                } else {
+                    Log.d("","실패함")
+
+                }
+            }
+
+            override fun onFailure(call: Call<WorkResponse>, t: Throwable) {
+                Log.d("","실패함 onFailure")
+
+            }
+            })
+    }
+
 }
