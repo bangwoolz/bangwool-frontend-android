@@ -18,6 +18,7 @@ object WithdrawDialogUtils {
                 dialogBuilder.setView(dialogViewBinding.root)
                 val dialog = dialogBuilder.create()
 
+
                 dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 dialogViewBinding.buttonCancel.setOnClickListener {
