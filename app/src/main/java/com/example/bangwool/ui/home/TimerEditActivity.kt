@@ -3,12 +3,20 @@ package com.example.bangwool.ui.home
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.bangwool.R
 import com.example.bangwool.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
+import com.example.bangwool.retrofit.Ppomodoro
+import com.example.bangwool.retrofit.PpomodoroId
+import com.example.bangwool.retrofit.PpomodorosResponse
+import com.example.bangwool.retrofit.RetrofitUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TimerEditActivity : AppCompatActivity() {
     lateinit var binding: ActivityTimerEditBinding
@@ -16,17 +24,46 @@ class TimerEditActivity : AppCompatActivity() {
         arrayListOf<String>("red", "pink", "orange", "yellow", "purple", "blue", "skyblue", "green")
     var checkViewList = arrayListOf<View>()
     var btnViewList = arrayListOf<View>()
+    var selectedColor = "red"
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerEditBinding.inflate(layoutInflater)
+
+
         initLayout()
         setContentView(binding.root)
     }
 
     fun initLayout() {
+        Log.d("qwerty123", RetrofitUtil.accessTokenString!!.toString())
+
+        setCheckViewList()
+        setCheckViewOnClickListener()
+
         binding.apply {
             val timerTitle = intent.getStringExtra("timerTitle")
             binding.tvTimerEditTitle.setText(timerTitle)
+
+            if (timerTitle.equals("타이머 수정")) {
+                val color = intent.getStringExtra("taskColor")
+                val name = intent.getStringExtra("taskName")
+                val time = intent.getStringExtra("taskTime")
+
+                Log.i("color", color!!)
+
+                editTextName.setText(name)
+                tvWorkTimeClock.setText(time)
+                if (color != null) {
+                    updateCheckedColor(color)
+                }
+
+            } else if (timerTitle.equals("타이머 추가")) {
+                // 새로 추가 시 코드
+                updateCheckedColor("red")
+
+            }
 
             textInputLayoutName.hint = ""
             editTextName.hint = "ex) 시험공부"
@@ -41,11 +78,12 @@ class TimerEditActivity : AppCompatActivity() {
                     }
                 }
             editTextName.setOnKeyListener { view, keyCode, keyEvent ->
-                if(keyEvent.action == KeyEvent.ACTION_DOWN){
-                    if(keyCode == KeyEvent.KEYCODE_ENTER){
+                if (keyEvent.action == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
                         editTextName.clearFocus()
                         clTimerName.requestFocus()
-                        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        val inputMethodManager =
+                            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         inputMethodManager.hideSoftInputFromWindow(editTextName.windowToken, 0)
                     }
                 }
@@ -53,19 +91,41 @@ class TimerEditActivity : AppCompatActivity() {
             }
             llWorkTime.setOnClickListener {
                 val str = tvWorkTimeClock.text.toString()
-                val workTimeDialog = TimeChooseDialog(this@TimerEditActivity, "작업 시간", 480, str.substring(0, str.length-3).toInt())
+                val workTimeDialog = TimeChooseDialog(
+                    this@TimerEditActivity,
+                    "작업 시간",
+                    480,
+                    str.substring(0, str.length - 5).trim().toInt()
+                )
                 workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
             }
             llRestTime.setOnClickListener {
                 val str = tvRestTimeClock.text.toString()
-                val restTimeDialog = TimeChooseDialog(this@TimerEditActivity, "쉬는 시간", 480, str.substring(0, str.length-3).toInt())
+                val restTimeDialog = TimeChooseDialog(
+                    this@TimerEditActivity,
+                    "쉬는 시간",
+                    480,
+                    str.substring(0, str.length - 5).toInt()
+                )
                 restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
             }
-            setCheckViewList()
-            setCheckViewOnClickListener()
-            updateCheckedColor("red")
+
             btnSave.setOnClickListener {
-                finish()
+                val name = binding.editTextName.text.toString()
+                val color = selectedColor
+                val workTime = binding.tvWorkTimeClock.text.toString().split(":")
+                val workHour = workTime[0].trim().toInt() / 60
+                val workMin = workTime[0].trim().toInt() % 60
+                val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].trim().toInt()
+
+                if (tvTimerEditTitle.text.toString().equals("타이머 추가")) {
+                    postPpomo()
+                } else if (tvTimerEditTitle.text.toString().equals("타이머 수정")) {
+                    val Id = intent.getStringExtra("PpomoId")!!.toInt()
+                    putPpomo(Id)
+                } else {
+                    Log.d("error", "btnSave")
+                }
             }
             icTimerEditBack.setOnClickListener {
                 finish()
@@ -87,6 +147,7 @@ class TimerEditActivity : AppCompatActivity() {
         }
         val i = colorList.indexOf(color)
         checkViewList[i].visibility = View.VISIBLE
+        selectedColor = color
     }
 
     fun setCheckViewList() {
@@ -108,4 +169,67 @@ class TimerEditActivity : AppCompatActivity() {
         btnViewList.add(binding.btnColorSkyblue)
         btnViewList.add(binding.btnColorGreen)
     }
+
+    private fun postPpomo() {
+        val name = binding.editTextName.text.toString()
+        val color = selectedColor
+        val workTime = binding.tvWorkTimeClock.text.toString().split(":")
+        val workHour = workTime[0].toInt() / 60
+        val workMin = workTime[0].toInt() % 60
+        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].toInt()
+
+        val Ppomo = Ppomodoro(name, color, workHour, workMin, restTime)
+
+        RetrofitUtil.getRetrofit().PostPpomodoro(Ppomo).enqueue(object :
+            Callback<PpomodorosResponse> {
+            override fun onResponse(
+                call: Call<PpomodorosResponse>,
+                response: Response<PpomodorosResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.i("POSTPpomo/Success", response.body()!!.toString())
+//                    val ppomoId = response.body()!!.toString().toInt()
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<PpomodorosResponse>, t: Throwable) {
+                Log.i("POSTPpomo/Failure", "fail")
+
+            }
+        })
+
+    }
+
+    private fun putPpomo(ppomoId: Int) {
+        val name = binding.editTextName.text.toString()
+        val color = selectedColor
+        val workTime = binding.tvWorkTimeClock.text.toString().split(":")
+        val workHour = workTime[0].trim().toInt() / 60
+        val workMin = workTime[0].trim().toInt() % 60
+        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].trim().toInt()
+
+
+        var Ppomo = Ppomodoro(name!!, color!!, workHour, workMin, restTime)
+
+        RetrofitUtil.getRetrofit().PutPpomodoro(ppomoId, Ppomo).enqueue(object :
+            Callback<PpomodorosResponse> {
+            override fun onResponse(
+                call: Call<PpomodorosResponse>,
+                response: Response<PpomodorosResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.i("PUTPpomo/Success", response.body()!!.toString())
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<PpomodorosResponse>, t: Throwable) {
+                Log.i("PUTPpomo/Failure", "fail")
+
+            }
+        })
+    }
 }
+
+
