@@ -8,8 +8,7 @@ import android.os.Message
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.bangwool.LoginActivity
-import com.example.bangwool.MainActivity
+import com.example.bangwool.R
 import com.example.bangwool.databinding.ActivityTimerBinding
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WorkRequest
@@ -149,7 +148,7 @@ class TimerActivity : AppCompatActivity() {
 
     //타이머 작동
     private fun startTimer() {
-        timerTask = timer(period = 10) {
+        timerTask = timer(period = 1) {
             if(time<=0){
                 if(isWorking){
                     clearToRestTime()
@@ -166,6 +165,20 @@ class TimerActivity : AppCompatActivity() {
             val min = time / 6000
             val sec = time % 6000 / 100
             val milli = time % 100
+
+            if(isWorking) {
+                if (time / 100 % 2 == 0) {
+                    binding.ivStudyTomato.setImageResource(R.drawable.studying_ppomo_mdpi)
+                } else {
+                    binding.ivStudyTomato.setImageResource(R.drawable.studying_ppomo2_mdpi)
+                }
+            } else {
+                if (time / 100 % 2 == 0) {
+                    binding.ivStudyTomato.setImageResource(R.drawable.happy_ppomo1_mdpi)
+                } else {
+                    binding.ivStudyTomato.setImageResource(R.drawable.happy_ppomo2_mdpi)
+                }
+            }
 
             runOnUiThread {
                 var upgradedMin = min.toString()
