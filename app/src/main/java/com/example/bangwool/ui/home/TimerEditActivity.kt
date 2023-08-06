@@ -32,6 +32,7 @@ class TimerEditActivity : AppCompatActivity() {
     }
 
     fun initLayout() {
+        Log.d("qwerty123", RetrofitUtil.accessTokenString!!.toString())
         binding.apply {
             val timerTitle = intent.getStringExtra("timerTitle")
             binding.tvTimerEditTitle.setText(timerTitle)
@@ -131,12 +132,12 @@ class TimerEditActivity : AppCompatActivity() {
     }
 
     private fun postPpomo() {
-        val name = binding.editTextName.toString()
+        val name = binding.editTextName.text.toString()
         val color = selectedColor
         val workTime = binding.tvWorkTimeClock.text.toString().split(":")
         val workHour = workTime[0].toInt() / 60
         val workMin = workTime[0].toInt() % 60
-        val restTime = binding.tvRestTimeClock.text.toString().toInt()
+        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].toInt()
 
         val Ppomo = Ppomodoros(name, color, workHour, workMin, restTime)
 
