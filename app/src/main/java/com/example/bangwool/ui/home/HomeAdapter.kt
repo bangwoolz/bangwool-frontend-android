@@ -34,6 +34,7 @@ class HomeAdapter(
     interface OnItemClickListener {
         fun onDeleteItemClick(homeItem: PpomodoroId)
         fun onEditItemClick(homeItem: PpomodoroId)
+
     }
 
     fun setOnClickListener(onItemClickListener: OnItemClickListener) {
@@ -63,6 +64,12 @@ class HomeAdapter(
 //                homeItemTaskTimeBtn.setImageResource(R.drawable.ic_play_filled)
                 homeItemTaskTimeBtn.setOnClickListener {
                     val i = Intent(context, TimerActivity::class.java)
+                    i.putExtra("id", item.id.toString())
+                    i.putExtra("name", item.name)
+                    i.putExtra("color", item.color)
+                    i.putExtra("workHour", item.workHour.toString())
+                    i.putExtra("workMin", item.workMin.toString())
+                    i.putExtra("restTime", item.restTime.toString())
                     context.startActivity(i)
                 }
                 modifyBtn.setOnClickListener {
