@@ -5,8 +5,9 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.PUT
 
 interface RetrofitInterface {
 
@@ -19,6 +20,15 @@ interface RetrofitInterface {
 //    fun getWeeklyRanking(
 //        @Body request: WeeklyRankingRequest
 //    ): Call<RankingResponse>
+
+    @POST("/work/{ppomodoroId}")
+    fun RecordWork(
+        @Path("ppomodoroId") ppomodoroId: Int,
+        @Body requestbody: WorkRequest
+    ): Call<WorkResponse>
+    @GET("/work/today")
+    fun WorkToday(
+    ): Call<Works>
 
     @GET("/ppomodoros")
     fun GetPpomodoro(): Call<Ppomodoros>
@@ -60,6 +70,11 @@ interface RetrofitLoginInterface {
     fun AuthLogin(
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
+  
+    @GET("/members/exist/email")
+    fun ExistEmail(
+        @Query("email") email: String
+    ): Call<ExistResponse>
 
 //    @POST("/daily-ranking")
 //    fun getDailyRanking(
@@ -71,6 +86,10 @@ interface RetrofitLoginInterface {
 //        @Body request: WeeklyRankingRequest
 //    ): Call<RankingResponse>
 
+    @GET("/members/exist/nickname")
+    fun ExistNickname(
+        @Query("nickname") nickname: String
+    ): Call<ExistResponse>
 }
 
 
