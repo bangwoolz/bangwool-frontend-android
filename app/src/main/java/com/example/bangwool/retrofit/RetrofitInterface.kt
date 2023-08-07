@@ -1,25 +1,54 @@
 package com.example.bangwool.retrofit
 
-import android.telecom.Call
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface RetrofitInterface {
 
-    @POST("/daily-ranking")
-    fun getDailyRanking(
-        @Body request: DailyRankingRequest
-    ): Call<RankingResponse>
+//    @POST("/daily-ranking")
+//    fun getDailyRanking(
+//        @Body request: DailyRankingRequest
+//    ): Call<RankingResponse>
+//
+//    @POST("/weekly-ranking")
+//    fun getWeeklyRanking(
+//        @Body request: WeeklyRankingRequest
+//    ): Call<RankingResponse>
 
-    @POST("/weekly-ranking")
-    fun getWeeklyRanking(
-        @Body request: WeeklyRankingRequest
-    ): Call<RankingResponse>
+    @GET("/ppomodoros")
+    fun GetPpomodoro(): Call<Ppomodoros>
 
+    @POST("/ppomodoros")
+    fun PostPpomodoro(
+        @Body requestBody: Ppomodoro
+    ): Call<PpomodorosResponse>
+
+    @PUT("/ppomodoros/{ppomodoroId}")
+    fun PutPpomodoro(
+        @Path("ppomodoroId") ppomodoroId: Int,
+        @Body requestBody: Ppomodoro
+    ): Call<PpomodorosResponse>
+
+    @DELETE("/ppomodoros/{ppomodoroId}")
+    fun DeletePpomodoro(
+        @Path("ppomodoroId") ppomodoroId: Int
+    ): Call<Void>
+
+    @POST("/work/month")
+    fun GetMonthWorkStatistic(
+        @Body requestBody: MonthWorkStatisticRequest
+    ): Call<MonthWorkStatisticResponse>
+
+    @GET("/work/week")
+    fun GetWeekWorkStatistic(): Call<WeekWorkStatisticResponse>
 
 }
+
 interface RetrofitLoginInterface {
 
     @POST("/members")
@@ -32,15 +61,15 @@ interface RetrofitLoginInterface {
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
 
-    @POST("/daily-ranking")
-    fun getDailyRanking(
-        @Body request: DailyRankingRequest
-    ): Call<RankingResponse>
-
-    @POST("/weekly-ranking")
-    fun getWeeklyRanking(
-        @Body request: WeeklyRankingRequest
-    ): Call<RankingResponse>
+//    @POST("/daily-ranking")
+//    fun getDailyRanking(
+//        @Body request: DailyRankingRequest
+//    ): Call<RankingResponse>
+//
+//    @POST("/weekly-ranking")
+//    fun getWeeklyRanking(
+//        @Body request: WeeklyRankingRequest
+//    ): Call<RankingResponse>
 
 }
 
