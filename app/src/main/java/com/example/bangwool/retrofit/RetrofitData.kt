@@ -22,6 +22,19 @@ data class TokenResponse(
     @SerializedName("token") val token: String
 )
 
+data class WorkRequest(
+    @SerializedName("workedHour") val workedHour: Int,
+    @SerializedName("workedMin") val workedMin : Int,
+)
+data class WorkResponse(
+    @SerializedName("id") val id: Int,
+)
+data class Works(
+    @SerializedName("ppomodoroId") val ppomodoroId: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workedMin") val workedMin: Int,
+    )
 data class PpomodoroId(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
