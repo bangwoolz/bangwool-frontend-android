@@ -1,6 +1,7 @@
 package com.example.bangwool.ui.ranking
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.databinding.FragmentRankingWeekBinding
 import com.example.bangwool.retrofit.RankingResponse
-import com.example.bangwool.retrofit.RetrofitClient
+import com.example.bangwool.retrofit.RetrofitInterface
+import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WeeklyRankingRequest
 import com.example.bangwool.retrofit.getAccessToken
 import retrofit2.Call
@@ -28,7 +30,7 @@ class RankingWeekFragment : Fragment() {
     ): View? {
         binding = FragmentRankingWeekBinding.inflate(inflater, container, false)
         initLayout()
-        fetchWeeklyRankingData() // 주간 랭킹 데이터 가져오는 메서드 호출
+        fetchWeeklyRankingData()
         return binding.root
     }
 
@@ -38,10 +40,9 @@ class RankingWeekFragment : Fragment() {
     }
 
     fun fetchWeeklyRankingData() {
-        val accessToken = getAccessToken(requireContext())
-        val apiService = RetrofitClient.createApiService()
+        RetrofitUtil.setAccessToken(getAccessToken(requireContext()))
+        val apiService = RetrofitUtil.getRetrofit()
 
-        // 주차 기간 계산 (월요일 오전 12시부터 현재시간까지하는 부분임..)
         val currentTime = Calendar.getInstance().timeInMillis
         val cal = Calendar.getInstance()
         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
@@ -51,11 +52,9 @@ class RankingWeekFragment : Fragment() {
         val start = cal.timeInMillis
         val end = currentTime
 
-        // 주간 랭킹 조회 요청하는 부분
         apiService.getWeeklyRanking(WeeklyRankingRequest(start.toInt(), end.toInt())).enqueue(object : Callback<RankingResponse> {
             override fun onResponse(call: Call<RankingResponse>, response: Response<RankingResponse>) {
                 if (response.isSuccessful) {
-                    // API 응답 성공 시 랭킹 리스트 업데이트..
                     val rankingItems = response.body()?.rankingResponses
                     rankingList.clear()
                     rankingItems?.let {
@@ -65,12 +64,12 @@ class RankingWeekFragment : Fragment() {
                     }
                     adapter.notifyDataSetChanged()
                 } else {
-                    // API 응답 실패 시 처리하는 부분..?
+                    Log.e("RankingWeekFragment", "API 응답 실패: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<RankingResponse>, t: Throwable) {
-                // 통신 실패 시 처리하는 부분.. 필요한지..?
+                Log.e("RankingWeekFragment", "통신 실패: ${t.message}")
             }
         })
     }
