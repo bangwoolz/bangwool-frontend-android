@@ -68,6 +68,7 @@ class StatisticFragment : Fragment() {
             val dlg = GoalTimeDialog(requireContext())
             dlg.setOnOKClickedListener{ hour ->
                 binding.tvGoalTimeText.text = "${hour} 시간"
+                saveGoalTime(requireContext(),hour.toInt())
                 goalHour = hour.toInt()
             }
             dlg.show()
@@ -296,8 +297,8 @@ class StatisticFragment : Fragment() {
                     val works = response.body()!!.works
                     Log.d("","성공함 works:${works[0]}")
                     if(works[0]!=null){
-//                        val goalWorks = works.filter { item -> item.workHour>=goalHour }
-                        val goalWorks = works.filter { item -> item.workMin>=3 }
+                        val goalWorks = works.filter { item -> item.workHour>=goalHour }
+//                        val goalWorks = works.filter { item -> item.workMin>=3 }
                         val goalWorkDayArr = goalWorks.map{item->item.day}
                         makeCalender(inputDate,goalWorkDayArr)
                     } else {
