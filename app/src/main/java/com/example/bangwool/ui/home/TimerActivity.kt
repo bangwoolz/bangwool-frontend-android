@@ -1,5 +1,6 @@
 package com.example.bangwool.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -112,12 +113,11 @@ class TimerActivity : AppCompatActivity() {
             stopTimer()
 
             // 시간 서버로 전송처리
-
             if (isWorking) {
                 val m = sendingTime / 6000
                 sendingTime -= m * 6000
                 Log.d("qwerty1234", m.toString())
-                //send m
+                timerHandler.sendEmptyMessage(m)
             }
         }
 
@@ -132,7 +132,7 @@ class TimerActivity : AppCompatActivity() {
         binding.icXBtn.setOnClickListener {
             val m = sendingTime / 6000
             Log.d("qwerty1234", m.toString())
-            //send m
+            timerHandler.sendEmptyMessage(m)
             finish()
         }
 
@@ -148,9 +148,14 @@ class TimerActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    val timerHandler: Handler = object : Handler() {
+    val timerHandler: Handler = @SuppressLint("HandlerLeak")
+    object : Handler() {
         override fun handleMessage(msg: Message) {
-            //sendToServerWorkTime(workTotalMin/60,workTotalMin%60)
+            var m = msg.what
+            val h = m / 60
+            m %= 60
+            Log.d("qwerty2", "${h} : ${m}")
+            sendToServerWorkTime(h,m)
         }
     }
 
@@ -163,7 +168,7 @@ class TimerActivity : AppCompatActivity() {
                     val m = sendingTime / 6000
                     sendingTime -= m * 6000
                     Log.d("qwerty1234", m.toString())
-                    //send m
+                    timerHandler.sendEmptyMessage(m)
                     isWorking = false
                 } else {
                     clearToWorkTime()
