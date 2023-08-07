@@ -21,7 +21,12 @@ data class TokenResponse(
     @SerializedName("token") val token: String
 )
 //Ranking 데이터 클래스
-data class RankingRequest(
+data class DailyRankingRequest(
+    @SerializedName("start") val start: Int,
+    @SerializedName("end") val end: Int
+)
+
+data class WeeklyRankingRequest(
     @SerializedName("start") val start: Int,
     @SerializedName("end") val end: Int
 )
