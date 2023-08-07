@@ -21,6 +21,16 @@ interface RetrofitLoginInterface {
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
 
+    @POST("/daily-ranking")
+    fun getDailyRanking(
+        @Body request: DailyRankingRequest
+    ): Call<RankingResponse>
+
+    @POST("/weekly-ranking")
+    fun getWeeklyRanking(
+        @Body request: WeeklyRankingRequest
+    ): Call<RankingResponse>
+
 }
 
 
