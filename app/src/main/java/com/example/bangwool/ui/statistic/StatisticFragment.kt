@@ -13,6 +13,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.bangwool.databinding.FragmentStatisticBinding
+import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.WeekWorkStatisticResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.time.LocalDate
 import kotlin.properties.Delegates
 
@@ -122,6 +127,7 @@ class StatisticFragment : Fragment() {
                 calendarMonth++
             }
         }
+        logWeekWorkStatistic()
         return binding.root
     }
 
@@ -174,6 +180,29 @@ class StatisticFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun logWeekWorkStatistic() {
+        RetrofitUtil.getRetrofit().GetWeekWorkStatistic().enqueue(object :
+            Callback<WeekWorkStatisticResponse> {
+            override fun onResponse(
+                call: Call<WeekWorkStatisticResponse>,
+                response: Response<WeekWorkStatisticResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val works = response.body()!!.works
+                    Log.d("","성공함 works:${works}")
+                } else {
+                    Log.d("","실패함")
+
+                }
+            }
+
+            override fun onFailure(call: Call<WeekWorkStatisticResponse>, t: Throwable) {
+                Log.d("","실패함 onFailure")
+
+            }
+        })
     }
 
 }

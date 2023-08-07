@@ -2,6 +2,7 @@ package com.example.bangwool.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangwool.databinding.ActivityTimerBinding
@@ -16,6 +17,19 @@ class TimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
+
+
+        //필요한 곳에 옮겨서 사용 ㄱㄱ
+        val Id = intent.getStringExtra("id")!!.toInt()
+        val name = intent.getStringExtra("name")
+        val color = intent.getStringExtra("color")
+        val workHour = intent.getStringExtra("workHour")!!.toInt()
+        val workMin = intent.getStringExtra("workMin")!!.toInt()
+        val restTime = intent.getStringExtra("restTime")!!.toInt()
+
+        Log.d("getStringExtra", Id.toString()+name+color+workHour.toString()+workMin.toString()+restTime.toString())
+
+
         binding.btnContinue.setOnClickListener{
             binding.btnContinue.visibility = View.INVISIBLE
             binding.btnClear.visibility = View.INVISIBLE
