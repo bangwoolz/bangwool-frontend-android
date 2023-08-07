@@ -8,12 +8,12 @@ interface RetrofitInterface {
 
     @POST("/daily-ranking")
     fun getDailyRanking(
-        @Body request: DailyRankingRequest // 수정된 부분
+        @Body request: DailyRankingRequest
     ): Call<RankingResponse>
 
     @POST("/weekly-ranking")
     fun getWeeklyRanking(
-        @Body request: DailyRankingRequest // 수정된 부분
+        @Body request: WeeklyRankingRequest
     ): Call<RankingResponse>
 
 }
