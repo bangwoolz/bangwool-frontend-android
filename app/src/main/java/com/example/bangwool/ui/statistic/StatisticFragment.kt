@@ -143,17 +143,25 @@ class StatisticFragment : Fragment() {
                         calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.ic_circle_filled)
                         calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.white))
                         calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                        if(inputDate.month.value==nowDate.month.value){
+                            if(nowDate.dayOfMonth==calendarDay){
+                                calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_circle_underline_layout)
+                                calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                                todayView = calenderDayTextArr[i]
+                            }
+                        }
                     } else {
                         calenderDayTextArr[i].background = null
                         calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
-                    }
-                    if(inputDate.month.value==nowDate.month.value){
-                        if(nowDate.dayOfMonth==calendarDay){
-                            calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_underline_text)
-                            calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
-                            todayView = calenderDayTextArr[i]
+                        if(inputDate.month.value==nowDate.month.value){
+                            if(nowDate.dayOfMonth==calendarDay){
+                                calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_underline_text)
+                                calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                                todayView = calenderDayTextArr[i]
+                            }
                         }
                     }
+
                     calendarDay++
                 }
             } else {
@@ -164,17 +172,25 @@ class StatisticFragment : Fragment() {
                         calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.ic_circle_filled)
                         calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
                         calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                        if(inputDate.month.value==nowDate.month.value){
+                            if(nowDate.dayOfMonth==calendarDay){
+                                calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_circle_underline_layout)
+                                calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                                todayView = calenderDayTextArr[i]
+                            }
+                        }
                     } else {
                         calenderDayTextArr[i].background = null
                         calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
-                    }
-                    if(inputDate.month.value==nowDate.month.value){
-                        if(nowDate.dayOfMonth==calendarDay){
-                            calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_underline_text)
-                            calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
-                            todayView = calenderDayTextArr[i]
+                        if(inputDate.month.value==nowDate.month.value){
+                            if(nowDate.dayOfMonth==calendarDay){
+                                calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_underline_text)
+                                calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                                todayView = calenderDayTextArr[i]
+                            }
                         }
                     }
+
                     calendarDay++
                 } else {
                     calenderDayTextArr[i].text=(lastMonthDate.lengthOfMonth()-(firstNowDate.dayOfWeek.value-(i+2))).toString()
