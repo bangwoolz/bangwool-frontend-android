@@ -7,7 +7,7 @@
             android:shape="ring"
             android:useLevel="false"
             android:type="sweep">
-            <solid android:color="#9E9E9E" />
+            <solid android:color="#E5E5E5" />
         </shape>
     </item>
 
