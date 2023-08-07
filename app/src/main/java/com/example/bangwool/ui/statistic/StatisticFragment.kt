@@ -31,6 +31,7 @@ class StatisticFragment : Fragment() {
     lateinit var binding : FragmentStatisticBinding
     var goalHour =0
     var nowDate:LocalDate = LocalDate.now()
+    var weekHourArr:Array<Double> = arrayOf() // 월~일까지의 시간 배열 더미 데이터 (받아와야할 데이터)
     var calendarMonth:Int =LocalDate.now().month.value
     lateinit var todayView:TextView
     override fun onCreateView(
@@ -73,42 +74,6 @@ class StatisticFragment : Fragment() {
         }
 
 
-        val hourArr:Array<Double> = arrayOf(4.0,2.5,2.5,2.5,5.5,7.0,3.0) // 월~일까지의 시간 배열 더미 데이터 (받아와야할 데이터)
-        val hourTextArr:Array<TextView> = arrayOf(binding.tvMondayHourText,binding.tvTuesdayHourText,binding.
-        tvWednesdayHourText,binding.tvThursdayHourText,binding.tvFridayHourText,binding.tvSaturdayHourText,binding.tvSundayHourText)
-        val barArr:Array<View> = arrayOf(binding.vMondayHourBar,binding.vTuesdayHourBar,binding.vWednesdayHourBar,
-        binding.vThursdayHourBar,binding.vFridayHourBar,binding.vSaturdayHourBar,binding.vSundayHourBar)
-
-        // 그래프에 시간 text 입력
-        for (i in 1..hourTextArr.size) {
-            if(hourArr[i-1]%1==0.0){
-                hourTextArr[i-1].text = "${(hourArr[i-1]/1).toInt()}h"
-            } else {
-                hourTextArr[i-1].text = "${hourArr[i-1]}h"
-            }
-        }
-
-        // 그래프 max 값에 따른 그래프 길이 조절
-        val maxHour:Double = hourArr.max() //
-        if(maxHour==0.0){
-            for( i in 0 until hourArr.size){
-                val lp = barArr[i].layoutParams
-                lp.height = 0
-                barArr[i].layoutParams = lp
-            }
-        } else {
-            for( i in 0 until hourArr.size){
-                val lp = barArr[i].layoutParams
-                val dpValue = (180*(hourArr[i]/maxHour))
-                val viewHeight = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    dpValue.toFloat(),
-                    resources.displayMetrics
-                ).toInt()
-                lp.height = viewHeight
-                barArr[i].layoutParams = lp
-            }
-        }
 
         // 달력 구현하기
 
@@ -142,8 +107,8 @@ class StatisticFragment : Fragment() {
                 calendarMonth++
             }
         }
-        logWeekWorkStatistic()
-        logMonthWorkStatistic()
+        getWeekWorkStatistic()
+        getMonthWorkStatistic()
         return binding.root
     }
 
@@ -198,7 +163,44 @@ class StatisticFragment : Fragment() {
 
     }
 
-    private fun logWeekWorkStatistic() {
+    private fun makeWeekGraph() {
+        val hourTextArr:Array<TextView> = arrayOf(binding.tvMondayHourText,binding.tvTuesdayHourText,binding.
+        tvWednesdayHourText,binding.tvThursdayHourText,binding.tvFridayHourText,binding.tvSaturdayHourText,binding.tvSundayHourText)
+        val barArr:Array<View> = arrayOf(binding.vMondayHourBar,binding.vTuesdayHourBar,binding.vWednesdayHourBar,
+            binding.vThursdayHourBar,binding.vFridayHourBar,binding.vSaturdayHourBar,binding.vSundayHourBar)
+        // 그래프에 시간 text 입력
+        for (i in 1..hourTextArr.size) {
+            if(weekHourArr[i-1]%1==0.0){
+                hourTextArr[i-1].text = "${(weekHourArr[i-1]/1).toInt()}h"
+            } else {
+                hourTextArr[i-1].text = "${weekHourArr[i-1]}h"
+            }
+        }
+
+        // 그래프 max 값에 따른 그래프 길이 조절
+        val maxHour:Double = weekHourArr.max() //
+        if(maxHour==0.0){
+            for( i in 0 until weekHourArr.size){
+                val lp = barArr[i].layoutParams
+                lp.height = 0
+                barArr[i].layoutParams = lp
+            }
+        } else {
+            for( i in 0 until weekHourArr.size){
+                val lp = barArr[i].layoutParams
+                val dpValue = (180*(weekHourArr[i]/maxHour))
+                val viewHeight = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    dpValue.toFloat(),
+                    resources.displayMetrics
+                ).toInt()
+                lp.height = viewHeight
+                barArr[i].layoutParams = lp
+            }
+        }
+    }
+
+    private fun getWeekWorkStatistic() {
         RetrofitUtil.getRetrofit().GetWeekWorkStatistic().enqueue(object :
             Callback<WeekWorkStatisticResponse> {
             override fun onResponse(
@@ -207,6 +209,17 @@ class StatisticFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val works = response.body()!!.works
+                    for (i in 1 .. 7){
+                        val matchedItem = works.find { item -> item.dayOfWeek == i }
+                        if(matchedItem!=null){
+                            val totalTime:Double = matchedItem.workHour.toDouble() + (matchedItem.workMin*10/60).toDouble()/10.0
+                            weekHourArr=weekHourArr.plus(totalTime)
+                        } else {
+                            weekHourArr=weekHourArr.plus(0.0)
+
+                        }
+                    }
+                    makeWeekGraph()
                     Log.d("","성공함 works:${works}")
                 } else {
                     Log.d("","실패함")
@@ -221,7 +234,7 @@ class StatisticFragment : Fragment() {
         })
     }
 
-    private fun logMonthWorkStatistic() {
+    private fun getMonthWorkStatistic() {
         val monthWorkStatisticRequest = MonthWorkStatisticRequest(2023,8)
         RetrofitUtil.getRetrofit().GetMonthWorkStatistic(monthWorkStatisticRequest).enqueue(object :
             Callback<MonthWorkStatisticResponse> {
