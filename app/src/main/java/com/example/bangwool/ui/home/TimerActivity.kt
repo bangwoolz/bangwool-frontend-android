@@ -22,13 +22,17 @@ import kotlin.concurrent.timer
 
 class TimerActivity : AppCompatActivity() {
     lateinit var binding:ActivityTimerBinding
-    private var workHour = 0
+
+    //타이머 intent 값
     private var ppomodoroId = 0
+    private var color = "purple"
+    private var workHour = 0
     private var workMin = 2
+    private var restTime = 0
+
+    //
     private var testSec = 0
     private var testSec2 = 0
-    private var restTime = 0
-    private var color = "purple"
     private val workTime = 100 * 60 * workMin + 100 * 60 * 60 * workHour + 100 * testSec
     private var time = workTime
     private var recentTime = workTime
@@ -39,10 +43,8 @@ class TimerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerBinding.inflate(layoutInflater)
 
-        val intent = intent //전달할 데이터를 받을 Intent
-
-        //타이머 색깔 설정
-
+        //전달할 데이터를 받을 Intent
+        val intent = intent
 
         ppomodoroId = intent.getStringExtra("id")!!.toInt()
         val name = intent.getStringExtra("name")
@@ -69,6 +71,13 @@ class TimerActivity : AppCompatActivity() {
         Log.d("getStringExtra", ppomodoroId.toString()+name+color+workHour.toString()+workMin.toString()+restTime.toString())
 
 
+        binding.btnStart.setOnClickListener{
+            binding.btnStart.visibility = View.INVISIBLE
+            binding.btnStop.visibility=View.VISIBLE
+            binding.ivHappyTomato.visibility=View.GONE
+            binding.ivStudyTomato.visibility=View.VISIBLE
+            startTimer()    //타이머 작동
+        }
         binding.btnContinue.setOnClickListener{
             binding.btnContinue.visibility = View.INVISIBLE
             binding.btnClear.visibility = View.INVISIBLE
@@ -76,17 +85,6 @@ class TimerActivity : AppCompatActivity() {
             binding.ivHappyTomato.visibility=View.GONE
             binding.ivStudyTomato.visibility=View.VISIBLE
             startTimer()    //타이머 작동
-        }
-        binding.btnClear.setOnClickListener{
-            clearBtns()
-            if(isWorking){
-                clearToWorkTime()
-            } else {
-                clearToRestTime()
-            }
-        }
-        binding.icXBtn.setOnClickListener{
-            finish()
         }
         binding.btnStop.setOnClickListener{
             binding.btnContinue.visibility = View.VISIBLE
@@ -106,12 +104,17 @@ class TimerActivity : AppCompatActivity() {
                 sendToServerWorkTime(diffMin/60,diffMin%60)
             }
         }
-        binding.btnStart.setOnClickListener{
-            binding.btnStart.visibility = View.INVISIBLE
-            binding.btnStop.visibility=View.VISIBLE
-            binding.ivHappyTomato.visibility=View.GONE
-            binding.ivStudyTomato.visibility=View.VISIBLE
-            startTimer()    //타이머 작동
+
+        binding.btnClear.setOnClickListener{
+            clearBtns()
+            if(isWorking){
+                clearToWorkTime()
+            } else {
+                clearToRestTime()
+            }
+        }
+        binding.icXBtn.setOnClickListener{
+            finish()
         }
 
         binding.icSetting.setOnClickListener {
@@ -129,11 +132,11 @@ class TimerActivity : AppCompatActivity() {
             if (msg.what == 0) {
                 if(recentTime == workTime){
                     //sendToServerWorkTime(workHour,workMin)
-                    Log.d("","서버로 ${workHour}시간 ${workMin}분 전송!!")
+                    Log.d("qwerty123","서버로 ${workHour}시간 ${workMin}분 전송!!")
                 } else {
                     val workTotalMin = workHour * 60 + workMin - totalSendedMin
                     //sendToServerWorkTime(workTotalMin/60,workTotalMin%60)
-                    Log.d("","서버로 ${workTotalMin/60}시간 ${workTotalMin%60}분 전송!!")
+                    Log.d("qwerty123","서버로 ${workTotalMin/60}시간 ${workTotalMin%60}분 전송!!")
                 }
                 clearBtns()
                 binding.ivHappyTomato.visibility=View.VISIBLE
@@ -193,7 +196,6 @@ class TimerActivity : AppCompatActivity() {
                     binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
                     binding.progressbar.progress=time
                 }
-
             }
         }
     }
@@ -216,7 +218,10 @@ class TimerActivity : AppCompatActivity() {
         if(sec<10){
             upgradedSec= "0"+sec.toString()
         }
-        binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
+        Log.d("qwerty123", "${upgradedMin} : ${upgradedSec}")
+        runOnUiThread {
+            binding.tvTimerMain!!.text = upgradedMin + " : " + upgradedSec
+        }
     }
 
 
