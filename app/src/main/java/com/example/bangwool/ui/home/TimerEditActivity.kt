@@ -95,7 +95,7 @@ class TimerEditActivity : AppCompatActivity() {
                     this@TimerEditActivity,
                     "작업 시간",
                     480,
-                    str.substring(0, str.length - 5).trim().toInt()
+                    str.split(":")[0].trim().toInt()
                 )
                 workTimeDialog.showWorkTimeDialog(tvWorkTimeClock)
             }
@@ -105,7 +105,7 @@ class TimerEditActivity : AppCompatActivity() {
                     this@TimerEditActivity,
                     "쉬는 시간",
                     480,
-                    str.substring(0, str.length - 5).toInt()
+                    str.split(":")[0].trim().toInt()
                 )
                 restTimeDialog.showWorkTimeDialog(tvRestTimeClock)
             }
@@ -174,9 +174,9 @@ class TimerEditActivity : AppCompatActivity() {
         val name = binding.editTextName.text.toString()
         val color = selectedColor
         val workTime = binding.tvWorkTimeClock.text.toString().split(":")
-        val workHour = workTime[0].toInt() / 60
-        val workMin = workTime[0].toInt() % 60
-        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].toInt()
+        val workHour = workTime[0].trim().toInt() / 60
+        val workMin = workTime[0].trim().toInt() % 60
+        val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].trim().toInt()
 
         val Ppomo = Ppomodoro(name, color, workHour, workMin, restTime)
 

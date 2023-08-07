@@ -121,14 +121,14 @@ class PasswordActivity : AppCompatActivity() {
                 } else {
                     loginIcErrorEmail.visibility = View.VISIBLE
                     pwTextInputLayout.isErrorEnabled = true
-                    pwTextInputLayout.error = "    비밀번호가 달라요. 다시 입력해주세요"
+                    pwTextInputLayout.error = "        비밀번호가 달라요. 다시 입력해주세요"
                 }
             }
 
             override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
                 loginIcErrorEmail.visibility = View.VISIBLE
                 pwTextInputLayout.isErrorEnabled = true
-                pwTextInputLayout.error = "    비밀번호가 달라요. 다시 입력해주세요"
+                pwTextInputLayout.error = "        비밀번호가 달라요. 다시 입력해주세요"
             }
 
         })
