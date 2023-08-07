@@ -1,11 +1,22 @@
 package com.example.bangwool.retrofit
 
+import android.telecom.Call
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RetrofitInterface {
+
+    @POST("/daily-ranking")
+    fun getDailyRanking(
+        @Body request: DailyRankingRequest
+    ): Call<RankingResponse>
+
+    @POST("/weekly-ranking")
+    fun getWeeklyRanking(
+        @Body request: WeeklyRankingRequest
+    ): Call<RankingResponse>
 
 
 }
@@ -20,6 +31,16 @@ interface RetrofitLoginInterface {
     fun AuthLogin(
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
+
+    @POST("/daily-ranking")
+    fun getDailyRanking(
+        @Body request: DailyRankingRequest
+    ): Call<RankingResponse>
+
+    @POST("/weekly-ranking")
+    fun getWeeklyRanking(
+        @Body request: WeeklyRankingRequest
+    ): Call<RankingResponse>
 
 }
 
