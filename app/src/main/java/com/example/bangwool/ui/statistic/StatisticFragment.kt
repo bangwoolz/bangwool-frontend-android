@@ -17,6 +17,9 @@ import com.example.bangwool.retrofit.MonthWorkStatisticRequest
 import com.example.bangwool.retrofit.MonthWorkStatisticResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WeekWorkStatisticResponse
+import com.example.bangwool.retrofit.getGoalTime
+import com.example.bangwool.retrofit.removeGoalTime
+import com.example.bangwool.retrofit.saveGoalTime
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,18 +39,29 @@ class StatisticFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStatisticBinding.inflate(inflater, container, false)
-
-        // 목표시간 설정 버튼 클릭시 event
-        binding.llCalenderAdd.setOnClickListener{
-            val dlg = GoalTimeDialog(requireContext())
-            dlg.setOnOKClickedListener{ hour ->
-                binding.tvGoalTimeText.text = "${hour} 시간"
-                goalHour = hour.toInt()
-                binding.llCalenderMain.visibility = View.VISIBLE
-                binding.llCalenderAdd.visibility = View.GONE
+//        removeGoalTime(requireContext())
+//        Log.d("","${getGoalTime(requireContext())}sdfafa")
+        val localGoalTime = getGoalTime(requireContext()).toInt()
+        if(localGoalTime==0){
+            // 목표시간 설정 버튼 클릭시 event
+            binding.llCalenderAdd.setOnClickListener{
+                val dlg = GoalTimeDialog(requireContext())
+                dlg.setOnOKClickedListener{ hour ->
+                    binding.tvGoalTimeText.text = "${hour} 시간"
+                    goalHour = hour.toInt()
+                    saveGoalTime(requireContext(),hour.toInt())
+                    binding.llCalenderMain.visibility = View.VISIBLE
+                    binding.llCalenderAdd.visibility = View.GONE
+                }
+                dlg.show()
             }
-            dlg.show()
+        } else {
+            goalHour = localGoalTime
+            binding.tvGoalTimeText.text = "${localGoalTime} 시간"
+            binding.llCalenderMain.visibility = View.VISIBLE
+            binding.llCalenderAdd.visibility = View.GONE
         }
+
 
         binding.llGoalTimeEditText.setOnClickListener{
             val dlg = GoalTimeDialog(requireContext())

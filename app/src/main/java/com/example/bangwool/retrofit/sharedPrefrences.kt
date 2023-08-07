@@ -24,3 +24,21 @@ fun getMemberId(JWTEncoded:String): Int {
     val memberId:Int = decodedData["sub"].toString().toInt()
     return memberId
 }
+
+fun saveGoalTime(context: Context, goalTime: Int) {
+    val pref =
+        context.getSharedPreferences("goalTime_spf", Context.MODE_PRIVATE) //shared key 설정
+    val edit = pref.edit() // 수정모드
+    edit.putString("goalTime", goalTime.toString()) // 값 넣기
+    edit.apply() // 적용하기
+}
+fun getGoalTime(context: Context): String {
+    val spf = context.getSharedPreferences("goalTime_spf", AppCompatActivity.MODE_PRIVATE)
+    return spf.getString("goalTime", 0.toString())!!
+}
+fun removeGoalTime(context: Context) {
+    val pref = context.getSharedPreferences("goalTime_spf", AppCompatActivity.MODE_PRIVATE)
+    val edit = pref.edit() // 수정모드
+    edit.remove("goalTime")
+    edit.apply()
+}
