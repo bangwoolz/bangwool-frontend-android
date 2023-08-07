@@ -216,6 +216,17 @@ class StatisticFragment : Fragment() {
             }
         }
 
+        // 그래프 색깔 설정
+        for (i in 0 until hourTextArr.size) {
+            if(weekHourArr[i]>=goalHour.toDouble()){
+                barArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.statistic_purple))
+                hourTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.statistic_purple))
+            } else {
+                barArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.statistic_light_purple))
+                hourTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.statistic_light_purple))
+            }
+        }
+
         // 그래프 max 값에 따른 그래프 길이 조절
         val maxHour:Double = weekHourArr.max() //
         if(maxHour==0.0){
