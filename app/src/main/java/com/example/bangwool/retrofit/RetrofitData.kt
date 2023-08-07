@@ -87,6 +87,10 @@ data class MonthWorkStatisticRequest(
 )
 
 data class MonthWorkStatisticResponse(
+    @SerializedName("works") val works: List<MonthWorkStatistic>,
+    )
+
+data class MonthWorkStatistic(
     @SerializedName("month") val month: Int,
     @SerializedName("day") val day: Int,
     @SerializedName("workHour") val workHour: Int,
