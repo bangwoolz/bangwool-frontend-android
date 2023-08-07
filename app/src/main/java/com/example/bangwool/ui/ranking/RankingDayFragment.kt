@@ -1,16 +1,19 @@
 package com.example.bangwool.ui.ranking
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentRankingDayBinding
+import com.example.bangwool.databinding.FragmentRankingWeekBinding
 import com.example.bangwool.retrofit.DailyRankingRequest
 import com.example.bangwool.retrofit.RankingResponse
-import com.example.bangwool.retrofit.RetrofitClient
+import com.example.bangwool.retrofit.RetrofitInterface
+import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.WeeklyRankingRequest
 import com.example.bangwool.retrofit.getAccessToken
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +34,6 @@ class RankingDayFragment : Fragment() {
 
         initLayout()
 
-        // 일간 랭킹 데이터 가져오는 메서드 호출
         fetchDailyRankingData()
 
         return binding.root
@@ -42,15 +44,10 @@ class RankingDayFragment : Fragment() {
         binding.rvDayRanking.adapter = adapter
     }
 
-    // 일간 랭킹 데이터 가져오는 메서드
     fun fetchDailyRankingData() {
-        // 액세스 토큰
-        val accessToken = getAccessToken(requireContext())
+        RetrofitUtil.setAccessToken(getAccessToken(requireContext()))
+        val apiService = RetrofitUtil.getRetrofit()
 
-        // Retrofit API 서비스
-        val apiService = RetrofitClient.createApiService()
-
-        // 현재 시간 계산 (오전 6시부터 현재시간까지 이거 맞는지..??)
         val currentTime = Calendar.getInstance().timeInMillis
         val sixAM = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 6)
@@ -60,28 +57,26 @@ class RankingDayFragment : Fragment() {
         }.timeInMillis
 
         val start = if (currentTime < sixAM) 0 else ((currentTime - sixAM) / (1000 * 60)).toInt()
-        val end = start // 일간 랭킹은 현재 시간까지..?
+        val end = start
 
-        // 일간 랭킹 조회
         apiService.getDailyRanking(DailyRankingRequest(start, end)).enqueue(object : Callback<RankingResponse> {
             override fun onResponse(call: Call<RankingResponse>, response: Response<RankingResponse>) {
                 if (response.isSuccessful) {
-                    // API 응답 성공 시 랭킹 리스트 업데이트..
                     val rankingItems = response.body()?.rankingResponses
                     rankingList.clear()
                     rankingItems?.let {
                         for (item in it) {
-                            rankingList.add(RankingInfo(item.rank,0, item.nickname, item.workedHour * 60 + item.workedMin))
+                            rankingList.add(RankingInfo(item.rank, 0, item.nickname, item.workedHour * 60 + item.workedMin))
                         }
                     }
                     adapter.notifyDataSetChanged()
                 } else {
-                    // API 응답 실패시에 처리하는 부분임
+                    Log.e("RankingWeekFragment", "API 응답 실패: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<RankingResponse>, t: Throwable) {
-                // 통신 실패 시 처리하는 부분임
+                Log.e("RankingWeekFragment", "통신 실패: ${t.message}")
             }
         })
     }

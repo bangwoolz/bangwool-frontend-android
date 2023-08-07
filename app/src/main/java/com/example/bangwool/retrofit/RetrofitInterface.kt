@@ -6,12 +6,12 @@ import retrofit2.http.POST
 
 interface RetrofitInterface {
 
-    @POST("/daily-ranking")
+    @POST("/ranking/day")
     fun getDailyRanking(
         @Body request: DailyRankingRequest
     ): Call<RankingResponse>
 
-    @POST("/weekly-ranking")
+    @POST("/ranking/week")
     fun getWeeklyRanking(
         @Body request: WeeklyRankingRequest
     ): Call<RankingResponse>
