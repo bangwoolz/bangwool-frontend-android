@@ -10,6 +10,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 val BASE_URL = BuildConfig.BASE_URL
@@ -17,6 +18,9 @@ val BASE_URL = BuildConfig.BASE_URL
 object RetrofitUtil {
 
     private var loginInstance: RetrofitLoginInterface? = null
+    private var instance: RetrofitInterface? = null
+    private var kakaoInstance : KakaoRetrofitInterface? = null
+    private var kakaoInstance2 : KakaoRetrofitInterface2? = null
     var accessTokenString = ""
 
 
@@ -37,9 +41,10 @@ object RetrofitUtil {
 
     fun getLoginRetrofit(): RetrofitLoginInterface {
         if (loginInstance == null) {
+            var gson= GsonBuilder().setLenient().create()
             val retrofit = Retrofit.Builder() //객체를 생성해 줍니다.
                 .baseUrl(BASE_URL) //통신할 서버 주소를 설정합니다.
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(getLoginOkHttpClient())
                 .build()
             loginInstance = retrofit.create(RetrofitLoginInterface::class.java)
@@ -48,18 +53,62 @@ object RetrofitUtil {
     }
 
 
-    fun getRetrofit(): RetrofitInterface {
-        val gson: Gson = GsonBuilder()
-            .setLenient()
-            .create()
-        var retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(getOkHttpClient())
-            .build()
+    private fun getKakaoOkhttpClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
 
-        return retrofit.create(RetrofitInterface::class.java)
+        if (BuildConfig.DEBUG) {
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            interceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .followRedirects(true)
+            .followSslRedirects(true)
+            .build()
     }
+
+    fun getKakaoRetrofit(): KakaoRetrofitInterface {
+        if (kakaoInstance == null) {
+            var gson= GsonBuilder().setLenient().create()
+            val retrofit = Retrofit.Builder() //객체를 생성해 줍니다.
+                .baseUrl(BASE_URL) //통신할 서버 주소를 설정합니다.
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .client(getKakaoOkhttpClient())
+                .build()
+            kakaoInstance = retrofit.create(KakaoRetrofitInterface::class.java)
+        }
+        return kakaoInstance!!
+    }
+
+    private fun getKakaoOkhttpClient2(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+
+        if (BuildConfig.DEBUG) {
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            interceptor.level = HttpLoggingInterceptor.Level.NONE
+        }
+
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
+    }
+
+    fun getKakaoRetrofit2(): KakaoRetrofitInterface2 {
+        if (kakaoInstance2 == null) {
+            var gson= GsonBuilder().setLenient().create()
+            val retrofit = Retrofit.Builder() //객체를 생성해 줍니다.
+                .baseUrl(BASE_URL) //통신할 서버 주소를 설정합니다.
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(getKakaoOkhttpClient())
+                .build()
+            kakaoInstance2 = retrofit.create(KakaoRetrofitInterface2::class.java)
+        }
+        return kakaoInstance2!!
+    }
+
 
     fun getOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
@@ -77,6 +126,21 @@ object RetrofitUtil {
         )
             .build()
     }
+
+    fun getRetrofit(): RetrofitInterface {
+        if (instance == null) {
+            var gson= GsonBuilder().setLenient().create()
+            val retrofit = Retrofit.Builder() //객체를 생성해 줍니다.
+                .baseUrl(BASE_URL) //통신할 서버 주소를 설정합니다.
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(getOkHttpClient())
+                .build()
+            instance = retrofit.create(RetrofitInterface::class.java)
+        }
+        return instance!!
+    }
+
+
 
     fun setAccessToken(str: String) {
         accessTokenString = str
