@@ -36,7 +36,9 @@
 
     <!--    TextInputLayout error message setting-->
     <style name="ErrorTextAppearance" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/androidDefault</item>
+        <item name="android:textColor">@color/secondary</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">@dimen/text_size_body5</item>
     </style>
 
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
