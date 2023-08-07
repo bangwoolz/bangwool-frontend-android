@@ -85,9 +85,10 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
+
                         <View
                             android:id="@+id/v_monday_hour_bar"
                             android:layout_width="12dp"
@@ -127,7 +128,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -169,7 +170,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -211,7 +212,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -253,7 +254,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -295,7 +296,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -337,7 +338,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View

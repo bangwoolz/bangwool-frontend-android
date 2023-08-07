@@ -13,6 +13,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.bangwool.databinding.FragmentStatisticBinding
+import com.example.bangwool.retrofit.MonthWorkStatisticRequest
+import com.example.bangwool.retrofit.MonthWorkStatisticResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WeekWorkStatisticResponse
 import retrofit2.Call
@@ -57,12 +59,11 @@ class StatisticFragment : Fragment() {
         }
 
 
-        val hourArr:Array<Double> = arrayOf(4.0,2.5,0.5,2.5,5.5,7.0,3.0) // 월~일까지의 시간 배열 더미 데이터 (받아와야할 데이터)
+        val hourArr:Array<Double> = arrayOf(4.0,2.5,2.5,2.5,5.5,7.0,3.0) // 월~일까지의 시간 배열 더미 데이터 (받아와야할 데이터)
         val hourTextArr:Array<TextView> = arrayOf(binding.tvMondayHourText,binding.tvTuesdayHourText,binding.
         tvWednesdayHourText,binding.tvThursdayHourText,binding.tvFridayHourText,binding.tvSaturdayHourText,binding.tvSundayHourText)
         val barArr:Array<View> = arrayOf(binding.vMondayHourBar,binding.vTuesdayHourBar,binding.vWednesdayHourBar,
         binding.vThursdayHourBar,binding.vFridayHourBar,binding.vSaturdayHourBar,binding.vSundayHourBar)
-
 
         // 그래프에 시간 text 입력
         for (i in 1..hourTextArr.size) {
@@ -97,7 +98,7 @@ class StatisticFragment : Fragment() {
 
         // 달력 구현하기
 
-        makeCalender(nowDate);
+        makeCalender(nowDate)
 
 
         binding.ivCalenderBackBtn.setOnClickListener{
@@ -128,6 +129,7 @@ class StatisticFragment : Fragment() {
             }
         }
         logWeekWorkStatistic()
+        logMonthWorkStatistic()
         return binding.root
     }
 
@@ -199,6 +201,30 @@ class StatisticFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<WeekWorkStatisticResponse>, t: Throwable) {
+                Log.d("","실패함 onFailure")
+
+            }
+        })
+    }
+
+    private fun logMonthWorkStatistic() {
+        val monthWorkStatisticRequest = MonthWorkStatisticRequest(2023,8)
+        RetrofitUtil.getRetrofit().GetMonthWorkStatistic(monthWorkStatisticRequest).enqueue(object :
+            Callback<MonthWorkStatisticResponse> {
+            override fun onResponse(
+                call: Call<MonthWorkStatisticResponse>,
+                response: Response<MonthWorkStatisticResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val works = response.body()!!.works
+                    Log.d("","성공함 works:${works}")
+                } else {
+                    Log.d("","실패함")
+
+                }
+            }
+
+            override fun onFailure(call: Call<MonthWorkStatisticResponse>, t: Throwable) {
                 Log.d("","실패함 onFailure")
 
             }
