@@ -77,7 +77,6 @@ class StatisticFragment : Fragment() {
 
         // 달력 구현하기
 
-        makeCalender(nowDate)
 
 
         binding.ivCalenderBackBtn.setOnClickListener{
@@ -91,7 +90,7 @@ class StatisticFragment : Fragment() {
                 if(calendarMonth==nowDate.month.value){
                     todayView.background = null
                 }
-                makeCalender(LocalDate.of(nowDate.year,calendarMonth-1,1))
+                getMonthWorkStatistic(LocalDate.of(nowDate.year,calendarMonth-1,1))
                 calendarMonth--
             }
         }
@@ -103,16 +102,16 @@ class StatisticFragment : Fragment() {
                 if(calendarMonth==1){
                     binding.ivCalenderBackBtn.imageTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_700))
                 }
-                makeCalender(LocalDate.of(nowDate.year,calendarMonth+1,1))
+                getMonthWorkStatistic(LocalDate.of(nowDate.year,calendarMonth+1,1))
                 calendarMonth++
             }
         }
         getWeekWorkStatistic()
-        getMonthWorkStatistic()
+        getMonthWorkStatistic(nowDate)
         return binding.root
     }
 
-    fun makeCalender(inputDate:LocalDate) {
+    fun makeCalender(inputDate:LocalDate, goalWorkDayArr: List<Int>) {
         var lastMonthDate = LocalDate.now()
         if(inputDate.month.value==1){
             lastMonthDate = LocalDate.of(inputDate.year-1,12,1)
@@ -137,12 +136,21 @@ class StatisticFragment : Fragment() {
             if(i>startIndex){
                 if(calendarDay>dateLength){
                     calenderDayTextArr[i].text=""
+                    calenderDayTextArr[i].background = null
                 } else {
                     calenderDayTextArr[i].text=calendarDay.toString()
-                    calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
+                    if(goalWorkDayArr.contains(calendarDay)){
+                        calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.ic_circle_filled)
+                        calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.white))
+                        calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                    } else {
+                        calenderDayTextArr[i].background = null
+                        calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
+                    }
                     if(inputDate.month.value==nowDate.month.value){
                         if(nowDate.dayOfMonth==calendarDay){
                             calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_underline_text)
+                            calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
                             todayView = calenderDayTextArr[i]
                         }
                     }
@@ -152,11 +160,26 @@ class StatisticFragment : Fragment() {
                 if(i+1==firstNowDate.dayOfWeek.value){
                     startIndex = i
                     calenderDayTextArr[i].text=calendarDay.toString()
-                    calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
+                    if(goalWorkDayArr.contains(calendarDay)){
+                        calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.ic_circle_filled)
+                        calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                        calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                    } else {
+                        calenderDayTextArr[i].background = null
+                        calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_700))
+                    }
+                    if(inputDate.month.value==nowDate.month.value){
+                        if(nowDate.dayOfMonth==calendarDay){
+                            calenderDayTextArr[i].background = resources.getDrawable(com.example.bangwool.R.drawable.custom_underline_text)
+                            calenderDayTextArr[i].backgroundTintList = ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.primary_300))
+                            todayView = calenderDayTextArr[i]
+                        }
+                    }
                     calendarDay++
                 } else {
                     calenderDayTextArr[i].text=(lastMonthDate.lengthOfMonth()-(firstNowDate.dayOfWeek.value-(i+2))).toString()
                     calenderDayTextArr[i].setTextColor(resources.getColor(com.example.bangwool.R.color.gray_300))
+                    calenderDayTextArr[i].background = null
                 }
             }
         }
@@ -234,8 +257,8 @@ class StatisticFragment : Fragment() {
         })
     }
 
-    private fun getMonthWorkStatistic() {
-        val monthWorkStatisticRequest = MonthWorkStatisticRequest(2023,8)
+    private fun getMonthWorkStatistic(inputDate: LocalDate) {
+        val monthWorkStatisticRequest = MonthWorkStatisticRequest(inputDate.year,inputDate.monthValue)
         RetrofitUtil.getRetrofit().GetMonthWorkStatistic(monthWorkStatisticRequest).enqueue(object :
             Callback<MonthWorkStatisticResponse> {
             override fun onResponse(
@@ -244,7 +267,16 @@ class StatisticFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val works = response.body()!!.works
-                    Log.d("","성공함 works:${works}")
+                    Log.d("","성공함 works:${works[0]}")
+                    if(works[0]!=null){
+//                        val goalWorks = works.filter { item -> item.workHour>=goalHour }
+                        val goalWorks = works.filter { item -> item.workMin>=3 }
+                        val goalWorkDayArr = goalWorks.map{item->item.day}
+                        makeCalender(inputDate,goalWorkDayArr)
+                    } else {
+                        makeCalender(inputDate, listOf())
+                    }
+
                 } else {
                     Log.d("","실패함")
 
