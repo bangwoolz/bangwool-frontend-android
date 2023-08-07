@@ -50,9 +50,16 @@ interface RetrofitLoginInterface {
     fun AuthLogin(
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
+  
+    @GET("/members/exist/email")
+    fun ExistEmail(
+        @Query("email") email: String
+    ): Call<ExistResponse>
 
-
-
+    @GET("/members/exist/nickname")
+    fun ExistNickname(
+        @Query("nickname") nickname: String
+    ): Call<ExistResponse>
 }
 
 
