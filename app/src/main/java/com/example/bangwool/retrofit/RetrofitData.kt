@@ -20,6 +20,22 @@ data class AuthLoginRequest(
 data class TokenResponse(
     @SerializedName("token") val token: String
 )
+//Ranking 데이터 클래스
+data class RankingRequest(
+    @SerializedName("start") val start: Int,
+    @SerializedName("end") val end: Int
+)
+
+data class RankingResponse(
+    @SerializedName("rankingResponses") val rankingResponses: List<RankingItem>
+)
+
+data class RankingItem(
+    @SerializedName("rank") val rank: Int,
+    @SerializedName("nickname") val nickname: String,
+    @SerializedName("workedHour") val workedHour: Int,
+    @SerializedName("workedMin") val workedMin: Int
+)
 
 //{
 //    "email": "uLTr2ZSzAxdbgfOU2nsh@lHlSNIDK94kj41TUtrvr9nEuHgZeWW.xi7.Ym.2VwK0clpM0.RRzCJwM1p-RwvfPGD2V9Re8BMkFYsAT8PxGnfBCOhO-TeX75x4kJUYjYyIriYL8mK",
