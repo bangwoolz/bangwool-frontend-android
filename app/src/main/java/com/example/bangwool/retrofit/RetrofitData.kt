@@ -22,6 +22,10 @@ data class TokenResponse(
     @SerializedName("token") val token: String
 )
 
+data class ExistResponse(
+    @SerializedName("exist") val exist: Boolean
+)
+
 data class WorkRequest(
     @SerializedName("workedHour") val workedHour: Int,
     @SerializedName("workedMin") val workedMin : Int,
@@ -35,6 +39,7 @@ data class Works(
     @SerializedName("workHour") val workHour: Int,
     @SerializedName("workedMin") val workedMin: Int,
     )
+
 data class PpomodoroId(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
