@@ -94,19 +94,35 @@
             android:progressTint="@color/primary_300" />
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/tv_timer_main"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="262dp"
-        android:fontFamily="@font/p_medium"
-        android:gravity="center"
-        android:text="34 : 35"
-        android:textAlignment="center"
-        android:textColor="@color/gray_900"
-        android:textSize="@dimen/timer_text_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ll_progressbar_box" />
+        app:layout_constraintTop_toTopOf="@+id/ll_progressbar_box">
+
+        <TextView
+            android:id="@+id/tv_timer_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="60dp"
+            android:fontFamily="@font/p_medium"
+            android:text="집중 시간"
+            android:textColor="@color/gray_600"
+            android:textSize="@dimen/text_size_body5" />
+
+        <TextView
+            android:id="@+id/tv_timer_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/p_medium"
+            android:gravity="center"
+            android:text="34 : 35"
+            android:textAlignment="center"
+            android:textColor="@color/gray_900"
+            android:textSize="@dimen/timer_text_size" />
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/iv_happy_tomato"
