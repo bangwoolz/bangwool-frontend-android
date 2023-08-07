@@ -50,7 +50,7 @@ class TimeChooseDialog(private val context: Context, val title: String, val rang
             val selectedMinute = binding.numberPickerMinute.value
 
             // 선택한 시간에 따라 형식 지정
-            val formattedTime = String.format("%d", selectedMinute) + ":00"
+            val formattedTime = String.format("%d", selectedMinute) + " : 00"
             // 텍스트 뷰에 반영
             textViewWorkTime.text = formattedTime
             dialog.dismiss()
