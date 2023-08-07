@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.databinding.FragmentRankingWeekBinding
-import com.example.bangwool.retrofit.DailyRankingRequest
 import com.example.bangwool.retrofit.RankingResponse
 import com.example.bangwool.retrofit.RetrofitClient
+import com.example.bangwool.retrofit.WeeklyRankingRequest
 import com.example.bangwool.retrofit.getAccessToken
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,7 +52,7 @@ class RankingWeekFragment : Fragment() {
         val end = currentTime
 
         // 주간 랭킹 조회 요청하는 부분
-        apiService.getWeeklyRanking(DailyRankingRequest(start.toInt(), end.toInt())).enqueue(object : Callback<RankingResponse> {
+        apiService.getWeeklyRanking(WeeklyRankingRequest(start.toInt(), end.toInt())).enqueue(object : Callback<RankingResponse> {
             override fun onResponse(call: Call<RankingResponse>, response: Response<RankingResponse>) {
                 if (response.isSuccessful) {
                     // API 응답 성공 시 랭킹 리스트 업데이트..
