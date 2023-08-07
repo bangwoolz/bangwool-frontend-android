@@ -60,6 +60,25 @@ interface RetrofitLoginInterface {
     fun ExistNickname(
         @Query("nickname") nickname: String
     ): Call<ExistResponse>
+
+}
+
+interface KakaoRetrofitInterface {
+
+    @GET("/kakao/oauth/authorize")
+    fun KakaoAuthorize(
+    ): Call<String>
+
+}
+
+interface KakaoRetrofitInterface2 {
+    @GET("https://kauth.kakao.com/oauth/authorize")
+    fun KakaoLogin(
+        @Query("client_id") client_id: String,
+        @Query("redirect_uri") redirect_uri: String,
+        @Query("response_-type") response_type: String
+    ): Call<OAuthTokenResponse>
+
 }
 
 
