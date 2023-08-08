@@ -1,23 +1,12 @@
 package com.example.bangwool
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getColor
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bangwool.R
-import com.example.bangwool.databinding.ItemHomeBinding
 import com.example.bangwool.databinding.ItemTodayPpomoBinding
-import com.example.bangwool.retrofit.Ppomodoro
-import com.example.bangwool.retrofit.PpomodoroId
 import com.example.bangwool.retrofit.WorkTodayResponse
-import com.example.bangwool.retrofit.WorksTodayResponse
-import com.example.bangwool.ui.home.TimerActivity
-import com.example.bangwool.ui.home.TimerEditActivity
-
 class TodayPpomoAdapter(
     private val context: Context,
     private var itemList: ArrayList<WorkTodayResponse>

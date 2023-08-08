@@ -14,11 +14,11 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="14dp">
 
-        <ImageView
-            android:id="@+id/top_setting"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_setting_adjust_outline"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/top_setting"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:src="@drawable/ic_setting_adjust_outline"/>-->
 
         <TextView
             android:layout_weight="1"
@@ -30,11 +30,11 @@
             android:textSize="@dimen/text_size_body2"
             android:textColor="@color/gray_800"/>
 
-        <ImageView
-            android:id="@+id/closeBtn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_x"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/closeBtn"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_x"/>-->
     </LinearLayout>
 
 
