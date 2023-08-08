@@ -5,8 +5,9 @@ import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
+import retrofit2.http.Query
+import retrofit2.http.PUT
 
 interface RetrofitInterface {
 
@@ -30,7 +31,16 @@ interface RetrofitInterface {
         @Path("ppomodoroId") ppomodoroId: Int
     ): Call<Void>
 
+
     //Work 작업
+    @POST("/work/{ppomodoroId}")
+    fun RecordWork(
+        @Path("ppomodoroId") ppomodoroId: Int,
+        @Body requestbody: WorkRequest
+    ): Call<WorkResponse>
+//    @GET("/work/today")
+//    fun WorkToday(
+//    ): Call<Works>
     @GET("/work/today")
     fun GetWork(): Call<WorksTodayResponse>
 
@@ -47,7 +57,16 @@ interface RetrofitLoginInterface {
     fun AuthLogin(
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
+  
+    @GET("/members/exist/email")
+    fun ExistEmail(
+        @Query("email") email: String
+    ): Call<ExistResponse>
 
+    @GET("/members/exist/nickname")
+    fun ExistNickname(
+        @Query("nickname") nickname: String
+    ): Call<ExistResponse>
 }
 
 

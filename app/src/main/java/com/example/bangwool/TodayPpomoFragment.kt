@@ -9,12 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.databinding.FragmentTodayPpomoBinding
-import com.example.bangwool.retrofit.PpomodoroId
-import com.example.bangwool.retrofit.Ppomodoros
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WorkTodayResponse
 import com.example.bangwool.retrofit.WorksTodayResponse
-import com.example.bangwool.ui.statistic.StatisticFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,13 +47,13 @@ class TodayPpomoFragment : Fragment() {
 
             }
 
-            topSetting.setOnClickListener {
-                // 설정으로 이동
-            }
-
-            closeBtn.setOnClickListener {
-                // 밑에 메뉴바가 있는데 닫기 버튼이 왜
-            }
+//            topSetting.setOnClickListener {
+//                // 설정으로 이동
+//            }
+//
+//            closeBtn.setOnClickListener {
+//                // 밑에 메뉴바가 있는데 닫기 버튼이 왜
+//            }
 
         }
     }

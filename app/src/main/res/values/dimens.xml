@@ -14,7 +14,7 @@
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">14dp</dimen>
 
     <!--    태현    -->
-
+    <dimen name="timer_text_size">52dp</dimen>
     <!--    현희    -->
 
     <!--    지원    -->
