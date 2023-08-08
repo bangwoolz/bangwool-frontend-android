@@ -10,6 +10,7 @@ import retrofit2.http.Path
 
 interface RetrofitInterface {
 
+    //Ppomodoro 뽀모도로
     @GET("/ppomodoros")
     fun GetPpomodoro(): Call<Ppomodoros>
 
@@ -28,6 +29,10 @@ interface RetrofitInterface {
     fun DeletePpomodoro(
         @Path("ppomodoroId") ppomodoroId: Int
     ): Call<Void>
+
+    //Work 작업
+    @GET("/work/today")
+    fun GetWork(): Call<WorksTodayResponse>
 
 }
 
