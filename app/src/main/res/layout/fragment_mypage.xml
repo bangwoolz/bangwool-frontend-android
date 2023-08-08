@@ -20,10 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/p_medium"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:text="마이페이지"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_body3"
+            android:textSize="@dimen/text_size_body2"
+            app:layout_constraintBottom_toTopOf="@id/line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray_300"
+            android:layout_marginTop="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -102,7 +105,7 @@
         android:id="@+id/appinfo_menu"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="228dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,14 +115,14 @@
             android:id="@+id/textViewAppInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="공지사항"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/p_medium"
+            android:text="공지사항"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body4"
-            android:fontFamily="@font/p_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
