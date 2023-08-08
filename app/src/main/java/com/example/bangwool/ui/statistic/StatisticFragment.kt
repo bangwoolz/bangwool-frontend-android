@@ -260,16 +260,22 @@ class StatisticFragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     val works = response.body()!!.works
-                    for (i in 1 .. 7){
-                        val matchedItem = works.find { item -> item.dayOfWeek == i }
-                        if(matchedItem!=null){
-                            val totalTime:Double = matchedItem.workHour.toDouble() + (matchedItem.workMin*10/60).toDouble()/10.0
-                            weekHourArr=weekHourArr.plus(totalTime)
-                        } else {
-                            weekHourArr=weekHourArr.plus(0.0)
+                    Log.d("","works: ${works}")
+                    if(works[0]!=null){
+                        for (i in 1 .. 7){
+                            val matchedItem = works.find { item -> item.dayOfWeek == i }
+                            if(matchedItem!=null){
+                                val totalTime:Double = matchedItem.workHour.toDouble() + (matchedItem.workMin*10/60).toDouble()/10.0
+                                weekHourArr=weekHourArr.plus(totalTime)
+                            } else {
+                                weekHourArr=weekHourArr.plus(0.0)
 
+                            }
                         }
+                    } else {
+                        weekHourArr = arrayOf(0.0,0.0,0.0,0.0,0.0,0.0,0.0)
                     }
+
                     makeWeekGraph()
                     Log.d("","성공함 works:${works}")
                 } else {
