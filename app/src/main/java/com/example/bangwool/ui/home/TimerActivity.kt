@@ -155,7 +155,13 @@ class TimerActivity : AppCompatActivity() {
             val h = m / 60
             m %= 60
             Log.d("qwerty2", "${h} : ${m}")
-            sendToServerWorkTime(h,m)
+            if (m == 0 && h == 0) {
+                Log.i("TimerActivity | sendToServerWorkTime", "NOT SEND")
+            } else {
+                Log.i("TimerActivity | sendToServerWorkTime", "SEND")
+
+                sendToServerWorkTime(h,m)
+            }
         }
     }
 
