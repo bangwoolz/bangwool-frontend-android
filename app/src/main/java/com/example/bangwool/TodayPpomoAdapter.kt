@@ -13,16 +13,6 @@ class TodayPpomoAdapter(
 ) :
     RecyclerView.Adapter<TodayPpomoAdapter.ViewHolder>() {
 
-//    var itemClickListener: OnItemClickListener? = null
-//
-//    interface OnItemClickListener {
-//        fun onItemClick(homeItem: PpomodoroId)
-//    }
-//
-//    fun setOnClickListener(onItemClickListener: OnItemClickListener) {
-//        itemClickListener = onItemClickListener
-//    }
-
     inner class ViewHolder(val binding: ItemTodayPpomoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: WorkTodayResponse) {

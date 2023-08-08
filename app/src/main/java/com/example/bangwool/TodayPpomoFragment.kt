@@ -42,7 +42,7 @@ class TodayPpomoFragment : Fragment() {
 
             todayppomoRecyclerView.apply {
                 layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
                 adapter = todayPpomoAdapter
 
             }
@@ -76,7 +76,7 @@ class TodayPpomoFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<WorksTodayResponse>, t: Throwable) {
-                Log.i("GETPpomo/Failure", "fail")
+                Log.i("GETTodayPpomo/Failure", "fail")
 
             }
         })
