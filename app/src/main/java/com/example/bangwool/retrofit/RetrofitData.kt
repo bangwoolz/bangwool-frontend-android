@@ -33,12 +33,12 @@ data class WorkRequest(
 data class WorkResponse(
     @SerializedName("id") val id: Int,
 )
-data class Works(
-    @SerializedName("ppomodoroId") val ppomodoroId: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("workHour") val workHour: Int,
-    @SerializedName("workedMin") val workedMin: Int,
-    )
+//data class Works(
+//    @SerializedName("ppomodoroId") val ppomodoroId: Int,
+//    @SerializedName("name") val name: String,
+//    @SerializedName("workHour") val workHour: Int,
+//    @SerializedName("workedMin") val workedMin: Int,
+//    )
 
 data class PpomodoroId(
     @SerializedName("id") val id: Int,
@@ -48,6 +48,7 @@ data class PpomodoroId(
     @SerializedName("workMin") val workMin: Int,
     @SerializedName("restTime") val restTime: Int
 )
+
 data class Ppomodoro(
     @SerializedName("name") val name: String,
     @SerializedName("color") val color: String,
@@ -60,11 +61,20 @@ data class Ppomodoros(
     @SerializedName("ppomodoros") val ppomodoros: List<PpomodoroId>
 )
 
-
 data class PpomodorosResponse(
     @SerializedName("id") val id: Int
 )
 
+data class WorkTodayResponse(
+    @SerializedName("ppomodoroId") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int
+)
+
+data class WorksTodayResponse(
+    @SerializedName("works") val works: List<WorkTodayResponse>
+)
 
 //{
 //    "email": "uLTr2ZSzAxdbgfOU2nsh@lHlSNIDK94kj41TUtrvr9nEuHgZeWW.xi7.Ym.2VwK0clpM0.RRzCJwM1p-RwvfPGD2V9Re8BMkFYsAT8PxGnfBCOhO-TeX75x4kJUYjYyIriYL8mK",

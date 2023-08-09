@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,17 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.service.notification.Condition.isValidId
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Patterns
-import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.bangwool.R
 import com.example.bangwool.databinding.ActivityLoginBinding
 import com.example.bangwool.retrofit.ExistResponse
-import com.example.bangwool.retrofit.RetrofitInterface
 import com.example.bangwool.retrofit.RetrofitUtil
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        co.activity = this
+        activity = this
 
         init()
     }
