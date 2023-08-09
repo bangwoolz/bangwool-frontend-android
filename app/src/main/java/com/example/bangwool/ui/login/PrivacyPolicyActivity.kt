@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
