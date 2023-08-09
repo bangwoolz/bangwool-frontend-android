@@ -51,10 +51,7 @@
 
     <!--    지원    -->
     <color name="transparent">#00FF0000</color>
-    <!--    현준    -->
-<!--    지원    -->
 
 <!--    현준    -->
-    <color name="gray_level">#BABABA</color>
-
+    <color name="gray_level">#BABABA</color>=
 </resources>
