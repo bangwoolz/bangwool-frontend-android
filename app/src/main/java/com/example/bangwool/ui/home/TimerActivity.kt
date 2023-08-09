@@ -155,7 +155,13 @@ class TimerActivity : AppCompatActivity() {
             val h = m / 60
             m %= 60
             Log.d("qwerty2", "${h} : ${m}")
-            sendToServerWorkTime(h,m)
+            if (m == 0 && h == 0) {
+                Log.i("TimerActivity | sendToServerWorkTime", "NOT SEND")
+            } else {
+                Log.i("TimerActivity | sendToServerWorkTime", "SEND")
+
+                sendToServerWorkTime(h,m)
+            }
         }
     }
 
@@ -167,7 +173,6 @@ class TimerActivity : AppCompatActivity() {
                     clearToRestTime()
                     val m = sendingTime / 6000
                     sendingTime -= m * 6000
-                    Log.d("qwerty1234", m.toString())
                     timerHandler.sendEmptyMessage(m)
                     isWorking = false
                 } else {
@@ -204,18 +209,20 @@ class TimerActivity : AppCompatActivity() {
                 }
             }
 
-            runOnUiThread {
-                var upgradedMin = min.toString()
-                if (min < 10) {
-                    upgradedMin = "0" + min.toString()
-                }
-                var upgradedSec = sec.toString()
-                if (sec < 10) {
-                    upgradedSec = "0" + sec.toString()
-                }
-                if (milli == 0) {
-                    binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
-                    binding.progressbar.progress = time
+            if(time % 10 == 0) {
+                runOnUiThread {
+                    var upgradedMin = min.toString()
+                    if (min < 10) {
+                        upgradedMin = "0" + min.toString()
+                    }
+                    var upgradedSec = sec.toString()
+                    if (sec < 10) {
+                        upgradedSec = "0" + sec.toString()
+                    }
+                    if (milli == 0) {
+                        binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
+                        binding.progressbar.progress = time
+                    }
                 }
             }
         }
