@@ -1,7 +1,8 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
 import android.app.Application
 import android.util.Log
+import com.example.bangwool.R
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
 

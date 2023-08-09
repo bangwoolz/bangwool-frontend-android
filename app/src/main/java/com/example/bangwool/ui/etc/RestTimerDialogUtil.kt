@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.etc
 
 import android.app.Dialog
 import android.content.Context
