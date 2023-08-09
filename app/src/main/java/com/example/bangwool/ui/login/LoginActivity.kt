@@ -4,19 +4,32 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.service.notification.Condition.isValidId
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.util.Patterns
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.bangwool.MainActivity
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ActivityLoginBinding
 import com.example.bangwool.retrofit.ExistResponse
+import com.example.bangwool.retrofit.KakaoLoginRequest
+import com.example.bangwool.retrofit.OAuthTokenResponse
 import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.saveAccessToken
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.user.UserApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        activity = this
+        co.activity = this
 
         init()
     }
@@ -90,8 +103,85 @@ class LoginActivity : AppCompatActivity() {
                 val i = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(i)
             }
+
+
+            btnKakaoLogin.setOnClickListener {
+                sdk()
+            }
         }
     }
+
+    private fun sdk() {
+        // 카카오계정으로 로그인 공통 callback 구성
+        // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
+
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                Log.e("LOGIN", "카카오계정으로 로그인 실패", error)
+            } else if (token != null) {
+                Log.i("LOGIN", "카카오계정으로 로그인 성공 ${token.accessToken}")
+                afterGetKaKaoToken(token.accessToken)
+            }
+        }
+
+        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) {
+            UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity) { token, error ->
+                if (error != null) {
+                    Log.e("LOGIN", "카카오톡으로 로그인 실패", error)
+
+                    // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
+                    // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                        return@loginWithKakaoTalk
+                    }
+
+                    // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
+                    UserApiClient.instance.loginWithKakaoAccount(
+                        this@LoginActivity,
+                        callback = callback
+                    )
+                } else if (token != null) {
+                    Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    afterGetKaKaoToken(token.accessToken)
+                }
+            }
+        } else {
+            UserApiClient.instance.loginWithKakaoAccount(
+                this@LoginActivity,
+                callback = callback
+            )
+        }
+    }
+
+    private fun afterGetKaKaoToken(kakaoToken: String){
+
+        val kakaoLoginRequest = KakaoLoginRequest(kakaoToken)
+        RetrofitUtil.getLoginRetrofit().KakaoLogin(kakaoLoginRequest).enqueue(object: Callback<OAuthTokenResponse>{
+            override fun onResponse(
+                call: Call<OAuthTokenResponse>,
+                response: Response<OAuthTokenResponse>
+            ) {
+                if(response.isSuccessful){
+                    val token = response.body()!!.token
+                    Log.d("LOGIN", token)
+                    saveAccessToken(this@LoginActivity, token)
+                    RetrofitUtil.setAccessToken(token)
+
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<OAuthTokenResponse>, t: Throwable) {
+                Log.d("LOGIN", t.message.toString())
+
+            }
+
+        })
+    }
+
 
     private fun checkEmail() {
         binding.apply {
@@ -100,49 +190,53 @@ class LoginActivity : AppCompatActivity() {
             // ProgressBar 보이도록 설정
             loginProgressBar.visibility = View.VISIBLE
 
-            RetrofitUtil.getLoginRetrofit().ExistEmail(loginIdEt.text.toString()).enqueue(object : Callback<ExistResponse> {
-                override fun onResponse(
-                    call: Call<ExistResponse>,
-                    response: Response<ExistResponse>
-                ) {
-                    if(response.isSuccessful){
-                        if(response.body()!!.exist){
-                            // 일정 시간(300ms) 후에 체크 이미지로 변경
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                loginProgressBar.visibility = View.GONE
-                                loginLoadingDone.visibility = View.VISIBLE
-                                //로딩 완료 메세지
-                                idTextInputLayout.error = "잠시후 로그인 창으로 이동합니다"
-                                //에러메세지 색상 변경
-                                idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
-                                idTextInputLayout.boxStrokeErrorColor =
-                                    getColorStateList(R.color.androidDefault)
+            RetrofitUtil.getLoginRetrofit().ExistEmail(loginIdEt.text.toString())
+                .enqueue(object : Callback<ExistResponse> {
+                    override fun onResponse(
+                        call: Call<ExistResponse>,
+                        response: Response<ExistResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            if (response.body()!!.exist) {
+                                // 일정 시간(300ms) 후에 체크 이미지로 변경
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    val intent =
-                                        Intent(this@LoginActivity, PasswordActivity::class.java)
-                                    val id = loginIdEt.text.toString()
-                                    intent.putExtra("loginId", id)
-                                    startActivity(intent)
-                                    loginCl.requestFocus()
-                                    idTextInputLayout.error = null
-                                    idTextInputLayout.isErrorEnabled = false
-                                    loginLoadingDone.visibility = View.GONE
-                                }, 1000)
-                            }, 2000)
-                        } else {
-                            loginProgressBar.visibility = View.GONE
-                            Toast.makeText(this@LoginActivity, "가입되지 않은 이메일", Toast.LENGTH_SHORT).show()
+                                    loginProgressBar.visibility = View.GONE
+                                    loginLoadingDone.visibility = View.VISIBLE
+                                    //로딩 완료 메세지
+                                    idTextInputLayout.error = "잠시후 로그인 창으로 이동합니다"
+                                    //에러메세지 색상 변경
+                                    idTextInputLayout.setErrorTextAppearance(R.style.CustomTextInputLayout)
+                                    idTextInputLayout.boxStrokeErrorColor =
+                                        getColorStateList(R.color.androidDefault)
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        val intent =
+                                            Intent(this@LoginActivity, PasswordActivity::class.java)
+                                        val id = loginIdEt.text.toString()
+                                        intent.putExtra("loginId", id)
+                                        startActivity(intent)
+                                        loginCl.requestFocus()
+                                        idTextInputLayout.error = null
+                                        idTextInputLayout.isErrorEnabled = false
+                                        loginLoadingDone.visibility = View.GONE
+                                    }, 1000)
+                                }, 2000)
+                            } else {
+                                loginProgressBar.visibility = View.GONE
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "가입되지 않은 이메일",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                         }
                     }
-                }
 
-                override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
-                }
+                    override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
+                        Toast.makeText(this@LoginActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+                    }
 
-            })
-
-
+                })
 
 
         }
