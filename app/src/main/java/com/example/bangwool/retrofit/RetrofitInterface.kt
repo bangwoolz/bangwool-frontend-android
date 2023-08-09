@@ -10,14 +10,8 @@ import retrofit2.http.Query
 import retrofit2.http.PUT
 
 interface RetrofitInterface {
-    @POST("/work/{ppomodoroId}")
-    fun RecordWork(
-        @Path("ppomodoroId") ppomodoroId: Int,
-        @Body requestbody: WorkRequest
-    ): Call<WorkResponse>
-    @GET("/work/today")
-    fun WorkToday(
-    ): Call<Works>
+
+    //Ppomodoro 뽀모도로
     @GET("/ppomodoros")
     fun GetPpomodoro(): Call<Ppomodoros>
 
@@ -36,6 +30,19 @@ interface RetrofitInterface {
     fun DeletePpomodoro(
         @Path("ppomodoroId") ppomodoroId: Int
     ): Call<Void>
+
+
+    //Work 작업
+    @POST("/work/{ppomodoroId}")
+    fun RecordWork(
+        @Path("ppomodoroId") ppomodoroId: Int,
+        @Body requestbody: WorkRequest
+    ): Call<WorkResponse>
+//    @GET("/work/today")
+//    fun WorkToday(
+//    ): Call<Works>
+    @GET("/work/today")
+    fun GetWork(): Call<WorksTodayResponse>
 
 }
 

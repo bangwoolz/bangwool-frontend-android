@@ -12,7 +12,7 @@
         android:title="@string/title_statistic" />
 
     <item
-        android:id="@+id/navigation_dummy"
+        android:id="@+id/navigation_ppomo"
         android:icon="@null"
         android:enabled="false"
         android:title="@string/title_dummy"/>
