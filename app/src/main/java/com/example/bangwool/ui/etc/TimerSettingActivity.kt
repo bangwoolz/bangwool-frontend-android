@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.etc
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -57,7 +57,7 @@ class TimerSettingActivity : AppCompatActivity() {
         setContentView(view)
 
         timeDialogUtils = TimeChooseDialog(this, "temp", 5, 0)
-        restTimerDialogUtil=RestTimerDialogUtil(this)
+        restTimerDialogUtil= RestTimerDialogUtil(this)
 
         binding.textViewWorkTime.setOnClickListener {
             timeDialogUtils.showWorkTimeDialog(binding.textViewWorkTime)

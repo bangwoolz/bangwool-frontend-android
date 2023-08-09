@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.mypage
 
 import android.content.Context
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import com.example.bangwool.databinding.DialogWithdrawBinding
 import com.example.bangwool.databinding.DialogWithdrawCompeBinding
+import com.example.bangwool.ui.login.LoginActivity
 
 
 object WithdrawDialogUtils {

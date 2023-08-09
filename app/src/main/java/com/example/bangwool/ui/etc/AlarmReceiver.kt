@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.etc
 
 import android.content.BroadcastReceiver
 import android.content.Context
