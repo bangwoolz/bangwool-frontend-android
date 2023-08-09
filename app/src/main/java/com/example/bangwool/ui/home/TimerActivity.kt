@@ -32,7 +32,7 @@ class TimerActivity : AppCompatActivity() {
     private var restTime = 0
 
     //
-    private val workTime = 100 * 60 * workMin + 100 * 60 * 60 * workHour
+    private val workTime = 60 * workMin + 60 * 60 * workHour
     private var time = workTime
     private var sendingTime = 0
     private var timerTask: Timer? = null
@@ -115,8 +115,8 @@ class TimerActivity : AppCompatActivity() {
 
             // 시간 서버로 전송처리
             if (isWorking) {
-                val m = sendingTime / 6000
-                sendingTime -= m * 6000
+                val m = sendingTime / 60
+                sendingTime -= m * 60
                 Log.d("qwerty1234", m.toString())
                 timerHandler.sendEmptyMessage(m)
             }
@@ -131,7 +131,7 @@ class TimerActivity : AppCompatActivity() {
             }
         }
         binding.icXBtn.setOnClickListener {
-            val m = sendingTime / 6000
+            val m = sendingTime / 60
             Log.d("qwerty1234", m.toString())
             timerHandler.sendEmptyMessage(m)
             finish()
@@ -161,19 +161,19 @@ class TimerActivity : AppCompatActivity() {
             } else {
                 Log.i("TimerActivity | sendToServerWorkTime", "SEND")
 
-                sendToServerWorkTime(h,m)
+                sendToServerWorkTime(h, m)
             }
         }
     }
 
     //타이머 작동
     private fun startTimer() {
-        timerTask = timer(period = 1) {
+        timerTask = timer(period = 1000) {
             if (time <= 0) {
                 if (isWorking) {
                     clearToRestTime()
-                    val m = sendingTime / 6000
-                    sendingTime -= m * 6000
+                    val m = sendingTime / 60
+                    sendingTime -= m * 60
                     timerHandler.sendEmptyMessage(m)
                     isWorking = false
                 } else {
@@ -192,39 +192,34 @@ class TimerActivity : AppCompatActivity() {
             time--
             if (isWorking)
                 sendingTime++
-            val min = time / 6000
-            val sec = time % 6000 / 100
-            val milli = time % 100
+            val min = time / 60
+            val sec = time % 60
 
             if (isWorking) {
-                if (time / 100 % 2 == 0) {
+                if (time % 2 == 0) {
                     binding.ivStudyTomato.setImageResource(R.drawable.studying_ppomo_mdpi)
                 } else {
                     binding.ivStudyTomato.setImageResource(R.drawable.studying_ppomo2_mdpi)
                 }
             } else {
-                if (time / 100 % 2 == 0) {
+                if (time % 2 == 0) {
                     binding.ivStudyTomato.setImageResource(R.drawable.happy_ppomo1_mdpi)
                 } else {
                     binding.ivStudyTomato.setImageResource(R.drawable.happy_ppomo2_mdpi)
                 }
             }
 
-            if(time % 10 == 0) {
-                runOnUiThread {
-                    var upgradedMin = min.toString()
-                    if (min < 10) {
-                        upgradedMin = "0" + min.toString()
-                    }
-                    var upgradedSec = sec.toString()
-                    if (sec < 10) {
-                        upgradedSec = "0" + sec.toString()
-                    }
-                    if (milli == 0) {
-                        binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
-                        binding.progressbar.progress = time
-                    }
+            runOnUiThread {
+                var upgradedMin = min.toString()
+                if (min < 10) {
+                    upgradedMin = "0" + min.toString()
                 }
+                var upgradedSec = sec.toString()
+                if (sec < 10) {
+                    upgradedSec = "0" + sec.toString()
+                }
+                binding.tvTimerMain?.text = "${upgradedMin} : ${upgradedSec}"
+                binding.progressbar.progress = time
             }
         }
     }
@@ -240,8 +235,8 @@ class TimerActivity : AppCompatActivity() {
     }
 
     private fun showTimeOnTimer() {
-        val min = time / 6000
-        val sec = time % 6000 / 100
+        val min = time / 60
+        val sec = time % 60
         var upgradedMin = min.toString()
         if (min < 10) {
             upgradedMin = "0" + min.toString()
@@ -261,7 +256,7 @@ class TimerActivity : AppCompatActivity() {
         runOnUiThread {
             binding.tvTimerType.text = "집중 시간"
         }
-        time = 100 * 60 * workMin + 100 * 60 * 60 * workHour
+        time = 60 * workMin + 60 * 60 * workHour
         showTimeOnTimer()
         binding.progressbar.max = time
         binding.progressbar.progress = time
@@ -271,7 +266,7 @@ class TimerActivity : AppCompatActivity() {
         runOnUiThread {
             binding.tvTimerType.text = "휴식 시간"
         }
-        time = 100 * 60 * restTime
+        time = 60 * restTime
         showTimeOnTimer()
         binding.progressbar.max = time
         binding.progressbar.progress = time
