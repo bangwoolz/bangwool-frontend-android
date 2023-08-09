@@ -51,11 +51,7 @@
         <activity android:name=".ui.login.PrivacyPolicyActivity" />
         <activity android:name=".ui.login.TermsAgreeActivity" />
         <activity android:name=".ui.login.textViewAllAgreementsActivity" />
-
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".PrivacyPolicyActivity" />
-        <activity android:name=".TermsAgreeActivity" />
-        <activity android:name=".textViewAllAgreementsActivity" />
+>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
