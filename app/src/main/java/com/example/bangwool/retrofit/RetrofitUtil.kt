@@ -10,6 +10,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 val BASE_URL = BuildConfig.BASE_URL
@@ -17,6 +18,7 @@ val BASE_URL = BuildConfig.BASE_URL
 object RetrofitUtil {
 
     private var loginInstance: RetrofitLoginInterface? = null
+    private var instance: RetrofitInterface? = null
     var accessTokenString = ""
 
 
@@ -37,28 +39,15 @@ object RetrofitUtil {
 
     fun getLoginRetrofit(): RetrofitLoginInterface {
         if (loginInstance == null) {
+            var gson= GsonBuilder().setLenient().create()
             val retrofit = Retrofit.Builder() //객체를 생성해 줍니다.
                 .baseUrl(BASE_URL) //통신할 서버 주소를 설정합니다.
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(getLoginOkHttpClient())
                 .build()
             loginInstance = retrofit.create(RetrofitLoginInterface::class.java)
         }
         return loginInstance!!
-    }
-
-
-    fun getRetrofit(): RetrofitInterface {
-        val gson: Gson = GsonBuilder()
-            .setLenient()
-            .create()
-        var retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(getOkHttpClient())
-            .build()
-
-        return retrofit.create(RetrofitInterface::class.java)
     }
 
     fun getOkHttpClient(): OkHttpClient {
@@ -78,6 +67,21 @@ object RetrofitUtil {
             .build()
     }
 
+    fun getRetrofit(): RetrofitInterface {
+        if (instance == null) {
+            var gson= GsonBuilder().setLenient().create()
+            val retrofit = Retrofit.Builder() //객체를 생성해 줍니다.
+                .baseUrl(BASE_URL) //통신할 서버 주소를 설정합니다.
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(getOkHttpClient())
+                .build()
+            instance = retrofit.create(RetrofitInterface::class.java)
+        }
+        return instance!!
+    }
+
+
+
     fun setAccessToken(str: String) {
         accessTokenString = str
     }
@@ -88,6 +92,8 @@ object RetrofitUtil {
             val tokenRequest = chain.request().newBuilder()
                 .addHeader("Authorization", "Bearer " + token)
                 .addHeader("Content-Type", "application/json").build()
+
+            Log.d("ABCD", "added token : $token")
 
             return chain.proceed(tokenRequest)
         }

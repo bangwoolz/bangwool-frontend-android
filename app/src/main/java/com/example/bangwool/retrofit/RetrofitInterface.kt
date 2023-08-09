@@ -11,25 +11,7 @@ import retrofit2.http.PUT
 
 interface RetrofitInterface {
 
-//    @POST("/daily-ranking")
-//    fun getDailyRanking(
-//        @Body request: DailyRankingRequest
-//    ): Call<RankingResponse>
-//
-//    @POST("/weekly-ranking")
-//    fun getWeeklyRanking(
-//        @Body request: WeeklyRankingRequest
-//    ): Call<RankingResponse>
-
-    @POST("/work/{ppomodoroId}")
-    fun RecordWork(
-        @Path("ppomodoroId") ppomodoroId: Int,
-        @Body requestbody: WorkRequest
-    ): Call<WorkResponse>
-    @GET("/work/today")
-    fun WorkToday(
-    ): Call<Works>
-
+    //Ppomodoro 뽀모도로
     @GET("/ppomodoros")
     fun GetPpomodoro(): Call<Ppomodoros>
 
@@ -48,6 +30,19 @@ interface RetrofitInterface {
     fun DeletePpomodoro(
         @Path("ppomodoroId") ppomodoroId: Int
     ): Call<Void>
+
+
+    //Work 작업
+    @POST("/work/{ppomodoroId}")
+    fun RecordWork(
+        @Path("ppomodoroId") ppomodoroId: Int,
+        @Body requestbody: WorkRequest
+    ): Call<WorkResponse>
+//    @GET("/work/today")
+//    fun WorkToday(
+//    ): Call<Works>
+    @GET("/work/today")
+    fun GetWork(): Call<WorksTodayResponse>
 
     @POST("/work/month")
     fun GetMonthWorkStatistic(
@@ -76,65 +71,14 @@ interface RetrofitLoginInterface {
         @Query("email") email: String
     ): Call<ExistResponse>
 
-//    @POST("/daily-ranking")
-//    fun getDailyRanking(
-//        @Body request: DailyRankingRequest
-//    ): Call<RankingResponse>
-//
-//    @POST("/weekly-ranking")
-//    fun getWeeklyRanking(
-//        @Body request: WeeklyRankingRequest
-//    ): Call<RankingResponse>
-
     @GET("/members/exist/nickname")
     fun ExistNickname(
         @Query("nickname") nickname: String
     ): Call<ExistResponse>
+
+    @POST("/kakao/login")
+    fun KakaoLogin(
+        @Body requestBody: KakaoLoginRequest
+    ): Call<OAuthTokenResponse>
+
 }
-
-
-//package com.example.hackatonkuit.retrofit2
-//
-//import retrofit2.Call
-//import retrofit2.http.GET
-//import retrofit2.http.Query
-//import retrofit2.http.Path
-//
-//interface RetrofitInterface {
-//
-//
-//    @GET("/app/category")
-//    fun requestCategories(
-//    ): Call<List<Category>>
-//
-//    @GET("/menus/category/{category_id}")
-//    fun requestMenuList(
-//        @Path("category_id") category_id: Long
-//    ): Call<List<MenuPreview>>
-//
-//    @GET("menus/{menu_id}")
-//    fun requestMenu(
-//        @Path("menu_id") menu_id: Long
-//    ): Call<List<Menu>>
-//
-//
-//    @GET("/menus")
-//    fun requestMenus(
-//        @Query("menu-status") menustatus: String
-//    ): Call<List<NewMenu>>
-//
-//    @GET("/orderItems")
-//    fun requestCarts(
-//        @Query("memberId") memberId: Long
-//    ): Call<List<CartItem>>
-//
-//
-//
-////    fun requestFriendsData(): Call<FriendsData>
-////
-////    @POST("/friendship")
-////    fun addFriend(
-////        @Body email: FriendEmailData
-////    ): Call<AddFriend>
-//
-//}
