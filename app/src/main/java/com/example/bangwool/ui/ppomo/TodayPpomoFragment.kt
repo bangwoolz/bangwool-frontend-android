@@ -1,6 +1,5 @@
-package com.example.bangwool
+package com.example.bangwool.ui.ppomo
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentTodayPpomoBinding
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WorkTodayResponse
@@ -21,6 +21,19 @@ class TodayPpomoFragment : Fragment() {
     lateinit var binding: FragmentTodayPpomoBinding
 
     var ppomoList: ArrayList<WorkTodayResponse> = arrayListOf()
+    var treeImgList = arrayListOf<Int>(
+        R.drawable.tree0,
+        R.drawable.tree1,
+        R.drawable.tree2,
+        R.drawable.tree3,
+        R.drawable.tree4,
+        R.drawable.tree5,
+        R.drawable.tree6,
+        R.drawable.tree7,
+        R.drawable.tree8,
+        R.drawable.tree9,
+        R.drawable.tree10
+    )
     lateinit var todayPpomoAdapter: TodayPpomoAdapter
 
     override fun onCreateView(
@@ -42,7 +55,7 @@ class TodayPpomoFragment : Fragment() {
 
             todayppomoRecyclerView.apply {
                 layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = todayPpomoAdapter
 
             }
@@ -71,6 +84,16 @@ class TodayPpomoFragment : Fragment() {
                     ppomoList.clear()
                     ppomoList.addAll(data)
                     todayPpomoAdapter.notifyDataSetChanged()
+
+                    var total = 0;
+                    ppomoList.forEach {
+                        total += it.workMin + 60*it.workHour
+                    }
+                    total /= 10;
+                    var tree = total % 11;
+                    var bucket = total / 11;
+                    binding.ppomoTreeIv.setImageResource(treeImgList[tree])
+                    binding.ppomoCountTv.text = "오늘은 토마토를 ${total/1}개나 모았어요!"
                     //뽀모도로 가져와서 리싸이클러뷰에 연동하기
                 }
             }
