@@ -33,12 +33,12 @@ data class WorkRequest(
 data class WorkResponse(
     @SerializedName("id") val id: Int,
 )
-data class Works(
-    @SerializedName("ppomodoroId") val ppomodoroId: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("workHour") val workHour: Int,
-    @SerializedName("workedMin") val workedMin: Int,
-    )
+//data class Works(
+//    @SerializedName("ppomodoroId") val ppomodoroId: Int,
+//    @SerializedName("name") val name: String,
+//    @SerializedName("workHour") val workHour: Int,
+//    @SerializedName("workedMin") val workedMin: Int,
+//    )
 
 data class PpomodoroId(
     @SerializedName("id") val id: Int,
@@ -65,6 +65,16 @@ data class PpomodorosResponse(
     @SerializedName("id") val id: Int
 )
 
+data class WorkTodayResponse(
+    @SerializedName("ppomodoroId") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int
+)
+
+data class WorksTodayResponse(
+    @SerializedName("works") val works: List<WorkTodayResponse>
+)
 data class KakaoLoginRequest(
     @SerializedName("token") val token: String
 )

@@ -1,16 +1,15 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
 import android.graphics.PorterDuff
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.bangwool.R
 import com.example.bangwool.databinding.ActivityRegisterBinding
 import com.example.bangwool.retrofit.ExistResponse
 import com.example.bangwool.retrofit.RetrofitUtil
