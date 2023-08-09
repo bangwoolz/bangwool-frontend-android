@@ -1,6 +1,5 @@
 package com.example.bangwool.ui.mypage
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,4 +39,5 @@ class MyPageFragment : Fragment() {
 
         return binding.root
     }
+
 }
