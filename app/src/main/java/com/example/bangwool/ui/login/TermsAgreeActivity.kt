@@ -1,20 +1,18 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.bangwool.R
 import com.example.bangwool.databinding.ActivityTermsagreeBinding
 import com.example.bangwool.retrofit.MemberSignUpRequest
 import com.example.bangwool.retrofit.MemberSignUpResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class TermsAgreeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTermsagreeBinding

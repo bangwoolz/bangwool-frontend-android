@@ -8,10 +8,9 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.bangwool.R
-import com.example.bangwool.TimeChooseDialog
+import com.example.bangwool.ui.login.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
 import com.example.bangwool.retrofit.Ppomodoro
-import com.example.bangwool.retrofit.PpomodoroId
 import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import retrofit2.Call
