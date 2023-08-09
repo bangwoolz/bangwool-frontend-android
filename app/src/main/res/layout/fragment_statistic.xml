@@ -85,9 +85,10 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
+
                         <View
                             android:id="@+id/v_monday_hour_bar"
                             android:layout_width="12dp"
@@ -127,7 +128,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -169,7 +170,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -211,7 +212,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -253,7 +254,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -295,7 +296,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -337,7 +338,7 @@
                             android:textSize="@dimen/text_size_body5"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:background="@drawable/normal_btn"
+                            android:background="@drawable/full_normal_btn"
                             android:backgroundTint="@color/statistic_purple"
                             />
                         <View
@@ -399,7 +400,7 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_marginTop="52dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginBottom="26dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_goal_check_title"
                     app:layout_constraintStart_toStartOf="parent"
@@ -427,7 +428,7 @@
                     android:layout_marginHorizontal="26dp"
                     android:orientation="vertical"
                     android:layout_marginTop="52dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintTop_toBottomOf="@id/tv_goal_check_title"
                     app:layout_constraintStart_toStartOf="parent"
                     >
