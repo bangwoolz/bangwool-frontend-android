@@ -21,21 +21,24 @@ data class AuthLoginRequest(
 data class TokenResponse(
     @SerializedName("token") val token: String
 )
-
-data class RankingRequest(
+//Ranking 데이터 클래스
+data class DailyRankingRequest(
     @SerializedName("start") val start: Int,
     @SerializedName("end") val end: Int
 )
 
-data class RankingResponse(
-    @SerializedName("rankingResponses") val rankingResponses: List<RankingItem>
+data class WeeklyRankingRequest(
+    @SerializedName("start") val start: Int,
+    @SerializedName("end") val end: Int
 )
 
-data class RankingItem(
-    @SerializedName("rank") val rank: Int,
+data class RankingResponses(
+    @SerializedName("rankingResponses") val rankingResponses: List<RankingResponse>
+)
+
+data class RankingResponse(
     @SerializedName("nickname") val nickname: String,
-    @SerializedName("workedHour") val workedHour: Int,
-    @SerializedName("workedMin") val workedMin: Int
+    @SerializedName("workedMinute") val workedMinute: Int
 )
 
 data class ExistResponse(
