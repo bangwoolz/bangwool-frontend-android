@@ -44,13 +44,12 @@
     <color name="timer_color_green">#AACB73</color>
     <color name="confirm_text">#FF6242</color>
 
-<!--    태현    -->
-
-<!--    현희    -->
-
-<!--    지원    -->
-
-<!--    현준    -->
-    <color name="gray_level">#BABABA</color>
-
+    <!--    태현    -->
+    <color name="statistic_purple">#9B77FF</color>
+    <color name="statistic_light_purple">#8D9AFF</color>
+    <!--    현희    -->
+  
+    <!--    지원    -->
+    <color name="transparent">#00FF0000</color>
+    <!--    현준    -->
 </resources>
