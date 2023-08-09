@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangwool.databinding.ActivityTimerSettingBinding
+import com.example.bangwool.ui.login.TimeChooseDialog
 
 class TimerSettingActivity : AppCompatActivity() {
 

@@ -1,13 +1,14 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.bangwool.MainActivity
+import com.example.bangwool.R
 import com.example.bangwool.databinding.ActivityPasswordBinding
 import com.example.bangwool.retrofit.AuthLoginRequest
 import com.example.bangwool.retrofit.RetrofitUtil
