@@ -44,6 +44,14 @@ interface RetrofitInterface {
     @GET("/work/today")
     fun GetWork(): Call<WorksTodayResponse>
 
+    @POST("/work/month")
+    fun GetMonthWorkStatistic(
+        @Body requestBody: MonthWorkStatisticRequest
+    ): Call<MonthWorkStatisticResponse>
+
+    @GET("/work/week")
+    fun GetWeekWorkStatistic(): Call<WeekWorkStatisticResponse>
+
 }
 
 interface RetrofitLoginInterface {

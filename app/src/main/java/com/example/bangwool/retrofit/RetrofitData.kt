@@ -22,6 +22,22 @@ data class TokenResponse(
     @SerializedName("token") val token: String
 )
 
+data class RankingRequest(
+    @SerializedName("start") val start: Int,
+    @SerializedName("end") val end: Int
+)
+
+data class RankingResponse(
+    @SerializedName("rankingResponses") val rankingResponses: List<RankingItem>
+)
+
+data class RankingItem(
+    @SerializedName("rank") val rank: Int,
+    @SerializedName("nickname") val nickname: String,
+    @SerializedName("workedHour") val workedHour: Int,
+    @SerializedName("workedMin") val workedMin: Int
+)
+
 data class ExistResponse(
     @SerializedName("exist") val exist: Boolean
 )
@@ -83,6 +99,32 @@ data class OAuthTokenResponse(
     @SerializedName("platform") val platform: Platform,
     @SerializedName("platformId") val platformId: Long,
     @SerializedName("id") val id: Int
+)
+data class MonthWorkStatisticRequest(
+    @SerializedName("year") val year: Int,
+    @SerializedName("month") val month: Int
+)
+
+data class MonthWorkStatisticResponse(
+    @SerializedName("works") val works: List<MonthWorkStatistic>,
+    )
+
+data class MonthWorkStatistic(
+    @SerializedName("month") val month: Int,
+    @SerializedName("day") val day: Int,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int,
+    @SerializedName("createDate") val createDate: String,
+)
+
+data class WeekWorkStatisticResponse(
+    @SerializedName("works") val works: List<WeekWorkStatistic>,
+)
+
+data class WeekWorkStatistic(
+    @SerializedName("dayOfWeek") val dayOfWeek: Int,
+    @SerializedName("workHour") val workHour: Int,
+    @SerializedName("workMin") val workMin: Int,
 )
 
 enum class Platform{
