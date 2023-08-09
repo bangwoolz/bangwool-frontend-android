@@ -7,23 +7,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ItemRankingBinding
 
-class RankingAdapter(var items: ArrayList<RankingInfo>): RecyclerView.Adapter<RankingAdapter.MyViewHolder>() {
+class RankingAdapter(var items: ArrayList<RankingInfo>) :
+    RecyclerView.Adapter<RankingAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(val binding: ItemRankingBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(position: Int){
+    inner class MyViewHolder(val binding: ItemRankingBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(position: Int) {
             binding.rankingItemTvRank.text = items[position].rank.toString()
             binding.rankingItemTvNickname.text = items[position].name
             binding.rankingItemTvTime.text = items[position].time.toString() + " Min"
 
             //id와 일치하는 랭킹에 user_ranking_layout 백그라운드 적용
-            var userRank = 3 // 이거 나중에 적절한 값으로 변경해야함
-            if (items[position].rank == userRank){
-                binding.itemRankingLl.setBackgroundResource(R.drawable.user_ranking_layout)
-            } else if (items[position].rank == 2){
-                binding.itemRankingLl.background = null
-            } else {
-                binding.itemRankingLl.setBackgroundResource(R.drawable.non_user_ranking_layout)
-            }
+//            var userRank = 3 // 이거 나중에 적절한 값으로 변경해야함
+//            if (items[position].rank == userRank){
+//                binding.itemRankingLl.setBackgroundResource(R.drawable.user_ranking_layout)
+//            } else if (items[position].rank == 2){
+//                binding.itemRankingLl.background = null
+//            } else {
+            binding.itemRankingLl.setBackgroundResource(R.drawable.non_user_ranking_layout)
+//            }
         }
     }
 

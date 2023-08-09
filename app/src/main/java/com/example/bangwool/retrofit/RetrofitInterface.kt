@@ -20,6 +20,14 @@ interface RetrofitInterface {
         @Body requestBody: Ppomodoro
     ): Call<PpomodorosResponse>
 
+    @GET("/ranking/day")
+    fun getDailyRanking(
+    ): Call<RankingResponses>
+
+    @GET("/ranking/week")
+    fun getWeeklyRanking(
+    ): Call<RankingResponses>
+
     @PUT("/ppomodoros/{ppomodoroId}")
     fun PutPpomodoro(
         @Path("ppomodoroId") ppomodoroId: Int,
@@ -38,9 +46,7 @@ interface RetrofitInterface {
         @Path("ppomodoroId") ppomodoroId: Int,
         @Body requestbody: WorkRequest
     ): Call<WorkResponse>
-//    @GET("/work/today")
-//    fun WorkToday(
-//    ): Call<Works>
+
     @GET("/work/today")
     fun GetWork(): Call<WorksTodayResponse>
 
@@ -65,7 +71,7 @@ interface RetrofitLoginInterface {
     fun AuthLogin(
         @Body requestbody: AuthLoginRequest
     ): Call<TokenResponse>
-  
+
     @GET("/members/exist/email")
     fun ExistEmail(
         @Query("email") email: String
