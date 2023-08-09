@@ -1,6 +1,8 @@
 package com.example.bangwool.ui.home
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -30,13 +32,15 @@ class TimerEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerEditBinding.inflate(layoutInflater)
 
+        val timerTitle = intent.getStringExtra("timerTitle")
+
 
         initLayout()
         setContentView(binding.root)
     }
 
     fun initLayout() {
-        Log.d("qwerty123", RetrofitUtil.accessTokenString!!.toString())
+        RetrofitUtil.accessTokenString?.toString()?.let { Log.d("qwerty123", it) }
 
         setCheckViewList()
         setCheckViewOnClickListener()
@@ -117,6 +121,15 @@ class TimerEditActivity : AppCompatActivity() {
                 val workMin = workTime[0].trim().toInt() % 60
                 val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].trim().toInt()
 
+                val intent = Intent()
+                intent.putExtra("name", name)
+                intent.putExtra("color", color)
+                intent.putExtra("workHour", workHour)
+                intent.putExtra("workMin", workMin)
+                intent.putExtra("restTime", restTime)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+
                 if (tvTimerEditTitle.text.toString().equals("타이머 추가")) {
                     postPpomo()
                 } else if (tvTimerEditTitle.text.toString().equals("타이머 수정")) {
@@ -125,6 +138,7 @@ class TimerEditActivity : AppCompatActivity() {
                 } else {
                     Log.d("error", "btnSave")
                 }
+                finish()
             }
             icTimerEditBack.setOnClickListener {
                 finish()
