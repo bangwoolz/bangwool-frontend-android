@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
 import android.os.Bundle
 import android.text.Editable
@@ -9,8 +9,9 @@ import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityFindpasswordBinding
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.PorterDuff
+import com.example.bangwool.ui.home.DialogUtils
+import com.example.bangwool.R
 import java.util.regex.Pattern
 
 class FindPasswordActivity : AppCompatActivity() {

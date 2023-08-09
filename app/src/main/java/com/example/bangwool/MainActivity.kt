@@ -1,19 +1,12 @@
 package com.example.bangwool
 
-import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.MenuItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.bangwool.databinding.ActivityMainBinding
 import com.example.bangwool.ui.home.HomeFragment
-import com.example.bangwool.ui.home.TimerEditActivity
 import com.example.bangwool.ui.mypage.MyPageFragment
+import com.example.bangwool.ui.ppomo.TodayPpomoFragment
 import com.example.bangwool.ui.ranking.RankingFragment
 import com.example.bangwool.ui.statistic.StatisticFragment
 import com.google.android.material.navigation.NavigationBarView
@@ -33,6 +26,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         binding.bottomNav.selectedItemId = R.id.navigation_home
         binding.fab.setOnClickListener{
             supportFragmentManager.beginTransaction().replace(R.id.main_frm, TodayPpomoFragment()).commit()
+            binding.bottomNav.selectedItemId = R.id.navigation_ppomo
         }
 
     }

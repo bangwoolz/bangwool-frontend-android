@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.ppomo
 
 import android.content.Context
 import android.util.Log
