@@ -32,31 +32,13 @@ data class WeeklyRankingRequest(
     @SerializedName("end") val end: Int
 )
 
-data class RankingResponse(
-    @SerializedName("rankingResponses") val rankingResponses: List<RankingItem>
-)
-
-data class RankingItem(
-    @SerializedName("rank") val rank: Int,
-    @SerializedName("nickname") val nickname: String,
-    @SerializedName("workedHour") val workedHour: Int,
-    @SerializedName("workedMin") val workedMin: Int
-)
-
-data class RankingRequest(
-    @SerializedName("start") val start: Int,
-    @SerializedName("end") val end: Int
+data class RankingResponses(
+    @SerializedName("rankingResponses") val rankingResponses: List<RankingResponse>
 )
 
 data class RankingResponse(
-    @SerializedName("rankingResponses") val rankingResponses: List<RankingItem>
-)
-
-data class RankingItem(
-    @SerializedName("rank") val rank: Int,
     @SerializedName("nickname") val nickname: String,
-    @SerializedName("workedHour") val workedHour: Int,
-    @SerializedName("workedMin") val workedMin: Int
+    @SerializedName("workedMinute") val workedMinute: Int
 )
 
 data class ExistResponse(
