@@ -61,69 +61,9 @@ interface RetrofitLoginInterface {
         @Query("nickname") nickname: String
     ): Call<ExistResponse>
 
-}
-
-interface KakaoRetrofitInterface {
-
-    @GET("/kakao/oauth/authorize")
-    fun KakaoAuthorize(
-    ): Call<String>
-
-}
-
-interface KakaoRetrofitInterface2 {
-    @GET("https://kauth.kakao.com/oauth/authorize")
+    @POST("/kakao/login")
     fun KakaoLogin(
-        @Query("client_id") client_id: String,
-        @Query("redirect_uri") redirect_uri: String,
-        @Query("response_-type") response_type: String
+        @Body requestBody: KakaoLoginRequest
     ): Call<OAuthTokenResponse>
 
 }
-
-
-//package com.example.hackatonkuit.retrofit2
-//
-//import retrofit2.Call
-//import retrofit2.http.GET
-//import retrofit2.http.Query
-//import retrofit2.http.Path
-//
-//interface RetrofitInterface {
-//
-//
-//    @GET("/app/category")
-//    fun requestCategories(
-//    ): Call<List<Category>>
-//
-//    @GET("/menus/category/{category_id}")
-//    fun requestMenuList(
-//        @Path("category_id") category_id: Long
-//    ): Call<List<MenuPreview>>
-//
-//    @GET("menus/{menu_id}")
-//    fun requestMenu(
-//        @Path("menu_id") menu_id: Long
-//    ): Call<List<Menu>>
-//
-//
-//    @GET("/menus")
-//    fun requestMenus(
-//        @Query("menu-status") menustatus: String
-//    ): Call<List<NewMenu>>
-//
-//    @GET("/orderItems")
-//    fun requestCarts(
-//        @Query("memberId") memberId: Long
-//    ): Call<List<CartItem>>
-//
-//
-//
-////    fun requestFriendsData(): Call<FriendsData>
-////
-////    @POST("/friendship")
-////    fun addFriend(
-////        @Body email: FriendEmailData
-////    ): Call<AddFriend>
-//
-//}

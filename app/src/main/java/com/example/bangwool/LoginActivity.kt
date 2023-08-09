@@ -20,8 +20,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.bangwool.databinding.ActivityLoginBinding
 import com.example.bangwool.retrofit.ExistResponse
+import com.example.bangwool.retrofit.KakaoLoginRequest
 import com.example.bangwool.retrofit.OAuthTokenResponse
-import com.example.bangwool.retrofit.RetrofitInterface
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.saveAccessToken
 import com.kakao.sdk.auth.model.OAuthToken
@@ -104,48 +104,7 @@ class LoginActivity : AppCompatActivity() {
 
 
             btnKakaoLogin.setOnClickListener {
-                RetrofitUtil.getKakaoRetrofit().KakaoAuthorize().enqueue(object: Callback<String> {
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        if(response.isSuccessful){
-                            val url = response.body().toString()
-                            val uurl = url.substring(9, url.length)
-                            val s = uurl.split("?")[1]
-                            val t = s.split("=")
-                            val client_id = t[1].split("&")[0]
-                            val redirect_url = t[2].split("&")[0]
-                            val response_type = t[3]
-                            Log.d("qwerty4", client_id + " " + redirect_url + " " + response_type)
-                            RetrofitUtil.getKakaoRetrofit2().KakaoLogin(client_id, redirect_url, response_type).enqueue(object : Callback<OAuthTokenResponse>{
-                                override fun onResponse(
-                                    call: Call<OAuthTokenResponse>,
-                                    response: Response<OAuthTokenResponse>
-                                ) {
-                                    if(response.isSuccessful){
-                                        Log.d("qwerty5", response.body()!!.toString())
-                                    } else {
-                                        Log.d("qwerty5", response.body()!!.toString())
-                                    }
-                                }
-
-                                override fun onFailure(
-                                    call: Call<OAuthTokenResponse>,
-                                    t: Throwable
-                                ) {
-                                    Log.d("qwerty5", t.message.toString())
-                                }
-
-                            })
-                        } else {
-                            Log.d("qwerty4", "2")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        Log.d("qwerty4", t.message.toString())
-                    }
-
-                })
-            //sdk()
+                sdk()
             }
         }
     }
@@ -159,11 +118,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.e("LOGIN", "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
                 Log.i("LOGIN", "카카오계정으로 로그인 성공 ${token.accessToken}")
-                saveAccessToken(this@LoginActivity, token.accessToken)
-                RetrofitUtil.setAccessToken(token.accessToken)
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                finish()
+                afterGetKaKaoToken(token.accessToken)
             }
         }
 
@@ -186,11 +141,7 @@ class LoginActivity : AppCompatActivity() {
                     )
                 } else if (token != null) {
                     Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
-                    saveAccessToken(this@LoginActivity, token.accessToken)
-                    RetrofitUtil.setAccessToken(token.accessToken)
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                    finish()
+                    afterGetKaKaoToken(token.accessToken)
                 }
             }
         } else {
@@ -199,6 +150,34 @@ class LoginActivity : AppCompatActivity() {
                 callback = callback
             )
         }
+    }
+
+    private fun afterGetKaKaoToken(kakaoToken: String){
+
+        val kakaoLoginRequest = KakaoLoginRequest(kakaoToken)
+        RetrofitUtil.getLoginRetrofit().KakaoLogin(kakaoLoginRequest).enqueue(object: Callback<OAuthTokenResponse>{
+            override fun onResponse(
+                call: Call<OAuthTokenResponse>,
+                response: Response<OAuthTokenResponse>
+            ) {
+                if(response.isSuccessful){
+                    val token = response.body()!!.token
+                    Log.d("LOGIN", token)
+                    saveAccessToken(this@LoginActivity, token)
+                    RetrofitUtil.setAccessToken(token)
+
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<OAuthTokenResponse>, t: Throwable) {
+                Log.d("LOGIN", t.message.toString())
+
+            }
+
+        })
     }
 
 
