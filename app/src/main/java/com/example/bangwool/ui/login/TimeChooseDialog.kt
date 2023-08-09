@@ -1,4 +1,4 @@
-package com.example.bangwool
+package com.example.bangwool.ui.login
 
 import android.app.Dialog
 import android.content.Context
@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.TextView
+import com.example.bangwool.R
 import com.example.bangwool.databinding.DialogTimechooseBinding
 
 class TimeChooseDialog(private val context: Context, val title: String, val range: Int, val chosen_number: Int) {
