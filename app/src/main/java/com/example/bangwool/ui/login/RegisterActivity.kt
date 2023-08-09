@@ -154,6 +154,12 @@ class RegisterActivity : AppCompatActivity() {
                             if(!response.body()!!.exist){
                                 isNicknameExist = false
                                 updateButtonState()
+                            }else {
+                                binding.textInputLayoutNickname.error = "      이미 존재하는 닉네임이에요"
+                                binding.textInputLayoutNickname.isErrorEnabled = true
+                                binding.icErrorNickName.visibility = View.VISIBLE
+                                isNicknameExist = true
+                                updateButtonState()
                             }
                         } else {
                             isNicknameExist = true
