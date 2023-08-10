@@ -23,6 +23,7 @@ class RankingWeekFragment : Fragment() {
     lateinit var binding: FragmentRankingWeekBinding
     var rankingList = arrayListOf<RankingInfo>()
     private val adapter = RankingAdapter(rankingList)
+    private var gi = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,8 +63,12 @@ class RankingWeekFragment : Fragment() {
                                 rankingItems[i].loginedUser
                             )
                         )
+                        if(rankingItems[i].loginedUser){
+                            gi=i
+                        }
                     }
                     adapter.notifyDataSetChanged()
+                    binding.rvWeekRanking.scrollToPosition(gi)
                 } else {
                     //로그 찍기1
                     Log.e("RankingWeekFragment", "API 응답 실패: ${response.code()}")
