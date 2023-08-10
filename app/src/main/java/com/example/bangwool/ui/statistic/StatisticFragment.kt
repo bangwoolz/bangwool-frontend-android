@@ -50,6 +50,8 @@ class StatisticFragment : Fragment() {
         val localGoalTime = getGoalTime(requireContext()).toInt()
         if (localGoalTime == 0) {
             // 목표시간 설정 버튼 클릭시 event
+            binding.llCalenderMain.visibility = View.GONE
+            binding.llCalenderAdd.visibility = View.VISIBLE
             binding.llCalenderAdd.setOnClickListener {
                 val dlg = GoalTimeDialog(requireContext())
                 dlg.setOnOKClickedListener { hour ->
