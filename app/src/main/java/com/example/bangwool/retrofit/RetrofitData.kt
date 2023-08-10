@@ -134,3 +134,10 @@ data class WeekWorkStatistic(
 enum class Platform{
     KAKAO
 }
+
+data class MyPageResponse(
+    @SerializedName("email") val email: String,
+    @SerializedName("nickname") val nickname: String,
+    @SerializedName("profileImage") val profileImage: String
+)
+
