@@ -62,8 +62,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:visibility="gone"
-                android:id="@+id/ppomo_busket2"
+                android:id="@+id/ppomo_busket4"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-85dp"
@@ -71,12 +70,12 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/bucket"
                 android:translationZ="2dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@id/ppomoTree_iv"
                 app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
 
             <ImageView
-                android:visibility="gone"
-                android:id="@+id/ppomo_busket4"
+                android:id="@+id/ppomo_busket2"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-40dp"
@@ -84,63 +83,63 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/bucket"
                 android:translationZ="-1dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@id/ppomoTree_iv"
                 app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
 
             <ImageView
-                android:visibility="gone"
-                android:id="@+id/ppomo_busket6"
-                android:layout_width="64dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-45dp"
-                android:layout_marginTop="-80dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/bucket"
-                android:translationZ="-2dp"
-                app:layout_constraintStart_toEndOf="@id/ppomoTree_iv"
-                app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
-
-            <ImageView
-                android:visibility="gone"
                 android:id="@+id/ppomo_busket8"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-80dp"
-                android:layout_marginTop="-100dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/bucket"
-                android:translationZ="-5dp"
-                app:layout_constraintStart_toEndOf="@id/ppomoTree_iv"
-                app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
-
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/ppomo_busket7"
-                android:layout_width="64dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="-100dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/bucket"
-                android:translationZ="-3dp"
-                app:layout_constraintStart_toStartOf="@id/ppomoTree_iv"
-                app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
-
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/ppomo_busket5"
-                android:layout_width="64dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-10dp"
+                android:layout_marginStart="-5dp"
                 android:layout_marginTop="-80dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/bucket"
                 android:translationZ="-2dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/ppomoTree_iv"
+                app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
+
+            <ImageView
+                android:id="@+id/ppomo_busket6"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="-25dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bucket"
+                android:translationZ="-5dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/ppomoTree_iv"
+                app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
+
+            <ImageView
+                android:id="@+id/ppomo_busket7"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-70dp"
+                android:layout_marginTop="-20dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bucket"
+                android:translationZ="-3dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/ppomoTree_iv"
                 app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
 
             <ImageView
+                android:id="@+id/ppomo_busket5"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-50dp"
+                android:layout_marginTop="-80dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/bucket"
+                android:translationZ="-2dp"
                 android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/ppomoTree_iv"
+                app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
+
+            <ImageView
                 android:id="@+id/ppomo_busket3"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
@@ -149,19 +148,20 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/bucket"
                 android:translationZ="-1dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/ppomoTree_iv"
                 app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
 
             <ImageView
                 android:id="@+id/ppomo_busket1"
                 android:layout_width="64dp"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="-25dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/bucket"
                 android:translationZ="1dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/ppomoTree_iv"
                 app:layout_constraintTop_toBottomOf="@id/ppomoTree_iv" />
 

@@ -138,7 +138,7 @@ class TodayPpomoFragment : Fragment() {
 
         basketImgList.addAll(basketImgId)
 
-        for (i in 0 until 8) {
+        for (i in 0 until basketNum) {
             basketImgList[i].visibility = View.VISIBLE
         }
     }

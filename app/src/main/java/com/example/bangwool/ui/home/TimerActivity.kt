@@ -90,7 +90,7 @@ class TimerActivity : AppCompatActivity() {
 
 
         binding.btnStart.setOnClickListener {
-//            sendToServerWorkTime(1, 0);
+//            sendToServerWorkTime(1, 15);
             binding.btnStart.visibility = View.INVISIBLE
             binding.btnStop.visibility = View.VISIBLE
             binding.ivHappyTomato.visibility = View.GONE
