@@ -67,7 +67,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/character_color</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowBackground">@drawable/splash_image</item>
         <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
