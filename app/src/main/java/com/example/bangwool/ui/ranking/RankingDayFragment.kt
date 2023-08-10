@@ -46,6 +46,10 @@ class RankingDayFragment : Fragment() {
         binding.rvDayRanking.adapter = adapter
     }
 
+    fun scrollToPosition(position: Int) {
+        binding.rvDayRanking.scrollToPosition(position)
+    }
+
     fun fetchDailyRankingData() {
         RetrofitUtil.setAccessToken(getAccessToken(requireContext()))
 
