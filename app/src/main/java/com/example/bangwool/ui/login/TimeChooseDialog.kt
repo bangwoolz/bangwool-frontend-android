@@ -25,6 +25,7 @@ class TimeChooseDialog(private val context: Context, val title: String, val rang
 
         val inflater = LayoutInflater.from(context)
         val binding: DialogTimechooseBinding = DialogTimechooseBinding.inflate(inflater)
+        binding.numberPickerMinute.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         dialog.setContentView(binding.root)
 
         binding.textViewTitle.text = title
