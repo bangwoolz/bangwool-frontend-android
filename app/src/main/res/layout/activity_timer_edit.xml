@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:fontFamily="@font/p_medium"
-                android:text="작업 시간"
+                android:text="집중 시간"
                 android:textColor="@color/gray_600"
                 android:textSize="@dimen/text_size_body4"
                 app:layout_constraintStart_toStartOf="parent"
