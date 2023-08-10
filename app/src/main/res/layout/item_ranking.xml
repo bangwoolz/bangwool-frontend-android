@@ -35,7 +35,7 @@
             <ImageView
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/splash_image" />
+                android:src="@drawable/happy_tomato" />
         </androidx.cardview.widget.CardView>
 
         <TextView
