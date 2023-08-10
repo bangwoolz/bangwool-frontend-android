@@ -309,7 +309,12 @@ class StatisticFragment : Fragment() {
         if (maxHour == 0.0) {
             for (i in 0 until weekHourArr.size) {
                 val lp = barArr[i].layoutParams
-                lp.height = 0
+                val viewHeight = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    90.0F,
+                    resources.displayMetrics
+                ).toInt()
+                lp.height = viewHeight
                 barArr[i].layoutParams = lp
             }
         } else {
