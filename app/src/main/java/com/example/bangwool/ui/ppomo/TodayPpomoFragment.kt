@@ -39,7 +39,6 @@ class TodayPpomoFragment : Fragment() {
     lateinit var todayPpomoAdapter: TodayPpomoAdapter
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -98,7 +97,11 @@ class TodayPpomoFragment : Fragment() {
                     total /= 15;
                     var tree = total % 6;
                     var bucket = total / 6;
-                    binding.ppomoTreeIv.setImageResource(treeImgList[tree])
+                    if (total >= 54) {
+                        binding.ppomoTreeIv.setImageResource(treeImgList[6])
+                    } else {
+                        binding.ppomoTreeIv.setImageResource(treeImgList[tree])
+                    }
                     binding.ppomoCountTv.text = "오늘은 토마토를 ${total / 1}개나 모았어요!"
 
                     Log.i("busketNum", bucket.toString())
@@ -135,12 +138,8 @@ class TodayPpomoFragment : Fragment() {
 
         basketImgList.addAll(basketImgId)
 
-        for (i in 0 until basketNum){
-            if (basketNum <= 8){
-                basketImgList[i].visibility = View.VISIBLE
-            } else {
-                Toast.makeText(requireContext(), "바구니 개수 최대임", Toast.LENGTH_SHORT).show()
-            }
+        for (i in 0 until 8) {
+            basketImgList[i].visibility = View.VISIBLE
         }
     }
 
