@@ -19,9 +19,9 @@
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/p_medium"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily="@font/p_medium"
             android:text="마이페이지"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body2"
@@ -35,8 +35,8 @@
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray_300"
             android:layout_marginTop="64dp"
+            android:background="@color/gray_300"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -53,15 +53,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageViewProfile"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="40dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:src="@drawable/profile_base"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/profile_border"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageViewProfile"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/happy_tomato" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textViewUsername"
@@ -73,7 +83,7 @@
             android:text="방울이님"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body3"
-            app:layout_constraintStart_toStartOf="@id/imageViewProfile"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfile"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -85,7 +95,7 @@
             android:text="Lv 1 씨앗"
             android:textColor="@color/gray_level"
             android:textSize="@dimen/text_size_body4"
-            app:layout_constraintStart_toStartOf="@id/imageViewProfile"
+            app:layout_constraintStart_toStartOf="@id/cardViewProfile"
             app:layout_constraintTop_toBottomOf="@id/textViewUsername" />
 
         <ImageView
@@ -138,14 +148,14 @@
             android:id="@+id/textViewQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="자주 묻는 질문"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/p_medium"
+            android:text="자주 묻는 질문"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body4"
-            android:fontFamily="@font/p_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -161,14 +171,14 @@
             android:id="@+id/textViewAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/p_medium"
+            android:text="About"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body4"
-            android:fontFamily="@font/p_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -184,14 +194,14 @@
             android:id="@+id/textViewLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그아웃"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/p_medium"
+            android:text="로그아웃"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body4"
-            android:fontFamily="@font/p_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -207,14 +217,14 @@
             android:id="@+id/textViewWithdraw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="탈퇴하기"
             android:layout_marginStart="24dp"
+            android:fontFamily="@font/p_medium"
+            android:text="탈퇴하기"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body4"
-            android:fontFamily="@font/p_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
