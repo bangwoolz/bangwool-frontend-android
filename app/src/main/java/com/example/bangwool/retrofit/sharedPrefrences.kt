@@ -42,3 +42,39 @@ fun removeGoalTime(context: Context) {
     edit.remove("goalTime")
     edit.apply()
 }
+
+fun saveUserId(context: Context, userId: String) {
+    val pref =
+        context.getSharedPreferences("userId_spf", Context.MODE_PRIVATE) //shared key 설정
+    val edit = pref.edit() // 수정모드
+    edit.putString("userId", userId) // 값 넣기
+    edit.apply() // 적용하기
+}
+fun getUserId(context: Context): String {
+    val spf = context.getSharedPreferences("userId_spf", AppCompatActivity.MODE_PRIVATE)
+    return spf.getString("userId", 0.toString())!!
+}
+
+fun savePassword(context: Context, password: String) {
+    val pref =
+        context.getSharedPreferences("password_spf", Context.MODE_PRIVATE) //shared key 설정
+    val edit = pref.edit() // 수정모드
+    edit.putString("password", password) // 값 넣기
+    edit.apply() // 적용하기
+}
+fun getPassword(context: Context): String {
+    val spf = context.getSharedPreferences("password_spf", AppCompatActivity.MODE_PRIVATE)
+    return spf.getString("password", 0.toString())!!
+}
+fun removeUserId(context: Context) {
+    val pref = context.getSharedPreferences("userId_spf", AppCompatActivity.MODE_PRIVATE)
+    val edit = pref.edit() // 수정모드
+    edit.remove("userId")
+    edit.apply()
+}
+fun removePassword(context: Context) {
+    val pref = context.getSharedPreferences("password_spf", AppCompatActivity.MODE_PRIVATE)
+    val edit = pref.edit() // 수정모드
+    edit.remove("password")
+    edit.apply()
+}

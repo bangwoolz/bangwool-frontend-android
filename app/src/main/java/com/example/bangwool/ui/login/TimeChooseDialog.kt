@@ -16,6 +16,7 @@ import com.example.bangwool.databinding.DialogTimechooseBinding
 
 class TimeChooseDialog(private val context: Context, val title: String, val range: Int, val chosen_number: Int) {
 
+
     fun showWorkTimeDialog(textViewWorkTime: TextView) {
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -24,7 +25,10 @@ class TimeChooseDialog(private val context: Context, val title: String, val rang
         dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         val inflater = LayoutInflater.from(context)
+
         val binding: DialogTimechooseBinding = DialogTimechooseBinding.inflate(inflater)
+        //
+        binding.numberPickerMinute.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         dialog.setContentView(binding.root)
 
         binding.textViewTitle.text = title
