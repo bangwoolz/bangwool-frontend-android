@@ -20,6 +20,12 @@ class HomeAdapter(
 ) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
+    fun updateData(newData: List<PpomodoroId>) {
+        itemList.clear()
+        itemList.addAll(newData)
+        notifyDataSetChanged()
+    }
+
     var itemClickListener: OnItemClickListener? = null
     val colorMap = mapOf(
         "red" to R.color.timer_color_red,
@@ -39,6 +45,7 @@ class HomeAdapter(
 
 
     }
+
 
     fun setOnClickListener(onItemClickListener: OnItemClickListener) {
         itemClickListener = onItemClickListener

@@ -44,11 +44,9 @@ class TermsAgreeActivity : AppCompatActivity() {
             }
 
             checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, isChecked ->
-                //remove checkbox's checked change listener
                 checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
                 }
                 checkBoxAllAgreements.isChecked = isChecked && checkBoxTermsOfUse.isChecked
-                //reallocate checkbox's checked change listener
                 checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
                     checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
                 }
@@ -57,7 +55,6 @@ class TermsAgreeActivity : AppCompatActivity() {
 
             checkBoxTermsOfUse.setOnCheckedChangeListener { _, isChecked ->
                 checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
-                    //remove checkbox's checked change listener
                 }
                 checkBoxAllAgreements.isChecked = isChecked && checkBoxPrivacyPolicy.isChecked
                 checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
