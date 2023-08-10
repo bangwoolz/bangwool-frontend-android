@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll_ranking_all"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:gravity="center_vertical"
@@ -34,7 +35,7 @@
             <ImageView
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-                android:src="@drawable/splash_image" />
+                android:src="@drawable/happy_tomato" />
         </androidx.cardview.widget.CardView>
 
         <TextView

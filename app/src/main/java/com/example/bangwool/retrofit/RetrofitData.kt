@@ -33,12 +33,13 @@ data class WeeklyRankingRequest(
 )
 
 data class RankingResponses(
-    @SerializedName("rankingResponses") val rankingResponses: List<RankingResponse>
+    @SerializedName("rankingResponses") val rankingResponses: List<RankingResponse>,
 )
 
 data class RankingResponse(
     @SerializedName("nickname") val nickname: String,
-    @SerializedName("workedMinute") val workedMinute: Int
+    @SerializedName("workedMinute") val workedMinute: Int,
+    @SerializedName("loginedUser") val loginedUser: Boolean,
 )
 
 data class ExistResponse(
