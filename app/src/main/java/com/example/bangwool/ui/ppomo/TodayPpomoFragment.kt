@@ -12,6 +12,7 @@ import com.example.bangwool.databinding.FragmentTodayPpomoBinding
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WorkTodayResponse
 import com.example.bangwool.retrofit.WorksTodayResponse
+import com.example.bangwool.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,20 +82,22 @@ class TodayPpomoFragment : Fragment() {
                 if (response.isSuccessful) {
                     Log.i("GETTodayPpomo/Success", response.body()!!.works.toString())
                     val data = response.body()!!.works
-                    ppomoList.clear()
-                    ppomoList.addAll(data)
-                    todayPpomoAdapter.notifyDataSetChanged()
+                    if (data != null) {
+                        ppomoList.clear()
+                        ppomoList.addAll(data)
+                        todayPpomoAdapter.notifyDataSetChanged()
 
-                    var total = 0;
-                    ppomoList.forEach {
-                        total += it.workMin + 60*it.workHour
+                        var total = 0;
+                        ppomoList.forEach {
+                            total += it.workMin + 60 * it.workHour
+                        }
+                        total /= 10;
+                        var tree = total % 11;
+                        var bucket = total / 11;
+                        binding.ppomoTreeIv.setImageResource(treeImgList[tree])
+                        binding.ppomoCountTv.text = "오늘은 토마토를 ${total / 1}개나 모았어요!"
                     }
-                    total /= 10;
-                    var tree = total % 11;
-                    var bucket = total / 11;
-                    binding.ppomoTreeIv.setImageResource(treeImgList[tree])
-                    binding.ppomoCountTv.text = "오늘은 토마토를 ${total/1}개나 모았어요!"
-                    //뽀모도로 가져와서 리싸이클러뷰에 연동하기
+
                 }
             }
 
@@ -107,7 +110,7 @@ class TodayPpomoFragment : Fragment() {
 
 
     fun initDummyData() {
-        val dummydata = WorkTodayResponse(0 ,"test", 2, 30)
+        val dummydata = WorkTodayResponse(0, "test", 2, 30)
         ppomoList.add(dummydata)
         ppomoList.add(dummydata)
         ppomoList.add(dummydata)
