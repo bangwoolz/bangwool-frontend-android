@@ -1,6 +1,7 @@
 package com.example.bangwool.ui.home
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
     //    var itemList: ArrayList<HomeItem> = arrayListOf()
     var ppomoList: ArrayList<PpomodoroId> = arrayListOf()
     lateinit var homeAdapter: HomeAdapter
+    private val REQUEST_EDIT_TIMER = 1
     val ppomoId: Int = 0
 
     val updatePpomodoro =
@@ -45,6 +47,14 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.dDay.setOnClickListener {
         }
+
+        binding.homeAddTaskBtn.setOnClickListener {
+            val i = Intent(requireContext(), TimerEditActivity::class.java)
+            i.putExtra("timerTitle", "타이머 추가")
+            startActivityForResult(i, REQUEST_EDIT_TIMER)
+        }
+
+
         /*
         binding.homeRecyclerView.setOnClickListener {
             val intent = Intent(activity, TimerActivity::class.java)
@@ -54,9 +64,25 @@ class HomeFragment : Fragment() {
 
 
 //        initDummyData()
+
         getPpomo()
         init()
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_EDIT_TIMER && resultCode == Activity.RESULT_OK) {
+            val name = data?.getStringExtra("name")
+            val color = data?.getStringExtra("color")
+            val workHour = data?.getIntExtra("workHour", 0)
+            val workMin = data?.getIntExtra("workMin", 0)
+            val restTime = data?.getIntExtra("restTime", 0)
+
+            if (name != null && color != null && workHour != null && workMin != null && restTime != null) {
+                // Process the data and update your UI
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

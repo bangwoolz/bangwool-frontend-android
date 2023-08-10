@@ -113,7 +113,7 @@ class PasswordActivity : AppCompatActivity() {
                     loginIcErrorEmail.visibility = View.GONE
     //                    pwTextInputLayout.error = "비밀번호 동일함"
                     val i = Intent(this@PasswordActivity, MainActivity::class.java)
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)//이미 있는거 수정
                     startActivity(i)
                     Toast.makeText(this@PasswordActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                     finish()
