@@ -14,6 +14,8 @@ import com.example.bangwool.retrofit.AuthLoginRequest
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.TokenResponse
 import com.example.bangwool.retrofit.saveAccessToken
+import com.example.bangwool.retrofit.savePassword
+import com.example.bangwool.retrofit.saveUserId
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -88,6 +90,7 @@ class PasswordActivity : AppCompatActivity() {
             loginBtn.backgroundTintList = getColorStateList(R.color.primary)
 
             loginBtn.setOnClickListener {
+                binding.root.setOnTouchListener { _, _ -> true }
                 requestAuthLogin()
             }
         }
@@ -107,11 +110,12 @@ class PasswordActivity : AppCompatActivity() {
                     val token = response.body()!!.token
                     saveAccessToken(this@PasswordActivity, token)
                     RetrofitUtil.setAccessToken(token)
-
+                    saveUserId(this@PasswordActivity,userId!!)
+                    savePassword(this@PasswordActivity,passwordEt.text.toString())
                     pwTextInputLayout.error = null
                     pwTextInputLayout.isErrorEnabled = false
                     loginIcErrorEmail.visibility = View.GONE
-    //                    pwTextInputLayout.error = "비밀번호 동일함"
+    //              pwTextInputLayout.error = "비밀번호 동일함"
                     val i = Intent(this@PasswordActivity, MainActivity::class.java)
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)//이미 있는거 수정
                     startActivity(i)

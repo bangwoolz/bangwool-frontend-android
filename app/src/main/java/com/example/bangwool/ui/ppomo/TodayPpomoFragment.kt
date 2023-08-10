@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentTodayPpomoBinding
@@ -21,7 +22,7 @@ import retrofit2.Response
 class TodayPpomoFragment : Fragment() {
     lateinit var binding: FragmentTodayPpomoBinding
 
-    var ppomoList: ArrayList<WorkTodayResponse> = arrayListOf()
+    var promoList = arrayListOf<WorkTodayResponse>()
     var treeImgList = arrayListOf<Int>(
         R.drawable.tree0,
         R.drawable.tree1,
@@ -37,11 +38,13 @@ class TodayPpomoFragment : Fragment() {
     )
     lateinit var todayPpomoAdapter: TodayPpomoAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTodayPpomoBinding.inflate(inflater, container, false)
+
 
 //        initDummyData()
         getTodayPpomo()
@@ -52,7 +55,7 @@ class TodayPpomoFragment : Fragment() {
 
     fun init() {
         binding.apply {
-            todayPpomoAdapter = TodayPpomoAdapter(requireContext(), ppomoList)
+            todayPpomoAdapter = TodayPpomoAdapter(requireContext(), promoList)
 
             todayppomoRecyclerView.apply {
                 layoutManager =
@@ -69,6 +72,7 @@ class TodayPpomoFragment : Fragment() {
 //                // 밑에 메뉴바가 있는데 닫기 버튼이 왜
 //            }
 
+
         }
     }
 
@@ -82,22 +86,28 @@ class TodayPpomoFragment : Fragment() {
                 if (response.isSuccessful) {
                     Log.i("GETTodayPpomo/Success", response.body()!!.works.toString())
                     val data = response.body()!!.works
-                    if (data != null) {
-                        ppomoList.clear()
-                        ppomoList.addAll(data)
-                        todayPpomoAdapter.notifyDataSetChanged()
 
-                        var total = 0;
-                        ppomoList.forEach {
-                            total += it.workMin + 60 * it.workHour
-                        }
-                        total /= 10;
-                        var tree = total % 11;
-                        var bucket = total / 11;
-                        binding.ppomoTreeIv.setImageResource(treeImgList[tree])
-                        binding.ppomoCountTv.text = "오늘은 토마토를 ${total / 1}개나 모았어요!"
+                    promoList.clear()
+                    if(data[0] != null)
+                        promoList.addAll(data)
+                    todayPpomoAdapter.notifyDataSetChanged()
+
+                    var total = 0;
+                    promoList.forEach {
+                        total += it.workMin + 60 * it.workHour
                     }
+                    total /= 15;
+                    var tree = total % 6;
+                    var bucket = total / 6;
+                    if (total >= 54) {
+                        binding.ppomoTreeIv.setImageResource(treeImgList[6])
+                    } else {
+                        binding.ppomoTreeIv.setImageResource(treeImgList[tree])
+                    }
+                    binding.ppomoCountTv.text = "오늘은 토마토를 ${total / 1}개나 모았어요!"
 
+                    Log.i("busketNum", bucket.toString())
+                    basket(bucket)
                 }
             }
 
@@ -109,10 +119,30 @@ class TodayPpomoFragment : Fragment() {
     }
 
 
-    fun initDummyData() {
-        val dummydata = WorkTodayResponse(0, "test", 2, 30)
-        ppomoList.add(dummydata)
-        ppomoList.add(dummydata)
-        ppomoList.add(dummydata)
+    fun basket(basketNum: Int) {
+        val basketImgId = arrayOf(
+            binding.ppomoBusket1,
+            binding.ppomoBusket2,
+            binding.ppomoBusket3,
+            binding.ppomoBusket4,
+            binding.ppomoBusket5,
+            binding.ppomoBusket6,
+            binding.ppomoBusket7,
+            binding.ppomoBusket8,
+//            binding.ppomoBusket9,
+//            binding.ppomoBusket10,
+//            binding.ppomoBusket11,
+//            binding.ppomoBusket12,
+//            binding.ppomoBusket13
+        )
+
+        val basketImgList = mutableListOf<ImageView>()
+
+        basketImgList.addAll(basketImgId)
+
+        for (i in 0 until basketNum) {
+            basketImgList[i].visibility = View.VISIBLE
+        }
     }
+
 }
