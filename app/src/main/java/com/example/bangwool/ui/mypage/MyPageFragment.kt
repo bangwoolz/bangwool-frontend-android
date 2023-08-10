@@ -41,6 +41,15 @@ class MyPageFragment : Fragment() {
             WithdrawDialogUtils.showAboutDialog(requireContext())
         }
 
+        binding.appinfoMenu.setOnClickListener {
+            UpdateDialogUtils.showUpdateDialog(requireContext())
+        }
+
+        binding.questionMenu.setOnClickListener {
+            UpdateDialogUtils.showUpdateDialog(requireContext())
+
+        }
+
         return binding.root
     }
 }
