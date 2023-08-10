@@ -152,9 +152,9 @@ class RegisterActivity : AppCompatActivity() {
                     ) {
                         if(response.isSuccessful){
                             if(!response.body()!!.exist){
-                                binding.textInputLayoutNickname.error = "        닉네임이 존재하지 않습니다."
+                                binding.textInputLayoutNickname.error = "닉네임이 존재하지 않습니다."
                                 updateNickNameErrorIcon(true)
-                                binding.textInputLayoutNickname.setErrorTextColor(ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_green)))
+                                binding.textInputLayoutNickname.setErrorTextColor(ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_600)))
                                 binding.textInputLayoutNickname.isErrorEnabled = true
                                 isNicknameExist = false
                                 updateButtonState()
@@ -522,7 +522,7 @@ class RegisterActivity : AppCompatActivity() {
             if (isValid) {
                 ContextCompat.getDrawable(this, R.drawable.round_check_24)
             } else {
-                ContextCompat.getDrawable(this, R.drawable.ic_error_circle_outline)
+                null
             }
 
         if (isValid) {
