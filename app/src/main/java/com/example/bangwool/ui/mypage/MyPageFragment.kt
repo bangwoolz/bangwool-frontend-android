@@ -2,11 +2,13 @@ package com.example.bangwool.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.bangwool.BuildConfig
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentMypageBinding
 import com.example.bangwool.retrofit.removePassword
@@ -59,15 +61,21 @@ class MyPageFragment : Fragment() {
         binding.withdrawMenu.setOnClickListener {
             WithdrawDialogUtils.showAboutDialog(requireContext())
         }
+        binding.textViewQuestion.setOnClickListener {
+            UpdateDialogUtils.showUpdateDialog(requireContext())
+        }
+        binding.appinfoMenu.setOnClickListener {
+            UpdateDialogUtils.showUpdateDialog(requireContext())
+        }
     }
 
     private fun fetchMyPageData() {
         retrofitInterface.getMyPage().enqueue(object : Callback<MyPageResponse> {
             override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
                 if (response.isSuccessful) {
-                    val myPageResponse = response.body()
-                    val nickname = myPageResponse?.nickname
-                    val profileImage = myPageResponse?.profileImage
+                    val myPageResponse = response.body()!!
+                    val nickname = myPageResponse.nickname
+                    val profileImage = myPageResponse.profileImage
 
 
                     // 닉네임 업데이트 부분
@@ -78,11 +86,11 @@ class MyPageFragment : Fragment() {
                         Glide.with(requireContext())
                             .load(profileImage)
                             .placeholder(R.drawable.profile_base) // 로딩 중에 보여줄 이미지
-                            .error(R.drawable.profile_base) // 에러 발생 시 보여줄 이미지
+                            .error(R.drawable.happy_tomato) // 에러 발생 시 보여줄 이미지
                             .into(binding.imageViewProfile)//이미지 이거는 어디에..?
                     } else {
                         // 프로필 이미지가 없을 경우 이미지 표시 근데 이미지를 어디서 입력빋는..?
-                        binding.imageViewProfile.setImageResource(R.drawable.profile_base)
+                        binding.imageViewProfile.setImageResource(R.drawable.happy_tomato)
                     }
                 } else {
                     // 서버 응답이 올바르지 않을 때 로그 출력.. whffu...졸려..
@@ -93,15 +101,5 @@ class MyPageFragment : Fragment() {
                 // 네트워크 요청 실패 때 로그 출력.. 졸리다..
             }
         })
-        binding.appinfoMenu.setOnClickListener {
-            UpdateDialogUtils.showUpdateDialog(requireContext())
-        }
-
-        binding.questionMenu.setOnClickListener {
-            UpdateDialogUtils.showUpdateDialog(requireContext())
-
-        }
-
-        return binding.root
     }
 }
