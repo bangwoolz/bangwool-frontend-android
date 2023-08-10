@@ -1,13 +1,9 @@
 package com.example.bangwool.ui.ranking
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ItemRankingBinding
@@ -53,6 +49,10 @@ class RankingAdapter(var items: ArrayList<RankingInfo>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemRankingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     override fun getItemCount(): Int {

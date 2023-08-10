@@ -25,7 +25,7 @@ class RankingDayFragment : Fragment() {
     private lateinit var binding: FragmentRankingDayBinding
     private val rankingList = arrayListOf<RankingInfo>()
     private val adapter = RankingAdapter(rankingList)
-
+    private var gi = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,9 +74,13 @@ class RankingDayFragment : Fragment() {
                                     rankingItems[i].loginedUser
                                 )
                             )
+                            if(rankingItems[i].loginedUser){
+                                gi=i
+                            }
                         }
                         // 어댑터에 데이터 변경을 알리고 리사이클러뷰 업데이트
                         adapter.notifyDataSetChanged()
+                        binding.rvDayRanking.scrollToPosition(gi)
                     } else {
                         // API 응답 실패 시 로그 출력
                         Log.e("RankingWeekFragment", "API 응답 실패: ${response.code()}")
