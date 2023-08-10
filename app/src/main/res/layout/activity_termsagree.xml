@@ -100,6 +100,63 @@
         app:layout_constraintTop_toBottomOf="@id/cl_all_agreement">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ButtonUsePolicy"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/ic_down"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/textViewUsePolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/p_medium"
+            android:text="이용약관 동의"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_body4"
+            app:layout_constraintBottom_toBottomOf="@+id/ButtonUsePolicy"
+            app:layout_constraintStart_toEndOf="@id/ButtonUsePolicy"
+            app:layout_constraintTop_toTopOf="@id/ButtonUsePolicy" />
+
+        <TextView
+            android:id="@+id/textViewUsePolicyRequired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="(필수)"
+            android:textColor="@color/gray_600"
+            app:layout_constraintBottom_toBottomOf="@id/textViewUsePolicy"
+            app:layout_constraintStart_toEndOf="@id/textViewUsePolicy"
+            app:layout_constraintTop_toTopOf="@id/textViewUsePolicy" />
+
+        <CheckBox
+            android:id="@+id/checkBoxUsePolicy"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/custom_checkbox"
+            android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@id/textViewUsePolicyRequired"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textViewUsePolicyRequired" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_use_term">
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ButtonPrivacyPolicy"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -115,10 +172,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:fontFamily="@font/p_medium"
-            android:text="이용약관 동의"
+            android:text="개인정보 처리 약관 동의"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_body4"
-            app:layout_constraintBottom_toBottomOf="@+id/ButtonPrivacyPolicy"
+            app:layout_constraintBottom_toBottomOf="@id/ButtonPrivacyPolicy"
             app:layout_constraintStart_toEndOf="@id/ButtonPrivacyPolicy"
             app:layout_constraintTop_toTopOf="@id/ButtonPrivacyPolicy" />
 
@@ -126,10 +183,10 @@
             android:id="@+id/textViewPrivacyPolicyRequired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/pretendard_regular"
+            android:layout_marginStart="10dp"
             android:text="(필수)"
-            android:textColor="@color/gray_600"
+            android:textColor="@android:color/darker_gray"
+            android:fontFamily="@font/p_medium"
             app:layout_constraintBottom_toBottomOf="@id/textViewPrivacyPolicy"
             app:layout_constraintStart_toEndOf="@id/textViewPrivacyPolicy"
             app:layout_constraintTop_toTopOf="@id/textViewPrivacyPolicy" />
@@ -143,63 +200,6 @@
             app:layout_constraintBottom_toBottomOf="@id/textViewPrivacyPolicyRequired"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textViewPrivacyPolicyRequired" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_use_term">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/ButtonViewAllAgreements"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/ic_down"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-        <TextView
-            android:id="@+id/textViewAllAgreements"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:fontFamily="@font/p_medium"
-            android:text="개인정보 처리 약관 동의"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_body4"
-            app:layout_constraintBottom_toBottomOf="@id/ButtonViewAllAgreements"
-            app:layout_constraintStart_toEndOf="@id/ButtonViewAllAgreements"
-            app:layout_constraintTop_toTopOf="@id/ButtonViewAllAgreements" />
-
-        <TextView
-            android:id="@+id/textViewPrivacyPolicyRequired2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="(필수)"
-            android:textColor="@android:color/darker_gray"
-            android:fontFamily="@font/p_medium"
-            app:layout_constraintBottom_toBottomOf="@id/textViewAllAgreements"
-            app:layout_constraintStart_toEndOf="@id/textViewAllAgreements"
-            app:layout_constraintTop_toTopOf="@id/textViewAllAgreements" />
-
-        <CheckBox
-            android:id="@+id/checkBoxTermsOfUse"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@drawable/custom_checkbox"
-            android:button="@null"
-            app:layout_constraintBottom_toBottomOf="@id/textViewPrivacyPolicyRequired2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textViewPrivacyPolicyRequired2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

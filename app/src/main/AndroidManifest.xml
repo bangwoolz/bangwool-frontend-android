@@ -50,7 +50,7 @@
         <activity android:name=".ui.login.RegisterActivity" />
         <activity android:name=".ui.login.PrivacyPolicyActivity" />
         <activity android:name=".ui.login.TermsAgreeActivity" />
-        <activity android:name=".ui.login.textViewAllAgreementsActivity" />
+        <activity android:name=".ui.login.UsePolicyActivity" />
 >
         <activity
             android:name=".MainActivity"
