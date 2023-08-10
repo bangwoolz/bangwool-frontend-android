@@ -8,6 +8,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPrivacypolicyBinding
     private var checkboxState = false
     private var isScrolledEnd = false
+//    val webView = binding.webView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,5 +18,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
             finish()
         }
 
+
+        binding.webView.loadUrl("file:///android_asset/privacy_policy.html")
     }
 }

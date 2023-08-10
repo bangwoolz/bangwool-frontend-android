@@ -20,6 +20,8 @@ import com.example.bangwool.retrofit.PpomodoroId
 import com.example.bangwool.retrofit.Ppomodoros
 import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.WorkTodayResponse
+import com.example.bangwool.retrofit.WorksTodayResponse
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,6 +32,8 @@ class HomeFragment : Fragment() {
 
     //    var itemList: ArrayList<HomeItem> = arrayListOf()
     var ppomoList: ArrayList<PpomodoroId> = arrayListOf()
+    var ppomoList_today: ArrayList<WorkTodayResponse> = arrayListOf()
+
     lateinit var homeAdapter: HomeAdapter
     private val REQUEST_EDIT_TIMER = 1
     val ppomoId: Int = 0
@@ -37,6 +41,7 @@ class HomeFragment : Fragment() {
     val updatePpomodoro =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             getPpomo()
+            getTodayPpomo()
         }
 
     override fun onCreateView(
@@ -65,7 +70,9 @@ class HomeFragment : Fragment() {
 
 //        initDummyData()
 
+//        getTodayPpomo()
         getPpomo()
+        getTodayPpomo()
         init()
         return binding.root
     }
@@ -151,7 +158,6 @@ class HomeFragment : Fragment() {
             })
 
 
-
             homeAddTaskBtn.setOnClickListener {
                 val i = Intent(requireContext(), TimerEditActivity::class.java)
                 i.putExtra("timerTitle", "타이머 추가")
@@ -166,6 +172,7 @@ class HomeFragment : Fragment() {
                 homeMenuDialog.show(parentFragmentManager, "HomeMenuDialog")
 
             }
+
         }
     }
 
@@ -177,43 +184,6 @@ class HomeFragment : Fragment() {
             context.resources.displayMetrics
         )
     }
-//
-//    fun listDialog() {
-//        val builder = AlertDialog.Builder(requireContext())
-//        val menu = arrayOf("알림 설정", "추가 설정")
-//        builder.setItems(menu) { dialog, which ->
-//            when (which) {
-//                0 -> {
-//                    // 알림 설정 화면으로 이동
-//                }
-//
-//                1 -> {
-//                    // 추가 설정 화면으로 이동
-//                }
-//
-//                else -> {
-//                    // 예외 처리 - 이 외의 인덱스에 대한 동작 구현 (필요한 경우)
-//                }
-//            }
-//        }
-//        val dialog = builder.create()
-//        dialog.show()
-//
-//        // 다이얼로그의 너비를 직접 지정 (예: 70%의 너비로 지정)
-//        val width = (resources.displayMetrics.widthPixels * 0.5).toInt()
-//        dialog.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-//
-//        // 다이얼로그의 배경 테두리 설정
-//        dialog.window?.setBackgroundDrawableResource(R.drawable.dialog_delete_layout)
-//    }
-
-
-//    fun initDummyData() {
-//        val dummydata = HomeItem(R.color.primary_100, "잠자기", "03:33", 0)
-//        itemList.add(dummydata)
-//        itemList.add(dummydata)
-//        itemList.add(dummydata)
-//    }
 
     private fun getPpomo() {
         RetrofitUtil.getRetrofit().GetPpomodoro().enqueue(object :
@@ -254,6 +224,43 @@ class HomeFragment : Fragment() {
 
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 Log.i("DELETEPpomo/Failure", "fail")
+
+            }
+        })
+    }
+
+
+    private fun getTodayPpomo() {
+        RetrofitUtil.getRetrofit().GetWork().enqueue(object :
+            Callback<WorksTodayResponse> {
+            override fun onResponse(
+                call: Call<WorksTodayResponse>,
+                response: Response<WorksTodayResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.i("GETTodayPpomo/Success", response.body()!!.works.toString())
+                    val data = response.body()!!.works
+
+                    var total = 0;
+                    var todayWorkHour = 0;
+                    var todayWorkMin = 0;
+                    if (data[0] != null) {
+                        data.forEach {
+                            todayWorkHour += it.workHour
+                            todayWorkMin += it.workMin
+                        }
+                        todayWorkHour += todayWorkMin / 60;
+                        todayWorkMin %= 60;
+
+                    }
+                    binding.todayWorkHourTv.text = todayWorkHour.toString()
+                    binding.todayWorkMinTv.text = todayWorkMin.toString()
+
+                }
+            }
+
+            override fun onFailure(call: Call<WorksTodayResponse>, t: Throwable) {
+                Log.i("GETTodayPpomo/Failure", "fail")
 
             }
         })

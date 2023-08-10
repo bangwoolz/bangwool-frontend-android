@@ -13,6 +13,7 @@ import com.example.bangwool.databinding.FragmentTodayPpomoBinding
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WorkTodayResponse
 import com.example.bangwool.retrofit.WorksTodayResponse
+import com.example.bangwool.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -85,6 +86,7 @@ class TodayPpomoFragment : Fragment() {
                 if (response.isSuccessful) {
                     Log.i("GETTodayPpomo/Success", response.body()!!.works.toString())
                     val data = response.body()!!.works
+
                     promoList.clear()
                     if(data[0] != null)
                         promoList.addAll(data)
@@ -143,11 +145,4 @@ class TodayPpomoFragment : Fragment() {
         }
     }
 
-
-    fun initDummyData() {
-        val dummydata = WorkTodayResponse(0, "test", 2, 30)
-        promoList.add(dummydata)
-        promoList.add(dummydata)
-        promoList.add(dummydata)
-    }
 }
