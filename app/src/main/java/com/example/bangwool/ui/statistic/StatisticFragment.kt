@@ -8,9 +8,12 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.Window
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import com.example.bangwool.databinding.FragmentStatisticBinding
 import com.example.bangwool.retrofit.MonthWorkStatistic
@@ -311,7 +314,17 @@ class StatisticFragment : Fragment() {
                 val lp = barArr[i].layoutParams
                 lp.height = 0
                 barArr[i].layoutParams = lp
+                val viewHeight = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    180F,
+                    resources.displayMetrics
+                ).toInt()
+                val param = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
+                param.bottomMargin = viewHeight
+                param.height = 0
+                barArr[i].layoutParams = param
             }
+
         } else {
             for (i in 0 until weekHourArr.size) {
                 val lp = barArr[i].layoutParams
