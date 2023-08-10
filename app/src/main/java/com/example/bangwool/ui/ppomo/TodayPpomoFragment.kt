@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentTodayPpomoBinding
@@ -36,11 +38,14 @@ class TodayPpomoFragment : Fragment() {
     )
     lateinit var todayPpomoAdapter: TodayPpomoAdapter
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTodayPpomoBinding.inflate(inflater, container, false)
+
 
 //        initDummyData()
         getTodayPpomo()
@@ -68,6 +73,7 @@ class TodayPpomoFragment : Fragment() {
 //                // 밑에 메뉴바가 있는데 닫기 버튼이 왜
 //            }
 
+
         }
     }
 
@@ -87,14 +93,16 @@ class TodayPpomoFragment : Fragment() {
 
                     var total = 0;
                     ppomoList.forEach {
-                        total += it.workMin + 60*it.workHour
+                        total += it.workMin + 60 * it.workHour
                     }
-                    total /= 10;
-                    var tree = total % 11;
-                    var bucket = total / 11;
+                    total /= 15;
+                    var tree = total % 6;
+                    var bucket = total / 6;
                     binding.ppomoTreeIv.setImageResource(treeImgList[tree])
-                    binding.ppomoCountTv.text = "오늘은 토마토를 ${total/1}개나 모았어요!"
-                    //뽀모도로 가져와서 리싸이클러뷰에 연동하기
+                    binding.ppomoCountTv.text = "오늘은 토마토를 ${total / 1}개나 모았어요!"
+
+                    Log.i("busketNum", bucket.toString())
+                    basket(bucket)
                 }
             }
 
@@ -106,8 +114,39 @@ class TodayPpomoFragment : Fragment() {
     }
 
 
+    fun basket(basketNum: Int) {
+        val basketImgId = arrayOf(
+            binding.ppomoBusket1,
+            binding.ppomoBusket2,
+            binding.ppomoBusket3,
+            binding.ppomoBusket4,
+            binding.ppomoBusket5,
+            binding.ppomoBusket6,
+            binding.ppomoBusket7,
+            binding.ppomoBusket8,
+//            binding.ppomoBusket9,
+//            binding.ppomoBusket10,
+//            binding.ppomoBusket11,
+//            binding.ppomoBusket12,
+//            binding.ppomoBusket13
+        )
+
+        val basketImgList = mutableListOf<ImageView>()
+
+        basketImgList.addAll(basketImgId)
+
+        for (i in 0 until basketNum){
+            if (basketNum <= 8){
+                basketImgList[i].visibility = View.VISIBLE
+            } else {
+                Toast.makeText(requireContext(), "바구니 개수 최대임", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
     fun initDummyData() {
-        val dummydata = WorkTodayResponse(0 ,"test", 2, 30)
+        val dummydata = WorkTodayResponse(0, "test", 2, 30)
         ppomoList.add(dummydata)
         ppomoList.add(dummydata)
         ppomoList.add(dummydata)
