@@ -16,6 +16,7 @@ import android.util.Log
 import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.bangwool.MainActivity
@@ -51,6 +52,19 @@ class LoginActivity : AppCompatActivity() {
 
         init()
     }
+
+    private fun blockTouch() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
+    }
+
+    // 화면 터치 재활성화
+    private fun unblockTouch() {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
@@ -96,6 +110,8 @@ class LoginActivity : AppCompatActivity() {
             loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
             loginStartBtn.setOnClickListener {
+                //터치 막기
+                blockTouch()
                 checkEmail()
             }
 
@@ -220,6 +236,9 @@ class LoginActivity : AppCompatActivity() {
                                         idTextInputLayout.error = null
                                         idTextInputLayout.isErrorEnabled = false
                                         loginLoadingDone.visibility = View.GONE
+
+                                        unblockTouch()
+
                                     }, 1000)
                                 }, 2000)
                             } else {
@@ -230,12 +249,14 @@ class LoginActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
+                                unblockTouch()
                             }
                         }
                     }
 
                     override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
                         Toast.makeText(this@LoginActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+                        unblockTouch()
                     }
 
                 })
