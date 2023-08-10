@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bangwool.R
@@ -15,7 +16,7 @@ import com.example.bangwool.retrofit.PpomodoroId
 class HomeAdapter(
     private val swipeHelperCallback: ItemTouchHelper,
     private val homeFragment: HomeFragment,
-    private val context: Context,
+    private val Context: Context,
     private var itemList: ArrayList<PpomodoroId>
 ) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
@@ -73,14 +74,14 @@ class HomeAdapter(
                 homeItemTaskTime.text = workTimeText
 //                homeItemTaskTimeBtn.setImageResource(R.drawable.ic_play_filled)
                 homeItemTaskTimeBtn.setOnClickListener {
-                    val i = Intent(context, TimerActivity::class.java)
+                    val i = Intent(Context, TimerActivity::class.java)
                     i.putExtra("id", item.id.toString())
                     i.putExtra("name", item.name)
                     i.putExtra("color", item.color)
                     i.putExtra("workHour", item.workHour.toString())
                     i.putExtra("workMin", item.workMin.toString())
                     i.putExtra("restTime", item.restTime.toString())
-                    context.startActivity(i)
+                    homeFragment.updatePpomodoro.launch(i)
                 }
                 modifyBtn.setOnClickListener {
                     val i = Intent(context, TimerEditActivity::class.java)
