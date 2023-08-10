@@ -33,11 +33,11 @@ class TermsAgreeActivity : AppCompatActivity() {
             textViewPrivacyPolicy.setOnClickListener {
                 navigateToPrivacyPolicy()
             }
-            ButtonViewAllAgreements.setOnClickListener {
-                navigateToAllAgreements()
+            ButtonUsePolicy.setOnClickListener {
+                navigateToUsePolicy()
             }
-            textViewAllAgreements.setOnClickListener {
-                navigateToAllAgreements()
+            textViewUsePolicy.setOnClickListener {
+                navigateToUsePolicy()
             }
             checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
                 checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
@@ -46,14 +46,14 @@ class TermsAgreeActivity : AppCompatActivity() {
             checkBoxPrivacyPolicy.setOnCheckedChangeListener { _, isChecked ->
                 checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
                 }
-                checkBoxAllAgreements.isChecked = isChecked && checkBoxTermsOfUse.isChecked
+                checkBoxAllAgreements.isChecked = isChecked && checkBoxUsePolicy.isChecked
                 checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
                     checkBoxAllAgreementsOnCheckedChangeListener(isChecked)
                 }
                 updateButtonState()
             }
 
-            checkBoxTermsOfUse.setOnCheckedChangeListener { _, isChecked ->
+            checkBoxUsePolicy.setOnCheckedChangeListener { _, isChecked ->
                 checkBoxAllAgreements.setOnCheckedChangeListener { _, isChecked ->
                 }
                 checkBoxAllAgreements.isChecked = isChecked && checkBoxPrivacyPolicy.isChecked
@@ -114,14 +114,14 @@ class TermsAgreeActivity : AppCompatActivity() {
 
     fun checkBoxAllAgreementsOnCheckedChangeListener(isChecked: Boolean) {
         binding.checkBoxPrivacyPolicy.isChecked = isChecked
-        binding.checkBoxTermsOfUse.isChecked = isChecked
+        binding.checkBoxUsePolicy.isChecked = isChecked
         updateButtonState()
     }
 
     private fun updateButtonState() {
         val isAllAgreementsChecked = binding.checkBoxAllAgreements.isChecked
         val isPrivacyPolicyChecked = binding.checkBoxPrivacyPolicy.isChecked
-        val isTermsOfUseChecked = binding.checkBoxTermsOfUse.isChecked
+        val isTermsOfUseChecked = binding.checkBoxUsePolicy.isChecked
         val isFormValid = isAllAgreementsChecked && isPrivacyPolicyChecked && isTermsOfUseChecked
 
         with(binding.buttonContinue) {
@@ -139,8 +139,8 @@ class TermsAgreeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun navigateToAllAgreements() {
-        val intent = Intent(this, textViewAllAgreementsActivity::class.java)
+    private fun navigateToUsePolicy() {
+        val intent = Intent(this, UsePolicyActivity::class.java)
         startActivity(intent)
     }
 }
