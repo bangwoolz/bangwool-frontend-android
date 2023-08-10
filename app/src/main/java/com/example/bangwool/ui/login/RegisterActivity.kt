@@ -276,6 +276,7 @@ class RegisterActivity : AppCompatActivity() {
                 intent.putExtra("name", textInputLayoutName.editText?.text.toString())
                 intent.putExtra("nickname", textInputLayoutNickname.editText?.text.toString())
                 intent.putExtra("password", textInputLayoutPassword.editText?.text.toString())
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 startActivity(intent)
             }
 
