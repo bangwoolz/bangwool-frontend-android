@@ -22,8 +22,6 @@ import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WorkTodayResponse
 import com.example.bangwool.retrofit.WorksTodayResponse
-import com.example.bangwool.ui.ppomo.TodayPpomoFragment
-import com.google.android.material.internal.ViewUtils.dpToPx
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,6 +41,7 @@ class HomeFragment : Fragment() {
     val updatePpomodoro =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             getPpomo()
+            getTodayPpomo()
         }
 
     override fun onCreateView(
@@ -73,6 +72,7 @@ class HomeFragment : Fragment() {
 
 //        getTodayPpomo()
         getPpomo()
+        getTodayPpomo()
         init()
         return binding.root
     }
@@ -158,7 +158,6 @@ class HomeFragment : Fragment() {
             })
 
 
-
             homeAddTaskBtn.setOnClickListener {
                 val i = Intent(requireContext(), TimerEditActivity::class.java)
                 i.putExtra("timerTitle", "타이머 추가")
@@ -173,6 +172,7 @@ class HomeFragment : Fragment() {
                 homeMenuDialog.show(parentFragmentManager, "HomeMenuDialog")
 
             }
+
         }
     }
 
@@ -240,22 +240,21 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     Log.i("GETTodayPpomo/Success", response.body()!!.works.toString())
                     val data = response.body()!!.works
-                    if (data != null) {
-                        ppomoList_today.clear()
-                        ppomoList_today.addAll(data)
 
-                        var total = 0;
-                        var todayWorkHour = 0;
-                        var todayWorkMin = 0;
-                        ppomoList_today.forEach {
+                    var total = 0;
+                    var todayWorkHour = 0;
+                    var todayWorkMin = 0;
+                    if (data[0] != null) {
+                        data.forEach {
                             todayWorkHour += it.workHour
                             todayWorkMin += it.workMin
                         }
-
-                        binding.todayWorkHourTv.text = todayWorkHour.toString()
-                        binding.todayWorkMinTv.text = todayWorkMin.toString()
+                        todayWorkHour += todayWorkMin / 60;
+                        todayWorkMin %= 60;
 
                     }
+                    binding.todayWorkHourTv.text = todayWorkHour.toString()
+                    binding.todayWorkMinTv.text = todayWorkMin.toString()
 
                 }
             }
