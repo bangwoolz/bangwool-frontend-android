@@ -152,13 +152,19 @@ class RegisterActivity : AppCompatActivity() {
                     ) {
                         if(response.isSuccessful){
                             if(!response.body()!!.exist){
+                                binding.textInputLayoutNickname.error = "닉네임이 존재하지 않습니다."
+                                updateNickNameErrorIcon(true)
+                                binding.textInputLayoutNickname.setErrorTextColor(ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.gray_600)))
+                                binding.textInputLayoutNickname.isErrorEnabled = true
                                 isNicknameExist = false
                                 updateButtonState()
-                            }else {
-                                binding.textInputLayoutNickname.error = "      이미 존재하는 닉네임이에요"
+
+                            } else {
+                                binding.textInputLayoutNickname.error = "        닉네임이 이미 존재합니다."
+                                updateNickNameErrorIcon(false)
+                                binding.textInputLayoutNickname.setErrorTextColor(ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.errorRed)))
                                 binding.textInputLayoutNickname.isErrorEnabled = true
                                 binding.icErrorNickName.visibility = View.VISIBLE
-                                updateButtonState()
                             }
                         } else {
                             isNicknameExist = true
@@ -418,18 +424,24 @@ class RegisterActivity : AppCompatActivity() {
     private fun validateNickname(nickname: String): Boolean {
         val nicknamePattern = Pattern.compile("^[a-zA-Z0-9가-힣]{1,5}\$")
         if (nickname.isEmpty()) {
+            updateNickNameErrorIcon(false)
+            binding.textInputLayoutNickname.setErrorTextColor(ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.errorRed)))
             binding.textInputLayoutNickname.error = "        닉네임을 입력하세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
             isNickNameValid = false
             return false
         } else if (!nicknamePattern.matcher(nickname).matches()) {
+            updateNickNameErrorIcon(false)
+            binding.textInputLayoutNickname.setErrorTextColor(ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.errorRed)))
             binding.textInputLayoutNickname.error = "        닉네임 형식을 확인해주세요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
             isNickNameValid = false
             return false
         } else if (nickname.length > 5) {
+            updateNickNameErrorIcon(false)
+            binding.textInputLayoutNickname.setErrorTextColor(ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.errorRed)))
             binding.textInputLayoutNickname.error = "        닉네임은 5글자 이하여야해요."
             binding.textInputLayoutNickname.isErrorEnabled = true
             binding.icErrorNickName.visibility = View.VISIBLE
@@ -503,5 +515,24 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.textInputLayoutEmail.setErrorIconDrawable(endIconDrawable)
+    }
+
+    private fun updateNickNameErrorIcon(isValid: Boolean) {
+        val endIconDrawable =
+            if (isValid) {
+                ContextCompat.getDrawable(this, R.drawable.round_check_24)
+            } else {
+                null
+            }
+
+        if (isValid) {
+            val tintColor = ContextCompat.getColor(this, R.color.gray_700)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        } else {
+            val tintColor = ContextCompat.getColor(this, R.color.secondary)
+            endIconDrawable?.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN)
+        }
+
+        binding.textInputLayoutNickname.setErrorIconDrawable(endIconDrawable)
     }
 }
