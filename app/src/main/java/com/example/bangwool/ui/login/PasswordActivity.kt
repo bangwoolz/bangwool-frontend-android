@@ -88,6 +88,7 @@ class PasswordActivity : AppCompatActivity() {
             loginBtn.backgroundTintList = getColorStateList(R.color.primary)
 
             loginBtn.setOnClickListener {
+                binding.root.setOnTouchListener { _, _ -> true }
                 requestAuthLogin()
             }
         }
