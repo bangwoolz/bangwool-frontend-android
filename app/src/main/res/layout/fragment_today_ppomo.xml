@@ -238,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="294dp"
                 android:fontFamily="@font/pretendard_semibold"
-                android:text="오늘은 토마토를 30개나 모았어요!"
+                android:text="오늘은 토마토를 0개나 모았어요!"
                 android:textColor="#000000"
                 android:textSize="@dimen/text_size_body2"
                 app:layout_constraintEnd_toEndOf="parent"
