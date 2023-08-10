@@ -1,3 +1,3 @@
 package com.example.bangwool.ui.ranking
 
-data class RankingInfo(val rank: Int, val name: String, val time: Int)
+data class RankingInfo(val rank: Int, val name: String, val time: Int, val loginedUser: Boolean)

@@ -1,5 +1,9 @@
 package com.example.bangwool.ui.ranking
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +16,14 @@ class RankingAdapter(var items: ArrayList<RankingInfo>) :
 
     inner class MyViewHolder(val binding: ItemRankingBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("ResourceAsColor")
         fun bind(position: Int) {
             binding.rankingItemTvRank.text = items[position].rank.toString()
             binding.rankingItemTvNickname.text = items[position].name
             binding.rankingItemTvTime.text = items[position].time.toString() + " Min"
+            if(items[position].loginedUser){
+                binding.llRankingAll.setBackgroundColor(Color.parseColor("#EEEEEE"))
+            }
 
             //id와 일치하는 랭킹에 user_ranking_layout 백그라운드 적용
 //            var userRank = 3 // 이거 나중에 적절한 값으로 변경해야함
