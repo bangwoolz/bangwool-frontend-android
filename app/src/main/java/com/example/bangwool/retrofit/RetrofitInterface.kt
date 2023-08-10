@@ -1,6 +1,7 @@
 package com.example.bangwool.retrofit
 
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -58,6 +59,9 @@ interface RetrofitInterface {
     @GET("/work/week")
     fun GetWeekWorkStatistic(): Call<WeekWorkStatisticResponse>
 
+    @GET("/members/mypage")
+    fun getMyPage(): Call<MyPageResponse>
+
 }
 
 interface RetrofitLoginInterface {
@@ -86,5 +90,8 @@ interface RetrofitLoginInterface {
     fun KakaoLogin(
         @Body requestBody: KakaoLoginRequest
     ): Call<OAuthTokenResponse>
+
+
+
 
 }

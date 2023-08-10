@@ -6,12 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentMypageBinding
 import com.example.bangwool.ui.login.LoginActivity
+import com.example.bangwool.retrofit.ExistResponse
+import com.example.bangwool.retrofit.MyPageResponse
+import com.example.bangwool.retrofit.RetrofitInterface
+import com.example.bangwool.retrofit.RetrofitUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class MyPageFragment : Fragment() {
-    lateinit var binding: FragmentMypageBinding
 
+    lateinit var binding: FragmentMypageBinding
+    private lateinit var retrofitInterface: RetrofitInterface
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,6 +30,14 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        retrofitInterface = RetrofitUtil.getRetrofit()
+        fetchMyPageData()
 
         // 로그아웃 버튼 클릭 이벤트
         binding.textViewLogout.setOnClickListener {
@@ -36,7 +55,39 @@ class MyPageFragment : Fragment() {
         binding.withdrawMenu.setOnClickListener {
             WithdrawDialogUtils.showAboutDialog(requireContext())
         }
+    }
 
-        return binding.root
+    private fun fetchMyPageData() {
+        retrofitInterface.getMyPage().enqueue(object : Callback<MyPageResponse> {
+            override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
+                if (response.isSuccessful) {
+                    val myPageResponse = response.body()
+                    val nickname = myPageResponse?.nickname
+                    val profileImage = myPageResponse?.profileImage
+
+
+                    // 닉네임 업데이트 부분
+                    binding.textViewUsername.text = "$nickname 님"
+
+                    // 프로필 이미지 업데이트
+                    if (!profileImage.isNullOrEmpty()) {
+                        Glide.with(requireContext())
+                            .load(profileImage)
+                            .placeholder(R.drawable.profile_base) // 로딩 중에 보여줄 이미지
+                            .error(R.drawable.profile_base) // 에러 발생 시 보여줄 이미지
+                            .into(binding.imageViewProfile)
+                    } else {
+                        // 프로필 이미지가 없을 경우 이미지 표시 근데 이미지를 어디서 입력빋는..?
+                        binding.imageViewProfile.setImageResource(R.drawable.profile_base)
+                    }
+                } else {
+                    // 서버 응답이 올바르지 않을 때 로그 출력.. whffu...졸려..
+                }
+            }
+
+            override fun onFailure(call: Call<MyPageResponse>, t: Throwable) {
+                // 네트워크 요청 실패 때 로그 출력.. 졸리다..
+            }
+        })
     }
 }
