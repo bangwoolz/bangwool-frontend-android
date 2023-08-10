@@ -58,7 +58,8 @@ class RankingWeekFragment : Fragment() {
                             RankingInfo(
                                 i + 1,
                                 rankingItems[i].nickname,
-                                rankingItems[i].workedMinute
+                                rankingItems[i].workedMinute,
+                                rankingItems[i].loginedUser
                             )
                         )
                     }
