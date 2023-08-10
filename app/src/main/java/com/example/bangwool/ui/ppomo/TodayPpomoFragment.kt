@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentTodayPpomoBinding
@@ -22,7 +21,7 @@ import retrofit2.Response
 class TodayPpomoFragment : Fragment() {
     lateinit var binding: FragmentTodayPpomoBinding
 
-    var ppomoList: ArrayList<WorkTodayResponse> = arrayListOf()
+    var promoList = arrayListOf<WorkTodayResponse>()
     var treeImgList = arrayListOf<Int>(
         R.drawable.tree0,
         R.drawable.tree1,
@@ -55,7 +54,7 @@ class TodayPpomoFragment : Fragment() {
 
     fun init() {
         binding.apply {
-            todayPpomoAdapter = TodayPpomoAdapter(requireContext(), ppomoList)
+            todayPpomoAdapter = TodayPpomoAdapter(requireContext(), promoList)
 
             todayppomoRecyclerView.apply {
                 layoutManager =
@@ -86,12 +85,13 @@ class TodayPpomoFragment : Fragment() {
                 if (response.isSuccessful) {
                     Log.i("GETTodayPpomo/Success", response.body()!!.works.toString())
                     val data = response.body()!!.works
-                    ppomoList.clear()
-                    ppomoList.addAll(data)
+                    promoList.clear()
+                    if(data[0] != null)
+                        promoList.addAll(data)
                     todayPpomoAdapter.notifyDataSetChanged()
 
                     var total = 0;
-                    ppomoList.forEach {
+                    promoList.forEach {
                         total += it.workMin + 60 * it.workHour
                     }
                     total /= 15;
@@ -146,8 +146,8 @@ class TodayPpomoFragment : Fragment() {
 
     fun initDummyData() {
         val dummydata = WorkTodayResponse(0, "test", 2, 30)
-        ppomoList.add(dummydata)
-        ppomoList.add(dummydata)
-        ppomoList.add(dummydata)
+        promoList.add(dummydata)
+        promoList.add(dummydata)
+        promoList.add(dummydata)
     }
 }
