@@ -39,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+
         <NumberPicker
             android:id="@+id/numberPickerMinute"
             android:layout_width="wrap_content"
@@ -46,6 +47,7 @@
             android:layout_gravity="center"
             android:elevation="1dp"
             android:gravity="center"
+            android:inputType="none"
             android:selectionDividerHeight="0dp"
             android:theme="@style/numberPickerCustomSize" />
 
@@ -65,6 +67,7 @@
             android:layout_height="72dp"
             android:layout_gravity="center_vertical"
             app:cardCornerRadius="10dp"
+            android:inputType="none"
             app:cardElevation="0dp">
 
             <View

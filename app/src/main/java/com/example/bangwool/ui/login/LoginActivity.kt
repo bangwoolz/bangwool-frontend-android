@@ -16,16 +16,25 @@ import android.util.Log
 import android.util.Patterns
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.bangwool.MainActivity
 import com.example.bangwool.R
 import com.example.bangwool.databinding.ActivityLoginBinding
+import com.example.bangwool.retrofit.AuthLoginRequest
 import com.example.bangwool.retrofit.ExistResponse
 import com.example.bangwool.retrofit.KakaoLoginRequest
 import com.example.bangwool.retrofit.OAuthTokenResponse
 import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.TokenResponse
+import com.example.bangwool.retrofit.getPassword
+import com.example.bangwool.retrofit.getUserId
+import com.example.bangwool.retrofit.removePassword
+import com.example.bangwool.retrofit.removeUserId
 import com.example.bangwool.retrofit.saveAccessToken
+import com.example.bangwool.retrofit.savePassword
+import com.example.bangwool.retrofit.saveUserId
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -48,9 +57,55 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        val userId = getUserId(this)
+//        val password = getPassword(this)
+//        if(!(userId.equals("0"))&&!(password.equals("0"))){
+//            val authLoginRequest = AuthLoginRequest(userId, password)
+//            RetrofitUtil.getLoginRetrofit().AuthLogin(authLoginRequest).enqueue(object :
+//                Callback<TokenResponse> {
+//                override fun onResponse(
+//                    call: Call<TokenResponse>,
+//                    response: Response<TokenResponse>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        val token = response.body()!!.token
+//                        saveAccessToken(this@LoginActivity, token)
+//                        RetrofitUtil.setAccessToken(token)
+//                        val i = Intent(this@LoginActivity, MainActivity::class.java)
+//                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)//이미 있는거 수정
+//                        startActivity(i)
+//                        Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+//                        finish()
+//                        if (LoginActivity.activity != null)
+//                            LoginActivity.activity!!.finish()
+//                    } else {
+//                        removeUserId(this@LoginActivity)
+//                        removePassword(this@LoginActivity)
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
+//
+//                }
+//
+//            })
+//        }
         co.activity = this
         init()
     }
+
+    private fun blockTouch() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
+        )
+    }
+
+    // 화면 터치 재활성화
+    private fun unblockTouch() {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
@@ -96,6 +151,8 @@ class LoginActivity : AppCompatActivity() {
             loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
             loginStartBtn.setOnClickListener {
+                //터치 막기
+                blockTouch()
                 checkEmail()
             }
 
@@ -220,6 +277,9 @@ class LoginActivity : AppCompatActivity() {
                                         idTextInputLayout.error = null
                                         idTextInputLayout.isErrorEnabled = false
                                         loginLoadingDone.visibility = View.GONE
+
+                                        unblockTouch()
+
                                     }, 1000)
                                 }, 2000)
                             } else {
@@ -230,12 +290,14 @@ class LoginActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
+                                unblockTouch()
                             }
                         }
                     }
 
                     override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
                         Toast.makeText(this@LoginActivity, "네트워크 오류", Toast.LENGTH_SHORT).show()
+                        unblockTouch()
                     }
 
                 })

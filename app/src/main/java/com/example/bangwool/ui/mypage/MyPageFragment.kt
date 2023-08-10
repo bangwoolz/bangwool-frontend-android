@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.bangwool.R
 import com.example.bangwool.databinding.FragmentMypageBinding
+import com.example.bangwool.retrofit.removePassword
+import com.example.bangwool.retrofit.removeUserId
 import com.example.bangwool.ui.login.LoginActivity
 import com.example.bangwool.retrofit.ExistResponse
 import com.example.bangwool.retrofit.MyPageResponse
@@ -42,6 +44,8 @@ class MyPageFragment : Fragment() {
         // 로그아웃 버튼 클릭 이벤트
         binding.textViewLogout.setOnClickListener {
             // 로그아웃 버튼을 클릭하면 LoginActivity로 이동하고 현재 액티비티를 종료
+            removeUserId(requireContext())
+            removePassword(requireContext())
             val intent = Intent(activity, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
@@ -89,5 +93,15 @@ class MyPageFragment : Fragment() {
                 // 네트워크 요청 실패 때 로그 출력.. 졸리다..
             }
         })
+        binding.appinfoMenu.setOnClickListener {
+            UpdateDialogUtils.showUpdateDialog(requireContext())
+        }
+
+        binding.questionMenu.setOnClickListener {
+            UpdateDialogUtils.showUpdateDialog(requireContext())
+
+        }
+
+        return binding.root
     }
 }
