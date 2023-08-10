@@ -154,6 +154,11 @@ class RegisterActivity : AppCompatActivity() {
                             if(!response.body()!!.exist){
                                 isNicknameExist = false
                                 updateButtonState()
+                            }else {
+                                binding.textInputLayoutNickname.error = "      이미 존재하는 닉네임이에요"
+                                binding.textInputLayoutNickname.isErrorEnabled = true
+                                binding.icErrorNickName.visibility = View.VISIBLE
+                                updateButtonState()
                             }
                         } else {
                             isNicknameExist = true
@@ -266,13 +271,54 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             buttonContinue.setOnClickListener {
-                val intent = Intent(this@RegisterActivity, TermsAgreeActivity::class.java)
-                intent.putExtra("email", textInputLayoutEmail.editText?.text.toString())
-                intent.putExtra("name", textInputLayoutName.editText?.text.toString())
-                intent.putExtra("nickname", textInputLayoutNickname.editText?.text.toString())
-                intent.putExtra("password", textInputLayoutPassword.editText?.text.toString())
-                startActivity(intent)
+                val email = binding.textInputLayoutEmail.editText?.text.toString()
+                val name = binding.textInputLayoutName.editText?.text.toString()
+                val nickname = binding.textInputLayoutNickname.editText?.text.toString()
+                val password = binding.textInputLayoutPassword.editText?.text.toString()
+
+                //이메일 체크부분
+                RetrofitUtil.getLoginRetrofit().ExistEmail(email).enqueue(object : Callback<ExistResponse> {
+                    override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>) {
+                        if (response.isSuccessful) {
+                            //추가 부분
+                            if (response.body()?.exist == true) {
+                                // 이메일이 이미 가입된 이메일일 때 안넘어가고 오류 발생
+                                binding.textInputLayoutEmail.error = "이미 가입된 이메일이에요."
+                                binding.textInputLayoutEmail.isErrorEnabled = true
+                                updateEndIcon(false)
+                                isEmailValid = false
+                            } else {
+                                //아니라면...
+                                val intent = Intent(this@RegisterActivity, TermsAgreeActivity::class.java)
+                                intent.putExtra("email", email)
+                                intent.putExtra("name", name)
+                                intent.putExtra("nickname", nickname)
+                                intent.putExtra("password", password)
+                                //플래그 사용
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                startActivity(intent)
+                            }
+                        } else {
+                            binding.textInputLayoutEmail.error = "이메일 중복 확인에 실패했어욥."
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
+                        binding.textInputLayoutEmail.error = "이메일 중복 확인에 실패했어요."
+                    }
+                })
             }
+
+
+//            buttonContinue.setOnClickListener {
+//                val intent = Intent(this@RegisterActivity, TermsAgreeActivity::class.java)
+//                intent.putExtra("email", textInputLayoutEmail.editText?.text.toString())
+//                intent.putExtra("name", textInputLayoutName.editText?.text.toString())
+//                intent.putExtra("nickname", textInputLayoutNickname.editText?.text.toString())
+//                intent.putExtra("password", textInputLayoutPassword.editText?.text.toString())
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//                startActivity(intent)
+//            }
 
             buttonBack.setOnClickListener {
                 finish()

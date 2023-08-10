@@ -100,8 +100,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginRegisterBtn.setOnClickListener {
-                val i = Intent(this@LoginActivity, RegisterActivity::class.java)
-                startActivity(i)
+                val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
             }
 
 
@@ -213,6 +214,7 @@ class LoginActivity : AppCompatActivity() {
                                             Intent(this@LoginActivity, PasswordActivity::class.java)
                                         val id = loginIdEt.text.toString()
                                         intent.putExtra("loginId", id)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                         startActivity(intent)
                                         loginCl.requestFocus()
                                         idTextInputLayout.error = null

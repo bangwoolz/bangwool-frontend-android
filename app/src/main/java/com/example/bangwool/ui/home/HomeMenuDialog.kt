@@ -3,6 +3,7 @@ package com.example.bangwool.ui.home
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import androidx.fragment.app.DialogFragment
 import com.example.bangwool.R
 import com.example.bangwool.databinding.DialogHomeMenuBinding
 import com.example.bangwool.databinding.DialogTimerDeleteBinding
+import com.example.bangwool.ui.etc.TimerSettingActivity
+
 
 class HomeMenuDialog : DialogFragment() {
     lateinit var binding: DialogHomeMenuBinding
@@ -22,10 +25,14 @@ class HomeMenuDialog : DialogFragment() {
             .setView(binding.root)
 
         binding.alarmSetting.setOnClickListener {
-            //알람 설정 창으로 이동
+            val i = Intent(requireContext(), TimerSettingActivity::class.java)
+            startActivity(i)
+            dialog?.dismiss()
         }
         binding.addSetting.setOnClickListener {
-            //추가 설정 창으로 이동
+            val i = Intent(requireContext(), TimerSettingActivity::class.java)
+            startActivity(i)
+            dialog?.dismiss()
         }
 
         val dialog = builder.create()
