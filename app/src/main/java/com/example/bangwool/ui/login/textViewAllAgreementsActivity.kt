@@ -14,5 +14,8 @@ class textViewAllAgreementsActivity : AppCompatActivity() {
         binding.buttonClose.setOnClickListener {
             finish()
         }
+
+        binding.webView.loadUrl("file:///android_asset/tos.html")
+
     }
 }
