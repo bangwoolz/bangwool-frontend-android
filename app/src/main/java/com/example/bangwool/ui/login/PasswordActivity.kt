@@ -114,7 +114,7 @@ class PasswordActivity : AppCompatActivity() {
                     pwTextInputLayout.error = null
                     pwTextInputLayout.isErrorEnabled = false
                     loginIcErrorEmail.visibility = View.GONE
-    //                    pwTextInputLayout.error = "비밀번호 동일함"
+    //              pwTextInputLayout.error = "비밀번호 동일함"
                     val i = Intent(this@PasswordActivity, MainActivity::class.java)
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)//이미 있는거 수정
                     startActivity(i)
