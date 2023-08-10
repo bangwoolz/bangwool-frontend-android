@@ -75,7 +75,7 @@ class MyPageFragment : Fragment() {
                             .load(profileImage)
                             .placeholder(R.drawable.profile_base) // 로딩 중에 보여줄 이미지
                             .error(R.drawable.profile_base) // 에러 발생 시 보여줄 이미지
-                            .into(binding.imageViewProfile)
+                            .into(binding.imageViewProfile)//이미지 이거는 어디에..?
                     } else {
                         // 프로필 이미지가 없을 경우 이미지 표시 근데 이미지를 어디서 입력빋는..?
                         binding.imageViewProfile.setImageResource(R.drawable.profile_base)
