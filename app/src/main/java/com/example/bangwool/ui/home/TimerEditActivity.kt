@@ -30,13 +30,22 @@ class TimerEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerEditBinding.inflate(layoutInflater)
 
+        val timerTitle = intent.getStringExtra("timerTitle")
+        val id = intent.getStringExtra("id")
+        val name = intent.getStringExtra("name")
+        val color = intent.getStringExtra("color")
+        val workHour = intent.getStringExtra("workHour")
+        val workMin = intent.getStringExtra("workMin")
+        val restTime = intent.getStringExtra("restTime")
+
+
 
         initLayout()
         setContentView(binding.root)
     }
 
     fun initLayout() {
-        Log.d("qwerty123", RetrofitUtil.accessTokenString!!.toString())
+        RetrofitUtil.accessTokenString?.toString()?.let { Log.d("qwerty123", it) }
 
         setCheckViewList()
         setCheckViewOnClickListener()

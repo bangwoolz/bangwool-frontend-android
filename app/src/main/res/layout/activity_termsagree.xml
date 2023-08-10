@@ -186,7 +186,7 @@
             android:layout_marginStart="10dp"
             android:text="(필수)"
             android:textColor="@android:color/darker_gray"
-            android:textStyle="bold"
+            android:fontFamily="@font/p_medium"
             app:layout_constraintBottom_toBottomOf="@id/textViewAllAgreements"
             app:layout_constraintStart_toEndOf="@id/textViewAllAgreements"
             app:layout_constraintTop_toTopOf="@id/textViewAllAgreements" />
