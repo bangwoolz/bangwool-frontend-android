@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
 
 //        initDummyData()
 
-        getTodayPpomo()
+//        getTodayPpomo()
         getPpomo()
         init()
         return binding.root
