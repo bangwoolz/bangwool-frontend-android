@@ -283,7 +283,7 @@ class RegisterActivity : AppCompatActivity() {
                             //추가 부분
                             if (response.body()?.exist == true) {
                                 // 이메일이 이미 가입된 이메일일 때 안넘어가고 오류 발생
-                                binding.textInputLayoutEmail.error = "     이미 가입된 이메일이에요."
+                                binding.textInputLayoutEmail.error = "이미 가입된 이메일이에요."
                                 binding.textInputLayoutEmail.isErrorEnabled = true
                                 updateEndIcon(false)
                                 isEmailValid = false
@@ -299,12 +299,12 @@ class RegisterActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }
                         } else {
-                            binding.textInputLayoutEmail.error = "     이메일 중복 확인에 실패했어욥."
+                            binding.textInputLayoutEmail.error = "이메일 중복 확인에 실패했어욥."
                         }
                     }
 
                     override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
-                        binding.textInputLayoutEmail.error = "     이메일 중복 확인에 실패했어요."
+                        binding.textInputLayoutEmail.error = "이메일 중복 확인에 실패했어요."
                     }
                 })
             }
