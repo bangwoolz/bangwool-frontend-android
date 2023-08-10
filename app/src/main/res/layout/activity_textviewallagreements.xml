@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/p_medium"
             android:gravity="center"
-            android:text="약관 동의"
+            android:text="약관 상세"
             android:textColor="@color/gray_800"
             android:textSize="@dimen/text_size_body3" />
 

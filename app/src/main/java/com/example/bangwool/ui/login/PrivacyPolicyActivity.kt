@@ -19,7 +19,6 @@ class PrivacyPolicyActivity : AppCompatActivity() {
         }
 
 
-//        webView.loadUrl("javascript:document.body.style.fontSize='2px';");
-
+        binding.webView.loadUrl("file:///android_asset/privacy_policy.html")
     }
 }
