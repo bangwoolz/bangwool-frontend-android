@@ -141,6 +141,7 @@ class TimerActivity : AppCompatActivity() {
         binding.icSetting.setOnClickListener {
             val i = Intent(this, TimerEditActivity::class.java)
             startActivityForResult(i, REQUEST_EDIT_TIMER)
+            finish()
             //startActivity(i)
         }
 
@@ -307,53 +308,53 @@ class TimerActivity : AppCompatActivity() {
         })
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_EDIT_TIMER && resultCode == Activity.RESULT_OK && data != null) {
-            val newName = data.getStringExtra("name")
-            val newColor = data.getStringExtra("color")
-            val newWorkHour = data.getIntExtra("workHour", 0)
-            val newWorkMin = data.getIntExtra("workMin", 0)
-            val newRestTime = data.getIntExtra("restTime", 0)
-            binding.tvTimerName.text = newName
-
-            when (newColor) {
-                "red" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
-
-                "pink" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_pink))
-
-                "orange" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_orange))
-
-                "yellow" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_yellow))
-
-                "purple" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_purple))
-
-                "blue" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_blue))
-
-                "skyblue" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_skyblue))
-
-                "green" -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_green))
-
-                else -> binding.ivTimerColor.imageTintList =
-                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
-            }
-
-            ppomodoroId = data.getIntExtra("ppomodoroId", 0)
-            workHour = newWorkHour
-            workMin = newWorkMin
-            restTime = newRestTime
-
-            setupTimer()
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_EDIT_TIMER && resultCode == Activity.RESULT_OK && data != null) {
+//            val newName = data.getStringExtra("name")
+//            val newColor = data.getStringExtra("color")
+//            val newWorkHour = data.getIntExtra("workHour", 0)
+//            val newWorkMin = data.getIntExtra("workMin", 0)
+//            val newRestTime = data.getIntExtra("restTime", 0)
+//            binding.tvTimerName.text = newName
+//
+//            when (newColor) {
+//                "red" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
+//
+//                "pink" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_pink))
+//
+//                "orange" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_orange))
+//
+//                "yellow" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_yellow))
+//
+//                "purple" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_purple))
+//
+//                "blue" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_blue))
+//
+//                "skyblue" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_skyblue))
+//
+//                "green" -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_green))
+//
+//                else -> binding.ivTimerColor.imageTintList =
+//                    ColorStateList.valueOf(resources.getColor(com.example.bangwool.R.color.timer_color_red))
+//            }
+//
+//            ppomodoroId = data.getIntExtra("ppomodoroId", 0)
+//            workHour = newWorkHour
+//            workMin = newWorkMin
+//            restTime = newRestTime
+//
+//            setupTimer()
+//        }
+//    }
 
     companion object {
         private const val REQUEST_EDIT_TIMER = 123

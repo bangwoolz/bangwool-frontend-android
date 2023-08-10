@@ -24,6 +24,7 @@ class MyPageFragment : Fragment() {
         binding.textViewLogout.setOnClickListener {
             // 로그아웃 버튼을 클릭하면 LoginActivity로 이동하고 현재 액티비티를 종료
             val intent = Intent(activity, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
             activity?.finish()
         }
