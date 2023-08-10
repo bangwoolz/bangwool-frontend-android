@@ -285,6 +285,15 @@ class StatisticFragment : Fragment() {
             binding.vSaturdayHourBar,
             binding.vSundayHourBar
         )
+        val rowArr: Array<View> = arrayOf(
+            binding.llStudyTimesFirstRow,
+            binding.llStudyTimesSecondRow,
+            binding.llStudyTimesThirdRow,
+            binding.llStudyTimesFourthRow,
+            binding.llStudyTimesFifthRow,
+            binding.llStudyTimesSixthRow,
+            binding.llStudyTimesSeventhRow
+        )
         // 그래프에 시간 text 입력
         for (i in 1..hourTextArr.size) {
             if (weekHourArr[i - 1] % 1 == 0.0) {
@@ -316,16 +325,15 @@ class StatisticFragment : Fragment() {
                 val lp = barArr[i].layoutParams
                 lp.height = 0
                 barArr[i].layoutParams = lp
-                val viewHeight = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    180F,
-                    resources.displayMetrics
-                ).toInt()
-                val param = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT)
-                param.bottomMargin = viewHeight
-                param.height = 0
-                barArr[i].layoutParams = param
             }
+            val lp = binding.llStudyTimesTable.layoutParams
+            val viewHeight = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                240F,
+                resources.displayMetrics
+            ).toInt()
+            lp.height = lp.height+viewHeight
+            binding.llStudyTimesTable.layoutParams = lp
 
         } else {
             for (i in 0 until weekHourArr.size) {
