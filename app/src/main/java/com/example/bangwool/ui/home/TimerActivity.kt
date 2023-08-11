@@ -91,12 +91,12 @@ class TimerActivity : AppCompatActivity() {
 
 
         binding.btnStart.setOnClickListener {
-            sendToServerWorkTime(1, 15);
-//            binding.btnStart.visibility = View.INVISIBLE
-//            binding.btnStop.visibility = View.VISIBLE
-//            binding.ivHappyTomato.visibility = View.GONE
-//            binding.ivStudyTomato.visibility = View.VISIBLE
-//            startTimer()    //타이머 작동
+//            sendToServerWorkTime(1, 15);
+            binding.btnStart.visibility = View.INVISIBLE
+            binding.btnStop.visibility = View.VISIBLE
+            binding.ivHappyTomato.visibility = View.GONE
+            binding.ivStudyTomato.visibility = View.VISIBLE
+            startTimer()    //타이머 작동
         }
         binding.btnContinue.setOnClickListener {
             binding.btnContinue.visibility = View.INVISIBLE
