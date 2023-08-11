@@ -11,14 +11,13 @@
         android:id="@+id/d_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/pretendard_medium"
         android:gravity="center"
         android:text="오늘의 집중 시간"
         android:textColor="#FF9999"
         android:textSize="@dimen/text_size_body2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/home_menu"
-        app:layout_constraintBottom_toBottomOf="@id/home_menu"/>
+        app:layout_constraintTop_toTopOf="@id/home_menu"/>
 
     <ImageView
         android:id="@+id/home_menu"
@@ -99,8 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="16dp"
-                android:backgroundTint="@color/gray_100"
                 android:layout_marginBottom="45dp"
+                android:backgroundTint="@color/gray_100"
                 android:elevation="100dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
