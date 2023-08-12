@@ -140,7 +140,7 @@ class TimerActivity : AppCompatActivity() {
 
         binding.icSetting.setOnClickListener {
             val i = Intent(this, TimerEditActivity::class.java)
-            startActivityForResult(i, REQUEST_EDIT_TIMER)
+            startActivity(i)
             finish()
             //startActivity(i)
         }
