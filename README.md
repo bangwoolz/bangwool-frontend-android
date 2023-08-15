@@ -1,12 +1,12 @@
 ![bangwool-logo](md_resources/ic_launcher-playstore.png)
-> 내가 키우는 POMO Timer 방울이
+> 내가 키우는 뽀모도로 방울이
 
 <br>
 
 ![version](https://img.shields.io/badge/version-demo-orange)
 [![CodeFactor](https://www.codefactor.io/repository/github/bangwoolz/bangwool-frontend-android/badge/develop)](https://www.codefactor.io/repository/github/bangwoolz/bangwool-frontend-android/overview/develop)
 
-# 🍅 방울이 : 내가 키우는 POMO Timer
+# 🍅 방울이 : 내가 키우는 뽀모도로
 방울이는 기존에 있던 Pomodoro 타이머 기법을 더 즐겁게 활용하여 자신의 집중시간을 관리하는 서비스입니다.
 #### 📃 [랜딩 페이지(개발중)]()
 #### 🎥 [시연영상(제작중)]()
@@ -110,7 +110,7 @@
 
 ## &nbsp;&nbsp;🚪 2.1 로그인을 통해 개인 설정 저장(일반, 소셜)
 
-(사진, 로그인, 회원가입 gif)
+![login](md_resources/login.gif)
 
 - 자체적인 회원가입 로그인을 지원합니다.
 - 카카오톡을 통한 소셜로그인도 지원합니다.
@@ -119,7 +119,7 @@
 
 ## &nbsp;&nbsp;⏰ 2.2 타이머 추가, 편집, 삭제
 
-(사진, 타이머 추가 편집 삭제 gif, 타이머 진행 gif)
+![timer](md_resources/timer.gif)
 
 - 타이머의 이름, 색상, 시간을 설정하고 추가할 수 있습니다.
 - 타이머를 수정하고 삭제할 수 있습니다.
@@ -128,28 +128,28 @@
 
 ## &nbsp;&nbsp;🍅 2.3 오늘의 집중 시간
 
-(사진, 오늘의 뽀모 구경 gif)
+![ppomo](md_resources/ppomo.gif)
 
 - 오늘의 토마토 수확량을 확인하며 성취감과 동기부여를 얻을 수 있습니다.
 - 공유 기능이 추가될 예정입니다.
 
 ## &nbsp;&nbsp;📊 2.4 주간, 월간의 집중 시간 통계
 
-(사진, 통계 구경하는, 목표시간 설정하는 gif)
+![statistic](md_resources/statistic.gif)
 
 - 주간, 월간 자신의 집중시간을 정리해서 확인하며 성취감을 얻을 수 있습니다.
 - 설정한 목표시간에 따라 다르게 보입니다.
 
 ## &nbsp;&nbsp;🏅 2.5 일간, 주간 집중 시간 랭킹
 
-(사진, 랭킹 확인하는 gif)
+![ranking](md_resources/ranking.gif)
 
 - 주간, 월간 집중시간 랭킹을 확인하며 승부욕과 성취감을 느낄 수 있습니다.
 - 자신의 랭킹을 중심으로 확인이 가능합니다.
 
 ## &nbsp;&nbsp;⚙️ 2.6 계정 설정
 
-(사진, 여러 곳 확인하는 gif)
+![mypage](md_resources/mypage.gif)
 
 - 자신의 개인정보를 변경하거나(예정) 공지사항(예정), 앱정보 등을 확인할 수 있습니다.
 - 로그아웃이나 회원탈퇴(예정)가 가능합니다.
@@ -180,7 +180,7 @@
 
 따라서 현재 방울이 서비스를 이용하기 위해서는 apk를 따로 다운로드 받아 설치하셔야 합니다.
 
-[방울이 demo version 다운로드]()
+[방울이 demo version 다운로드(준비중)]()
 
 ## &nbsp;&nbsp;🛍️ 4.2 스토어 출시 이후(예정)
 
