@@ -1,4 +1,4 @@
-![bangwool-logo](app/src/main/ic_launcher-playstore.png)
+![bangwool-logo](md_resources/ic_launcher-playstore.png)
 > 내가 키우는 POMO Timer 방울이
 
 <br>
@@ -221,7 +221,7 @@
  </tr>
    
  <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/ic_launcher-playstore.png" width="50" height="50"></td>
   <td align='center'>이현희</td>
   <td align='center'>팀장<br>PM<br>FE-android 팀장<br>BE 개발</td>
   <td align='center'><a href="https://github.com/nonaninona"><img src="http://img.shields.io/badge/nonaninona-green?style=social&logo=github"/></a></td>
@@ -229,7 +229,7 @@
  </tr>
 
  <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/happy_ppomo1_mdpi.png" width="50" height="50"></td>
   <td align='center'>김가영</td>
   <td align='center'>디자이너<br>앱 화면, 로고, 캐릭터 디자인<br>프로젝트 기획</td>
   <td align='center'><a href=""><img src="http://img.shields.io/badge/gayoung-green?style=social&logo=designer"/></a></td>
@@ -237,7 +237,7 @@
  </tr>
  
  <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/studying_ppomo_mdpi.png" width="50" height="50"></td>
   <td align='center'>김태현</td>
   <td align='center'>FE-android 개발<br>timer, statistics 화면/기능 제작<br>프로젝트 기획</td>
   <td align='center'><a href="https://github.com/Unique0902"><img src="http://img.shields.io/badge/Unique0902-green?style=social&logo=github"/></a></td>
@@ -245,7 +245,7 @@
  </tr>
 
  <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/happy_ppomo2_mdpi.png" width="50" height="50"></td>
   <td align='center'>김지원</td>
   <td align='center'>FE-android 개발<br>login, timer list, day statistics 화면/기능 제작</td>
   <td align='center'><a href="https://github.com/Kjiw0n"><img src="http://img.shields.io/badge/Kjiw0n-green?style=social&logo=github"/></a></td>
@@ -253,7 +253,7 @@
  </tr>
 
  <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/studying_ppomo2_mdpi.png" width="50" height="50"></td>
   <td align='center'>문현준</td>
   <td align='center'>FE-android 개발<br>register, ranking, mypage 화면/기능 제작</td>
   <td align='center'><a href="https://github.com/Mouon"><img src="http://img.shields.io/badge/Mouon-green?style=social&logo=github"/></a></td>
@@ -261,7 +261,7 @@
  </tr>
    
  <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/tired_ppomo1_mdpi.png" width="50" height="50"></td>
   <td align='center'>황재상</td>
   <td align='center'>FE-ios 팀장<br>ios 총개발</td>
   <td align='center'><a href="https://github.com/jxx-sx"><img src="http://img.shields.io/badge/jxx--sx-green?style=social&logo=github"/></a></td>
@@ -269,7 +269,7 @@
  </tr>
 
   <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/ic_launcher-playstore.png" width="50" height="50"></td>
   <td align='center'>김정우</td>
   <td align='center'>BackEnd 팀장<br>ERD 구상<br>서버 배포, CI/CD 구성<br>ppomodoro, Login 기능 구현</td>
   <td align='center'><a href="https://github.com/jung-woo-kim"><img src="http://img.shields.io/badge/jung--woo--kim-green?style=social&logo=github"/></a></td>
@@ -277,7 +277,7 @@
  </tr>
 
  <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/tired_ppomo2_mdpi.png" width="50" height="50"></td>
   <td align='center'>신희을</td>
   <td align='center'>BackEnd 개발<br>ERD 구상<br>work, member 기능 구현</td>
   <td align='center'><a href="https://github.com/ShinHeeEul"><img src="http://img.shields.io/badge/ShinHeeEul-green?style=social&logo=github"/></a></td>
@@ -285,7 +285,7 @@
  </tr>
 
   <tr>
-  <td align='center'><img src="" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/studying_ppomo_mdpi.png" width="50" height="50"></td>
   <td align='center'>이영선</td>
   <td align='center'>BackEnd 개발<br>ERD 구상<br>kakao login, login 기능 구현</td>
   <td align='center'><a href="https://github.com/lyouxsun"><img src="http://img.shields.io/badge/lyouxsun-green?style=social&logo=github"/></a></td>
