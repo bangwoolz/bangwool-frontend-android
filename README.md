@@ -1,12 +1,12 @@
 ![bangwool-logo](md_resources/ic_launcher-playstore.png)
-> 내가 키우는 POMO Timer 방울이
+> 내가 키우는 뽀모도로 방울이
 
 <br>
 
 ![version](https://img.shields.io/badge/version-demo-orange)
 [![CodeFactor](https://www.codefactor.io/repository/github/bangwoolz/bangwool-frontend-android/badge/develop)](https://www.codefactor.io/repository/github/bangwoolz/bangwool-frontend-android/overview/develop)
 
-# 🍅 방울이 : 내가 키우는 POMO Timer
+# 🍅 방울이 : 내가 키우는 뽀모도로
 방울이는 기존에 있던 Pomodoro 타이머 기법을 더 즐겁게 활용하여 자신의 집중시간을 관리하는 서비스입니다.
 #### 📃 [랜딩 페이지(개발중)]()
 #### 🎥 [시연영상(제작중)]()
@@ -180,7 +180,7 @@
 
 따라서 현재 방울이 서비스를 이용하기 위해서는 apk를 따로 다운로드 받아 설치하셔야 합니다.
 
-[방울이 demo version 다운로드]()
+[방울이 demo version 다운로드(준비중)]()
 
 ## &nbsp;&nbsp;🛍️ 4.2 스토어 출시 이후(예정)
 
