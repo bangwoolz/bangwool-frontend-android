@@ -9,7 +9,7 @@
 # 🍅 방울이 : 내가 키우는 뽀모도로
 방울이는 기존에 있던 Pomodoro 타이머 기법을 더 즐겁게 활용하여 자신의 집중시간을 관리하는 서비스입니다.
 #### 📃 [랜딩 페이지(개발중)]()
-#### 🎥 [시연영상(제작중)]()
+#### 🎥 [시연영상](md_resources/demo_video.mp4)
 #### 🖥️ [발표자료](md_resources/bangwool_demo_day_ppt.pdf)
 
 <br>
@@ -84,7 +84,7 @@
 
 ## &nbsp;&nbsp;✅ 1.3 해결방안
 
-(사진, 타이머, 통계, 랭킹, 귀여운 캐릭터, 방울 뽀모도로)
+<img src="md_resources/solution.png" width="480" height="300"/>
 
 방울이는 시간관리를 하면서 경험하는 부정적인 감정들을 줄이고 긍정적인 감정을 늘리는데 초점이 맞춰진 솔루션입니다.
 
@@ -267,7 +267,7 @@
  </tr>
 
   <tr>
-  <td align='center'><img src="md_resources/ic_launcher-playstore.png" width="50" height="50"></td>
+  <td align='center'><img src="md_resources/toss_logo.png" width="80" height="40"></td>
   <td align='center'>김정우</td>
   <td align='center'>BackEnd 팀장<br>ERD 구상<br>서버 배포, CI/CD 구성<br>ppomodoro, Login 기능 구현</td>
   <td align='center'><a href="https://github.com/jung-woo-kim"><img src="http://img.shields.io/badge/jung--woo--kim-green?style=social&logo=github"/></a></td>
