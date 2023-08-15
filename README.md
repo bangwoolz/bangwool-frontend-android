@@ -285,7 +285,7 @@
  </tr>
 
   <tr>
-  <td align='center'><img src="md_resources/toss_logo.png" width="80" height="40"></td>
+  <td align='center'><img src="md_resources/toss_logo.png" width="50" height="25"></td>
   <td align='center'>김정우</td>
   <td align='center'>BackEnd 팀장<br>ERD 구상<br>서버 배포, CI/CD 구성<br>ppomodoro, Login 기능 구현</td>
   <td align='center'><a href="https://github.com/jung-woo-kim"><img src="http://img.shields.io/badge/jung--woo--kim-green?style=social&logo=github"/></a></td>
