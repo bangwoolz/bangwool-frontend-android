@@ -10,7 +10,7 @@
 방울이는 기존에 있던 Pomodoro 타이머 기법을 더 즐겁게 활용하여 자신의 집중시간을 관리하는 서비스입니다.
 #### 📃 [랜딩 페이지(개발중)]()
 #### 🎥 [시연영상(제작중)]()
-#### 🖥️ [발표자료]()
+#### 🖥️ [발표자료](md_resources/bangwool_demo_day_ppt.pdf)
 
 <br>
 
@@ -44,7 +44,7 @@
 
 # 🍅 1. 프로젝트 소개
 ## &nbsp;&nbsp;🎯 1.1 overview
-(사진, 타이머 사진?)
+<img src="md_resources/splash_image.png" width="135" height="300"/>
 
 방울이는 기존에 존재하던 뽀모도로 시간관리 기법을 더 즐겁게 활용할 수 있도록 도와주는 서비스입니다.
 
@@ -61,8 +61,10 @@
 방울이는 그런 사람들에게 도움이 되고 더 나아가 시간관리 문화를 전파하고자 합니다.
 
 ## &nbsp;&nbsp;🤔 1.2 문제인식
-
-(사진 플레이 스토어, 통계 그래프)
+<div>
+<img src="md_resources/many_timers.png" width="340" height="200"/>
+<img src="md_resources/statistics.png" width="340" height="200"/>
+</div>
 
 시간관리기법을 위한 서비스는 이미 많이 찾아볼 수 있습니다.
 
@@ -74,13 +76,9 @@
 
 성공적으로 시간관리를 할 수 있게된 사람은 그렇게 많지 않습니다.
 
-통계(13번의 시도 - https://blog.gitnux.com/time-management-statistics/, https://www.acuitytraining.co.uk/news-tips/time-management-statistics-2022-research/)
-
 많은 이유가 있겠지만 가장 많은 이유로는 실패에 대한 두려움 즉 부담감과 동기부여, 흥미제공 요인이 부족한 것을 꼽을 수 있겠습니다.
 
 한 마디로 말해 사용자에게 제공되는 긍정적인 감정적 경험이 부족하다는 것입니다.
-
-통계(main reason for pro.. is fear of failure - https://pubmed.ncbi.nlm.nih.gov/29845359/)
 
 그래서 방울이는 시간을 관리하는 것이 힘들고 지루한 일이 아니라 얼마든지 쉽고 재미있게 할 수 있다는 알려주는 서비스가 되고자 했습니다.
 
