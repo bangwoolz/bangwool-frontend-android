@@ -227,7 +227,7 @@
 </div>
 
 ## &nbsp;&nbsp;📑 5.2 기획, IA, 플로우차트
-![기획서](md_resources/proposal.docs)
+![기획서](md_resources/proposal.docx)
 ![IA](md_resources/IA.png)
 ![FlowChart](md_resources/FlowChart.png)
 
