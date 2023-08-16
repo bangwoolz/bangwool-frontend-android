@@ -227,16 +227,26 @@
 </div>
 
 ## &nbsp;&nbsp;📑 5.2 기획, IA, 플로우차트
-![기획서](md_resources/proposal.docx)
+### [기획서](md_resources/proposal.docx)
+
+### IA
 ![IA](md_resources/IA.png)
+
+### FlowChart
 ![FlowChart](md_resources/FlowChart.png)
 
 ## &nbsp;&nbsp;🔌 5.3 시스템 아키텍쳐
 ![SystemArchitecture](md_resources/SA.png)
 
 ## &nbsp;&nbsp;💬 5.4 협업 툴 활용
+
+### Jira
 ![Jira](md_resources/Jira.png)
+
+### Slack
 ![Slack](md_resources/Slack.png)
+
+### Github
 ![Github](md_resources/Github.png)
 
 <br>
