@@ -34,10 +34,11 @@
 ### 4. 설치안내
 ###### &nbsp;&nbsp;4.1 스토어 출시 이전(현재)
 ###### &nbsp;&nbsp;4.2 스토어 출시 이후(예정)
-### 5. 기술스택
-###### &nbsp;&nbsp;5.1 프론트
-###### &nbsp;&nbsp;5.2 백엔드
-###### &nbsp;&nbsp;5.3 협업
+### 5. 개발
+###### &nbsp;&nbsp;5.1 기술스택
+###### &nbsp;&nbsp;5.2 기획, IA, 플로우차트
+###### &nbsp;&nbsp;5.3 시스템 아키텍쳐
+###### &nbsp;&nbsp;5.4 협업 툴 활용
 ### 6. 팀정보
 
 <br>
@@ -206,7 +207,8 @@
 
 <br>
 
-# 💻 5. 기술스택
+# 💻 5. 개발
+## &nbsp;&nbsp;📚 5.1 기술스택
 
 <div align=left> 
   <img src="https://img.shields.io/badge/android-3DDC84?style=for-the-badge&logo=android&logoColor=white"> 
@@ -223,6 +225,19 @@
   <img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">
   <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white">
 </div>
+
+## &nbsp;&nbsp;📑 5.2 기획, IA, 플로우차트
+![기획서](md_resources/proposal.docs)
+![IA](md_resources/IA.png)
+![FlowChart](md_resources/FlowChart.png)
+
+## &nbsp;&nbsp;🔌 5.3 시스템 아키텍쳐
+![SystemArchitecture](md_resources/SA.png)
+
+## &nbsp;&nbsp;💬 5.4 협업 툴 활용
+![Jira](md_resources/Jira.png)
+![Slack](md_resources/Slack.png)
+![Github](md_resources/Github.png)
 
 <br>
   
