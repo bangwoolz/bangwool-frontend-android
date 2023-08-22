@@ -16,6 +16,13 @@ fun getAccessToken(context: Context): String {
     val spf = context.getSharedPreferences("accessToken_spf", AppCompatActivity.MODE_PRIVATE)
     return spf.getString("accessToken", 1.toString())!!
 }
+fun removeAccessToken(context: Context) {
+    val pref = context.getSharedPreferences("accessToken_spf", AppCompatActivity.MODE_PRIVATE)
+    val edit = pref.edit() // 수정모드
+    edit.remove("accessToken")
+    edit.apply()
+}
+
 fun getMemberId(JWTEncoded:String): Int {
     val splitStr:List<String> = JWTEncoded.split(".")
     val decodedBytes: ByteArray = Base64.decode(splitStr[1], Base64.URL_SAFE)

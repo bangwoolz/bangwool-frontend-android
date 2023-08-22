@@ -18,6 +18,7 @@ import com.example.bangwool.retrofit.ExistResponse
 import com.example.bangwool.retrofit.MyPageResponse
 import com.example.bangwool.retrofit.RetrofitInterface
 import com.example.bangwool.retrofit.RetrofitUtil
+import com.example.bangwool.retrofit.removeAccessToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,8 +49,10 @@ class MyPageFragment : Fragment() {
             // 로그아웃 버튼을 클릭하면 LoginActivity로 이동하고 현재 액티비티를 종료
             removeUserId(requireContext())
             removePassword(requireContext())
+            removeAccessToken(requireContext())
+            RetrofitUtil.removeInstances()
             val intent = Intent(activity, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
             activity?.finish()
         }
@@ -70,7 +73,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun fetchMyPageData() {
-        retrofitInterface.getMyPage().enqueue(object : Callback<MyPageResponse> {
+        RetrofitUtil.getRetrofit().getMyPage().enqueue(object : Callback<MyPageResponse> {
             override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
                 if (response.isSuccessful) {
                     val myPageResponse = response.body()!!

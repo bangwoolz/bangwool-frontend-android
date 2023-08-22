@@ -57,7 +57,8 @@ object RetrofitUtil {
         } else {
             interceptor.level = HttpLoggingInterceptor.Level.NONE
         }
-        Log.d("qwerty123", accessTokenString)
+        Log.d("qwerty123", "sdfsdf:${accessTokenString}")
+        Log.d("afa", "sdfdsfdsf")
 
         return OkHttpClient.Builder().addInterceptor(interceptor).addInterceptor(
             AddedTokenRequest(
@@ -80,10 +81,16 @@ object RetrofitUtil {
         return instance!!
     }
 
+    fun removeInstances() {
+        loginInstance = null
+        instance = null
+    }
+
 
 
     fun setAccessToken(str: String) {
         accessTokenString = str
+        Log.d("","accessTokenString:${accessTokenString}")
     }
 
     class AddedTokenRequest(val token: String) : Interceptor {
