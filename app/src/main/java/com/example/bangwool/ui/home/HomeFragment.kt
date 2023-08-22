@@ -22,6 +22,8 @@ import com.example.bangwool.retrofit.PpomodorosResponse
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.WorkTodayResponse
 import com.example.bangwool.retrofit.WorksTodayResponse
+import com.example.bangwool.retrofit.getAccessToken
+import com.example.bangwool.retrofit.getUserId
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,7 +35,6 @@ class HomeFragment : Fragment() {
     //    var itemList: ArrayList<HomeItem> = arrayListOf()
     var ppomoList: ArrayList<PpomodoroId> = arrayListOf()
     var ppomoList_today: ArrayList<WorkTodayResponse> = arrayListOf()
-
     lateinit var homeAdapter: HomeAdapter
     private val REQUEST_EDIT_TIMER = 1
     val ppomoId: Int = 0
@@ -52,7 +53,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.dDay.setOnClickListener {
         }
-
+        Log.d("","등장")
+        Log.d("","${getAccessToken(requireContext())}")
         binding.homeAddTaskBtn.setOnClickListener {
             val i = Intent(requireContext(), TimerEditActivity::class.java)
             i.putExtra("timerTitle", "타이머 추가")
