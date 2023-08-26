@@ -52,8 +52,7 @@ class TimerEditActivity : AppCompatActivity() {
 
         binding.apply {
             val timerTitle = intent.getStringExtra("timerTitle")
-            binding.tvTimerEditTitle.setText(timerTitle)
-
+            include.tvTimerEditTitle.text = timerTitle
             if (timerTitle.equals("타이머 수정")) {
                 val color = intent.getStringExtra("taskColor")
                 val name = intent.getStringExtra("taskName")
@@ -125,17 +124,17 @@ class TimerEditActivity : AppCompatActivity() {
                 val workHour = workTime[0].trim().toInt() / 60
                 val workMin = workTime[0].trim().toInt() % 60
                 val restTime = binding.tvRestTimeClock.text.toString().split(":")[0].trim().toInt()
-
-                if (tvTimerEditTitle.text.toString().equals("타이머 추가")) {
+//sfsfsf
+                if (include.tvTimerEditTitle.text.toString().equals("타이머 추가")) {
                     postPpomo()
-                } else if (tvTimerEditTitle.text.toString().equals("타이머 수정")) {
+                } else if (include.tvTimerEditTitle.text.toString().equals("타이머 수정")) {
                     val Id = intent.getStringExtra("PpomoId")!!.toInt()
                     putPpomo(Id)
                 } else {
                     Log.d("error", "btnSave")
                 }
             }
-            icTimerEditBack.setOnClickListener {
+            include.icTimerEditBack.setOnClickListener {
                 finish()
             }
         }
