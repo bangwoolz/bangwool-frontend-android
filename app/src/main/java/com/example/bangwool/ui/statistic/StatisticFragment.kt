@@ -332,7 +332,7 @@ class StatisticFragment : Fragment() {
                 240F,
                 resources.displayMetrics
             ).toInt()
-            lp.height = lp.height+viewHeight
+            lp.height = viewHeight
             binding.llStudyTimesTable.layoutParams = lp
 
         } else {
