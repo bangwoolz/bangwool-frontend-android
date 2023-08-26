@@ -1,12 +1,14 @@
 package com.example.bangwool.ui.home
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.example.bangwool.MainActivity
 import com.example.bangwool.R
 import com.example.bangwool.ui.login.TimeChooseDialog
 import com.example.bangwool.databinding.ActivityTimerEditBinding
@@ -228,7 +230,10 @@ class TimerEditActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     Log.i("PUTPpomo/Success", response.body()!!.toString())
-                    finish()
+                    val i = Intent(this@TimerEditActivity, MainActivity::class.java)
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)//이미 있는거 수정
+                    startActivity(i)
+//                    finish()
                 }
             }
 
