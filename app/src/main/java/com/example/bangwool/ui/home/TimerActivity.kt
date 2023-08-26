@@ -140,9 +140,14 @@ class TimerActivity : AppCompatActivity() {
 
         binding.icSetting.setOnClickListener {
             val i = Intent(this, TimerEditActivity::class.java)
+            val wtime = workHour * 60 + workMin
+            val workTimeText = wtime.toString() + " : 00"
+            i.putExtra("taskColor", color)
+            i.putExtra("taskName", name)
+            i.putExtra("taskTime", workTimeText)
+            i.putExtra("timerTitle", "타이머 수정")
+            i.putExtra("PpomoId", ppomodoroId.toString())
             startActivity(i)
-            finish()
-            //startActivity(i)
         }
 
         clearToWorkTime()
