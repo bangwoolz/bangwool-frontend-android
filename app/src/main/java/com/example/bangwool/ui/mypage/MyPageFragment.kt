@@ -19,6 +19,7 @@ import com.example.bangwool.retrofit.MyPageResponse
 import com.example.bangwool.retrofit.RetrofitInterface
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.removeAccessToken
+import com.example.bangwool.ui.home.TimerEditActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,6 +70,10 @@ class MyPageFragment : Fragment() {
         }
         binding.appinfoMenu.setOnClickListener {
             UpdateDialogUtils.showUpdateDialog(requireContext())
+        }
+        binding.myinfo.setOnClickListener {
+            val i = Intent(requireContext(), EditPrivacyActivity::class.java)
+            startActivity(i)
         }
     }
 

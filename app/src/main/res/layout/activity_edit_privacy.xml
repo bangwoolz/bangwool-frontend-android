@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ic_timer_edit_back"
+            android:id="@+id/ic_back"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_back"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="@id/ic_timer_edit_back" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
