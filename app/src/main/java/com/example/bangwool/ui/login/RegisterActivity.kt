@@ -326,9 +326,11 @@ class RegisterActivity : AppCompatActivity() {
 //                startActivity(intent)
 //            }
 
-            buttonBack.setOnClickListener {
+            includeTitleBar.icTimerEditBack.setOnClickListener {
                 finish()
             }
+
+            includeTitleBar.tvTimerEditTitle.text = "회원가입"
         }
     }
 

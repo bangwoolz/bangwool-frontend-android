@@ -8,7 +8,7 @@
     tools:context=".ui.home.TimerEditActivity">
 
     <include layout="@layout/titlebar_with_back_btn"
-        android:id="@+id/include"
+        android:id="@+id/include_title_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -20,7 +20,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/include">
+        app:layout_constraintTop_toBottomOf="@id/include_title_bar">
 
         <TextView
             android:id="@+id/tv_timer_name"
