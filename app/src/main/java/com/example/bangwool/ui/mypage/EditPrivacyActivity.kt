@@ -26,6 +26,7 @@ class EditPrivacyActivity : AppCompatActivity() {
             binding.clPassword.visibility = View.VISIBLE
             binding.clCheckPassword.visibility = View.VISIBLE
             binding.btnEditPasswordAfter.visibility = View.VISIBLE
+            binding.svMyInfo.isScrollbarFadingEnabled = false
         }
 
         setContentView(binding.root)
