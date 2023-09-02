@@ -9,7 +9,7 @@
 # 🍅 방울이 : 내가 키우는 뽀모도로
 방울이는 기존에 있던 Pomodoro 타이머 기법을 더 즐겁게 활용하여 자신의 집중시간을 관리하는 서비스입니다.
 #### 📃 [랜딩 페이지](http://52.78.240.117:8081/)
-#### 🎥 [시연영상](https://www.youtube.com/watch?v=WnocY39fDVk&t=10s)
+#### 🎥 [시연영상](https://www.youtube.com/watch?v=WnocY39fDVk)
 #### 🖥️ [발표자료](md_resources/bangwool_demo_day_ppt.pdf)
 
 <br>
