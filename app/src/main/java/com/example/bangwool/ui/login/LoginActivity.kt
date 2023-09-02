@@ -148,6 +148,12 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
 
+            loginIdEt.setOnEditorActionListener { textView, i, keyEvent ->
+                if(loginStartBtn.isEnabled)
+                    loginStartBtn.performClick()
+                return@setOnEditorActionListener true
+            }
+
             loginStartBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginStartBtn.backgroundTintList = getColorStateList(R.color.gray_300)
             loginStartBtn.setOnClickListener {

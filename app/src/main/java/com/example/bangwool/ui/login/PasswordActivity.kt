@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.bangwool.MainActivity
@@ -57,6 +58,11 @@ class PasswordActivity : AppCompatActivity() {
                     }
                 }
             }
+            passwordEt.setOnEditorActionListener { textView, i, keyEvent ->
+                checkPassword(passwordEt.text.toString().trim())
+                requestAuthLogin()
+                return@setOnEditorActionListener true
+            }
 
             pwTextInputLayout.error = null
             passwordEt.addTextChangedListener(object : TextWatcher {
@@ -80,6 +86,7 @@ class PasswordActivity : AppCompatActivity() {
     }
 
     private fun ActivityPasswordBinding.checkPassword(pw: String) {
+        Log.d("asdf123", "checkpassword")
         if (pw.isEmpty()) {
             loginBtn.setBackgroundResource(R.drawable.long_normal_btn)
             loginBtn.backgroundTintList = getColorStateList(R.color.gray_300)
@@ -97,6 +104,8 @@ class PasswordActivity : AppCompatActivity() {
     }
 
     private fun ActivityPasswordBinding.requestAuthLogin() {
+        Log.d("asdf123", "requestauthlogin")
+
         val authLoginRequest = AuthLoginRequest(userId!!, passwordEt.text.toString())
         loginIcErrorEmail.visibility = View.GONE
         pwTextInputLayout.isErrorEnabled = false
