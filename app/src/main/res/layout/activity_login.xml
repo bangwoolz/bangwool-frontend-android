@@ -69,6 +69,8 @@
                     android:fontFamily="@font/p_medium"
                     android:hint="ex) banwol@gmail.com"
                     android:maxLines="1"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
                     android:paddingStart="4dp"
                     android:textColorHint="@color/gray_400"
                     android:textSize="@dimen/text_size_body3" />
