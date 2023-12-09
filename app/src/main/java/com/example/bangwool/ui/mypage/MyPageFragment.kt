@@ -19,6 +19,7 @@ import com.example.bangwool.retrofit.MyPageResponse
 import com.example.bangwool.retrofit.RetrofitInterface
 import com.example.bangwool.retrofit.RetrofitUtil
 import com.example.bangwool.retrofit.removeAccessToken
+import com.example.bangwool.ui.home.TimerEditActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +29,9 @@ class MyPageFragment : Fragment() {
 
     lateinit var binding: FragmentMypageBinding
     private lateinit var retrofitInterface: RetrofitInterface
+    lateinit var nickname: String
+    lateinit var profileImage: String
+    lateinit var email: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +74,13 @@ class MyPageFragment : Fragment() {
         binding.appinfoMenu.setOnClickListener {
             UpdateDialogUtils.showUpdateDialog(requireContext())
         }
+        binding.myinfo.setOnClickListener {
+            val i = Intent(requireContext(), EditPrivacyActivity::class.java)
+            i.putExtra("nickname", nickname)
+            i.putExtra("profileImage", profileImage)
+            i.putExtra("email", email)
+            startActivity(i)
+        }
     }
 
     private fun fetchMyPageData() {
@@ -77,8 +88,9 @@ class MyPageFragment : Fragment() {
             override fun onResponse(call: Call<MyPageResponse>, response: Response<MyPageResponse>) {
                 if (response.isSuccessful) {
                     val myPageResponse = response.body()!!
-                    val nickname = myPageResponse.nickname
-                    val profileImage = myPageResponse.profileImage
+                    nickname = myPageResponse.nickname
+                    profileImage = myPageResponse.profileImage
+                    email = myPageResponse.email
 
 
                     // 닉네임 업데이트 부분
